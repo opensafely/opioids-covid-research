@@ -13,21 +13,12 @@ from cohortextractor import (
     StudyDefinition,
     patients,
     Measure,
+    codelist,
 )
 
 # Import codelists from codelist.py (which pulls them from the codelist folder)
-from codelists import (
-   opioid_codes,
-   high_dose_codes,
-   care_home_codes,
-)
+from codelists import *
 
-from config import start_date, end_date, codelist_path, demographics
-
-from demographic_variables import demographic_variables
-
-## Define study time variables
-from datetime import datetime
 
 ## Define study population and variables
 study = StudyDefinition(
