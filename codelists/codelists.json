@@ -6,12 +6,6 @@
       "downloaded_at": "2022-07-29 13:42:31.250800Z",
       "sha": "85e3b0949455aa282fd26b09d523905127160789"
     },
-    "opensafely-nhs-england-care-homes-residential-status.csv": {
-      "id": "opensafely/nhs-england-care-homes-residential-status/3712ef13",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/nhs-england-care-homes-residential-status/3712ef13/",
-      "downloaded_at": "2022-07-29 13:37:06.941448Z",
-      "sha": "357b2af4841e574f7d43bfeff143b39cdfed6997"
-    },
     "opensafely-cancer-excluding-lung-and-haematological-snomed.csv": {
       "id": "opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15",
       "url": "https://codelists.opensafely.org/codelist/opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15/",
@@ -41,6 +35,12 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/first-generation-antipsychotics-excluding-long-acting-depots-dmd/1e9b227c/",
       "downloaded_at": "2022-08-04 11:51:07.688944Z",
       "sha": "05377dd984eee854029417020513c043c4f25876"
+    },
+    "primis-covid19-vacc-uptake-longres.csv": {
+      "id": "primis-covid19-vacc-uptake/longres/v1",
+      "url": "https://codelists.opensafely.org/codelist/primis-covid19-vacc-uptake/longres/v1/",
+      "downloaded_at": "2022-08-08 15:17:25.607995Z",
+      "sha": "4d4c94b9c6aa267c6a60657150bbc5ec7d2d7625"
     }
   }
 }
