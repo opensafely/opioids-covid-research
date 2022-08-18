@@ -15,29 +15,39 @@ actions:
   # Extract data ----
   
   ## Cohort data
-  extract_data:
-    run: cohortextractor:latest generate_cohort --study-definition study_definition --index-date-range "2018-01-01 to 2022-03-01 by month" --output-dir=output/data --output-format='csv'
+  generate_cohort:
+    run: >
+      cohortextractor:latest generate_cohort
+        --study-definition study_definition
+        --index-date-range "2018-01-01 to 2022-03-01 by month"
     outputs:
       highly_sensitive:
-        cohort: output/data/input_*.csv
-  
+        cohort: output/input_*.csv
+
+
   ## Ethnicity      
-  extract_ethnicity:
-    run: cohortextractor:latest generate_cohort --study-definition study_definition_ethnicity --output-dir=output/data --output-format='csv'
+  generate_ethnicity_cohort:
+    run: >
+      cohortextractor:latest generate_cohort
+        --study-definition study_definition_ethnicity
     outputs:
       highly_sensitive:
-        cohort: output/data/input_ethnicity.csv
+        cohort: output/input_ethnicity.csv
 
 
   # Data processing ----
   
   ## Add ethnicity
-  join_ethnicity:
-    run: python:latest python analysis/join_ethnicity.py
-    needs: [extract_data, extract_ethnicity]
+  join_cohorts:
+    run: >
+      cohort-joiner:v0.0.46
+        --lhs output/input_*.csv
+        --rhs output/input_ethnicity.csv
+        --output-dir output/joined
+    needs: [generate_cohort, generate_ethnicity_cohort]
     outputs:
       highly_sensitive:
-        cohort: output/data/input*.csv
+        cohort: output/joined/input_*.csv
 
   ## Generate measures
   #generate_measures:

@@ -5,3 +5,4 @@ opensafely/lung-cancer-snomed/2020-04-15
 opensafely/ethnicity-snomed-0removed/2e641f61
 opensafely/first-generation-antipsychotics-excluding-long-acting-depots-dmd/1e9b227c
 primis-covid19-vacc-uptake/longres/v1
+opensafely/sickle-cell-disease-snomed/2020-04-14

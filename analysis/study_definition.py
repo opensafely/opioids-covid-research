@@ -19,7 +19,6 @@ from cohortextractor import (
 # Import codelists from codelist.py (which pulls them from the codelist folder)
 from codelists import *
 
-
 ## Define study population and variables
 study = StudyDefinition(
 
@@ -30,7 +29,7 @@ study = StudyDefinition(
   default_expectations={
     "date": {"earliest": "2018-01-01", "latest": "2022-03-31"},
     "rate": "uniform",
-    "incidence": 0.1,
+    "incidence": 0.15,
   },
  
   # Define the study population
@@ -43,7 +42,7 @@ study = StudyDefinition(
       AND 
       (sex = "M" OR sex = "F")
       AND
-      (age >=18 AND age < 110)
+      (age >=5 AND age < 110)
       """,
     
       has_died = patients.died_from_any_cause(
@@ -51,13 +50,11 @@ study = StudyDefinition(
         returning = "binary_flag",
       ),
     
-      registered = patients.satisfying(
-       "registered_at_start",
-       registered_at_start = patients.registered_as_of("index_date"),
+      registered = patients.registered_as_of("index_date"),
       ), 
-    ),
   
-  ## Variables
+  
+  ## Variables ##
 
   ### Sex
   sex = patients.sex(
@@ -66,51 +63,47 @@ study = StudyDefinition(
       "category": {"ratios": {"M": 0.49, "F": 0.51}},
     },
   ),
-  
-  ### Age
-  age = patients.age_as_of(
-    "index_date",
-    return_expectations = {
-      "rate": "universal",
-      "int": {"distribution": "population_ages"},
-      "incidence" : 0.001
-    },
-  ),
 
   ### Age categories
   age_cat = patients.categorised_as(
     {"0": "DEFAULT",
-      "1": """age >= 18 AND age < 30""",
-      "2": """age >= 30 AND age < 40""",
-      "3": """age >= 40 AND age < 50""",
-      "4": """age >= 50 AND age < 60""",
-      "5": """age >= 60 AND age < 70""",
-      "6": """age >= 70 AND age < 80""",
-      "7": """age >= 80 AND age < 90""",
-      "8": """age >= 90""",
+      "1": """age >= 5 AND age < 18""",
+      "2": """age >= 18 AND age < 30""",
+      "3": """age >= 30 AND age < 40""",
+      "4": """age >= 40 AND age < 50""",
+      "5": """age >= 50 AND age < 60""",
+      "6": """age >= 60 AND age < 70""",
+      "7": """age >= 70 AND age < 80""",
+      "8": """age >= 80 AND age < 90""",
+      "9": """age >= 90""",
     },
+
+    age = patients.age_as_of(
+     "index_date",
+    ),
 
     return_expectations = {
       "rate": "universal",
       "category": {
         "ratios": {
           "0": 0.01,
-          "1": 0.16,
-          "2": 0.18,
-          "3": 0.16,
-          "4": 0.18,
-          "5": 0.14,          
+          "1": 0.12,
+          "2": 0.12,
+          "3": 0.12,
+          "4": 0.12,
+          "5": 0.12,          
           "6": 0.11,
-          "7": 0.05,
-          "8": 0.01,
+          "7": 0.11,
+          "8": 0.11,
+          "9": 0.06
         }},
     },
   ),
   
   ### Index of multiple deprivation
-  imd = patients.categorised_as(
+  imdq10 = patients.categorised_as(
     {"0": "DEFAULT",
-      "1": """index_of_multiple_deprivation >=1 AND index_of_multiple_deprivation < 32844*1/5""",
+      "1": """index_of_multiple_deprivation >= 0 AND index_of_multiple_deprivation < 32844*1/10""",
       "2": """index_of_multiple_deprivation >= 32844*1/10 AND index_of_multiple_deprivation < 32844*2/10""",
       "3": """index_of_multiple_deprivation >= 32844*2/10 AND index_of_multiple_deprivation < 32844*3/10""",
       "4": """index_of_multiple_deprivation >= 32844*3/10 AND index_of_multiple_deprivation < 32844*4/10""",
@@ -127,6 +120,7 @@ study = StudyDefinition(
       returning = "index_of_multiple_deprivation",
       round_to_nearest = 100,
     ),
+
     return_expectations = {
       "rate": "universal",
       "category": {
@@ -172,7 +166,6 @@ study = StudyDefinition(
   ## Groups
   
   ### Care home - using combination of primis codes and address linkage (based on Schultze report)
-  ### TODO CONFIRM THIS IS CODED CORRECTLY, especially the tpp_care_home_type part ###
   carehome = patients.satisfying(
     """
     carehome_codes
@@ -184,6 +177,7 @@ study = StudyDefinition(
       "incidence": 0.05,
     },
 
+    ### Care home from codelists
     carehome_codes = patients.with_these_clinical_events(
       carehome_primis_codes,
       on_or_before = "index_date",
@@ -214,7 +208,7 @@ study = StudyDefinition(
     #    },
     #),
 
-    ## My attempt to simplify above code to a binary variable
+    ## Care home from TPP address list (as binary variable)
     tpp_care_home_type=patients.care_home_status_as_of(
       "index_date",
       categorised_as={
@@ -230,62 +224,90 @@ study = StudyDefinition(
     ),
   ),
 
-  ### Cancer 
+  ### Cancer in past year
   cancer = patients.with_these_clinical_events(
     cancer_codes,
-    on_or_before = "index_date",
+    between = ["first_day_of_month(index_date) - 1 year","last_day_of_month(index_date)"],
     returning = "binary_flag",
-    return_expectations = {"incidence": 0.15}
+    return_expectations = {
+      "date": {
+        "earliest": "first_day_of_month(index_date) - 1 year",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15}
+  ),
+
+  ### Sickle cell disease
+  scd = patients.with_these_clinical_events(
+    scd_codes,
+    on_or_before = "last_day_of_month(index_date)",
+    returning = "binary_flag",
+    return_expectations = {"incidence": .0002}
   ),
 
   #####################
-  ## Medication DM&D
+  ## Medication DM&D ##
   
   ## Opioid prescribing
+
   ### Any prescribing
   opioid_any = patients.with_these_medications(
     opioid_codes,
-    between = ["index_date", "last_day_of_month(index_date)"],
+    between = ["first_day_of_month(index_date)", "last_day_of_month(index_date)"],
     returning = "binary_flag",
-    return_expectations = {"incidence": 0.15}
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
   ),
 
   ### High dose prescribing
   hi_opioid_any = patients.with_these_medications(
     hi_opioid_codes,
-    between = ["index_date", "last_day_of_month(index_date)"],
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],
     returning = "binary_flag",
-    return_expectations = {"incidence": 0.05}
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.05
+      },
   ),
 
   ### Any new prescribing (2-year washout)
   ### TODO: should patients be registered for 2+ years for defining new use?? 
   opioid_new = patients.satisfying(
     """
-    opioid_current_date
+    opioid_any
     AND 
-    NOT opioid_last_date
+    NOT opioid_last
     """, 
+
     return_expectations = {
       "incidence": 0.1,
     },
-    
-    opioid_current_date = patients.with_these_medications(
+
+    opioid_last = patients.with_these_medications(
       opioid_codes,
-      returning = "date",
-      find_last_match_in_period = True,
-      between = ["index_date", "last_day_of_month(index_date)"],
-      date_format = "YYYY-MM-DD",
-      return_expectations = {"incidence": 0.15}
-    ),
-    
-    opioid_last_date = patients.with_these_medications(
-      opioid_codes,
-      returning = "date",
+      returning = "binary_flag",
+      between = ["opioid_any_date - 2 year", "opioid_any_date - 1 day"],
       find_first_match_in_period = True,
-      between = ["opioid_current_date - 2 year", "opioid_current_date - 1 day"],
-      date_format = "YYYY-MM-DD",
-      return_expectations = {"incidence": 0.1}
+      return_expectations = {
+        "date": {
+          "earliest": "first_day_of_month(index_date) - 2 year",
+          "latest": "last_day_of_month(index_date)- 1 day",
+        },
+        "incidence": 0.1
+        }
     ),
   ),
 
@@ -293,38 +315,34 @@ study = StudyDefinition(
   hi_opioid_new = patients.satisfying(
     
     """
-    hi_opioid_current_date
+    hi_opioid_any
     AND 
-    NOT hi_opioid_last_date
+    NOT hi_opioid_last
     """, 
     
     return_expectations = {
       "incidence": 0.05,
     },
     
-    hi_opioid_current_date = patients.with_these_medications(
-      hi_opioid_codes,
-      returning = "date",
-      find_last_match_in_period = True,
-      between = ["index_date", "last_day_of_month(index_date)"],
-      date_format = "YYYY-MM-DD",
-      return_expectations = {"incidence": 0.05}
-    ),
-    
-    hi_opioid_last_date = patients.with_these_medications(
+    hi_opioid_last = patients.with_these_medications(
       hi_opioid_codes,
       returning = "date",
       find_first_match_in_period = True,
-      between = ["hi_opioid_current_date - 2 year", "hi_opioid_current_date - 1 day"],
+      between = ["hi_opioid_any_date - 2 year", "hi_opioid_any_date - 1 day"],
       date_format = "YYYY-MM-DD",
-      return_expectations = {"incidence": 0.01}
+      return_expectations = {
+        "date": {
+          "earliest": "first_day_of_month(index_date) - 2 year",
+          "latest": "last_day_of_month(index_date)- 1 day",
+        },
+        "incidence": 0.1}
     ),
   ),
 
   # Opioid naive in past 2 years (for denominator for new use)
   opioid_naive = patients.satisfying(
     """
-    NOT opioid_last_date
+    NOT opioid_last
     """, 
     return_expectations = {
       "incidence": 0.2,
@@ -334,7 +352,7 @@ study = StudyDefinition(
   # High dose opioid naive in past 2 years (for denominator for new use)
   hi_opioid_naive = patients.satisfying(
     """
-    NOT hi_opioid_last_date
+    NOT hi_opioid_last
     """, 
     return_expectations = {
       "incidence": 0.1,

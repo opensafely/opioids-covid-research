@@ -41,6 +41,12 @@
       "url": "https://codelists.opensafely.org/codelist/primis-covid19-vacc-uptake/longres/v1/",
       "downloaded_at": "2022-08-08 15:17:25.607995Z",
       "sha": "4d4c94b9c6aa267c6a60657150bbc5ec7d2d7625"
+    },
+    "opensafely-sickle-cell-disease-snomed.csv": {
+      "id": "opensafely/sickle-cell-disease-snomed/2020-04-14",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/sickle-cell-disease-snomed/2020-04-14/",
+      "downloaded_at": "2022-08-15 08:36:40.353500Z",
+      "sha": "b004055087ab7e1c0381114eecb5cc7e7a1084d0"
     }
   }
 }

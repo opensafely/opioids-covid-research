@@ -52,6 +52,13 @@ cancer_codes = combine_codelists(
   haem_ca_codes
 )
 
+## Sickle cell disease
+scd_codes = codelist_from_csv(
+  "codelists/opensafely-sickle-cell-disease-snomed.csv",
+  system = "snomed",
+  column = "id"
+)
+
 ## Medication DM&D
 
 ### Any opioid (note - using SSRIs as a stand in until opioid codelist is finalised)
@@ -67,7 +74,6 @@ hi_opioid_codes = codelist_from_csv(
   system = "snomed",
   column = "dmd_id",
 )
-
 
 ## Ethnicity
 ethnicity_codes_6 = codelist_from_csv(
