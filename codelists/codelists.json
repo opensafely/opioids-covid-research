@@ -47,6 +47,12 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/sickle-cell-disease-snomed/2020-04-14/",
       "downloaded_at": "2022-08-15 08:36:40.353500Z",
       "sha": "b004055087ab7e1c0381114eecb5cc7e7a1084d0"
+    },
+    "opensafely-high-dose-long-acting-opioids-openprescribing.csv": {
+      "id": "opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd/",
+      "downloaded_at": "2022-08-18 15:56:34.412167Z",
+      "sha": "9c4b1556b75eed64ebb222a01f3ed4a318c4c708"
     }
   }
 }

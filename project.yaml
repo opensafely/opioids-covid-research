@@ -8,7 +8,7 @@
 version: '3.0'
 
 expectations:
-  population_size: 1000000
+  population_size: 100000
 
 actions:
 
@@ -20,6 +20,7 @@ actions:
       cohortextractor:latest generate_cohort
         --study-definition study_definition
         --index-date-range "2018-01-01 to 2022-03-01 by month"
+        --output-dir=output
     outputs:
       highly_sensitive:
         cohort: output/input_*.csv
@@ -50,13 +51,14 @@ actions:
         cohort: output/joined/input_*.csv
 
   ## Generate measures
-  #generate_measures:
-  #  run: cohortextractor:latest generate_measures --study-definition study_definition --output-dir=output/data
-  #  needs: [join_ethnicity]
-  #  outputs:
-  #    moderately_sensitive:
-  #      measure_csv: output/data/measure_*.csv
-  
+  generate_measures:
+    run: cohortextractor:latest generate_measures --study-definition study_definition --output-dir=output/joined
+    needs: [join_cohorts]
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/joined/measure_*.csv
+
+
   ## Process data
   #data_process:
   #  run: r:latest analysis/process/process_data.R
@@ -64,7 +66,7 @@ actions:
   #  outputs:
   #    moderately_sensitive:
   #      measure_csv: output/data/measure_final_*.csv
- 
+
   
   # Results ----
         

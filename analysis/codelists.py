@@ -76,9 +76,9 @@ hi_opioid_codes = codelist_from_csv(
 )
 
 ## Ethnicity
-ethnicity_codes_6 = codelist_from_csv(
+ethnicity_codes_16 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
     system="snomed",
     column="snomedcode",
-    category_column="Grouping_6",
+    category_column="Grouping_16",
 )
