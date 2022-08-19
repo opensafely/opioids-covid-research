@@ -51,12 +51,12 @@ actions:
         cohort: output/joined/input_*.csv
 
   ## Generate measures
-  generate_measures:
-    run: cohortextractor:latest generate_measures --study-definition study_definition --output-dir=output/joined
-    needs: [join_cohorts]
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/joined/measure_*.csv
+  # generate_measures:
+  #   run: cohortextractor:latest generate_measures --study-definition study_definition --output-dir=output/joined
+  #   needs: [join_cohorts]
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/joined/measure_*.csv
 
 
   ## Process data
