@@ -1,11 +1,5 @@
 {
   "files": {
-    "opensafely-selective-serotonin-reuptake-inhibitors-dmd.csv": {
-      "id": "opensafely/selective-serotonin-reuptake-inhibitors-dmd/6a572e55",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/selective-serotonin-reuptake-inhibitors-dmd/6a572e55/",
-      "downloaded_at": "2022-07-29 13:42:31.250800Z",
-      "sha": "85e3b0949455aa282fd26b09d523905127160789"
-    },
     "opensafely-cancer-excluding-lung-and-haematological-snomed.csv": {
       "id": "opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15",
       "url": "https://codelists.opensafely.org/codelist/opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15/",
@@ -30,12 +24,6 @@
       "downloaded_at": "2022-08-02 09:37:45.116235Z",
       "sha": "8b849b5b785d80306e488d0109640c8c1d2da01b"
     },
-    "opensafely-first-generation-antipsychotics-excluding-long-acting-depots-dmd.csv": {
-      "id": "opensafely/first-generation-antipsychotics-excluding-long-acting-depots-dmd/1e9b227c",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/first-generation-antipsychotics-excluding-long-acting-depots-dmd/1e9b227c/",
-      "downloaded_at": "2022-08-04 11:51:07.688944Z",
-      "sha": "05377dd984eee854029417020513c043c4f25876"
-    },
     "primis-covid19-vacc-uptake-longres.csv": {
       "id": "primis-covid19-vacc-uptake/longres/v1",
       "url": "https://codelists.opensafely.org/codelist/primis-covid19-vacc-uptake/longres/v1/",
@@ -48,17 +36,17 @@
       "downloaded_at": "2022-08-15 08:36:40.353500Z",
       "sha": "b004055087ab7e1c0381114eecb5cc7e7a1084d0"
     },
-    "opensafely-high-dose-long-acting-opioids-openprescribing.csv": {
-      "id": "opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd/",
-      "downloaded_at": "2022-08-18 15:56:34.412167Z",
-      "sha": "9c4b1556b75eed64ebb222a01f3ed4a318c4c708"
+    "opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
+      "id": "opensafely/high-dose-long-acting-opioids-openprescribing-dmd/52f27403",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/high-dose-long-acting-opioids-openprescribing-dmd/52f27403/",
+      "downloaded_at": "2022-08-30 15:37:15.986847Z",
+      "sha": "998d956447c4aa67f9b3b8f21a757b4bfbe6d9c1"
     },
-    "opensafely-non-high-dose-long-acting-opioids-openprescribing.csv": {
-      "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8/",
-      "downloaded_at": "2022-08-30 12:32:42.788259Z",
-      "sha": "0721235b544cf94649c2ab16047d15ec402dd80f"
+    "opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
+      "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
+      "downloaded_at": "2022-08-30 15:37:16.260030Z",
+      "sha": "3ea446349db9e9fff80f89e9646f8f935bc5cc6d"
     }
   }
 }

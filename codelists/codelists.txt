@@ -4,5 +4,5 @@ opensafely/lung-cancer-snomed/2020-04-15
 opensafely/ethnicity-snomed-0removed/2e641f61
 primis-covid19-vacc-uptake/longres/v1
 opensafely/sickle-cell-disease-snomed/2020-04-14
-opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd
-opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8
+opensafely/high-dose-long-acting-opioids-openprescribing-dmd/52f27403
+opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce
