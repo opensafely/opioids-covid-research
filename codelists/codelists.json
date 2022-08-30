@@ -53,6 +53,12 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd/",
       "downloaded_at": "2022-08-18 15:56:34.412167Z",
       "sha": "9c4b1556b75eed64ebb222a01f3ed4a318c4c708"
+    },
+    "opensafely-non-high-dose-long-acting-opioids-openprescribing.csv": {
+      "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8/",
+      "downloaded_at": "2022-08-30 12:32:42.788259Z",
+      "sha": "0721235b544cf94649c2ab16047d15ec402dd80f"
     }
   }
 }

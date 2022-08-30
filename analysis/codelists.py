@@ -61,18 +61,24 @@ scd_codes = codelist_from_csv(
 
 ## Medication DM&D
 
-### Any opioid (note - using SSRIs as a stand in until opioid codelist is finalised)
-opioid_codes = codelist_from_csv(
-  "codelists/opensafely-selective-serotonin-reuptake-inhibitors-dmd.csv",
+### Low dose opioids
+lo_opioid_codes = codelist_from_csv(
+  "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-0013e8c8-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
 
 ### High dose opioids (note - using antipsychotics as a stand in until opioid codelist is finalised)
 hi_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-first-generation-antipsychotics-excluding-long-acting-depots-dmd.csv",
+  "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-22c902fd-dmd.csv",
   system = "snomed",
   column = "dmd_id",
+)
+
+### Any opioid
+opioid_codes = combine_codelists(
+  lo_opioid_codes,
+  hi_opioid_codes
 )
 
 ## Ethnicity

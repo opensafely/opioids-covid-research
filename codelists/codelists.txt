@@ -1,9 +1,8 @@
-opensafely/selective-serotonin-reuptake-inhibitors-dmd/6a572e55
 opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15
 opensafely/haematological-cancer-snomed/2020-04-15
 opensafely/lung-cancer-snomed/2020-04-15
 opensafely/ethnicity-snomed-0removed/2e641f61
-opensafely/first-generation-antipsychotics-excluding-long-acting-depots-dmd/1e9b227c
 primis-covid19-vacc-uptake/longres/v1
 opensafely/sickle-cell-disease-snomed/2020-04-14
 opensafely/high-dose-long-acting-opioids-openprescribing/22c902fd
+opensafely/non-high-dose-long-acting-opioids-openprescribing/0013e8c8
