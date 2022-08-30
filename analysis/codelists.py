@@ -63,14 +63,14 @@ scd_codes = codelist_from_csv(
 
 ### Low dose opioids
 lo_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-0013e8c8-dmd.csv",
+  "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
 
 ### High dose opioids (note - using antipsychotics as a stand in until opioid codelist is finalised)
 hi_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-22c902fd-dmd.csv",
+  "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
