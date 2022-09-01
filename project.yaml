@@ -44,19 +44,22 @@ actions:
       cohort-joiner:v0.0.46
         --lhs output/input_*.csv
         --rhs output/input_ethnicity.csv
-        --output-dir output/joined
+        --output-dir output/data
     needs: [generate_cohort, generate_ethnicity_cohort]
     outputs:
       highly_sensitive:
-        cohort: output/joined/input_*.csv
+        cohort: output/data/input_*.csv
 
   ## Generate measures
-  # generate_measures:
-  #   run: cohortextractor:latest generate_measures --study-definition study_definition --output-dir=output/joined
-  #   needs: [join_cohorts]
-  #   outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/joined/measure_*.csv
+  generate_measures:
+    run: >
+      cohortextractor:latest generate_measures 
+        --study-definition study_definition 
+        --output-dir output/data
+    needs: [join_cohorts]
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/data/measure_*.csv
 
 
   ## Process data
