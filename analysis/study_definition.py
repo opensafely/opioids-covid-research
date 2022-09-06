@@ -376,85 +376,28 @@ study = StudyDefinition(
 
 measures = [
   
-  #  Monthly rates - whole population
-  
-  ## Any opioid
+  #  Monthly rates #
+  # Full population ####
+  ## Any opioid 
   Measure(
     id = "opioid_all_any",
     numerator = "opioid_any",
     denominator = "population",
-    group_by = ["population"],
+    group_by = ["cancer"],
     small_number_suppression = True,
   ),
 
-  ## High dose opioid
+  ## High dose opioid 
   Measure(
     id = "hi_opioid_all_any",
     numerator = "hi_opioid_any",
     denominator = "population",
-    group_by = ["population"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - cancer
-  ## Any opioid
-  Measure(
-    id = "opioid_ca_any",
-    numerator = "opioid_any",
-    denominator = "population",
     group_by = ["cancer"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - cancer
-  Measure(
-    id = "hi_opioid_ca_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["cancer"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - carehomes
-  ## Any opioid
-  Measure(
-    id = "opioid_care_any",
-    numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["carehome"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - carehomes
-  Measure(
-    id = "hi_opioid_care_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["carehome"],
     small_number_suppression = True,
   ),
   
-  # Monthly rates - sickle cell
-  ## Any opioid
-  Measure(
-    id = "opioid_scd_any",
-    numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["scd"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - sickle cell
-  Measure(
-    id = "hi_opioid_scd_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["scd"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - age and sex
-  ## Any opioid
+  # Age and sex ####
+  ## Any opioid - age and sex 
   Measure(
     id = "opioid_age_any",
     numerator = "opioid_any",
@@ -463,7 +406,7 @@ measures = [
     small_number_suppression = True,
   ),
 
-  ## High dose opioid - age and sex
+  ## High dose opioid - age and sex 
   Measure(
     id = "hi_opioid_age_any",
     numerator = "hi_opioid_any",
@@ -472,8 +415,46 @@ measures = [
     small_number_suppression = True,
   ),
 
-  # Monthly rates - ethnicity
-  ## Any opioid
+  # Carehomes ####
+  ## ANy opioid - carehomes 
+  Measure(
+    id = "opioid_care_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["carehome","cancer"],
+    small_number_suppression = True,
+  ),
+
+  ## High dose opioid - carehomes 
+  Measure(
+    id = "hi_opioid_care_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["carehome","cancer"],
+    small_number_suppression = True,
+  ),
+  
+  # Sickle cell ####
+  ## Any opioid - sickle cell 
+  Measure(
+    id = "opioid_scd_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["scd","cancer"],
+    small_number_suppression = True,
+  ),
+
+  ## High dose opioid - sickle cell 
+  Measure(
+    id = "hi_opioid_scd_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["scd","cancer"],
+    small_number_suppression = True,
+  ),
+
+  # Ethnicity ####
+  ## Any opioid - ethnicity 
   Measure(
     id = "opioid_eth_any",
     numerator = "opioid_any",
@@ -482,7 +463,7 @@ measures = [
     small_number_suppression = True,
   ),
 
-  ## High dose opioid - ethnicity
+  ## High dose opioid - ethnicity 
   Measure(
     id = "hi_opioid_eth_any",
     numerator = "hi_opioid_any",
@@ -491,8 +472,8 @@ measures = [
     small_number_suppression = True,
   ),
 
-  # Monthly rates - region
-  ## Any opioid
+  # Region ####
+  ## Any opioid - region - by cancer
   Measure(
     id = "opioid_reg_any",
     numerator = "opioid_any",
@@ -501,7 +482,7 @@ measures = [
     small_number_suppression = True,
   ),
 
-  ## High dose opioid - region
+  ## High dose opioid - region - by cancer
   Measure(
     id = "hi_opioid_reg_any",
     numerator = "hi_opioid_any",
@@ -509,9 +490,9 @@ measures = [
     group_by = ["region","cancer"],
     small_number_suppression = True,
   ),
-  
-  # Monthly rates - imd
-  ## Any opioid
+
+  # IMD deciles
+  ## Any opioid - imd
   Measure(
     id = "opioid_imd_any",
     numerator = "opioid_any",
@@ -529,16 +510,13 @@ measures = [
     small_number_suppression = True,
   ),
 
-  ####
-
-  #  Monthly rates - initiation
-
-  ## Any opioid initiation
+  #  Monthly rates - initiation #
+  ## Any opioid 
   Measure(
     id = "opioid_all_new",
     numerator = "opioid_new",
     denominator = "opioid_naive",
-    group_by = ["population"],
+    group_by = ["cancer"],
     small_number_suppression = True,
   ),
 
@@ -547,68 +525,11 @@ measures = [
     id = "hi_opioid_all_new",
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
-    group_by = ["population"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - cancer
-  ## new opioid
-  Measure(
-    id = "opioid_ca_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
     group_by = ["cancer"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - cancer
-  Measure(
-    id = "hi_opioid_ca_new",
-    numerator = "hi_opioid_new",
-    denominator = "hi_opioid_naive",
-    group_by = ["cancer"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - carehomes
-  ## new opioid
-  Measure(
-    id = "opioid_care_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["carehome"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - carehomes
-  Measure(
-    id = "hi_opioid_care_new",
-    numerator = "hi_opioid_new",
-    denominator = "hi_opioid_naive",
-    group_by = ["carehome"],
     small_number_suppression = True,
   ),
   
-  # Monthly rates - sickle cell
-  ## new opioid
-  Measure(
-    id = "opioid_scd_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["scd"],
-    small_number_suppression = True,
-  ),
-
-  ## High dose opioid - sickle cell
-  Measure(
-    id = "hi_opioid_scd_new",
-    numerator = "hi_opioid_new",
-    denominator = "hi_opioid_naive",
-    group_by = ["scd"],
-    small_number_suppression = True,
-  ),
-
-  # Monthly rates - age and sex
+  # Age and sex #
   ## new opioid
   Measure(
     id = "opioid_age_new",
@@ -626,9 +547,47 @@ measures = [
     group_by = ["age_cat","sex","cancer"],
     small_number_suppression = True,
   ),
+  
+  # Carehomes #
+  ## new opioid - carehomes
+  Measure(
+    id = "opioid_care_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["carehome","cancer"],
+    small_number_suppression = True,
+  ),
 
-  # Monthly rates - ethnicity
-  ## new opioid
+  ## High dose opioid - carehomes
+  Measure(
+    id = "hi_opioid_care_new",
+    numerator = "hi_opioid_new",
+    denominator = "hi_opioid_naive",
+    group_by = ["carehome","cancer"],
+    small_number_suppression = True,
+  ),
+  
+  # Sickle cell #
+  ## new opioid - sickle cell
+  Measure(
+    id = "opioid_scd_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["scd","cancer"],
+    small_number_suppression = True,
+  ),
+
+  ## High dose opioid - sickle cell
+  Measure(
+    id = "hi_opioid_scd_new",
+    numerator = "hi_opioid_new",
+    denominator = "hi_opioid_naive",
+    group_by = ["scd","cancer"],
+    small_number_suppression = True,
+  ),
+
+  # Ethnicity #
+  ## new opioid - ethnicity
   Measure(
     id = "opioid_eth_new",
     numerator = "opioid_new",
@@ -646,8 +605,8 @@ measures = [
     small_number_suppression = True,
   ),
 
-  # Monthly rates - region
-  ## new opioid
+  # Region #
+  ## new opioid - region
   Measure(
     id = "opioid_reg_new",
     numerator = "opioid_new",
@@ -665,8 +624,8 @@ measures = [
     small_number_suppression = True,
   ),
   
-  # Monthly rates - imd
-  ## new opioid
+  # IMD decile #
+  ## new opioid - imd
   Measure(
     id = "opioid_imd_new",
     numerator = "opioid_new",
