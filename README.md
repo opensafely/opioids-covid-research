@@ -1,4 +1,4 @@
-# opioids-covid-research
+# Changes in prescribing of opioids during COVID-19 
 
 This is the code and configuration for opioids-covid-research.
 

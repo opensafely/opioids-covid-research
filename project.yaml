@@ -1,12 +1,90 @@
+######################################
+
+# This script defines the project pipeline - it specifys the execution orders for all the code in this
+# repo using a series of actions.
+
+######################################
+
 version: '3.0'
 
 expectations:
-  population_size: 1000
+  population_size: 1000000
 
 actions:
 
-  generate_study_population:
-    run: cohortextractor:latest generate_cohort --study-definition study_definition
+  # Extract data ----
+  
+  ## Cohort data
+  generate_cohort:
+    run: >
+      cohortextractor:latest generate_cohort
+        --study-definition study_definition
+        --index-date-range "2018-01-01 to 2022-03-01 by month"
+        --output-dir=output
     outputs:
       highly_sensitive:
-        cohort: output/input.csv
+        cohort: output/input_*.csv
+
+
+  ## Ethnicity      
+  generate_ethnicity_cohort:
+    run: >
+      cohortextractor:latest generate_cohort
+        --study-definition study_definition_ethnicity
+    outputs:
+      highly_sensitive:
+        cohort: output/input_ethnicity.csv
+
+
+  # Data processing ----
+  
+  ## Add ethnicity
+  join_cohorts:
+    run: >
+      cohort-joiner:v0.0.46
+        --lhs output/input_*.csv
+        --rhs output/input_ethnicity.csv
+        --output-dir output/data
+    needs: [generate_cohort, generate_ethnicity_cohort]
+    outputs:
+      highly_sensitive:
+        cohort: output/data/input_*.csv
+
+  ## Generate measures
+  generate_measures:
+    run: >
+      cohortextractor:latest generate_measures 
+        --study-definition study_definition 
+        --output-dir output/data
+    needs: [join_cohorts]
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/data/measure_*.csv
+
+
+  ## Process data
+  #data_process:
+  #  run: r:latest analysis/process/process_data.R
+  #  needs: [join_ethnicity, generate_measures]
+  #  outputs:
+  #    moderately_sensitive:
+  #      measure_csv: output/data/measure_final_*.csv
+
+  
+  # Results ----
+        
+  ## Table 1
+  #table_1:
+  #  run: r:latest analysis/descriptive/table_1.R
+  #  needs: [join_ethnicity]
+  #  outputs:
+  #    moderately_sensitive:
+  #      table: output/tables/table1_redacted.csv
+
+  ## Table 2
+  #table_2:
+  #  run: r:latest analysis/descriptive/table_2.R
+  #  needs: [join_ethnicity]
+  #  outputs:
+  #    moderately_sensitive:
+  #      tables: output/tables/table2*.csv
