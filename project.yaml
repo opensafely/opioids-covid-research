@@ -62,29 +62,23 @@ actions:
         measure_csv: output/data/measure_*.csv
 
 
-  ## Process data
-  #data_process:
-  #  run: r:latest analysis/process/process_data.R
-  #  needs: [join_ethnicity, generate_measures]
-  #  outputs:
-  #    moderately_sensitive:
-  #      measure_csv: output/data/measure_final_*.csv
-
   
   # Results ----
-        
-  ## Table 1
-  #table_1:
-  #  run: r:latest analysis/descriptive/table_1.R
-  #  needs: [join_ethnicity]
-  #  outputs:
-  #    moderately_sensitive:
-  #      table: output/tables/table1_redacted.csv
 
-  ## Table 2
-  #table_2:
-  #  run: r:latest analysis/descriptive/table_2.R
-  #  needs: [join_ethnicity]
-  #  outputs:
-  #    moderately_sensitive:
-  #      tables: output/tables/table2*.csv
+ ## Process data
+  process_data:
+   run: r:latest analysis/process/process_data.R
+   needs: [join_cohorts,generate_measures]
+   outputs:
+      moderately_sensitive:
+        measure_csv: output/time series/timeseries_*.csv
+
+  ## Table 
+  table:
+    run: r:latest analysis/descriptive/table.R
+    needs: [join_cohorts]
+    outputs:
+      moderately_sensitive:
+        table: output/tables/table_*.csv
+
+ 
