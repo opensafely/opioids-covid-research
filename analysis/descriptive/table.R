@@ -12,6 +12,9 @@
 ## FOr running locally only
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
 
+dir.create(here::here("output", "tables"), showWarnings = FALSE, recursive=TRUE)
+
+
 ## Import libraries
 library('tidyverse')
 library('lubridate')

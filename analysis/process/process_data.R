@@ -16,6 +16,9 @@
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
 
+dir.create(here::here("output", "time series"), showWarnings = FALSE, recursive=TRUE)
+
+
 # Import libraries #
 library('tidyverse')
 library('lubridate')
@@ -26,6 +29,7 @@ library('dplyr')
 
 # Custom functions
 source(here("analysis", "lib", "custom_functions.R"))
+
 
 ###############################
 # Prevalence datasets
@@ -467,19 +471,19 @@ head(new_nocancer)
 ###############################
 
 prev_full <- prev_full %>% 
-  arrange(age_cat,sex,region,imdq10,ethnicity,carehome,scd,date)
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 write.csv(prev_full,file = here::here("output", "time series", "timeseries_prev_full.csv"))
 
 prev_nocancer <- prev_nocancer %>% 
-  arrange(age_cat,sex,region,imdq10,ethnicity,carehome,scd,date) 
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 write.csv(prev_nocancer,file = here::here("output", "time series", "timeseries_prev_nocancer.csv"))
 
 new_full <- new_full %>% 
-  arrange(age_cat,sex,region,imdq10,ethnicity,carehome,scd,date) 
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 write.csv(new_full,file = here::here("output", "time series", "timeseries_new_full.csv"))
 
 new_nocancer <- new_nocancer %>% 
-  arrange(age_cat,sex,region,imdq10,ethnicity,carehome,scd,date) 
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 write.csv(new_nocancer,file = here::here("output", "time series", "timeseries_new_nocancer.csv"))
 
 ###############################
