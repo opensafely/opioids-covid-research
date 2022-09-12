@@ -23,10 +23,11 @@ library('arrow')
 library('here')
 library('reshape2')
 library('dplyr')
+library('fs')
 
 ## Create directories
-dir.create(here::here("output", "time series"), showWarnings = FALSE, recursive = TRUE)
-dir.create(here::here("output", "joined"), showWarnings = FALSE, recursive = TRUE)
+dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
 prev_ts <- read_csv(here::here("output", "joined", "final_timeseries_prev.csv")) %>%

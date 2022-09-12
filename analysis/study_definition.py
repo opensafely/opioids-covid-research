@@ -33,7 +33,6 @@ study = StudyDefinition(
   },
  
   # Define the study population
-  # TODO: for TPP studies, do we need to specify TPP registered?
   population = patients.satisfying(
       """
       NOT has_died

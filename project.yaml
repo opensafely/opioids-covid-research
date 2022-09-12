@@ -80,7 +80,7 @@ actions:
   ## Add ethnicity
   join_cohorts:
     run: >
-      cohort-joiner:v0.0.46
+      cohort-joiner:v0.0.48
         --lhs output/input_*.csv
         --rhs output/input_ethnicity.csv
         --output-dir output/data
@@ -110,7 +110,8 @@ actions:
       moderately_sensitive:
         measure_csv: output/joined/final_*.csv
 
-  # Results #
+
+  # Results ---
 
   ## Time series
   timeseries:
