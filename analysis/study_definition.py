@@ -384,7 +384,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid 
@@ -393,7 +392,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["cancer"],
-    small_number_suppression = True,
+    
   ),
   
   # Age and sex ####
@@ -403,7 +402,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["age_cat","sex","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - age and sex 
@@ -412,7 +411,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["age_cat","sex","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   # Carehomes ####
@@ -422,7 +421,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["carehome","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - carehomes 
@@ -431,7 +430,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["carehome","cancer"],
-    small_number_suppression = True,
+    
   ),
   
   # Sickle cell ####
@@ -441,7 +440,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["scd","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - sickle cell 
@@ -450,7 +449,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["scd","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   # Ethnicity ####
@@ -460,7 +459,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["ethnicity","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - ethnicity 
@@ -469,7 +468,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   # Region ####
@@ -479,7 +478,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["region","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - region - by cancer
@@ -488,7 +487,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["region","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   # IMD deciles
@@ -498,7 +497,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["imdq10","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid - imd
@@ -507,7 +506,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["imdq10","cancer"],
-    small_number_suppression = True,
+    
   ),
 
   #  Monthly rates - initiation #
@@ -517,7 +516,7 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["cancer"],
-    small_number_suppression = True,
+    
   ),
 
   ## High dose opioid
@@ -526,7 +525,7 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["cancer"],
-    small_number_suppression = True,
+    
   ),
   
   # Age and sex #
@@ -536,7 +535,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["age_cat","sex","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - age and sex
@@ -545,7 +543,6 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["age_cat","sex","cancer"],
-    small_number_suppression = True,
   ),
   
   # Carehomes #
@@ -555,7 +552,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["carehome","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - carehomes
@@ -564,7 +560,6 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["carehome","cancer"],
-    small_number_suppression = True,
   ),
   
   # Sickle cell #
@@ -574,7 +569,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["scd","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - sickle cell
@@ -583,7 +577,6 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["scd","cancer"],
-    small_number_suppression = True,
   ),
 
   # Ethnicity #
@@ -593,7 +586,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["ethnicity","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - ethnicity
@@ -601,8 +593,7 @@ measures = [
     id = "hi_opioid_eth_new",
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
-    group_by = ["ethnicity","cancer"],
-    small_number_suppression = True,
+    group_by = ["ethnicity","cancer"], 
   ),
 
   # Region #
@@ -612,7 +603,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["region","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - region
@@ -621,7 +611,6 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["region","cancer"],
-    small_number_suppression = True,
   ),
   
   # IMD decile #
@@ -631,7 +620,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["imdq10","cancer"],
-    small_number_suppression = True,
   ),
 
   ## High dose opioid - imd
@@ -640,7 +628,6 @@ measures = [
     numerator = "hi_opioid_new",
     denominator = "hi_opioid_naive",
     group_by = ["imdq10","cancer"],
-    small_number_suppression = True,
   ),
 
 ]
