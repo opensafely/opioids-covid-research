@@ -35,7 +35,7 @@ for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
 
 # Function to summarise data over each variable
 f <- function(var,name) {
-  for_tables %>%
+  df <- for_tables %>%
     group_by(!!enquo(var), cancer) %>%
     summarise(
       tot = n(),
@@ -48,6 +48,7 @@ f <- function(var,name) {
     )  %>%
     rename(label := {{var}}) %>%
     mutate(group = name)
+  return(df)
 }
 
 combined <- rbind(
