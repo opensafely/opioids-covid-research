@@ -24,6 +24,8 @@ library('here')
 library('reshape2')
 library('dplyr')
 library('fs')
+library('ggplot2')
+library('RColorBrewer')
 
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
@@ -168,27 +170,25 @@ write.csv(new_nocancer, file = here::here("output", "time series", "timeseries_n
 ## Example graph to check
 ###############################
 
+#graph <-
+#  ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
+#              & !(age_cat %in% c("Missing")))) +
+#  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
+#  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+#             linetype = "longdash") +
+#  facet_wrap(~ age_cat) +
+#  scale_y_continuous(expand = c(.02, .02)) +
+#  scale_color_brewer(palette =  "Paired") +
+#  ylab("People prescribed an opioid per\n1000 registered patients") +
+#  xlab("Month") +
+#  theme_bw() +
+#  theme(strip.background = element_blank(),
+#        strip.text = element_text(hjust = 0),
+#        axis.text.x = element_text(angle = 45, hjust = 1),
+#        legend.title = element_blank(),
+#        panel.grid.major.x = element_blank(),
+#        panel.grid.minor.x = element_blank()) +
+#  guides(color = "none")
 
-graph <-
-  ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
-              & !(age_cat %in% c("Missing")))) +
-  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
-  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
-             linetype = "longdash") +
-  facet_wrap(~ age_cat) +
-  scale_y_continuous(expand = c(.02, .02)) +
-  ylab("People prescribed an opioid per\n1000 registered patients") +
-  xlab("Month") +
-  theme_bw() +
-  theme(strip.background = element_blank(),
-        strip.text = element_text(hjust = 0),
-        axis.text.x = element_text(angle = 45, hjust = 1),
-        legend.title = element_blank(),
-        panel.grid.major.x = element_blank(),
-        panel.grid.minor.x = element_blank()) +
-  guides(color = "none")
-
-png(filename = "output/time series/graph_age.png", 
-    width = 6, height = 4.5, unit = "in", res = 300)
- graph
-dev.off()
+#ggsave(filename = here::here("output/time series/graph_age.png"), 
+#  graph, width = 6, height = 4.5, unit = "in", dpi = 300)

@@ -116,7 +116,7 @@ actions:
   ## Time series
   timeseries:
     run: r:latest analysis/descriptive/time_series.R
-    needs: [join_cohorts]
+    needs: [join_cohorts, process_data]
     outputs:
       moderately_sensitive:
         table: output/time series/timeseries_*.csv
@@ -124,7 +124,7 @@ actions:
   ## Table 
   table:
     run: r:latest analysis/descriptive/table.R
-    needs: [join_cohorts]
+    needs: [join_cohorts, process_data]
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv
