@@ -32,11 +32,27 @@ dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = 
 dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
-prev_ts <- read_csv(here::here("output", "joined", "final_timeseries_prev.csv")) %>%
-  mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"))
+prev_ts <- read_csv(here::here("output", "joined", "final_timeseries_prev.csv"),
+   col_types = cols(
+                      region  = col_character(),
+                      imdq10 = col_character(),
+                      ethnicity  = col_character(),
+                      carehome  = col_character(),
+                      scd  = col_character(),
+                      age_cat  = col_character(),
+                      sex = col_character(),
+                      date = col_date(format="%Y-%m-%d")))
   
-new_ts <- read_csv(here::here("output", "joined", "final_timeseries_new.csv")) %>%
-  mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"))
+new_ts <- read_csv(here::here("output", "joined", "final_timeseries_new.csv"),
+  col_types = cols(
+                      region  = col_character(),
+                      imdq10= col_character(),
+                      ethnicity  = col_character(),
+                      carehome  = col_character(),
+                      scd  = col_character(),
+                      age_cat  = col_character(),
+                      sex = col_character(),
+                      date = col_date(format="%Y-%m-%d")))
   
 
 ###################################
@@ -170,25 +186,26 @@ write.csv(new_nocancer, file = here::here("output", "time series", "timeseries_n
 ## Example graph to check
 ###############################
 
-#graph <-
-#  ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
-#              & !(age_cat %in% c("Missing")))) +
-#  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
-#  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
-#             linetype = "longdash") +
-#  facet_wrap(~ age_cat) +
-#  scale_y_continuous(expand = c(.02, .02)) +
-#  scale_color_brewer(palette =  "Paired") +
-#  ylab("People prescribed an opioid per\n1000 registered patients") +
-#  xlab("Month") +
-#  theme_bw() +
-#  theme(strip.background = element_blank(),
-#        strip.text = element_text(hjust = 0),
-#        axis.text.x = element_text(angle = 45, hjust = 1),
-#        legend.title = element_blank(),
-#        panel.grid.major.x = element_blank(),
-#        panel.grid.minor.x = element_blank()) +
-#  guides(color = "none")
+graph <-
+  ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
+              & !(age_cat %in% c("Missing")))) +
+  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  facet_wrap(~ age_cat) +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed an opioid per\n1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
 
-#ggsave(filename = here::here("output/time series/graph_age.png"), 
-#  graph, width = 6, height = 4.5, unit = "in", dpi = 300)
+ggsave(filename = here::here("output/time series/graph_age.png"),
+  graph, width = 6, height = 4.5, unit = "in", dpi = 300)
+
