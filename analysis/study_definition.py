@@ -186,12 +186,7 @@ study = StudyDefinition(
       carehome_primis_codes,
       on_or_before = "index_date",
       returning = "binary_flag",
-      return_expectations = {
-        "date": {
-          "earliest": "2017-01-01", 
-          "latest": "index_date",
-          },
-        "incidence": 0.1}
+      return_expectations = {"incidence": 0.1}
     ),
 
     # COPIED CODE  
@@ -238,12 +233,7 @@ study = StudyDefinition(
     cancer_codes,
     between = ["first_day_of_month(index_date) - 1 year","last_day_of_month(index_date)"],
     returning = "binary_flag",
-    return_expectations = {
-      "date": {
-        "earliest": "first_day_of_month(index_date) - 1 year",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15}
+    return_expectations = {"incidence": 0.15}
   ),
 
   ### Sickle cell disease
