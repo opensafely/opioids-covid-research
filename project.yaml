@@ -119,7 +119,8 @@ actions:
     needs: [join_cohorts, process_data]
     outputs:
       moderately_sensitive:
-        table: output/time series/timeseries_*.csv
+        table: output/time series/timeseries_*.csv  
+        plot: output/time series/graph_age.png
 
   ## Table 
   table:
@@ -128,5 +129,6 @@ actions:
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv
+      
 
  
