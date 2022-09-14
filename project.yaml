@@ -104,7 +104,7 @@ actions:
   ## Process data
   process_data:
    run: r:latest analysis/process/process_data.R
-   needs: [generate_measures]
+   needs: [generate_measures,join_cohorts]
    outputs:
       moderately_sensitive:
         measure_csv: output/joined/final_*.csv
