@@ -119,7 +119,7 @@ actions:
     outputs:
       moderately_sensitive:
         table: output/time series/timeseries_*.csv  
-        plot: output/time series/graph_age.png
+        plot: output/time series/graph*.png
 
   ## Table 
   table:
