@@ -186,9 +186,10 @@ write.csv(new_nocancer, file = here::here("output", "time series", "timeseries_n
 ## Example graph to check
 ###############################
 
-graph <-
+# Prevalence by age/sex
+graph1 <-
   ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
-              & !(age_cat %in% c("Missing")))) +
+                & !(age_cat %in% c("Missing")))) +
   geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
   geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
              linetype = "longdash") +
@@ -206,6 +207,81 @@ graph <-
         panel.grid.minor.x = element_blank()) +
   guides(color = "none")
 
-ggsave(filename = here::here("output/time series/graph_age.png"),
-  graph, width = 6, height = 4.5, unit = "in", dpi = 300)
+ggsave(filename = here::here("output/time series/prev_age.png"),
+       graph1, width = 6.5, height = 4.75, unit = "in", dpi = 300)
+
+# Prevalence of high dose opioids by age/sex
+graph2 <-
+  ggplot(subset(prev_full, (sex %in% c("Male", "Female"))
+                & !(age_cat %in% c("Missing")))) +
+  geom_line(aes(x = date, y = prev_hi_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  facet_wrap(~ age_cat) +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed a high dose opioid\nper 1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
+
+ggsave(filename = here::here("output/time series/prev_hi_age.png"),
+       graph2, width = 6.5, height = 4.75, unit = "in", dpi = 300)
+
+# Incidence by age/sex
+graph3 <-
+  ggplot(subset(new_full, (sex %in% c("Male", "Female"))
+                & !(age_cat %in% c("Missing")))) +
+  geom_line(aes(x = date, y = new_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  facet_wrap(~ age_cat) +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed an opioid per\n1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
+
+ggsave(filename = here::here("output/time series/new_age.png"),
+       graph3, width = 6.5, height = 4.75, unit = "in", dpi = 300)
+
+# Incidence of high dose opioids by age/sex
+graph4 <-
+  ggplot(subset(new_full, (sex %in% c("Male", "Female"))
+                & !(age_cat %in% c("Missing")))) +
+  geom_line(aes(x = date, y = new_hi_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  facet_wrap(~ age_cat) +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed a high dose opioid\nper 1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
+
+ggsave(filename = here::here("output/time series/new_hi_age.png"),
+       graph4, width = 6.5, height = 4.75, unit = "in", dpi = 300)
+
+
+
 
