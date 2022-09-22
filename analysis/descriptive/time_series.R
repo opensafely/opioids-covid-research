@@ -207,7 +207,7 @@ graph1 <-
         panel.grid.minor.x = element_blank()) +
   guides(color = "none")
 
-ggsave(filename = here::here("output/time series/prev_age.png"),
+ggsave(filename = here::here("output/time series/graph_prev_age.png"),
        graph1, width = 6.5, height = 4.75, unit = "in", dpi = 300)
 
 # Prevalence of high dose opioids by age/sex
@@ -231,7 +231,7 @@ graph2 <-
         panel.grid.minor.x = element_blank()) +
   guides(color = "none")
 
-ggsave(filename = here::here("output/time series/prev_hi_age.png"),
+ggsave(filename = here::here("output/time series/graph_prev_hi_age.png"),
        graph2, width = 6.5, height = 4.75, unit = "in", dpi = 300)
 
 # Incidence by age/sex
@@ -255,7 +255,7 @@ graph3 <-
         panel.grid.minor.x = element_blank()) +
   guides(color = "none")
 
-ggsave(filename = here::here("output/time series/new_age.png"),
+ggsave(filename = here::here("output/time series/graph_new_age.png"),
        graph3, width = 6.5, height = 4.75, unit = "in", dpi = 300)
 
 # Incidence of high dose opioids by age/sex
@@ -279,7 +279,7 @@ graph4 <-
         panel.grid.minor.x = element_blank()) +
   guides(color = "none")
 
-ggsave(filename = here::here("output/time series/new_hi_age.png"),
+ggsave(filename = here::here("output/time series/graph_new_hi_age.png"),
        graph4, width = 6.5, height = 4.75, unit = "in", dpi = 300)
 
 
