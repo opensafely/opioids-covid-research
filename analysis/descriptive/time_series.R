@@ -193,7 +193,7 @@ graph1 <-
   geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
   geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
              linetype = "longdash") +
-  facet_wrap(~ age_cat) +
+  facet_wrap(~ age_cat,  scales="free_y") +
   scale_y_continuous(expand = c(.02, .02)) +
   scale_color_brewer(palette =  "Paired") +
   ylab("People prescribed an opioid per\n1000 registered patients") +
@@ -217,7 +217,7 @@ graph2 <-
   geom_line(aes(x = date, y = prev_hi_rate * 10, col = age_cat, linetype = sex)) +
   geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
              linetype = "longdash") +
-  facet_wrap(~ age_cat) +
+  facet_wrap(~ age_cat,  scales="free_y") +
   scale_y_continuous(expand = c(.02, .02)) +
   scale_color_brewer(palette =  "Paired") +
   ylab("People prescribed a high dose opioid\nper 1000 registered patients") +
@@ -241,7 +241,7 @@ graph3 <-
   geom_line(aes(x = date, y = new_rate * 10, col = age_cat, linetype = sex)) +
   geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
              linetype = "longdash") +
-  facet_wrap(~ age_cat) +
+  facet_wrap(~ age_cat,  scales="free_y") +
   scale_y_continuous(expand = c(.02, .02)) +
   scale_color_brewer(palette =  "Paired") +
   ylab("People prescribed an opioid per\n1000 registered patients") +
@@ -265,7 +265,7 @@ graph4 <-
   geom_line(aes(x = date, y = new_hi_rate * 10, col = age_cat, linetype = sex)) +
   geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
              linetype = "longdash") +
-  facet_wrap(~ age_cat) +
+  facet_wrap(~ age_cat, scales="free_y") +
   scale_y_continuous(expand = c(.02, .02)) +
   scale_color_brewer(palette =  "Paired") +
   ylab("People prescribed a high dose opioid\nper 1000 registered patients") +
@@ -285,3 +285,47 @@ ggsave(filename = here::here("output/time series/graph_new_hi_age.png"),
 
 
 
+# Prevalence by care home
+graph5 <-
+  ggplot(subset(prev_full, carehome=="Yes")) +
+  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed an opioid per\n1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
+
+ggsave(filename = here::here("output/time series/graph_prev_care.png"),
+       graph5, width = 6.5, height = 4.75, unit = "in", dpi = 300)
+
+
+# Prevalence by SCD
+graph6 <-
+  ggplot(subset(prev_full, scd=="Yes")) +
+  geom_line(aes(x = date, y = prev_rate * 10, col = age_cat, linetype = sex)) +
+  geom_vline(xintercept = as.Date("2020-03-01"), col = "gray70",
+             linetype = "longdash") +
+  scale_y_continuous(expand = c(.02, .02)) +
+  scale_color_brewer(palette =  "Paired") +
+  ylab("People prescribed an opioid per\n1000 registered patients") +
+  xlab("Month") +
+  theme_bw() +
+  theme(strip.background = element_blank(),
+        strip.text = element_text(hjust = 0),
+        axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title = element_blank(),
+        panel.grid.major.x = element_blank(),
+        panel.grid.minor.x = element_blank()) +
+  guides(color = "none")
+
+ggsave(filename = here::here("output/time series/graph_prev_scd.png"),
+       graph6, width = 6.5, height = 4.75, unit = "in", dpi = 300)
