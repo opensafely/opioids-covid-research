@@ -121,7 +121,7 @@ actions:
         table: output/time series/timeseries_*.csv  
   
   ## Time series graphs
-  timeseries:
+  graphs:
     run: r:latest analysis/descriptive/graphs.R
     needs: [process_data]
     outputs:
