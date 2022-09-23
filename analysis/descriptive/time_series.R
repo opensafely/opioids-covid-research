@@ -168,25 +168,25 @@ print(dim(new_nocancer))
 # Remove children and sickle cell disease (due to small numbers) 
 
 prev_full <- prev_full %>%
-  subset(!(scd %in% c("No","Yes")) & age_cat != "5-17 y") %>%
+  subset(!(scd %in% c("No","Yes")) & !(age_cat %in% c("5-17 y"))) %>%
   arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
 
 write.csv(prev_full, file = here::here("output", "time series", "timeseries_prev_full.csv"))
 
 prev_nocancer <- prev_nocancer %>%
-  subset(!(scd %in% c("No","Yes")) & age_cat != "5-17 y") %>%
+  subset(!(scd %in% c("No","Yes")) & !(age_cat %in% c("5-17 y"))) %>%
   arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
 
 write.csv(prev_nocancer, file = here::here("output", "time series", "timeseries_prev_nocancer.csv"))
 
 new_full <- new_full %>%
-  subset(!(scd %in% c("No","Yes")) & age_cat != "5-17 y") %>%
+  subset(!(scd %in% c("No","Yes")) & !(age_cat %in% c("5-17 y"))) %>%
   arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
 
 write.csv(new_full, file = here::here("output", "time series", "timeseries_new_full.csv"))
 
 new_nocancer <- new_nocancer %>%
-  subset(!(scd %in% c("No","Yes")) & age_cat != "5-17 y") %>%
+  subset(!(scd %in% c("No","Yes")) & !(age_cat %in% c("5-17 y"))) %>%
   arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
 
 write.csv(new_nocancer, file = here::here("output", "time series", "timeseries_new_nocancer.csv"))
