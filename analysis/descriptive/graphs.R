@@ -1,3 +1,64 @@
+#######################################################
+#
+# This script creates time series graphs by subgroups
+#
+#######################################################
+
+
+library('tidyverse')
+library('lubridate')
+library('arrow')
+library('here')
+library('reshape2')
+library('dplyr')
+library('fs')
+library('ggplot2')
+library('RColorBrewer')
+
+## Create directories
+dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
+
+# Read in data
+prev_full <- read_csv(here::here("output", "time series", "timeseries_prev_full.csv"),
+                    col_types = cols(
+                      region  = col_character(),
+                      imdq10 = col_character(),
+                      ethnicity  = col_character(),
+                      carehome  = col_character(),
+                      age_cat  = col_character(),
+                      sex = col_character(),
+                      date = col_date(format="%Y-%m-%d")))
+
+prev_nocancer <- read_csv(here::here("output", "time series", "timeseries_prev_nocancer.csv"),
+                   col_types = cols(
+                     region  = col_character(),
+                     imdq10= col_character(),
+                     ethnicity  = col_character(),
+                     carehome  = col_character(),
+                     age_cat  = col_character(),
+                     sex = col_character(),
+                     date = col_date(format="%Y-%m-%d")))
+
+new_full <- read_csv(here::here("output", "time series", "timeseries_new_full.csv"),
+                      col_types = cols(
+                        region  = col_character(),
+                        imdq10 = col_character(),
+                        ethnicity  = col_character(),
+                        carehome  = col_character(),
+                        age_cat  = col_character(),
+                        sex = col_character(),
+                        date = col_date(format="%Y-%m-%d")))
+
+new_nocancer <- read_csv(here::here("output", "time series", "timeseries_new_nocancer.csv"),
+                          col_types = cols(
+                            region  = col_character(),
+                            imdq10= col_character(),
+                            ethnicity  = col_character(),
+                            carehome  = col_character(),
+                            age_cat  = col_character(),
+                            sex = col_character(),
+                            date = col_date(format="%Y-%m-%d")))
+
 ##############################
 ## Graphs to check
 ###############################

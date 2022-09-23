@@ -123,7 +123,7 @@ actions:
   ## Time series graphs
   graphs:
     run: r:latest analysis/descriptive/graphs.R
-    needs: [process_data]
+    needs: [timeseries]
     outputs:
       moderately_sensitive:
         plot: output/time series/graph*.png
