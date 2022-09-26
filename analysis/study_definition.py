@@ -41,7 +41,7 @@ study = StudyDefinition(
       AND 
       (sex = "M" OR sex = "F")
       AND
-      (age >=5 AND age < 110)
+      (age >=18 AND age < 110)
       """,
     
       has_died = patients.died_from_any_cause(
@@ -75,15 +75,14 @@ study = StudyDefinition(
   ### Age categories
   age_cat = patients.categorised_as(
     {"0": "DEFAULT",
-      "1": """age >= 5 AND age < 18""",
-      "2": """age >= 18 AND age < 30""",
-      "3": """age >= 30 AND age < 40""",
-      "4": """age >= 40 AND age < 50""",
-      "5": """age >= 50 AND age < 60""",
-      "6": """age >= 60 AND age < 70""",
-      "7": """age >= 70 AND age < 80""",
-      "8": """age >= 80 AND age < 90""",
-      "9": """age >= 90""",
+      "1": """age >= 18 AND age < 30""",
+      "2": """age >= 30 AND age < 40""",
+      "3": """age >= 40 AND age < 50""",
+      "4": """age >= 50 AND age < 60""",
+      "5": """age >= 60 AND age < 70""",
+      "6": """age >= 70 AND age < 80""",
+      "7": """age >= 80 AND age < 90""",
+      "8": """age >= 90""",
     },
 
     return_expectations = {
@@ -93,17 +92,16 @@ study = StudyDefinition(
           "0": 0.01,
           "1": 0.12,
           "2": 0.12,
-          "3": 0.12,
-          "4": 0.12,
-          "5": 0.12,          
-          "6": 0.11,
-          "7": 0.11,
-          "8": 0.11,
-          "9": 0.06
+          "3": 0.13,
+          "4": 0.13,
+          "5": 0.13,          
+          "6": 0.12,
+          "7": 0.12,
+          "8": 0.12,
         }},
     },
   ),
-  
+
   ### Index of multiple deprivation
   imdq10 = patients.categorised_as(
     {"0": "DEFAULT",

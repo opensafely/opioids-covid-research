@@ -73,11 +73,11 @@ redact <- function(variables) {
 bycancer <- combined %>%
   mutate_at(c(vars(c("tot", contains('opioid')))), redact) %>%
   mutate(
-    # Calculate percentages
-    p_prev = opioid_any / tot * 100,
-    p_prev_hi = hi_opioid_any / tot * 100,
-    p_new = opioid_new / opioid_naive * 100,
-    p_new_hi = hi_opioid_new / hi_opioid_naive * 100
+    # Calculate rates
+    p_prev = opioid_any / tot * 1000,
+    p_prev_hi = hi_opioid_any / tot * 1000,
+    p_new = opioid_new / opioid_naive * 1000,
+    p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
   )
 
 # Full population
@@ -95,15 +95,16 @@ fullpop <- combined %>%
   
   mutate_at(c(vars(c("tot", contains('opioid')))), redact) %>%
   mutate(
-    # Calculate percentages
-    p_prev = opioid_any / tot * 100,
-    p_prev_hi = hi_opioid_any / tot * 100,
-    p_new = opioid_new / opioid_naive * 100,
-    p_new_hi = hi_opioid_new / hi_opioid_naive * 100
+    # Calculate rates
+    p_prev = opioid_any / tot * 1000,
+    p_prev_hi = hi_opioid_any / tot * 1000,
+    p_new = opioid_new / opioid_naive * 1000,
+    p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
   )
 
 head(bycancer)
 head(fullpop)
+
 
 ###################
 # Save tables
@@ -114,6 +115,7 @@ write.csv(fullpop, here::here("output", "tables", "table_full_population.csv"))
 
 bycancer <- bycancer %>% arrange(group, label)
 write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"))
+
 
 
 

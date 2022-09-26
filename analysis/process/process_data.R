@@ -62,7 +62,7 @@ prevalence <- full_join(
       TRUE ~ NA_character_),
          
     # Ethnicity
-    ethnicity = ifelse(ethnicity == "", "Missing", ethnicity),
+    ethnicity = ifelse((ethnicity %in% c("",NA)), "Missing", ethnicity),
          
     # IMD deciles
     imdq10 = fct_case_when(
