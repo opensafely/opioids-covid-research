@@ -222,25 +222,25 @@ ggsave(filename = here::here("output/time series/graph_noca_new_hi_region.png"),
 # Prevalence by carehome
 line_graph(subset(prev_nocancer, (carehome == "Yes")), prev_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_noca_prev_region.png"),
+ggsave(filename = here::here("output/time series/graph_noca_prev_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by carehome
 line_graph(subset(prev_nocancer, (carehome == "Yes")), prev_hi_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_noca_prev_hi_region.png"),
+ggsave(filename = here::here("output/time series/graph_noca_prev_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by carehome
 line_graph(subset(new_nocancer, (carehome == "Yes")), new_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_noca_new_region.png"),
+ggsave(filename = here::here("output/time series/graph_noca_new_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence (high dose) by carehome
 line_graph(subset(new_nocancer, (carehome == "Yes")), new_hi_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_noca_new_hi_region.png"),
+ggsave(filename = here::here("output/time series/graph_noca_new_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 
@@ -363,23 +363,23 @@ ggsave(filename = here::here("output/time series/graph_new_hi_region.png"),
 # Prevalence by carehome
 line_graph(subset(prev_full, (carehome == "Yes")), prev_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_prev_region.png"),
+ggsave(filename = here::here("output/time series/graph_prev_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by carehome
 line_graph(subset(prev_full, (carehome == "Yes")), prev_hi_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_prev_hi_region.png"),
+ggsave(filename = here::here("output/time series/graph_prev_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by carehome
 line_graph(subset(new_full, (carehome == "Yes")), new_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_new_region.png"),
+ggsave(filename = here::here("output/time series/graph_new_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence (high dose) by carehome
 line_graph(subset(new_full, (carehome == "Yes")), new_hi_rate, carehome) 
 
-ggsave(filename = here::here("output/time series/graph_new_hi_region.png"),
+ggsave(filename = here::here("output/time series/graph_new_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
