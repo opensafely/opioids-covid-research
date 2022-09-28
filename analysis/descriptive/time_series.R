@@ -114,25 +114,25 @@ new_full <- new_ts %>%
   group_by(date, region, imdq10, ethnicity, carehome, scd, age_cat, sex) %>%
   summarise(
     opioid_new = sum(opioid_new),
-    hi_opioid_new = sum(hi_opioid_new),
+    #hi_opioid_new = sum(hi_opioid_new),
     opioid_naive = sum(opioid_naive),
-    hi_opioid_naive = sum(hi_opioid_naive)
+    #hi_opioid_naive = sum(hi_opioid_naive)
     ) %>%
   mutate(
     
     # Suppression and rounding
     opioid_new = case_when(opioid_new > 5 ~ opioid_new),
       opioid_new = round(opioid_new / 7) * 7,
-    hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
-     hi_opioid_new = round(hi_opioid_new / 7) * 7,
+    #hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
+    # hi_opioid_new = round(hi_opioid_new / 7) * 7,
     opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
       opioid_naive = round(opioid_naive / 7) * 7,
-    hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
-      hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
+    #hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
+    #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000,
-    new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
+    #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) 
 
 ## Create dataset for new opioid prescribing in people without cancer only
@@ -145,16 +145,16 @@ new_nocancer <- new_ts %>%
     # Suppression and rounding
     opioid_new = case_when(opioid_new > 5 ~ opioid_new),
       opioid_new = round(opioid_new / 7) * 7,
-    hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
-      hi_opioid_new = round(hi_opioid_new / 7) * 7,
+    #hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
+    #  hi_opioid_new = round(hi_opioid_new / 7) * 7,
     opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
       opioid_naive = round(opioid_naive / 7) * 7,
-    hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
-      hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
+    #hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
+    #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000,
-    new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
+    #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) 
 
 print(dim(new_full))

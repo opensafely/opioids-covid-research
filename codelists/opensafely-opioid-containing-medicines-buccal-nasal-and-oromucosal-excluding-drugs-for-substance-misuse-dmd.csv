@@ -1,0 +1,86 @@
+dmd_type,dmd_id,dmd_name,bnf_code
+VMP,134812008,Fentanyl 200microgram lozenges,0407020A0AAAIAI
+VMP,134810000,Fentanyl 400microgram lozenges,0407020A0AAAJAJ
+VMP,134809005,Fentanyl 600microgram lozenges,0407020A0AAAKAK
+VMP,134808002,Fentanyl 800microgram lozenges,0407020A0AAALAL
+VMP,134807007,Fentanyl 1.2mg lozenges,0407020A0AAANAN
+VMP,134806003,Fentanyl 1.6mg lozenges,0407020A0AAAPAP
+VMP,14951911000001104,Fentanyl 100microgram sublingual tablets sugar free,0407020A0AAAWAW
+VMP,14952011000001106,Fentanyl 200microgram sublingual tablets sugar free,0407020A0AAAXAX
+VMP,14952111000001107,Fentanyl 300microgram sublingual tablets sugar free,0407020A0AAAYAY
+VMP,14952211000001101,Fentanyl 400microgram sublingual tablets sugar free,0407020A0AAAZAZ
+VMP,14952311000001109,Fentanyl 600microgram sublingual tablets sugar free,0407020A0AABABA
+VMP,14952411000001102,Fentanyl 800microgram sublingual tablets sugar free,0407020A0AABBBB
+VMP,14973311000001101,Fentanyl 100microgram buccal tablets sugar free,0407020A0AABCBC
+VMP,14973411000001108,Fentanyl 200microgram buccal tablets sugar free,0407020A0AABDBD
+VMP,14973511000001107,Fentanyl 400microgram buccal tablets sugar free,0407020A0AABEBE
+VMP,14973611000001106,Fentanyl 600microgram buccal tablets sugar free,0407020A0AABFBF
+VMP,14973711000001102,Fentanyl 800microgram buccal tablets sugar free,0407020A0AABGBG
+VMP,16037811000001102,Fentanyl 50micrograms/dose nasal spray,0407020A0AABHBH
+VMP,16037611000001101,Fentanyl 100micrograms/dose nasal spray,0407020A0AABJBJ
+VMP,16037711000001105,Fentanyl 200micrograms/dose nasal spray,0407020A0AABLBL
+VMP,17674111000001105,Fentanyl 400micrograms/dose nasal spray,0407020A0AABPBP
+VMP,23560111000001105,Fentanyl 200microgram buccal films sugar free,0407020A0AABTBT
+VMP,23560211000001104,Fentanyl 400microgram buccal films sugar free,0407020A0AABUBU
+VMP,23560311000001107,Fentanyl 800microgram buccal films sugar free,0407020A0AABVBV
+VMP,24446611000001102,Fentanyl 133microgram sublingual tablets sugar free,0407020A0AABXBX
+VMP,24446811000001103,Fentanyl 533microgram sublingual tablets sugar free,0407020A0AABYBY
+VMP,24446711000001106,Fentanyl 267microgram sublingual tablets sugar free,0407020A0AABZBZ
+AMP,152911000001100,Actiq 200microgram lozenges with integral oromucosal applicator,0407020A0BCAAAI
+AMP,437011000001104,Actiq 400microgram lozenges with integral oromucosal applicator,0407020A0BCABAJ
+AMP,906611000001102,Actiq 600microgram lozenges with integral oromucosal applicator,0407020A0BCACAK
+AMP,732011000001108,Actiq 800microgram lozenges with integral oromucosal applicator,0407020A0BCADAL
+AMP,305111000001108,Actiq 1.2mg lozenges with integral oromucosal applicator,0407020A0BCAEAN
+AMP,745311000001104,Actiq 1.6mg lozenges with integral oromucosal applicator,0407020A0BCAFAP
+AMP,14948311000001105,Abstral 100microgram sublingual tablets,0407020A0BJAAAW
+AMP,14950411000001103,Abstral 200microgram sublingual tablets,0407020A0BJABAX
+AMP,14949911000001103,Abstral 300microgram sublingual tablets,0407020A0BJACAY
+AMP,14949411000001106,Abstral 400microgram sublingual tablets,0407020A0BJADAZ
+AMP,14949011000001102,Abstral 600microgram sublingual tablets,0407020A0BJAEBA
+AMP,14948711000001109,Abstral 800microgram sublingual tablets,0407020A0BJAFBB
+AMP,14971111000001104,Effentora 100microgram buccal tablets,0407020A0BKAABC
+AMP,14971411000001109,Effentora 200microgram buccal tablets,0407020A0BKABBD
+AMP,14971711000001103,Effentora 400microgram buccal tablets,0407020A0BKACBE
+AMP,14972811000001102,Effentora 600microgram buccal tablets,0407020A0BKADBF
+AMP,14972311000001106,Effentora 800microgram buccal tablets,0407020A0BKAEBG
+AMP,16035311000001103,Instanyl 200micrograms/dose nasal spray,0407020A0BNAGBL
+AMP,16034711000001103,Instanyl 100micrograms/dose nasal spray,0407020A0BNAHBJ
+AMP,16034111000001104,Instanyl 50micrograms/dose nasal spray,0407020A0BNAIBH
+AMP,17668011000001105,PecFent 100micrograms/dose nasal spray,0407020A0BPAABJ
+AMP,17668511000001102,PecFent 400micrograms/dose nasal spray,0407020A0BPABBP
+AMP,23523811000001103,Breakyl 200microgram buccal films,0407020A0BSAABT
+AMP,23524511000001103,Breakyl 400microgram buccal films,0407020A0BSABBU
+AMP,23524811000001100,Breakyl 800microgram buccal films,0407020A0BSACBV
+AMP,24406811000001106,Recivit 133microgram sublingual tablets,0407020A0BTAABX
+AMP,24406311000001102,Recivit 400microgram sublingual tablets,0407020A0BTABAZ
+AMP,24407411000001106,Recivit 533microgram sublingual tablets,0407020A0BTACBY
+AMP,24407111000001101,Recivit 267microgram sublingual tablets,0407020A0BTADBZ
+AMP,24406511000001108,Recivit 800microgram sublingual tablets,0407020A0BTAEBB
+AMP,37039311000001100,Cynril 200microgram lozenges with integral oromucosal applicator,0407020A0BWAAAI
+AMP,37039711000001101,Cynril 400microgram lozenges with integral oromucosal applicator,0407020A0BWABAJ
+AMP,37040211000001100,Cynril 600microgram lozenges with integral oromucosal applicator,0407020A0BWACAK
+AMP,37040511000001102,Cynril 800microgram lozenges with integral oromucosal applicator,0407020A0BWADAL
+AMP,37042311000001107,Cynril 1.2mg lozenges with integral oromucosal applicator,0407020A0BWAEAN
+AMP,37046711000001105,Cynril 1.6mg lozenges with integral oromucosal applicator,0407020A0BWAFAP
+VMP,322498006,Buprenorphine 200microgram sublingual tablets sugar free,0407020B0AAABAB
+VMP,322492007,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,14968811000001107,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,21218511000001100,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,14962311000001101,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,28092811000001101,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,14947711000001108,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,22623211000001100,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,14961211000001102,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,38813511000001105,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,38424811000001108,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,18085111000001101,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,15061411000001101,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,14719611000001105,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,36885711000001109,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,21805211000001102,Buprenorphine 400microgram sublingual tablets sugar free,0407020B0AAADAD
+AMP,867611000001105,Temgesic 200microgram sublingual tablets,0407020B0BBAAAB
+AMP,762111000001101,Temgesic 400microgram sublingual tablets,0407020B0BBADAD
+AMP,19957211000001102,Tephine 200microgram sublingual tablets,0407020B0BFAAAB
+AMP,19957411000001103,Tephine 400microgram sublingual tablets,0407020B0BFABAD
+VMP,14937511000001104,Alfentanil 0.1% nasal spray,1501043A0AAAEAE
+AMP,14937011000001107,Alfentanil 0.1% nasal spray,1501043A0AAAEAE

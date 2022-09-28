@@ -1,0 +1,153 @@
+dmd_type,dmd_id,dmd_name,bnf_code
+VMP,36120011000001101,Fentanyl 25micrograms/hour transdermal patches,0407020A0AAAEAE
+AMP,15023811000001107,Fentanyl 25micrograms/hour transdermal patches,0407020A0AAAEAE
+AMP,10724711000001109,Fentanyl 25micrograms/hour transdermal patches,0407020A0AAAEAE
+AMP,13440611000001102,Fentanyl 25micrograms/hour transdermal patches,0407020A0AAAEAE
+VMP,36120211000001106,Fentanyl 50micrograms/hour transdermal patches,0407020A0AAAFAF
+AMP,15024011000001104,Fentanyl 50micrograms/hour transdermal patches,0407020A0AAAFAF
+AMP,10724911000001106,Fentanyl 50micrograms/hour transdermal patches,0407020A0AAAFAF
+AMP,13440811000001103,Fentanyl 50micrograms/hour transdermal patches,0407020A0AAAFAF
+VMP,36120311000001103,Fentanyl 75micrograms/hour transdermal patches,0407020A0AAAGAG
+AMP,15024211000001109,Fentanyl 75micrograms/hour transdermal patches,0407020A0AAAGAG
+AMP,10725111000001107,Fentanyl 75micrograms/hour transdermal patches,0407020A0AAAGAG
+AMP,13441011000001100,Fentanyl 75micrograms/hour transdermal patches,0407020A0AAAGAG
+VMP,36119911000001103,Fentanyl 100micrograms/hour transdermal patches,0407020A0AAAHAH
+AMP,15024411000001108,Fentanyl 100micrograms/hour transdermal patches,0407020A0AAAHAH
+AMP,10725311000001109,Fentanyl 100micrograms/hour transdermal patches,0407020A0AAAHAH
+AMP,13441211000001105,Fentanyl 100micrograms/hour transdermal patches,0407020A0AAAHAH
+VMP,9752311000001101,Fentanyl 12micrograms/hour transdermal patches,0407020A0AAAUAU
+VMP,23707711000001107,Fentanyl 37.5microgram/hour transdermal patches,0407020A0AABWBW
+AMP,2837011000001109,Durogesic 25micrograms transdermal patches,0407020A0BBAAAE
+AMP,2836411000001102,Durogesic 50micrograms transdermal patches,0407020A0BBABAF
+AMP,2836711000001108,Durogesic 75micrograms transdermal patches,0407020A0BBACAG
+AMP,2838111000001106,Durogesic 100micrograms transdermal patches,0407020A0BBADAH
+AMP,9089711000001102,Durogesic DTrans 25micrograms/hour transdermal patches,0407020A0BBAIAE
+AMP,9089911000001100,Durogesic DTrans 50micrograms/hour transdermal patches,0407020A0BBAJAF
+AMP,9090111000001109,Durogesic DTrans 75micrograms/hour transdermal patches,0407020A0BBAKAG
+AMP,9090311000001106,Durogesic DTrans 100micrograms/hour transdermal patches,0407020A0BBALAH
+AMP,9751111000001108,Durogesic DTrans 12micrograms/hour transdermal patches,0407020A0BBAMAU
+AMP,9508011000001106,Tilofyl 25micrograms/hour transdermal patches,0407020A0BDAAAE
+AMP,9508211000001101,Tilofyl 50micrograms/hour transdermal patches,0407020A0BDABAF
+AMP,9508511000001103,Tilofyl 75micrograms/hour transdermal patches,0407020A0BDACAG
+AMP,9508911000001105,Tilofyl 100micrograms/hour transdermal patches,0407020A0BDADAH
+AMP,11084511000001104,Matrifen 12micrograms/hour transdermal patches,0407020A0BEAAAU
+AMP,11084911000001106,Matrifen 25micrograms/hour transdermal patches,0407020A0BEABAE
+AMP,11085311000001109,Matrifen 50micrograms/hour transdermal patches,0407020A0BEACAF
+AMP,11085711000001108,Matrifen 75micrograms/hour transdermal patches,0407020A0BEADAG
+AMP,11085911000001105,Matrifen 100micrograms/hour transdermal patches,0407020A0BEAEAH
+AMP,12881511000001103,Mezolar Matrix 12micrograms/hour transdermal patches,0407020A0BFAAAU
+AMP,12881711000001108,Mezolar Matrix 25micrograms/hour transdermal patches,0407020A0BFABAE
+AMP,12882011000001103,Mezolar Matrix 50micrograms/hour transdermal patches,0407020A0BFACAF
+AMP,12882411000001107,Mezolar Matrix 75micrograms/hour transdermal patches,0407020A0BFADAG
+AMP,12882611000001105,Mezolar Matrix 100micrograms/hour transdermal patches,0407020A0BFAEAH
+AMP,23682311000001104,Mezolar Matrix 37.5microgram/hour transdermal patches,0407020A0BFAFBW
+AMP,12874811000001109,Fentalis Reservoir 25micrograms/hour transdermal patches,0407020A0BGAAAE
+AMP,12874911000001104,Fentalis Reservoir 50micrograms/hour transdermal patches,0407020A0BGABAF
+AMP,12875011000001104,Fentalis Reservoir 75micrograms/hour transdermal patches,0407020A0BGACAG
+AMP,12875111000001103,Fentalis Reservoir 100micrograms/hour transdermal patches,0407020A0BGADAH
+AMP,13567511000001103,Osmach 25micrograms/hour transdermal patches,0407020A0BHAAAE
+AMP,13567711000001108,Osmach 50micrograms/hour transdermal patches,0407020A0BHABAF
+AMP,13567911000001105,Osmach 75micrograms/hour transdermal patches,0407020A0BHACAG
+AMP,13568111000001108,Osmach 100micrograms/hour transdermal patches,0407020A0BHADAH
+AMP,15302411000001109,Osmanil 25micrograms/hour transdermal patches,0407020A0BLAAAE
+AMP,15302611000001107,Osmanil 50micrograms/hour transdermal patches,0407020A0BLABAF
+AMP,15302811000001106,Osmanil 75micrograms/hour transdermal patches,0407020A0BLACAG
+AMP,15303011000001109,Osmanil 100micrograms/hour transdermal patches,0407020A0BLADAH
+AMP,16088911000001101,Osmanil 12micrograms/hour transdermal patches,0407020A0BLAEAU
+AMP,15363211000001100,Victanyl 25micrograms/hour transdermal patches,0407020A0BMAAAE
+AMP,15363411000001101,Victanyl 50micrograms/hour transdermal patches,0407020A0BMABAF
+AMP,15363611000001103,Victanyl 75micrograms/hour transdermal patches,0407020A0BMACAG
+AMP,15363811000001104,Victanyl 100micrograms/hour transdermal patches,0407020A0BMADAH
+AMP,32520211000001103,Victanyl 12micrograms/hour transdermal patches,0407020A0BMAEAU
+AMP,19486711000001102,Fencino 12micrograms/hour transdermal patches,0407020A0BQAAAU
+AMP,19486911000001100,Fencino 25micrograms/hour transdermal patches,0407020A0BQABAE
+AMP,19487111000001100,Fencino 50micrograms/hour transdermal patches,0407020A0BQACAF
+AMP,19487311000001103,Fencino 75micrograms/hour transdermal patches,0407020A0BQADAG
+AMP,19487511000001109,Fencino 100micrograms/hour transdermal patches,0407020A0BQAEAH
+AMP,23449411000001109,Opiodur 12micrograms/hour transdermal patches,0407020A0BRAAAU
+AMP,23449611000001107,Opiodur 25micrograms/hour transdermal patches,0407020A0BRABAE
+AMP,23449811000001106,Opiodur 75micrograms/hour transdermal patches,0407020A0BRACAG
+AMP,23450011000001105,Opiodur 100micrograms/hour transdermal patches,0407020A0BRADAH
+AMP,23450311000001108,Opiodur 50micrograms/hour transdermal patches,0407020A0BRAEAF
+AMP,35358711000001106,Opiodur 12micrograms/hour transdermal patches,0407020A0BRAFAU
+AMP,35359311000001101,Opiodur 25micrograms/hour transdermal patches,0407020A0BRAGAE
+AMP,35359511000001107,Opiodur 50micrograms/hour transdermal patches,0407020A0BRAHAF
+AMP,35359711000001102,Opiodur 75micrograms/hour transdermal patches,0407020A0BRAIAG
+AMP,35359911000001100,Opiodur 100micrograms/hour transdermal patches,0407020A0BRAJAH
+AMP,37972611000001107,Opiodur 12micrograms/hour transdermal patches,0407020A0BRAKAU
+AMP,37973911000001108,Opiodur 25micrograms/hour transdermal patches,0407020A0BRALAE
+AMP,37974911000001105,Opiodur 50micrograms/hour transdermal patches,0407020A0BRAMAF
+AMP,37975411000001101,Opiodur 75micrograms/hour transdermal patches,0407020A0BRANAG
+AMP,37975711000001107,Opiodur 100micrograms/hour transdermal patches,0407020A0BRAPAH
+AMP,24560211000001102,Mylafent 12micrograms/hour transdermal patches,0407020A0BUAAAU
+AMP,24560411000001103,Mylafent 25micrograms/hour transdermal patches,0407020A0BUABAE
+AMP,24560611000001100,Mylafent 50micrograms/hour transdermal patches,0407020A0BUACAF
+AMP,24560811000001101,Mylafent 75micrograms/hour transdermal patches,0407020A0BUADAG
+AMP,24561011000001103,Mylafent 100micrograms/hour transdermal patches,0407020A0BUAEAH
+AMP,30001711000001101,Yemex 12micrograms/hour transdermal patches,0407020A0BVAAAU
+AMP,30002011000001106,Yemex 25micrograms/hour transdermal patches,0407020A0BVABAE
+AMP,30002211000001101,Yemex 50micrograms/hour transdermal patches,0407020A0BVACAF
+AMP,30002711000001108,Yemex 75micrograms/hour transdermal patches,0407020A0BVADAG
+AMP,30003011000001102,Yemex 100micrograms/hour transdermal patches,0407020A0BVAEAH
+VMP,35913711000001103,Buprenorphine 35micrograms/hour transdermal patches,0407020B0AAAEAE
+VMP,35913811000001106,Buprenorphine 52.5micrograms/hour transdermal patches,0407020B0AAAFAF
+VMP,35913911000001101,Buprenorphine 70micrograms/hour transdermal patches,0407020B0AAAGAG
+VMP,9567211000001104,Buprenorphine 5micrograms/hour transdermal patches,0407020B0AAAHAH
+VMP,9567411000001100,Buprenorphine 10micrograms/hour transdermal patches,0407020B0AAAIAI
+VMP,9567311000001107,Buprenorphine 20micrograms/hour transdermal patches,0407020B0AAAJAJ
+VMP,32038411000001102,Buprenorphine 15micrograms/hour transdermal patches,0407020B0AAAKAK
+AMP,3446611000001101,Transtec 35micrograms/hour transdermal patches,0407020B0BDAAAE
+AMP,3448811000001101,Transtec 52.5micrograms/hour transdermal patches,0407020B0BDABAF
+AMP,3449311000001104,Transtec 70micrograms/hour transdermal patches,0407020B0BDACAG
+AMP,9565311000001104,BuTrans 5micrograms/hour transdermal patches,0407020B0BEAAAH
+AMP,9565611000001109,BuTrans 10micrograms/hour transdermal patches,0407020B0BEABAI
+AMP,9565911000001103,BuTrans 20micrograms/hour transdermal patches,0407020B0BEACAJ
+AMP,31877211000001103,BuTrans 15micrograms/hour transdermal patches,0407020B0BEADAK
+AMP,23446211000001101,Hapoctasin 35micrograms/hour transdermal patches,0407020B0BGAAAE
+AMP,23446411000001102,Hapoctasin 52.5micrograms/hour transdermal patches,0407020B0BGABAF
+AMP,23446611000001104,Hapoctasin 70micrograms/hour transdermal patches,0407020B0BGACAG
+AMP,31279211000001103,Butec 5micrograms/hour transdermal patches,0407020B0BHAAAH
+AMP,31278911000001104,Butec 10micrograms/hour transdermal patches,0407020B0BHABAI
+AMP,31278611000001105,Butec 20micrograms/hour transdermal patches,0407020B0BHACAJ
+AMP,34027411000001106,Butec 15micrograms/hour transdermal patches,0407020B0BHADAK
+AMP,32484211000001106,Bupeaze 35micrograms/hour transdermal patches,0407020B0BIAAAE
+AMP,32484411000001105,Bupeaze 52.5micrograms/hour transdermal patches,0407020B0BIABAF
+AMP,32484611000001108,Bupeaze 70micrograms/hour transdermal patches,0407020B0BIACAG
+AMP,32576211000001102,Prenotrix 35micrograms/hour transdermal patches,0407020B0BJAAAE
+AMP,32643211000001102,Prenotrix 52.5micrograms/hour transdermal patches,0407020B0BJABAF
+AMP,32643711000001109,Prenotrix 70micrograms/hour transdermal patches,0407020B0BJACAG
+AMP,33038711000001103,Reletrans 5micrograms/hour transdermal patches,0407020B0BKAAAH
+AMP,33038911000001101,Reletrans 10micrograms/hour transdermal patches,0407020B0BKABAI
+AMP,33039111000001106,Reletrans 15micrograms/hour transdermal patches,0407020B0BKACAK
+AMP,33039311000001108,Reletrans 20micrograms/hour transdermal patches,0407020B0BKADAJ
+AMP,33054211000001103,Panitaz 5micrograms/hour transdermal patches,0407020B0BLAAAH
+AMP,33054411000001104,Panitaz 10micrograms/hour transdermal patches,0407020B0BLABAI
+AMP,33054611000001101,Panitaz 20micrograms/hour transdermal patches,0407020B0BLACAJ
+AMP,33480711000001101,Sevodyne 5micrograms/hour transdermal patches,0407020B0BMAAAH
+AMP,33480911000001104,Sevodyne 10micrograms/hour transdermal patches,0407020B0BMABAI
+AMP,33481111000001108,Sevodyne 20micrograms/hour transdermal patches,0407020B0BMACAJ
+AMP,38910911000001104,Sevodyne 15micrograms/hour transdermal patches,0407020B0BMADAK
+AMP,33546611000001105,Buplast 35micrograms/hour transdermal patches,0407020B0BNAAAE
+AMP,33546411000001107,Buplast 52.5micrograms/hour transdermal patches,0407020B0BNABAF
+AMP,33548111000001103,Buplast 70micrograms/hour transdermal patches,0407020B0BNACAG
+AMP,34172511000001101,Relevtec 35micrograms/hour transdermal patches,0407020B0BPAAAE
+AMP,34172311000001107,Relevtec 52.5micrograms/hour transdermal patches,0407020B0BPABAF
+AMP,34172111000001105,Relevtec 70micrograms/hour transdermal patches,0407020B0BPACAG
+AMP,34551811000001100,Bupramyl 5micrograms/hour transdermal patches,0407020B0BQAAAH
+AMP,34552011000001103,Bupramyl 10micrograms/hour transdermal patches,0407020B0BQABAI
+AMP,34552211000001108,Bupramyl 20micrograms/hour transdermal patches,0407020B0BQACAJ
+AMP,34838811000001108,Busiete 5micrograms/hour transdermal patches,0407020B0BRAAAH
+AMP,34839011000001107,Busiete 10micrograms/hour transdermal patches,0407020B0BRABAI
+AMP,34839211000001102,Busiete 20micrograms/hour transdermal patches,0407020B0BRACAJ
+AMP,34911711000001108,Turgeon 35micrograms/hour transdermal patches,0407020B0BSAAAE
+AMP,34911911000001105,Turgeon 52.5micrograms/hour transdermal patches,0407020B0BSABAF
+AMP,34912111000001102,Turgeon 70micrograms/hour transdermal patches,0407020B0BSACAG
+AMP,35543711000001101,Carlosafine 35micrograms/hour transdermal patches,0407020B0BTAAAE
+AMP,35543911000001104,Carlosafine 52.5micrograms/hour transdermal patches,0407020B0BTABAF
+AMP,35544111000001100,Carlosafine 70micrograms/hour transdermal patches,0407020B0BTACAG
+AMP,35544311000001103,Bunov 5micrograms/hour transdermal patches,0407020B0BUAAAH
+AMP,35544511000001109,Bunov 10micrograms/hour transdermal patches,0407020B0BUABAI
+AMP,35545111000001101,Bunov 20micrograms/hour transdermal patches,0407020B0BUACAJ
+AMP,38728711000001102,Rebrikel 5micrograms/hour transdermal patches,0407020B0BVAAAH
+AMP,38745611000001103,Rebrikel 10micrograms/hour transdermal patches,0407020B0BVABAI
+AMP,38746011000001101,Rebrikel 20micrograms/hour transdermal patches,0407020B0BVACAJ

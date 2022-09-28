@@ -42,11 +42,41 @@
       "downloaded_at": "2022-08-30 15:37:15.986847Z",
       "sha": "998d956447c4aa67f9b3b8f21a757b4bfbe6d9c1"
     },
-    "opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
-      "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
-      "downloaded_at": "2022-08-30 15:37:16.260030Z",
-      "sha": "3ea446349db9e9fff80f89e9646f8f935bc5cc6d"
+    "opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd/20d38d99",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd/20d38d99/",
+      "downloaded_at": "2022-09-28 14:32:50.481120Z",
+      "sha": "f02ec6bcfc5dcc0e4e5041d54c15d3cd744b04f1"
+    },
+    "opensafely-opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd/07c41a64",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd/07c41a64/",
+      "downloaded_at": "2022-09-28 14:32:50.684741Z",
+      "sha": "cf87bbb51fe5f4f32bb26627e835869c26bff738"
+    },
+    "opensafely-opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd/6eb4a72e",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd/6eb4a72e/",
+      "downloaded_at": "2022-09-28 14:32:51.271825Z",
+      "sha": "a41e62e765935b71021cc065f2b805d1db5bdca5"
+    },
+    "opensafely-opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd/55a533f9",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd/55a533f9/",
+      "downloaded_at": "2022-09-28 14:32:51.446356Z",
+      "sha": "044adae7ce3f0ec4d8e504d3091d858053ec3ec7"
+    },
+    "opensafely-opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd/3c95c0c4",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd/3c95c0c4/",
+      "downloaded_at": "2022-09-28 14:32:51.608816Z",
+      "sha": "7bd5331516dd6c0e371d262dd479a3918719a5ae"
+    },
+    "opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv": {
+      "id": "opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f/",
+      "downloaded_at": "2022-09-28 14:32:51.814440Z",
+      "sha": "3fc91ee3233d04fc7cb15266195dfa62415b696b"
     }
   }
 }

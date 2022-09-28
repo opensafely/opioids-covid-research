@@ -60,25 +60,63 @@ scd_codes = codelist_from_csv(
 )
 
 ## Medication DM&D
-
-### Low dose opioids
-lo_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  system = "snomed",
-  column = "dmd_id",
-)
-
-### High dose opioids (note - using antipsychotics as a stand in until opioid codelist is finalised)
+### High dose, long-acting opioids 
 hi_opioid_codes = codelist_from_csv(
   "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
 
+### Buccal opioids
+buc_opioid_codes = codelist_from_csv(
+  "opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Inhaled opioids
+inh_opioid_codes = codelist_from_csv(
+  "opensafely/opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Oral opioids
+oral_opioid_codes = codelist_from_csv(
+  "opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Parenteral opioids
+par_opioid_codes = codelist_from_csv(
+  "opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Rectal opioids
+rec_opioid_codes = codelist_from_csv(
+  "opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Transdermal opioids
+trans_opioid_codes = codelist_from_csv(
+  "opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
 ### Any opioid
 opioid_codes = combine_codelists(
-  lo_opioid_codes,
-  hi_opioid_codes
+  buc_opioid_codes,
+  inh_opioid_codes,
+  oral_opioid_codes,
+  par_opioid_codes,
+  rec_opioid_codes,
+  trans_opioid_codes,
 )
 
 ## Ethnicity
