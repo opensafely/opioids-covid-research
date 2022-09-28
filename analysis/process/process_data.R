@@ -62,7 +62,7 @@ prevalence <- full_join(
       TRUE ~ NA_character_),
          
     # Ethnicity
-    ethnicity = ifelse((ethnicity %in% c("",NA)), "Missing", ethnicity),
+    ethnicity = ifelse(ethnicity == "", "Missing", ethnicity),
          
     # IMD deciles
     imdq10 = fct_case_when(
@@ -82,15 +82,14 @@ prevalence <- full_join(
     # Age
     age_cat = fct_case_when(
       age_cat == 0 ~ "Missing",
-      age_cat == 1 ~ "5-17 y",
-      age_cat == 2 ~ "18-29 y",
-      age_cat == 3 ~ "30-39 y",
-      age_cat == 4 ~ "40-49 y",
-      age_cat == 5 ~ "50-59 y",
-      age_cat == 6 ~ "60-69 y",
-      age_cat == 7 ~ "70-79 y",
-      age_cat == 8 ~ "80-89 y",
-      age_cat == 9 ~ "90+ y"
+      age_cat == 1 ~ "18-29 y",
+      age_cat == 2 ~ "30-39 y",
+      age_cat == 3 ~ "40-49 y",
+      age_cat == 4 ~ "50-59 y",
+      age_cat == 5 ~ "60-69 y",
+      age_cat == 6 ~ "70-79 y",
+      age_cat == 7 ~ "80-89 y",
+      age_cat == 8 ~ "90+ y"
       ),
          
     #Carehome
@@ -167,15 +166,14 @@ incidence <- full_join(
     # Age
     age_cat = fct_case_when(
       age_cat == 0 ~ "Missing",
-      age_cat == 1 ~ "5-17 y",
-      age_cat == 2 ~ "18-29 y",
-      age_cat == 3 ~ "30-39 y",
-      age_cat == 4 ~ "40-49 y",
-      age_cat == 5 ~ "50-59 y",
-      age_cat == 6 ~ "60-69 y",
-      age_cat == 7 ~ "70-79 y",
-      age_cat == 8 ~ "80-89 y",
-      age_cat == 9 ~ "90+ y"
+      age_cat == 1 ~ "18-29 y",
+      age_cat == 2 ~ "30-39 y",
+      age_cat == 3 ~ "40-49 y",
+      age_cat == 4 ~ "50-59 y",
+      age_cat == 5 ~ "60-69 y",
+      age_cat == 6 ~ "70-79 y",
+      age_cat == 7 ~ "80-89 y",
+      age_cat == 8 ~ "90+ y"
       ),
          
     #Carehome
@@ -272,15 +270,14 @@ for_tables <-
     # Age
     age_cat = fct_case_when(
       age_cat == 0 ~ "Missing",
-      age_cat == 1 ~ "5-17 y",
-      age_cat == 2 ~ "18-29 y",
-      age_cat == 3 ~ "30-39 y",
-      age_cat == 4 ~ "40-49 y",
-      age_cat == 5 ~ "50-59 y",
-      age_cat == 6 ~ "60-69 y",
-      age_cat == 7 ~ "70-79 y",
-      age_cat == 8 ~ "80-89 y",
-      age_cat == 9 ~ "90+ y",
+      age_cat == 1 ~ "18-29 y",
+      age_cat == 2 ~ "30-39 y",
+      age_cat == 3 ~ "40-49 y",
+      age_cat == 4 ~ "50-59 y",
+      age_cat == 5 ~ "60-69 y",
+      age_cat == 6 ~ "70-79 y",
+      age_cat == 7 ~ "80-89 y",
+      age_cat == 8 ~ "90+ y",
       TRUE ~ NA_character_
     ),
     
