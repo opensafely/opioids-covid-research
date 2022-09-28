@@ -23,8 +23,8 @@ library('fs')
 source(here("analysis", "lib", "custom_functions.R"))
 
 ## Create directories if needed
-dir_create(here::here("output", "tables"), showWarnings = FALSE, recursive = TRUE)
-dir_create(here::here("output", "joined"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here::here("output", "tables"), showWarnings = FALSE, recursive = TRUE)
+dir.create(here::here("output", "joined"), showWarnings = FALSE, recursive = TRUE)
 
 ## Read in data
 for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
