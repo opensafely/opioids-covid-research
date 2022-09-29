@@ -29,10 +29,10 @@ library('RColorBrewer')
 
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
-prev_ts <- read_csv(here::here("output", "joined", "final_timeseries_prev.csv"),
+prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
    col_types = cols(
                       region  = col_character(),
                       imdq10 = col_character(),
@@ -43,7 +43,7 @@ prev_ts <- read_csv(here::here("output", "joined", "final_timeseries_prev.csv"),
                       sex = col_character(),
                       date = col_date(format="%Y-%m-%d")))
   
-new_ts <- read_csv(here::here("output", "joined", "final_timeseries_new.csv"),
+new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
   col_types = cols(
                       region  = col_character(),
                       imdq10= col_character(),
@@ -168,27 +168,23 @@ print(dim(new_nocancer))
 # Remove children and sickle cell disease (due to small numbers) 
 
 prev_full <- prev_full %>%
-  subset(!(scd %in% c("No","Yes"))) %>%
-  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 
-write.csv(prev_full, file = here::here("output", "time series", "timeseries_prev_full.csv"))
+write.csv(prev_full, file = here::here("output", "time series", "ts_prev_full.csv"))
 
 prev_nocancer <- prev_nocancer %>%
-  subset(!(scd %in% c("No","Yes"))) %>%
-  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 
-write.csv(prev_nocancer, file = here::here("output", "time series", "timeseries_prev_nocancer.csv"))
+write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_nocancer.csv"))
 
 new_full <- new_full %>%
-  subset(!(scd %in% c("No","Yes"))) %>%
-  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd, date)
 
-write.csv(new_full, file = here::here("output", "time series", "timeseries_new_full.csv"))
+write.csv(new_full, file = here::here("output", "time series", "ts_new_full.csv"))
 
 new_nocancer <- new_nocancer %>%
-  subset(!(scd %in% c("No","Yes"))) %>%
-  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, date)
+  arrange(age_cat, sex, region, imdq10, ethnicity, carehome, scd,  date)
 
-write.csv(new_nocancer, file = here::here("output", "time series", "timeseries_new_nocancer.csv"))
+write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"))
 
 

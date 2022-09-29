@@ -175,10 +175,6 @@ study = StudyDefinition(
     tpp_care_home_type
     """,
 
-    return_expectations = {
-      "incidence": 0.05,
-    },
-
     ### Care home from codelists
     carehome_codes = patients.with_these_clinical_events(
       carehome_primis_codes,
@@ -187,7 +183,7 @@ study = StudyDefinition(
       return_expectations = {"incidence": 0.1}
     ),
 
-    # COPIED CODE  
+    # COPIED CODE FROM SCHULTZE REPORT
     # tpp_care_home_type=patients.care_home_status_as_of(
     #  "index_date",
     #  categorised_as={
@@ -214,22 +210,23 @@ study = StudyDefinition(
     tpp_care_home_type=patients.care_home_status_as_of(
       "index_date",
       categorised_as={
-        "1": """
+        1: """
           IsPotentialCareHome
           """,
-        "0": "DEFAULT",
+        0: "DEFAULT",
         },
-      return_expectations={
-        "rate": "universal",
-        "category": {"ratios": {"1": .15, "0": 0.85,},},
-      },
     ),
+
+     return_expectations = {
+      "incidence": 0.05,
+    },
+
   ),
 
   ### Cancer in past year
   cancer = patients.with_these_clinical_events(
     cancer_codes,
-    between = ["first_day_of_month(index_date) - 1 year","last_day_of_month(index_date)"],
+    between = ["first_day_of_month(index_date) - 1 year", "last_day_of_month(index_date)"],
     returning = "binary_flag",
     return_expectations = {"incidence": 0.15}
   ),

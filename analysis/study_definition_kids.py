@@ -72,7 +72,6 @@ study = StudyDefinition(
     }
     ),
 
-  
   ### Index of multiple deprivation
   imdq10 = patients.categorised_as(
     {"0": "DEFAULT",
@@ -158,25 +157,7 @@ study = StudyDefinition(
       },
   ),
 
-  ### High dose prescribing
-  hi_opioid_any = patients.with_these_medications(
-    hi_opioid_codes,
-    between = ["first_day_of_month(index_date)", "last_day_of_month(index_date)"],
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.05
-      },
-  ),
-
 )
-
 
 # --- DEFINE MEASURES ---
 
@@ -189,51 +170,24 @@ measures = [
     id = "opioid_all_any",
     numerator = "opioid_any",
     denominator = "population",
-    group_by = ["cancer"],
+    group_by = ["population"],
   ),
 
-  ## High dose opioid 
-  Measure(
-    id = "hi_opioid_all_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["cancer"],
-    
-  ),
-  
   # Sex ####
   ## Any opioid -  sex 
   Measure(
-    id = "opioid_age_any",
+    id = "opioid_sex_any",
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["sex"],
     
   ),
 
-  ## High dose opioid - sex 
-  Measure(
-    id = "hi_opioid_sex_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["sex"],
-    
-  ),
-  
   # Ethnicity ####
   ## Any opioid - ethnicity 
   Measure(
     id = "opioid_eth_any",
     numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["ethnicity"],
-    
-  ),
-
-  ## High dose opioid - ethnicity 
-  Measure(
-    id = "hi_opioid_eth_any",
-    numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity"],
     
@@ -249,29 +203,11 @@ measures = [
     
   ),
 
-  ## High dose opioid - region 
-  Measure(
-    id = "hi_opioid_reg_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["region"],
-    
-  ),
-
   # IMD deciles
   ## Any opioid - imd
   Measure(
     id = "opioid_imd_any",
     numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["imdq10"],
-    
-  ),
-
-  ## High dose opioid - imd
-  Measure(
-    id = "hi_opioid_imd_any",
-    numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["imdq10"],
     

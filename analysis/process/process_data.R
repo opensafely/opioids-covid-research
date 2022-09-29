@@ -18,10 +18,11 @@ library('arrow')
 library('here')
 library('reshape2')
 library('dplyr')
+library('fs')
 
 # Create directory
-dir.create(here::here("output", "joined"), showWarnings = FALSE, recursive = TRUE)
-dir.create(here::here("output", "data"), showWarnings = FALSE, recursive = TRUE)
+dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "data"), showWarnings = FALSE, recurse = TRUE)
 
 # Custom functions
 source(here("analysis", "lib", "custom_functions.R"))
@@ -107,7 +108,7 @@ prevalence <- full_join(
     # Convert to integer to avoid scientific notation in csv
     population = as.integer(population),
     opioid_any = as.integer(opioid_any),
-    hi_opioid_any = as.integer(hi_opioid_any),
+    hi_opioid_any = as.integer(hi_opioid_any)
   ) 
 
 
@@ -199,8 +200,8 @@ incidence <- full_join(
 ## Save as .csv
 ###############################
 
-write.csv(prevalence, file = here::here("output", "joined", "final_timeseries_prev.csv"))
-write.csv(incidence, file = here::here("output", "joined", "final_timeseries_new.csv"))
+write.csv(prevalence, file = here::here("output", "joined", "final_ts_prev.csv"))
+write.csv(incidence, file = here::here("output", "joined", "final_ts_new.csv"))
 
 ###############################
 # Read in data for tables

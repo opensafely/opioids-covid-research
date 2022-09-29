@@ -23,8 +23,8 @@ library('fs')
 source(here("analysis", "lib", "custom_functions.R"))
 
 ## Create directories if needed
-dir.create(here::here("output", "tables"), showWarnings = FALSE, recursive = TRUE)
-dir.create(here::here("output", "joined"), showWarnings = FALSE, recursive = TRUE)
+dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
 for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
@@ -58,7 +58,7 @@ combined <- rbind(
   f(region, "Region"),
   f(imdq10, "IMD decile"),
   f(carehome, "Care home"),
-  f(scd, "Sickle cell disease"),
+  f(scd, "Sickle cell disease")
   ) 
 
 ########################################################
