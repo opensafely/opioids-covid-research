@@ -33,11 +33,9 @@ dir_create(here::here("output", "kids", "time series"), showWarnings = FALSE, re
 # Read in data
 prev_ts <- read_csv(here::here("output", "kids", "joined", "final_ts_prev_kids.csv"),
    col_types = cols(
-                      region  = col_character(),
-                      imdq10 = col_character(),
-                      ethnicity  = col_character(),
-                      sex = col_character(),
-                      date = col_date(format="%Y-%m-%d")))
+               group  = col_character(),
+               label = col_character(),
+               date = col_date(format="%Y-%m-%d")))
 
 ###################################
 # Prevalence
@@ -46,7 +44,7 @@ prev_ts <- read_csv(here::here("output", "kids", "joined", "final_ts_prev_kids.c
 ## Create dataset for opioid prescribing in 
 ##  full population (combine cancer/no cancer)
 prev_full <- prev_ts %>%
-  group_by(date, region, imdq10, ethnicity, sex) %>%
+  group_by(date, group, label) %>%
   summarise(opioid_any = sum(opioid_any), population = sum(population)) %>%
   mutate(
     
@@ -70,6 +68,6 @@ print(dim(prev_full))
 # Remove children and sickle cell disease (due to small numbers) 
 
 prev_full <- prev_full %>%
-  arrange(sex, region, imdq10, ethnicity, date)
+  arrange(group, label, date)
 
 write.csv(prev_full, file = here::here("output", "kids", "time series", "ts_prev_full_kids.csv"))

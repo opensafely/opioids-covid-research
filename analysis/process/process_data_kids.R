@@ -67,8 +67,16 @@ prevalence <- bind_rows(
          
     # Convert to integer to avoid scientific notation in csv
     population = as.integer(population),
-    opioid_any = as.integer(opioid_any)
-  ) 
+    opioid_any = as.integer(opioid_any),
+    
+    label = coalesce(region, imdq10, ethnicity, sex),
+    label = ifelse(is.na(label), "Total", label),
+    group = ifelse(!is.na(region), "Region",
+                   ifelse(!is.na(imdq10), "IMD decile",
+                          ifelse(!is.na(ethnicity), "Ethnicity",
+                                 ifelse(!is.na(sex), "Sex", "Total"))))) %>%
+  select(!c(region, imdq10, ethnicity, sex))
+  
 
 
 ###############################
