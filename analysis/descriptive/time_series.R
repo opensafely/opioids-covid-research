@@ -73,12 +73,12 @@ prev_full <- prev_ts %>%
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
-    ) 
+    ) %>%
+  select(!c("...1"))
   
 ## Create dataset for any opioid prescribing in people without cancer only
 prev_nocancer <- prev_ts %>%
   subset(cancer == 0) %>%
-  group_by(date, group, label, sex) %>%
   mutate(
 
     hi_opioid_any = ifelse(group %in% c("Ethnicity", "SCD"), NA, hi_opioid_any),
@@ -94,7 +94,8 @@ prev_nocancer <- prev_ts %>%
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
-  ) 
+  ) %>%
+  select(!c("cancer", "...1"))
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
