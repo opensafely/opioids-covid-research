@@ -74,7 +74,7 @@ bycancer <- combined %>%
   mutate_at(c(vars(c("tot", contains('opioid')))), redact) %>%
   mutate(
     # Calculate rates
-    p_prev = opioid_any / tot * 1000,
+    p_prev = opioid_any / tot * 1000
    # p_prev_hi = hi_opioid_any / tot * 1000,
    # p_new = opioid_new / opioid_naive * 1000,
    # p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
@@ -85,7 +85,7 @@ fullpop <- combined %>%
   group_by(group, label) %>%
   summarise(
     tot = sum(tot),
-    opioid_any = sum(opioid_any),
+    opioid_any = sum(opioid_any)
     #hi_opioid_any = sum(hi_opioid_any),
     #opioid_new = sum(opioid_new),
     #hi_opioid_new = sum(hi_opioid_new),
@@ -96,7 +96,7 @@ fullpop <- combined %>%
   mutate_at(c(vars(c("tot", contains('opioid')))), redact) %>%
   mutate(
     # Calculate rates
-    p_prev = opioid_any / tot * 1000,
+    p_prev = opioid_any / tot * 1000
     #p_prev_hi = hi_opioid_any / tot * 1000,
     #p_new = opioid_new / opioid_naive * 1000,
     #p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
