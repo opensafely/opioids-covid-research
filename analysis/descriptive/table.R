@@ -78,7 +78,8 @@ bycancer <- combined %>%
    # p_prev_hi = hi_opioid_any / tot * 1000,
    # p_new = opioid_new / opioid_naive * 1000,
    # p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
-  )
+  ) %>%
+  select(!(c("hi_opioid_any","opioid_naive","hi_opioid_new","hi_opioid_naive","opioid_new")))
 
 # Full population
 fullpop <- combined %>%
