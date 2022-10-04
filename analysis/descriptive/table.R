@@ -25,6 +25,7 @@ source(here("analysis", "lib", "custom_functions.R"))
 ## Create directories if needed
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
 for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
@@ -112,10 +113,10 @@ head(fullpop)
 ###################
 
 fullpop <- fullpop %>% arrange(group, label)
-write.csv(fullpop, here::here("output", "tables", "table_full_population.csv"))
+write.csv(fullpop, here::here("output", "for release", "table_full_population.csv"))
 
 bycancer <- bycancer %>% arrange(group, label)
-write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"))
+write.csv(bycancer, here::here("output", "for release", "table_by_cancer.csv"))
 
 
 

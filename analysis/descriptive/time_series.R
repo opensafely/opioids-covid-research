@@ -29,7 +29,7 @@ library('RColorBrewer')
 
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
 prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
@@ -37,14 +37,18 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
                       group  = col_character(),
                       label = col_character(),
                       sex = col_character(),
-                      date = col_date(format = "%Y-%m-%d")))
-  
+                      date = col_date(format = "%Y-%m-%d")),
+   col_select = c("cancer", "group", "label", "sex", "date", "population", "opioid_any",
+                  "hi_opioid_any")) 
+
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
   col_types = cols(
                       group  = col_character(),
                       label = col_character(),
                       sex = col_character(),
-                      date = col_date(format = "%Y-%m-%d")))
+                      date = col_date(format = "%Y-%m-%d")),
+  col_select = c("cancer", "group", "label", "sex", "date", "opioid_naive",
+                 "opioid_new" )) 
   
 
 ###################################
@@ -73,9 +77,8 @@ prev_full <- prev_ts %>%
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
-    ) %>%
-  select(!c("...1"))
-  
+    ) 
+
 ## Create dataset for any opioid prescribing in people without cancer only
 prev_nocancer <- prev_ts %>%
   subset(cancer == 0) %>%
@@ -95,7 +98,7 @@ prev_nocancer <- prev_ts %>%
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
   ) %>%
-  select(!c("cancer", "...1"))
+  select(!c("cancer"))
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
@@ -135,7 +138,6 @@ new_full <- new_ts %>%
 ## Create dataset for new opioid prescribing in people without cancer only
 new_nocancer <- new_ts %>%
   subset(cancer == 0) %>%
-  select(c(date, group, label, sex, opioid_new, hi_opioid_new, opioid_naive, hi_opioid_naive)) %>%
   mutate(
     
     # Suppression and rounding
@@ -151,7 +153,8 @@ new_nocancer <- new_ts %>%
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000,
     #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
-  ) 
+  ) %>%
+  select(!c("cancer"))
 
 print(dim(new_full))
 print(dim(new_nocancer))
@@ -164,24 +167,28 @@ print(dim(new_nocancer))
 prev_full <- prev_full %>%
   arrange(group, label, sex, date)
 
-write.csv(prev_full, file = here::here("output", "time series", "ts_prev_full.csv"))
+write.csv(prev_full, file = here::here("output", "for release", "ts_prev_full.csv"),
+          row.names = FALSE)
 
 prev_nocancer <- prev_nocancer %>%
   arrange(group, label, sex, date) %>%
     subset(!(group %in% c("SCD")))
 
-write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_nocancer.csv"))
+write.csv(prev_nocancer, file = here::here("output", "for release", "ts_prev_nocancer.csv"),
+          row.names = FALSE)
 
 new_full <- new_full %>%
   arrange(group, label, sex, date) %>%
   subset(!(group %in% c("Ethnicity", "SCD")))
 
-write.csv(new_full, file = here::here("output", "time series", "ts_new_full.csv"))
+write.csv(new_full, file = here::here("output", "for release", "ts_new_full.csv"),
+          row.names = FALSE)
 
 new_nocancer <- new_nocancer %>%
   arrange(group, label, sex, date) %>%
   subset(!(group %in% c("Ethnicity", "SCD")))
 
-write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"))
+write.csv(new_nocancer, file = here::here("output", "for release", "ts_new_nocancer.csv"),
+          row.names = FALSE)
 
 
