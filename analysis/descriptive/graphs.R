@@ -18,31 +18,32 @@ library('RColorBrewer')
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "time series", "graphs"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 
 # Read in data
-prev_full <- read_csv(here::here("output", "time series", "ts_prev_full.csv"),
+prev_full <- read_csv(here::here("output", "for release", "ts_prev_full.csv"),
                     col_types = cols(
                       group  = col_character(),
                       label = col_character(),
                       sex = col_character(),
                       date = col_date(format="%Y-%m-%d")))
 
-prev_nocancer <- read_csv(here::here("output", "time series", "ts_prev_nocancer.csv"),
+prev_nocancer <- read_csv(here::here("output", "for release", "ts_prev_nocancer.csv"),
                    col_types = cols(
                      group  = col_character(),
                      label = col_character(),
                      sex = col_character(),
                      date = col_date(format="%Y-%m-%d")))
 
-new_full <- read_csv(here::here("output", "time series", "ts_new_full.csv"),
+new_full <- read_csv(here::here("output", "for release", "ts_new_full.csv"),
                       col_types = cols(
                         group  = col_character(),
                         label = col_character(),
                         sex = col_character(),
                         date = col_date(format="%Y-%m-%d")))
 
-new_nocancer <- read_csv(here::here("output", "time series", "ts_new_nocancer.csv"),
+new_nocancer <- read_csv(here::here("output",  "for release", "ts_new_nocancer.csv"),
                           col_types = cols(
                             group  = col_character(),
                             label = col_character(),

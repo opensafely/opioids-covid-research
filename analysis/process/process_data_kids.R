@@ -75,7 +75,7 @@ prevalence <- bind_rows(
                    ifelse(!is.na(imdq10), "IMD decile",
                           ifelse(!is.na(ethnicity), "Ethnicity",
                                  ifelse(!is.na(sex), "Sex", "Total"))))) %>%
-  select(!c(region, imdq10, ethnicity, sex))
+  select(!c(region, imdq10, ethnicity, sex, value))
   
 
 

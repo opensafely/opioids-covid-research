@@ -159,7 +159,7 @@ actions:
     needs: [process_data]
     outputs:
       moderately_sensitive:
-        table: output/time series/ts_*.csv  
+        table: output/for release/ts_*.csv  
   
   ## Time series graphs
   graphs:
@@ -175,7 +175,7 @@ actions:
     needs: [process_data]
     outputs:
       moderately_sensitive:
-        table: output/tables/table_*.csv
+        table: output/for release/table_*.csv
 
   
   ## Time series
@@ -184,7 +184,7 @@ actions:
     needs: [process_data_kids]
     outputs:
       moderately_sensitive:
-        table: output/kids/time series/ts_*.csv  
+        table: output/kids/for release/ts_*.csv  
   
   ## Time series graphs
   graphs_kids:
@@ -200,7 +200,7 @@ actions:
     needs: [process_data_kids]
     outputs:
       moderately_sensitive:
-        table: output/kids/tables/table_*.csv
+        table: output/kids/for release/table_*.csv
       
 
  

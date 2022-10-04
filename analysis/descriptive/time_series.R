@@ -37,8 +37,8 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
                       group  = col_character(),
                       label = col_character(),
                       sex = col_character(),
-                      date = col_date(format = "%Y-%m-%d")),
-   col_select = c("cancer", "group", "label", "sex", "date", "population", "opioid_any",
+                      date = col_date(format = "%Y-%m-%d"))) %>%
+   select(c("cancer", "group", "label", "sex", "date", "population", "opioid_any",
                   "hi_opioid_any")) 
 
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
@@ -46,8 +46,8 @@ new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
                       group  = col_character(),
                       label = col_character(),
                       sex = col_character(),
-                      date = col_date(format = "%Y-%m-%d")),
-  col_select = c("cancer", "group", "label", "sex", "date", "opioid_naive",
+                      date = col_date(format = "%Y-%m-%d"))) %>%
+  select(c("cancer", "group", "label", "sex", "date", "opioid_naive",
                  "opioid_new" )) 
   
 
