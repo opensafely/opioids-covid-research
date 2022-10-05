@@ -126,7 +126,7 @@ new_full <- new_ts %>%
   summarise(
     opioid_new = sum(opioid_new),
     #hi_opioid_new = sum(hi_opioid_new),
-    opioid_naive = sum(opioid_naive),
+    opioid_naive = sum(opioid_naive)
     #hi_opioid_naive = sum(hi_opioid_naive)
     ) %>%
   mutate(

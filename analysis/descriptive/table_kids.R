@@ -57,14 +57,16 @@ combined <- rbind(
 # Rounding and redaction
 ########################################################
 
-redact <- function(variables) {
-  case_when(variables > 5 ~ variables)
-}
+
 
 # Full population
 fullpop <- combined %>%
-  mutate_at(c(vars(c("tot", contains('opioid')))), redact) %>%
   mutate(
+    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
+      opioid_any = round(opioid_any / 7) * 7,
+    tot = case_when(tot > 5 ~ tot), 
+      tot = round(tot / 7) * 7,
+    
     # Calculate rates
     p_prev = opioid_any / tot * 1000
   ) %>%

@@ -125,9 +125,6 @@ prevalence <- full_join(
 # Incidence datasets
 ###############################
 
-read <- function(){
-  
-}
 
 incidence <- full_join(
   (bind_rows(
