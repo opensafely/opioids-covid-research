@@ -80,7 +80,10 @@ bycancer <- combined %>%
    # p_new = opioid_new / opioid_naive * 1000,
    # p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
   ) %>%
-  select(!(c("hi_opioid_any","opioid_naive","hi_opioid_new","hi_opioid_naive","opioid_new")))
+  select(c(cancer, group, label, opioid_any, tot, p_prev)) %>%
+  rename(cancer_diagnosis = cancer,
+         any_opioid_prescribing = opioid_any, total_population = tot, 
+         prevalence_per_1000 = p_prev)
 
 # Full population
 fullpop <- combined %>%
@@ -102,7 +105,11 @@ fullpop <- combined %>%
     #p_prev_hi = hi_opioid_any / tot * 1000,
     #p_new = opioid_new / opioid_naive * 1000,
     #p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
-  )
+  ) %>%
+  rename(
+       any_opioid_prescribing = opioid_any, total_population = tot, 
+       prevalence_per_1000 = p_prev)
+
 
 head(bycancer)
 head(fullpop)
@@ -112,11 +119,14 @@ head(fullpop)
 # Save tables
 ###################
 
-fullpop <- fullpop %>% arrange(group, label)
-write.csv(fullpop, here::here("output", "for release", "table_full_population.csv"))
+fullpop <- fullpop %>% arrange(group, label) 
+write.csv(fullpop, here::here("output", "for release", "table_full_population.csv"),
+          row.names = FALSE)
 
-bycancer <- bycancer %>% arrange(group, label)
-write.csv(bycancer, here::here("output", "for release", "table_by_cancer.csv"))
+bycancer <- bycancer %>% arrange(group, label) %>%
+  subset(group != "Sickle cell disease")
+write.csv(bycancer, here::here("output", "for release", "table_by_cancer.csv"),
+          row.names = FALSE)
 
 
 

@@ -58,7 +58,10 @@ prev_full <- prev_ts %>%
     
     # calculating rates
     prev_rate = opioid_any / population * 1000
-    ) 
+    ) %>%
+   rename(any_opioid_prescribing = opioid_any,
+         total_population = population,
+         prevalence_per_1000 = prev_rate)
   
 print(dim(prev_full))
 
@@ -70,7 +73,8 @@ print(dim(prev_full))
 # Remove children and sickle cell disease (due to small numbers) 
 
 prev_full <- prev_full %>%
-  arrange(group, label, date)
+  arrange(group, label, date) %>%
+  subset(group != "Ethnicity")
 
 write.csv(prev_full, file = here::here("output", "kids", "for release", "ts_prev_full_kids.csv"),
           row.names = FALSE)
