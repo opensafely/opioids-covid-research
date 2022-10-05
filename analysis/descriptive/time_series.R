@@ -104,12 +104,12 @@ prev_nocancer <- prev_ts %>%
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
   ) %>%
-  select(!c("cancer")) %>%
   rename(any_opioid_prescribing = opioid_any,
          any_high_dose_opioid_prescribing = hi_opioid_any,
          total_population = population,
          prevalence_per_1000 = prev_rate,
-         high_dose_prevalence_per_1000 = prev_hi_rate)
+         high_dose_prevalence_per_1000 = prev_hi_rate) %>%
+  select(!c(cancer))
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
@@ -142,7 +142,7 @@ new_full <- new_ts %>%
     #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
-    new_rate = opioid_new / opioid_naive * 1000,
+    new_rate = opioid_new / opioid_naive * 1000
     #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) %>%
   rename(new_opioid_prescribing = opioid_new, 
@@ -164,12 +164,12 @@ new_nocancer <- new_ts %>%
     #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
-    new_rate = opioid_new / opioid_naive * 1000,
+    new_rate = opioid_new / opioid_naive * 1000
     #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) %>%
-  select(!c("cancer")) %>%
   rename(new_opioid_prescribing = opioid_new, 
-         incidence_per_1000 = new_rate)
+         incidence_per_1000 = new_rate) %>%
+  select(!c(cancer))
 
 print(dim(new_full))
 print(dim(new_nocancer))
