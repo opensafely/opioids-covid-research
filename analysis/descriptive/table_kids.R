@@ -49,7 +49,6 @@ f <- function(var,name) {
 
 combined <- rbind(
   f(sex, "Sex"),
-  f(ethnicity, "Ethnicity"),
   f(region, "Region"),
   f(imdq10, "IMD decile")
   ) 
@@ -68,7 +67,9 @@ fullpop <- combined %>%
   mutate(
     # Calculate rates
     p_prev = opioid_any / tot * 1000
-  )
+  ) %>%
+  rename(any_opioid_prescribing = opioid_any, total_population = tot, 
+                 prevalence_per_1000 = p_prev)
 
 head(fullpop)
 
@@ -78,7 +79,8 @@ head(fullpop)
 ###################
 
 fullpop <- fullpop %>% arrange(group, label)
-write.csv(fullpop, here::here("output", "kids", "for release", "table_full_kids.csv"))
+write.csv(fullpop, here::here("output", "kids", "for release", "table_full_kids.csv"),
+          row.names = FALSE)
 
 
 

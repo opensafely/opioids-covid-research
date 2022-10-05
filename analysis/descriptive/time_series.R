@@ -77,7 +77,13 @@ prev_full <- prev_ts %>%
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
-    ) 
+    )   %>%
+    rename(any_opioid_prescribing = opioid_any,
+               any_high_dose_opioid_prescribing = hi_opioid_any,
+               total_population = population,
+               prevalence_per_1000 = prev_rate,
+               high_dose_prevalence_per_1000 = prev_hi_rate)
+
 
 ## Create dataset for any opioid prescribing in people without cancer only
 prev_nocancer <- prev_ts %>%
@@ -98,7 +104,12 @@ prev_nocancer <- prev_ts %>%
     prev_rate = opioid_any / population * 1000, 
     prev_hi_rate = hi_opioid_any / population * 1000
   ) %>%
-  select(!c("cancer"))
+  select(!c("cancer")) %>%
+  rename(any_opioid_prescribing = opioid_any,
+         any_high_dose_opioid_prescribing = hi_opioid_any,
+         total_population = population,
+         prevalence_per_1000 = prev_rate,
+         high_dose_prevalence_per_1000 = prev_hi_rate)
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
@@ -133,7 +144,9 @@ new_full <- new_ts %>%
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000,
     #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
-  ) 
+  ) %>%
+  rename(new_opioid_prescribing = opioid_new, 
+       incidence_per_1000 = new_rate)
 
 ## Create dataset for new opioid prescribing in people without cancer only
 new_nocancer <- new_ts %>%
@@ -154,7 +167,9 @@ new_nocancer <- new_ts %>%
     new_rate = opioid_new / opioid_naive * 1000,
     #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) %>%
-  select(!c("cancer"))
+  select(!c("cancer")) %>%
+  rename(new_opioid_prescribing = opioid_new, 
+         incidence_per_1000 = new_rate)
 
 print(dim(new_full))
 print(dim(new_nocancer))

@@ -4,6 +4,10 @@
 #
 #######################################################
 
+# For running locally only #
+# setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
+# getwd()
+
 
 library('tidyverse')
 library('lubridate')
@@ -99,21 +103,21 @@ line_graph <- function(data, y){
 ######################################
 
 # Prevalence by age/sex
-line_graph(subset(prev_nocancer, group == "Age"), prev_rate) +
+line_graph(subset(prev_nocancer, group == "Age"), prevalence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_age.png"),
        width = 8, height = 4, unit = "in", dpi = 300)
 
 # Prevalence of high dose opioids by age/sex
-line_graph(subset(prev_nocancer, group == "Age"), prev_hi_rate) +
+line_graph(subset(prev_nocancer, group == "Age"), high_dose_prevalence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_hi_age.png"),
        width = 8, height = 4, unit = "in", dpi = 300)
 
 # Incidence by age/sex
-line_graph(subset(new_nocancer, group == "Age"), new_rate) +
+line_graph(subset(new_nocancer, group == "Age"), incidence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_new_age.png"),
@@ -130,19 +134,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_noca_new_age.png")
 ####
 
 # Prevalence by IMD
-line_graph(subset(prev_nocancer, group == "IMD decile"), prev_rate) 
+line_graph(subset(prev_nocancer, group == "IMD decile"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by IMD
-line_graph(subset(prev_nocancer, group == "IMD decile"), prev_hi_rate) 
+line_graph(subset(prev_nocancer, group == "IMD decile"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_hi_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by IMD
-line_graph(subset(new_nocancer, group == "IMD decile"), new_rate) 
+line_graph(subset(new_nocancer, group == "IMD decile"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_new_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -156,19 +160,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_noca_new_imd.png")
 ####
 
 # Prevalence by ethnicity
-line_graph(subset(prev_nocancer, group == "Ethnicity"), prev_rate) 
+line_graph(subset(prev_nocancer, group == "Ethnicity"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_eth.png"),
       width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by eth
-line_graph(subset(prev_nocancer, group == "Ethnicity"), prev_hi_rate) 
+line_graph(subset(prev_nocancer, group == "Ethnicity"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_hi_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by eth
-line_graph(subset(new_nocancer, group == "Ethnicity"), new_rate)
+line_graph(subset(new_nocancer, group == "Ethnicity"), incidence_per_1000)
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_new_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -182,19 +186,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_noca_new_eth.png")
 ####
 
 # Prevalence by region
-line_graph(subset(prev_nocancer, group == "Region"), prev_rate) 
+line_graph(subset(prev_nocancer, group == "Region"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by region
-line_graph(subset(prev_nocancer, group == "Region"), prev_hi_rate) 
+line_graph(subset(prev_nocancer, group == "Region"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_hi_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by region
-line_graph(subset(new_nocancer, group == "Region"), new_rate) 
+line_graph(subset(new_nocancer, group == "Region"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_new_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -208,19 +212,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_noca_new_region.pn
 ####
 
 # Prevalence by carehome
-line_graph(subset(prev_nocancer, group == "Care home" & label == "Yes"), prev_rate) 
+line_graph(subset(prev_nocancer, group == "Care home" & label == "Yes"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by carehome
-line_graph(subset(prev_nocancer, group == "Care home" & label == "Yes"), prev_hi_rate) 
+line_graph(subset(prev_nocancer, group == "Care home" & label == "Yes"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_prev_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by carehome
-line_graph(subset(new_nocancer, group == "Care home" & label == "Yes"), new_rate) 
+line_graph(subset(new_nocancer, group == "Care home" & label == "Yes"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_noca_new_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -237,21 +241,21 @@ ggsave(filename = here::here("output/time series/graphs/graph_noca_new_carehome.
 ######################################
 
 # Prevalence by age/sex
-line_graph(subset(prev_full, group == "Age"), prev_rate) +
+line_graph(subset(prev_full, group == "Age"), prevalence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_age.png"),
        width = 8, height = 4, unit = "in", dpi = 300)
 
 # Prevalence of high dose opioids by age/sex
-line_graph(subset(prev_full, group == "Age"), prev_hi_rate) +
+line_graph(subset(prev_full, group == "Age"), high_dose_prevalence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_age.png"),
        width = 8, height = 4, unit = "in", dpi = 300)
 
 # Incidence by age/sex
-line_graph(subset(new_full, group == "Age"), new_rate) +
+line_graph(subset(new_full, group == "Age"), incidence_per_1000) +
   facet_wrap(~ sex, scales = "free_y")
 
 ggsave(filename = here::here("output/time series/graphs/graph_new_age.png"),
@@ -268,19 +272,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_new_age.png"),
 ####
 
 # Prevalence by IMD
-line_graph(subset(prev_full, group == "IMD decile"), prev_rate) 
+line_graph(subset(prev_full, group == "IMD decile"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by IMD
-line_graph(subset(prev_full, group == "IMD decile"), prev_hi_rate) 
+line_graph(subset(prev_full, group == "IMD decile"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by IMD
-line_graph(subset(new_full, group == "IMD decile"), new_rate) 
+line_graph(subset(new_full, group == "IMD decile"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_new_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -294,19 +298,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_new_imd.png"),
 ####
 
 # Prevalence by ethnicity
-line_graph(subset(prev_full, group == "Ethnicity"), prev_rate) 
+line_graph(subset(prev_full, group == "Ethnicity"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by eth
-line_graph(subset(prev_full, group == "Ethnicity"), prev_hi_rate) 
+line_graph(subset(prev_full, group == "Ethnicity"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by eth
-line_graph(subset(new_full, group == "Ethnicity"), new_rate) 
+line_graph(subset(new_full, group == "Ethnicity"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_new_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -320,19 +324,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_new_eth.png"),
 ####
 
 # Prevalence by region
-line_graph(subset(prev_full, group == "Region"), prev_rate) 
+line_graph(subset(prev_full, group == "Region"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by region
-line_graph(subset(prev_full, group == "Region"), prev_hi_rate) 
+line_graph(subset(prev_full, group == "Region"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by region
-line_graph(subset(new_full,  group == "Region"), new_rate) 
+line_graph(subset(new_full,  group == "Region"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_new_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -346,19 +350,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_new_region.png"),
 ####
 
 # Prevalence by carehome
-line_graph(subset(prev_full, group == "Care home" & label == "Yes"), prev_rate) 
+line_graph(subset(prev_full, group == "Care home" & label == "Yes"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by carehome
-line_graph(subset(prev_full, group == "Care home" & label == "Yes"), prev_hi_rate) 
+line_graph(subset(prev_full, group == "Care home" & label == "Yes"), high_dose_prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by carehome
-line_graph(subset(new_full, group == "Care home" & label == "Yes"), new_rate) 
+line_graph(subset(new_full, group == "Care home" & label == "Yes"), incidence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_new_carehome.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -373,19 +377,19 @@ ggsave(filename = here::here("output/time series/graphs/graph_new_carehome.png")
 ####
 
 # Prevalence by scd
-line_graph(subset(prev_full, group == "SCD" & label == "Yes"), prev_rate) 
+line_graph(subset(prev_full, group == "SCD" & label == "Yes"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/time series/graphs/graph_prev_scd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
 
 # Prevalence (high dose) by scd
-#line_graph(subset(prev_full, (scd == "Yes")), prev_hi_rate, scd) 
+#line_graph(subset(prev_full, (scd == "Yes")), high_dose_prevalence_per_1000, scd) 
 
 #ggsave(filename = here::here("output/time series/graphs/graph_prev_hi_scd.png"),
 #       width = 6, height = 4, unit = "in", dpi = 300)
 
 # Incidence by scd
-#line_graph(subset(new_full, (scd == "Yes")), new_rate, scd) 
+#line_graph(subset(new_full, (scd == "Yes")), incidence_per_1000, scd) 
 
 #ggsave(filename = here::here("output/time series/graphs/graph_new_scd.png"),
 #       width = 6, height = 4, unit = "in", dpi = 300)
