@@ -77,7 +77,7 @@ line_graph <- function(data, y){
 ######################################
 
 # Prevalence by age/sex
-line_graph(subset(prev_full, group == "Sex"), prev_rate) 
+line_graph(subset(prev_full, group == "Sex"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_sex.png"),
        width = 8, height = 4, unit = "in", dpi = 300)
@@ -85,7 +85,7 @@ ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_sex
 ####
 
 # Prevalence by IMD
-line_graph(subset(prev_full, group == "IMD decile"), prev_rate) 
+line_graph(subset(prev_full, group == "IMD decile"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_imd.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -95,7 +95,7 @@ ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_imd
 ####
 
 # Prevalence by ethnicity
-line_graph(subset(prev_full, group == "Ethnicity"), prev_rate) 
+line_graph(subset(prev_full, group == "Ethnicity"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_eth.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
@@ -104,7 +104,7 @@ ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_eth
 ####
 
 # Prevalence by region
-line_graph(subset(prev_full, group == "Region"), prev_rate) 
+line_graph(subset(prev_full, group == "Region"), prevalence_per_1000) 
 
 ggsave(filename = here::here("output/kids/time series/graphs/graph_kids_prev_region.png"),
        width = 6, height = 4, unit = "in", dpi = 300)
