@@ -21,28 +21,28 @@ study = StudyDefinition(
     population = patients.all(),
     
      # Ethnicity
-    ethnicity=patients.categorised_as(
+    ethnicity16=patients.categorised_as(
         {
             "Unknown": "DEFAULT",
-            "White - British": "eth='1'",
-            "White - Irish": "eth='2'",
-            "White - Other": "eth='3'",
-            "Mixed - White/Black Caribbean": "eth='4'",
-            "Mixed - White/Black African": "eth='5'",
-            "Mixed - White/Asian": "eth='6'",
-            "Mixed - Other": "eth='7'",
-            "Asian or Asian British - Indian": "eth='8'",
-            "Asian or Asian British - Pakistani": "eth='9'",
-            "Asian or Asian British - Bangladeshi": "eth='10'",
-            "Asian or Asian British - Other": "eth='11'",
-            "Black or Black British - Caribbean": "eth='12'",
-            "Black or Black British - African": "eth='13'",
-            "Black or Black British - Other": "eth='14'",
-            "Other - Chinese": "eth='15'",
-            "Other": "eth='16'",
+            "White - British": "eth16='1'",
+            "White - Irish": "eth16='2'",
+            "White - Other": "eth16='3'",
+            "Mixed - White/Black Caribbean": "eth16='4'",
+            "Mixed - White/Black African": "eth16='5'",
+            "Mixed - White/Asian": "eth16='6'",
+            "Mixed - Other": "eth16='7'",
+            "Asian or Asian British - Indian": "eth16='8'",
+            "Asian or Asian British - Pakistani": "eth16='9'",
+            "Asian or Asian British - Bangladeshi": "eth16='10'",
+            "Asian or Asian British - Other": "eth16='11'",
+            "Black or Black British - Caribbean": "eth16='12'",
+            "Black or Black British - African": "eth16='13'",
+            "Black or Black British - Other": "eth16='14'",
+            "Other - Chinese": "eth16='15'",
+            "Other": "eth16='16'",
         },
 
-        eth=patients.with_these_clinical_events(
+        eth16=patients.with_these_clinical_events(
             ethnicity_codes_16,
             returning="category",
             find_last_match_in_period=True,
@@ -91,6 +91,51 @@ study = StudyDefinition(
                     "Black or Black British - African": 0.05,
                     "Black or Black British - Other": 0.05,
                     "Other - Chinese": 0.05,
+                    "Other": 0.05,
+                    "Unknown": 0.05,
+                },
+            },
+        },
+    ),
+
+    ethnicity6=patients.categorised_as(
+        {
+            "Unknown": "DEFAULT",
+            "White": "eth6='1'",
+            "Mixed": "eth6='2'",
+            "Asian or Asian British": "eth6='3'",
+            "Black or Black British": "eth6='4'",
+            "Other": "eth6='5'",
+        },
+
+        eth6=patients.with_these_clinical_events(
+            ethnicity_codes_6,
+            returning="category",
+            find_last_match_in_period=True,
+            include_date_of_match=False,
+            return_expectations={
+                "incidence": 0.75,
+                "category": {
+                    "ratios": {
+                        "1": 0.30,
+                        "2": 0.20,
+                        "3": 0.20,
+                        "4": 0.20,
+                        "5": 0.05,
+                        "6": 0.05,
+                    },
+                },
+            },
+        ),
+
+        return_expectations={
+            "rate": "universal",
+            "category": {
+                "ratios": {
+                    "White": 0.30,
+                    "Mixed": 0.20,
+                    "Asian or Asian British": 0.20,
+                    "Black or Black British": 0.20,
                     "Other": 0.05,
                     "Unknown": 0.05,
                 },
