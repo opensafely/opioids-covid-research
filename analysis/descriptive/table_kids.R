@@ -25,7 +25,6 @@ source(here("analysis", "lib", "custom_functions.R"))
 ## Create directories if needed
 dir_create(here::here("output", "kids", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "kids", "joined"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "kids", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
 for_tables <- read_csv(here::here("output", "kids", "joined", "final_for_tables_kids.csv")) 
@@ -81,7 +80,7 @@ head(fullpop)
 ###################
 
 fullpop <- fullpop %>% arrange(group, label)
-write.csv(fullpop, here::here("output", "kids", "for release", "table_full_kids.csv"),
+write.csv(fullpop, here::here("output", "kids", "table", "table_full_kids.csv"),
           row.names = FALSE)
 
 

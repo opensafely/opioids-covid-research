@@ -28,7 +28,6 @@ library('fs')
 
 ## Create directories
 dir_create(here::here("output", "kids", "time series"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "kids", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
 prev_ts <- read_csv(here::here("output", "kids", "joined", "final_ts_prev_kids.csv"),
@@ -76,5 +75,5 @@ prev_full <- prev_full %>%
   arrange(group, label, date) %>%
   subset(group != "Ethnicity")
 
-write.csv(prev_full, file = here::here("output", "kids", "for release", "ts_prev_full_kids.csv"),
+write.csv(prev_full, file = here::here("output", "kids", "time series", "ts_prev_full_kids.csv"),
           row.names = FALSE)

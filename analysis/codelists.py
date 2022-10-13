@@ -126,3 +126,11 @@ ethnicity_codes_16 = codelist_from_csv(
     column="snomedcode",
     category_column="Grouping_16",
 )
+
+## Ethnicity
+ethnicity_codes_6 = codelist_from_csv(
+    "codelists/opensafely-ethnicity-snomed-0removed.csv",
+    system="snomed",
+    column="snomedcode",
+    category_column="Grouping_6",
+)
