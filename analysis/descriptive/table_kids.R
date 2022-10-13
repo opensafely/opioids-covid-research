@@ -81,7 +81,7 @@ head(fullpop)
 ###################
 
 fullpop <- fullpop %>% arrange(group, label)
-write.csv(fullpop, here::here("output", "kids", "table", "table_full_kids.csv"),
+write.csv(fullpop, here::here("output", "kids", "tables", "table_full_kids.csv"),
           row.names = FALSE)
 
 
