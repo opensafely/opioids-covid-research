@@ -68,7 +68,7 @@ actions:
   generate_study_population_kids:
     run: cohortextractor:latest generate_cohort 
       --study-definition study_definition_kids
-      --index-date-range "2018-01-01 to 2021-12-01 by month" 
+      --index-date-range "2018-01-01 to 2022-03-01 by month" 
       --output-dir=output/kids
       --output-format=csv
     outputs:

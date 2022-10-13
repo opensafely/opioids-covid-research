@@ -49,7 +49,8 @@ f <- function(var,name) {
 combined <- rbind(
   f(sex, "Sex"),
   f(region, "Region"),
-  f(imdq10, "IMD decile")
+  f(imdq10, "IMD decile"),
+  f(ethnicity6, "Ethnicity")
   ) 
 
 ########################################################
