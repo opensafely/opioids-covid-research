@@ -16,12 +16,11 @@ library('ggplot2')
 library('RColorBrewer')
 
 ## Create directories
-dir_create(here::here("output", "kids", "for release"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "kids", "time series", "graphs"), showWarnings = FALSE, recurse = TRUE)
 
 
 # Read in data
-prev_full <- read_csv(here::here("output", "kids", "for release", "ts_prev_full_kids.csv"),
+prev_full <- read_csv(here::here("output", "kids", "time series", "ts_prev_full_kids.csv"),
                     col_types = cols(
                       group  = col_character(),
                       label = col_character(),

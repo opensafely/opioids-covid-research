@@ -189,7 +189,7 @@ measures = [
     id = "opioid_eth_any",
     numerator = "opioid_any",
     denominator = "population",
-    group_by = ["ethnicity"],
+    group_by = ["ethnicity6"],
     
   ),
 

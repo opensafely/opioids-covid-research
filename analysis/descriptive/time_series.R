@@ -29,7 +29,7 @@ library('RColorBrewer')
 
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "for release"), showWarnings = FALSE, recurse = TRUE)
+
 
 # Read in data
 prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
@@ -64,7 +64,7 @@ prev_full <- prev_ts %>%
             population = sum(population)) %>%
   mutate(
     
-    hi_opioid_any = ifelse(group %in% c("Ethnicity", "SCD"), NA, hi_opioid_any),
+    hi_opioid_any = ifelse(group %in% c("Ethnicity16", "SCD"), NA, hi_opioid_any),
 
     # Suppression and rounding 
     opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
@@ -90,7 +90,7 @@ prev_nocancer <- prev_ts %>%
   subset(cancer == 0) %>%
   mutate(
 
-    hi_opioid_any = ifelse(group %in% c("Ethnicity", "SCD"), NA, hi_opioid_any),
+    hi_opioid_any = ifelse(group %in% c("Ethnicity16", "SCD"), NA, hi_opioid_any),
 
     # Suppression and rounding 
     opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
@@ -125,25 +125,18 @@ new_full <- new_ts %>%
   group_by(date, group, label, sex) %>%
   summarise(
     opioid_new = sum(opioid_new),
-    #hi_opioid_new = sum(hi_opioid_new),
     opioid_naive = sum(opioid_naive)
-    #hi_opioid_naive = sum(hi_opioid_naive)
     ) %>%
   mutate(
 
     # Suppression and rounding
     opioid_new = case_when(opioid_new > 5 ~ opioid_new),
       opioid_new = round(opioid_new / 7) * 7,
-    #hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
-    # hi_opioid_new = round(hi_opioid_new / 7) * 7,
     opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
       opioid_naive = round(opioid_naive / 7) * 7,
-    #hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
-    #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000
-    #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) %>%
   rename(new_opioid_prescribing = opioid_new, 
        incidence_per_1000 = new_rate)
@@ -156,16 +149,11 @@ new_nocancer <- new_ts %>%
     # Suppression and rounding
     opioid_new = case_when(opioid_new > 5 ~ opioid_new),
       opioid_new = round(opioid_new / 7) * 7,
-    #hi_opioid_new = case_when(hi_opioid_new > 5 ~ hi_opioid_new),
-    #  hi_opioid_new = round(hi_opioid_new / 7) * 7,
     opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
       opioid_naive = round(opioid_naive / 7) * 7,
-    #hi_opioid_naive = case_when(hi_opioid_naive > 5 ~ hi_opioid_naive),
-    #  hi_opioid_naive = round(hi_opioid_naive / 7) * 7,
     
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000
-    #new_hi_rate = hi_opioid_new  / hi_opioid_naive * 1000
   ) %>%
   rename(new_opioid_prescribing = opioid_new, 
          incidence_per_1000 = new_rate) %>%
@@ -182,28 +170,28 @@ print(dim(new_nocancer))
 prev_full <- prev_full %>%
   arrange(group, label, sex, date)
 
-write.csv(prev_full, file = here::here("output", "for release", "ts_prev_full.csv"),
+write.csv(prev_full, file = here::here("output", "time series", "ts_prev_full.csv"),
           row.names = FALSE)
 
 prev_nocancer <- prev_nocancer %>%
   arrange(group, label, sex, date) %>%
     subset(!(group %in% c("SCD")))
 
-write.csv(prev_nocancer, file = here::here("output", "for release", "ts_prev_nocancer.csv"),
+write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_nocancer.csv"),
           row.names = FALSE)
 
 new_full <- new_full %>%
   arrange(group, label, sex, date) %>%
   subset(!(group %in% c("Ethnicity", "SCD")))
 
-write.csv(new_full, file = here::here("output", "for release", "ts_new_full.csv"),
+write.csv(new_full, file = here::here("output", "time series", "ts_new_full.csv"),
           row.names = FALSE)
 
 new_nocancer <- new_nocancer %>%
   arrange(group, label, sex, date) %>%
   subset(!(group %in% c("Ethnicity", "SCD")))
 
-write.csv(new_nocancer, file = here::here("output", "for release", "ts_new_nocancer.csv"),
+write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"),
           row.names = FALSE)
 
 
