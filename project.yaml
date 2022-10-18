@@ -55,20 +55,20 @@ actions:
       highly_sensitive:
         cohort: output/inp*.csv
   
-  #generate_study_population_5:
-  #  run: cohortextractor:latest generate_cohort 
-  #    --study-definition study_definition
-  #    --index-date-range "2022-01-01 to 2022-03-01 by month" 
-  #    --output-dir=output 
-  #    --output-format=csv
-  #  outputs:
-  #    highly_sensitive:
-  #      cohort: output/in*.csv
+  generate_study_population_5:
+    run: cohortextractor:latest generate_cohort 
+      --study-definition study_definition
+      --index-date-range "2022-01-01 to 2022-03-01 by month" 
+      --output-dir=output 
+      --output-format=csv
+    outputs:
+      highly_sensitive:
+        cohort: output/in*.csv
 
   generate_study_population_kids:
     run: cohortextractor:latest generate_cohort 
       --study-definition study_definition_kids
-      --index-date-range "2018-01-01 to 2021-12-01 by month" 
+      --index-date-range "2018-01-01 to 2022-03-01 by month" 
       --output-dir=output/kids
       --output-format=csv
     outputs:
@@ -96,7 +96,8 @@ actions:
         --rhs output/input_ethnicity.csv
         --output-dir output/data
     needs: [generate_study_population_1, generate_study_population_2, 
-      generate_study_population_3, generate_study_population_4, 
+    generate_study_population_5,
+    generate_study_population_3, generate_study_population_4,
       generate_ethnicity_cohort]
     outputs:
       highly_sensitive:
@@ -159,7 +160,7 @@ actions:
     needs: [process_data]
     outputs:
       moderately_sensitive:
-        table: output/for release/ts_*.csv  
+        table: output/time series/ts_*.csv  
   
   ## Time series graphs
   graphs:
@@ -175,7 +176,7 @@ actions:
     needs: [process_data]
     outputs:
       moderately_sensitive:
-        table: output/for release/table_*.csv
+        table: output/tables/table_*.csv
 
   
   ## Time series
@@ -184,7 +185,7 @@ actions:
     needs: [process_data_kids]
     outputs:
       moderately_sensitive:
-        table: output/kids/for release/ts_*.csv  
+        table: output/kids/time series/ts_*.csv  
   
   ## Time series graphs
   graphs_kids:
@@ -200,7 +201,7 @@ actions:
     needs: [process_data_kids]
     outputs:
       moderately_sensitive:
-        table: output/kids/for release/table_*.csv
+        table: output/kids/tables/table_*.csv
       
 
  

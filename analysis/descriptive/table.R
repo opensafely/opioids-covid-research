@@ -25,7 +25,6 @@ source(here("analysis", "lib", "custom_functions.R"))
 ## Create directories if needed
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "for release"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
 for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
@@ -43,9 +42,7 @@ f <- function(var,name) {
       opioid_any = sum(opioid_any),
       hi_opioid_any = sum(hi_opioid_any),
       opioid_new = sum(opioid_new),
-      hi_opioid_new = sum(hi_opioid_new),
       opioid_naive = sum(opioid_naive),
-      hi_opioid_naive = sum(hi_opioid_naive)
     )  %>%
     rename(label := {{var}}) %>%
     mutate(group = name)
@@ -55,7 +52,8 @@ f <- function(var,name) {
 combined <- rbind(
   f(age_cat, "Age"),
   f(sex, "Sex"),
-  f(ethnicity, "Ethnicity"),
+  f(ethnicity16, "Ethnicity16"),
+  f(ethnicity6, "Ethnicity6"),
   f(region, "Region"),
   f(imdq10, "IMD decile"),
   f(carehome, "Care home"),
@@ -76,9 +74,6 @@ bycancer <- combined %>%
     
    # Calculate rates
     p_prev = opioid_any / tot * 1000
-   # p_prev_hi = hi_opioid_any / tot * 1000,
-   # p_new = opioid_new / opioid_naive * 1000,
-   # p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
   ) %>%
   select(c(cancer, group, label, opioid_any, tot, p_prev)) %>%
   rename(cancer_diagnosis = cancer,
@@ -93,9 +88,7 @@ fullpop <- combined %>%
     opioid_any = sum(opioid_any)
     #hi_opioid_any = sum(hi_opioid_any),
     #opioid_new = sum(opioid_new),
-    #hi_opioid_new = sum(hi_opioid_new),
     #opioid_naive = sum(opioid_naive),
-    #hi_opioid_naive = sum(hi_opioid_naive)
     ) %>%
   mutate(    
     opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
@@ -123,12 +116,12 @@ head(fullpop)
 ###################
 
 fullpop <- fullpop %>% arrange(group, label) 
-write.csv(fullpop, here::here("output", "for release", "table_full_population.csv"),
+write.csv(fullpop, here::here("output", "tables", "table_full_population.csv"),
           row.names = FALSE)
 
 bycancer <- bycancer %>% arrange(group, label) %>%
   subset(group != "Sickle cell disease")
-write.csv(bycancer, here::here("output", "for release", "table_by_cancer.csv"),
+write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"),
           row.names = FALSE)
 
 
