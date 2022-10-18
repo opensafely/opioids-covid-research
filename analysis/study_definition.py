@@ -478,6 +478,7 @@ measures = [
 
   # Ethnicity ####
   ## Any opioid - ethnicity16 
+
   Measure(
     id = "opioid_eth16_any",
     numerator = "opioid_any",
@@ -510,6 +511,21 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","cancer"],
+),
+  Measure(
+    id = "opioid_eth16_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity16","cancer"],
+    
+  ),
+
+  ## High dose opioid - ethnicity16 
+  Measure(
+    id = "hi_opioid_eth16_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity16","cancer"],
     
   ),
 
@@ -519,6 +535,7 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","age_cat","sex","cancer"],
+
     
   ),
 
@@ -528,6 +545,7 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","age_cat","sex","cancer"],
+
     
   ),
 
