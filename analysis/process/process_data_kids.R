@@ -48,7 +48,7 @@ prevalence <- bind_rows(
       TRUE ~ NA_character_),
          
     # Ethnicity
-    ethnicity = ifelse(ethnicity == "", "Missing", ethnicity),
+    ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
          
     # IMD deciles
     imdq10 = fct_case_when(
@@ -69,13 +69,13 @@ prevalence <- bind_rows(
     population = as.integer(population),
     opioid_any = as.integer(opioid_any),
     
-    label = coalesce(region, imdq10, ethnicity, sex),
+    label = coalesce(region, imdq10, ethnicity6, sex),
     label = ifelse(is.na(label), "Total", label),
     group = ifelse(!is.na(region), "Region",
                    ifelse(!is.na(imdq10), "IMD decile",
-                          ifelse(!is.na(ethnicity), "Ethnicity",
+                          ifelse(!is.na(ethnicity6), "Ethnicity",
                                  ifelse(!is.na(sex), "Sex", "Total"))))) %>%
-  select(!c(region, imdq10, ethnicity, sex, value))
+  select(!c(region, imdq10, ethnicity6, sex, value))
   
 
 
@@ -101,13 +101,13 @@ write.csv(prevalence, file = here::here("output", "kids", "joined", "final_ts_pr
 #   mutate(time = 0)
 
 ## Read in data and combine - people prescribed opioids during COVID and combine
-apr20 <- read_csv(here::here("output", "kids", "data", "input_kids_2020-04-01.csv")) 
-may20 <- read_csv(here::here("output", "kids", "data", "input_kids_2020-05-01.csv")) %>%
-  filter(!patient_id %in% apr20$patient_id)
-jun20 <- read_csv(here::here("output", "kids", "data", "input_kids_2020-06-01.csv")) %>%
-  filter(!patient_id %in% c(apr20$patient_id, may20$patient_id))
+apr22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-01-01.csv")) 
+may22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-02-01.csv")) %>%
+  filter(!patient_id %in% apr22$patient_id)
+jun22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-03-01.csv")) %>%
+  filter(!patient_id %in% c(apr22$patient_id, may22$patient_id))
 
-cohort <- rbind(apr20, may20, jun20) %>%
+cohort <- rbind(apr22, may22, jun22) %>%
   select(!(c(opioid_any_date))) 
 
 
@@ -132,7 +132,7 @@ for_tables <-
       TRUE ~ NA_character_),
     
     # Ethnicity
-    ethnicity = ifelse(ethnicity == "", "Missing", ethnicity),
+    ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
     
     # IMD
     imdq10 = fct_case_when(
