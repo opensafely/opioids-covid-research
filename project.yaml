@@ -154,6 +154,14 @@ actions:
 
   # Results ---
 
+  ## Time series by age/sex
+  timeseries_agesex:
+    run: r:latest analysis/descriptive/time_series_age_sex.R
+    needs: [process_data]
+    outputs:
+      moderately_sensitive:
+        table: output/time series/ts*.csv  
+
   ## Time series
   timeseries:
     run: r:latest analysis/descriptive/time_series.R
