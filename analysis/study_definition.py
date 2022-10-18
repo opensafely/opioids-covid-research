@@ -478,6 +478,7 @@ measures = [
 
   # Ethnicity ####
   ## Any opioid - ethnicity16 
+
   Measure(
     id = "opioid_eth16_any",
     numerator = "opioid_any",
@@ -510,6 +511,41 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","cancer"],
+),
+  Measure(
+    id = "opioid_eth16_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity16","cancer"],
+    
+  ),
+
+  ## High dose opioid - ethnicity16 
+  Measure(
+    id = "hi_opioid_eth16_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity16","cancer"],
+    
+  ),
+
+    ## Any opioid - ethnicity6
+  Measure(
+    id = "opioid_eth6_agesex_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","age_cat","sex","cancer"],
+
+    
+  ),
+
+  ## High dose opioid - ethnicity6 
+  Measure(
+    id = "hi_opioid_eth6_agesex_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","age_cat","sex","cancer"],
+
     
   ),
 
@@ -532,6 +568,25 @@ measures = [
     
   ),
 
+    # Region ####
+  ## Any opioid - region
+  Measure(
+    id = "opioid_reg_agesex_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["region","age_cat","sex","cancer"],
+    
+  ),
+
+  ## High dose opioid - region 
+  Measure(
+    id = "hi_opioid_reg_agesex_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["region","age_cat","sex","cancer"],
+    
+  ),
+
   # IMD deciles
   ## Any opioid - imd
   Measure(
@@ -548,6 +603,25 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["imdq10","cancer"],
+    
+  ),
+
+  # IMD deciles
+  ## Any opioid - imd
+  Measure(
+    id = "opioid_imd_agesex_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","age_cat","sex","cancer"],
+    
+  ),
+
+  ## High dose opioid - imd
+  Measure(
+    id = "hi_opioid_imd_agesex_any",
+    numerator = "hi_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","age_cat","sex","cancer"],
     
   ),
 

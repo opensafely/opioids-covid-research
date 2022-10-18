@@ -38,8 +38,8 @@ prevalence <- full_join(
     read_csv(here::here("output", "data", "measure_opioid_all_any.csv")),
     read_csv(here::here("output", "data", "measure_opioid_reg_any.csv")), 
     read_csv(here::here("output", "data", "measure_opioid_imd_any.csv")), 
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth16_any.csv")), list(ethnicity = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_any.csv")), list(ethnicity = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth16_any.csv")), list(ethnicity16 = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_opioid_care_any.csv")),
     read_csv(here::here("output", "data", "measure_opioid_scd_any.csv")),
     read_csv(here::here("output", "data", "measure_opioid_agesex_any.csv")),
@@ -50,8 +50,8 @@ prevalence <- full_join(
     read_csv(here::here("output", "data", "measure_hi_opioid_all_any.csv")),
     read_csv(here::here("output", "data", "measure_hi_opioid_reg_any.csv")), 
     read_csv(here::here("output", "data", "measure_hi_opioid_imd_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth16_any.csv")), list(ethnicity = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth6_any.csv")), list(ethnicity = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth16_any.csv")), list(ethnicity16 = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_hi_opioid_care_any.csv")),
     read_csv(here::here("output", "data", "measure_hi_opioid_scd_any.csv")),
     read_csv(here::here("output", "data", "measure_hi_opioid_agesex_any.csv")),
@@ -67,10 +67,6 @@ prevalence <- full_join(
      sex == "F" ~ "Female",
      sex == "M" ~ "Male",
      TRUE ~ NA_character_),
-         
-    # Ethnicity
-    ethnicity16 = ifelse(ethnicity16 == "", "Missing", ethnicity16),
-    ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
          
     # IMD deciles
     imdq10 = fct_case_when(
@@ -157,10 +153,6 @@ incidence <- bind_rows(
       sex == "F" ~ "Female",
       sex == "M" ~ "Male",
       TRUE ~ NA_character_),
-         
-    # Ethnicity
-      ethnicity16 = ifelse(ethnicity16 == "", "Missing", ethnicity16),
-      ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
          
     # IMD deciles
     imdq10 = fct_case_when(

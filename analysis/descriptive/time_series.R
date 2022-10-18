@@ -30,7 +30,6 @@ library('RColorBrewer')
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
 
-
 # Read in data
 prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
    col_types = cols(
@@ -108,8 +107,7 @@ prev_nocancer <- prev_ts %>%
          any_high_dose_opioid_prescribing = hi_opioid_any,
          total_population = population,
          prevalence_per_1000 = prev_rate,
-         high_dose_prevalence_per_1000 = prev_hi_rate) %>%
-  select(!c(cancer))
+         high_dose_prevalence_per_1000 = prev_hi_rate) 
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
@@ -182,14 +180,14 @@ write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_noc
 
 new_full <- new_full %>%
   arrange(group, label, sex, date) %>%
-  subset(!(group %in% c("Ethnicity", "SCD")))
+  subset(!(group %in% c("Ethnicity16", "SCD")))
 
 write.csv(new_full, file = here::here("output", "time series", "ts_new_full.csv"),
           row.names = FALSE)
 
 new_nocancer <- new_nocancer %>%
   arrange(group, label, sex, date) %>%
-  subset(!(group %in% c("Ethnicity", "SCD")))
+  subset(!(group %in% c("Ethnicity16", "SCD")))
 
 write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"),
           row.names = FALSE)
