@@ -35,18 +35,16 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
    col_types = cols(
                       group  = col_character(),
                       label = col_character(),
-                      sex = col_character(),
                       date = col_date(format = "%Y-%m-%d"))) %>%
-   select(c("cancer", "group", "label", "sex", "date", "population", "opioid_any",
+   select(c("cancer", "group", "label", "date", "population", "opioid_any",
                   "hi_opioid_any")) 
 
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
   col_types = cols(
                       group  = col_character(),
                       label = col_character(),
-                      sex = col_character(),
                       date = col_date(format = "%Y-%m-%d"))) %>%
-  select(c("cancer", "group", "label", "sex", "date", "opioid_naive",
+  select(c("cancer", "group", "label", "date", "opioid_naive",
                  "opioid_new" )) 
   
 
@@ -58,7 +56,7 @@ new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
 ## Create dataset for opioid prescribing in 
 ##  full population (combine cancer/no cancer)
 prev_full <- prev_ts %>%
-  group_by(date, group, label, sex) %>%
+  group_by(date, group, label) %>%
   summarise(opioid_any = sum(opioid_any), hi_opioid_any = sum(hi_opioid_any), 
             population = sum(population)) %>%
   mutate(
@@ -120,7 +118,7 @@ print(dim(prev_nocancer))
 ## Create dataset for new opioid prescribing in
 ##  full population (combine cancer/no cancer)
 new_full <- new_ts %>%
-  group_by(date, group, label, sex) %>%
+  group_by(date, group, label) %>%
   summarise(
     opioid_new = sum(opioid_new),
     opioid_naive = sum(opioid_naive)
@@ -166,27 +164,27 @@ print(dim(new_nocancer))
 ###############################
 
 prev_full <- prev_full %>%
-  arrange(group, label, sex, date)
+  arrange(group, label, date)
 
 write.csv(prev_full, file = here::here("output", "time series", "ts_prev_full.csv"),
           row.names = FALSE)
 
 prev_nocancer <- prev_nocancer %>%
-  arrange(group, label, sex, date) %>%
+  arrange(group, label, date) %>%
     subset(!(group %in% c("SCD")))
 
 write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_nocancer.csv"),
           row.names = FALSE)
 
 new_full <- new_full %>%
-  arrange(group, label, sex, date) %>%
+  arrange(group, label, date) %>%
   subset(!(group %in% c("Ethnicity16", "SCD")))
 
 write.csv(new_full, file = here::here("output", "time series", "ts_new_full.csv"),
           row.names = FALSE)
 
 new_nocancer <- new_nocancer %>%
-  arrange(group, label, sex, date) %>%
+  arrange(group, label, date) %>%
   subset(!(group %in% c("Ethnicity16", "SCD")))
 
 write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"),
