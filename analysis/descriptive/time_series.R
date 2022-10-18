@@ -30,7 +30,6 @@ library('RColorBrewer')
 ## Create directories
 dir_create(here::here("output", "time series"), showWarnings = FALSE, recurse = TRUE)
 
-
 # Read in data
 prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
    col_types = cols(
