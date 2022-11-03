@@ -196,12 +196,12 @@ actions:
         table: output/kids/time series/ts_*.csv  
   
   ## Time series graphs
-  graphs_kids:
-    run: r:latest analysis/descriptive/graphs_kids.R
-    needs: [timeseries_kids]
-    outputs:
-      moderately_sensitive:
-        plot: output/kids/time series/graphs/graph*.png
+  #graphs_kids:
+  #  run: r:latest analysis/descriptive/graphs_kids.R
+  #  needs: [timeseries_kids]
+  #  outputs:
+  #    moderately_sensitive:
+  #      plot: output/kids/time series/graphs/graph*.png
 
   ## Table 
   table_kids:
