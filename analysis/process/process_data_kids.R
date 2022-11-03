@@ -101,13 +101,13 @@ write.csv(prevalence, file = here::here("output", "kids", "joined", "final_ts_pr
 #   mutate(time = 0)
 
 ## Read in data and combine - people prescribed opioids during COVID and combine
-apr22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-01-01.csv")) 
-may22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-02-01.csv")) %>%
+jan22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-01-01.csv")) 
+feb22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-02-01.csv")) %>%
   filter(!patient_id %in% apr22$patient_id)
-jun22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-03-01.csv")) %>%
+mar22 <- read_csv(here::here("output", "kids", "data", "input_kids_2022-03-01.csv")) %>%
   filter(!patient_id %in% c(apr22$patient_id, may22$patient_id))
 
-cohort <- rbind(apr22, may22, jun22) %>%
+cohort <- rbind(jan22, feb22, mar22) %>%
   select(!(c(opioid_any_date))) 
 
 

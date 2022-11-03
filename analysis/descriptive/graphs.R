@@ -25,29 +25,29 @@ dir_create(here::here("output", "time series", "graphs"), showWarnings = FALSE, 
 
 
 # Read in data
-prev_full <- read_csv(here::here("output", "time series", "ts_prev_full.csv"),
-                    col_types = cols(
-                      group  = col_character(),
-                      label = col_character(),
-                      date = col_date(format="%Y-%m-%d")))
+#prev_full <- read_csv(here::here("output", "time series", "ts_prev_full.csv"),
+#                    col_types = cols(
+#                      group  = col_character(),
+#                      label = col_character(),
+#                      date = col_date(format="%Y-%m-%d")))
 
-prev_nocancer <- read_csv(here::here("output", "time series", "ts_prev_nocancer.csv"),
-                   col_types = cols(
-                     group  = col_character(),
-                     label = col_character(),
-                     date = col_date(format="%Y-%m-%d")))
+#prev_nocancer <- read_csv(here::here("output", "time series", "ts_prev_nocancer.csv"),
+#                   col_types = cols(
+#                     group  = col_character(),
+#                     label = col_character(),
+#                     date = col_date(format="%Y-%m-%d")))
 
-new_full <- read_csv(here::here("output", "time series", "ts_new_full.csv"),
-                      col_types = cols(
-                        group  = col_character(),
-                        label = col_character(),
-                        date = col_date(format="%Y-%m-%d")))
+#new_full <- read_csv(here::here("output", "time series", "ts_new_full.csv"),
+#                      col_types = cols(
+#                        group  = col_character(),
+#                        label = col_character(),
+#                        date = col_date(format="%Y-%m-%d")))
 
-new_nocancer <- read_csv(here::here("output",  "time series", "ts_new_nocancer.csv"),
-                          col_types = cols(
-                            group  = col_character(),
-                            label = col_character(),
-                            date = col_date(format="%Y-%m-%d")))
+#new_nocancer <- read_csv(here::here("output",  "time series", "ts_new_nocancer.csv"),
+#                          col_types = cols(
+#                            group  = col_character(),
+#                            label = col_character(),
+#                            date = col_date(format="%Y-%m-%d")))
 
 
 ###############################

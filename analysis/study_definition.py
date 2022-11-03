@@ -376,7 +376,6 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["cancer"],
-    
   ),
   
   # Age and sex ####
@@ -386,7 +385,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["age_cat","sex","cancer"],
-    
   ),
 
   ## High dose opioid - age and sex 
@@ -395,10 +393,8 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["age_cat","sex","cancer"],
-    
   ),
 
-    
   # Age and sex ####
   ## Any opioid - age and sex 
   Measure(
@@ -406,7 +402,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["age_cat","cancer"],
-    
   ),
 
   ## High dose opioid - age and sex 
@@ -415,10 +410,8 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["age_cat","cancer"],
-    
   ),
 
-    
   # Age and sex ####
   ## Any opioid - age and sex 
   Measure(
@@ -426,7 +419,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["sex","cancer"],
-    
   ),
 
   ## High dose opioid - age and sex 
@@ -484,7 +476,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["ethnicity16","cancer"],
-    
   ),
 
   ## High dose opioid - ethnicity16 
@@ -493,7 +484,6 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity16","cancer"],
-    
   ),
 
     ## Any opioid - ethnicity6
@@ -502,7 +492,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","cancer"],
-    
   ),
 
   ## High dose opioid - ethnicity6 
@@ -511,42 +500,23 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","cancer"],
-),
-  Measure(
-    id = "opioid_eth16_any",
-    numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["ethnicity16","cancer"],
-    
   ),
 
-  ## High dose opioid - ethnicity16 
-  Measure(
-    id = "hi_opioid_eth16_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["ethnicity16","cancer"],
-    
-  ),
 
-    ## Any opioid - ethnicity6
+    ## Any opioid - ethnicity6 by age and sex
   Measure(
     id = "opioid_eth6_agesex_any",
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","age_cat","sex","cancer"],
-
-    
   ),
 
-  ## High dose opioid - ethnicity6 
+  ## High dose opioid - ethnicity6 by age and sex
   Measure(
     id = "hi_opioid_eth6_agesex_any",
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["ethnicity6","age_cat","sex","cancer"],
-
-    
   ),
 
   # Region ####
@@ -556,7 +526,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["region","cancer"],
-    
   ),
 
   ## High dose opioid - region 
@@ -565,26 +534,23 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["region","cancer"],
-    
   ),
 
     # Region ####
-  ## Any opioid - region
+  ## Any opioid - region by age and sex
   Measure(
     id = "opioid_reg_agesex_any",
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["region","age_cat","sex","cancer"],
-    
   ),
 
-  ## High dose opioid - region 
+  ## High dose opioid - region by age and sex
   Measure(
     id = "hi_opioid_reg_agesex_any",
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["region","age_cat","sex","cancer"],
-    
   ),
 
   # IMD deciles
@@ -594,7 +560,6 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["imdq10","cancer"],
-    
   ),
 
   ## High dose opioid - imd
@@ -603,26 +568,23 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["imdq10","cancer"],
-    
   ),
 
   # IMD deciles
-  ## Any opioid - imd
+  ## Any opioid - imd by age and sex
   Measure(
     id = "opioid_imd_agesex_any",
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["imdq10","age_cat","sex","cancer"],
-    
   ),
 
-  ## High dose opioid - imd
+  ## High dose opioid - imd by age and sex
   Measure(
     id = "hi_opioid_imd_agesex_any",
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["imdq10","age_cat","sex","cancer"],
-    
   ),
 
   #  Monthly rates - initiation #
@@ -632,7 +594,6 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["cancer"],
-    
   ),
   
   # Age and sex #
@@ -680,7 +641,6 @@ measures = [
     group_by = ["scd","cancer"],
   ),
 
-  #
   #  Ethnicity #
   ## new opioid - ethnicity16
   Measure(
@@ -699,6 +659,14 @@ measures = [
     group_by = ["ethnicity6","cancer"],
   ),
 
+  ## new opioid - ethnicity6 by gae and sex
+  Measure(
+    id = "opioid_eth6_agesex_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["ethnicity6","age_cat","sex","cancer"],
+  ),
+
   # Region #
   ## new opioid - region
   Measure(
@@ -706,6 +674,14 @@ measures = [
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["region","cancer"],
+  ),
+
+    ## new opioid - region
+  Measure(
+    id = "opioid_reg_agesex_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["region","age_cat","sex","cancer"],
   ),
   
   # IMD decile #
@@ -717,5 +693,28 @@ measures = [
     group_by = ["imdq10","cancer"],
   ),
 
+    ## new opioid - imd by age and sex
+  Measure(
+    id = "opioid_imd_agesex_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["imdq10","age_cat","sex","cancer"],
+  ),
 
+  #####Sensitivity - without care home
+  # any opioid
+    Measure(
+    id = "opioid_age_care_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["age_cat","carehome"],
+  ),
+  
+  # new opioid
+    Measure(
+    id = "opioid_age_care_new",
+    numerator = "opioid_new",
+    denominator = "opioid_naive",
+    group_by = ["age_cat","carehome"],
+  ),
 ]
