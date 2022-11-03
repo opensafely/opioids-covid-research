@@ -25,29 +25,29 @@ dir_create(here::here("output", "time series", "graphs"), showWarnings = FALSE, 
 
 
 # Read in data
-prev_full <- read_csv(here::here("output", "time series", "ts_prev_full.csv"),
-                    col_types = cols(
-                      group  = col_character(),
-                      label = col_character(),
-                      date = col_date(format="%Y-%m-%d")))
+#prev_full <- read_csv(here::here("output", "time series", "ts_prev_full.csv"),
+#                    col_types = cols(
+#                      group  = col_character(),
+#                      label = col_character(),
+#                      date = col_date(format="%Y-%m-%d")))
 
-prev_nocancer <- read_csv(here::here("output", "time series", "ts_prev_nocancer.csv"),
-                   col_types = cols(
-                     group  = col_character(),
-                     label = col_character(),
-                     date = col_date(format="%Y-%m-%d")))
+#prev_nocancer <- read_csv(here::here("output", "time series", "ts_prev_nocancer.csv"),
+#                   col_types = cols(
+#                     group  = col_character(),
+#                     label = col_character(),
+#                     date = col_date(format="%Y-%m-%d")))
 
-new_full <- read_csv(here::here("output", "time series", "ts_new_full.csv"),
-                      col_types = cols(
-                        group  = col_character(),
-                        label = col_character(),
-                        date = col_date(format="%Y-%m-%d")))
+#new_full <- read_csv(here::here("output", "time series", "ts_new_full.csv"),
+#                      col_types = cols(
+#                        group  = col_character(),
+#                        label = col_character(),
+#                        date = col_date(format="%Y-%m-%d")))
 
-new_nocancer <- read_csv(here::here("output",  "time series", "ts_new_nocancer.csv"),
-                          col_types = cols(
-                            group  = col_character(),
-                            label = col_character(),
-                            date = col_date(format="%Y-%m-%d")))
+#new_nocancer <- read_csv(here::here("output",  "time series", "ts_new_nocancer.csv"),
+#                          col_types = cols(
+#                            group  = col_character(),
+#                            label = col_character(),
+#                            date = col_date(format="%Y-%m-%d")))
 
 
 ###############################
@@ -91,3 +91,23 @@ line_graph <- function(data, y){
     ) 
   return(graph)
 }
+
+
+################################
+agecare <- read_csv(here::here("output",  "time series", "ts_agecare.csv"),
+                          col_types = cols(
+                            age_cat  = col_character(),
+                            carehome = col_character(),
+                            date = col_date(format="%Y-%m-%d"))) %>%
+  rename(label = carehome, group = age_cat)
+
+agecare_prev <- line_graph(subset(agecare, group == "90+ y"), y = prevalence_per_1000)
+
+ggsave(filename = here::here("output/time series/graphs/graph_age_care_prev.png"),
+  width = 8, height = 4, unit = "in", dpi = 300)
+
+agecare_new <- line_graph(subset(agecare, group == "90+ y"),  y = incidence_per_1000)
+
+ggsave(filename = here::here("output/time series/graphs/graph_age_care_new.png"),
+  width = 8, height = 4, unit = "in", dpi = 300)
+

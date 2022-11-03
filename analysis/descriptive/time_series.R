@@ -36,7 +36,7 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
                       group  = col_character(),
                       label = col_character(),
                       date = col_date(format = "%Y-%m-%d"))) %>%
-   select(c("cancer", "group", "label", "date", "population", "opioid_any",
+   dplyr::select(c("cancer", "group", "label", "date", "population", "opioid_any",
                   "hi_opioid_any")) 
 
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
@@ -44,7 +44,7 @@ new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
                       group  = col_character(),
                       label = col_character(),
                       date = col_date(format = "%Y-%m-%d"))) %>%
-  select(c("cancer", "group", "label", "date", "opioid_naive",
+  dplyr::select(c("cancer", "group", "label", "date", "opioid_naive",
                  "opioid_new" )) 
   
 
@@ -158,6 +158,45 @@ new_nocancer <- new_ts %>%
 print(dim(new_full))
 print(dim(new_nocancer))
 
+#################################################
+# Sensitivity analysis - age not in care home
+#################################################
+
+# Read in data
+agecare_ts <- read_csv(here::here("output", "joined", "final_ts_agecare.csv"),
+                       col_types = cols(
+                         age_cat = col_character(),
+                         carehome = col_character(),
+                         date = col_date(format = "%Y-%m-%d"))) %>%
+  dplyr::select(c("age_cat", "carehome", "date", "opioid_naive", "population",
+                  "opioid_new", "opioid_any" )) 
+
+
+## Create dataset for opioid prescribing by care home
+agecare <- agecare_ts %>%
+  group_by(date, age_cat, carehome) %>%
+  mutate(
+  
+    # Suppression and rounding 
+    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
+      opioid_any = round(opioid_any / 7) * 7,
+    population = case_when(population > 5 ~ population), 
+      population = round(population / 7) * 7,
+    opioid_new = case_when(opioid_new > 5 ~ opioid_new), 
+      opioid_new = round(opioid_new / 7) * 7,
+    opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive), 
+      opioid_naive = round(opioid_naive / 7) * 7,
+    
+    # calculating rates
+    prev_rate = opioid_any / population * 1000, 
+    new_rate = opioid_new / opioid_naive * 1000
+    )   %>%
+    rename(any_opioid_prescribing = opioid_any,
+               new_opioid_prescribing = opioid_new,
+               total_population = population,
+               prevalence_per_1000 = prev_rate,
+               incidence_per_1000 = new_rate)
+
 
 ###############################
 ## Sort and save as .csv
@@ -170,8 +209,7 @@ write.csv(prev_full, file = here::here("output", "time series", "ts_prev_full.cs
           row.names = FALSE)
 
 prev_nocancer <- prev_nocancer %>%
-  arrange(group, label, date) %>%
-    subset(!(group %in% c("SCD")))
+  arrange(group, label, date) 
 
 write.csv(prev_nocancer, file = here::here("output", "time series", "ts_prev_nocancer.csv"),
           row.names = FALSE)
@@ -190,4 +228,9 @@ new_nocancer <- new_nocancer %>%
 write.csv(new_nocancer, file = here::here("output", "time series", "ts_new_nocancer.csv"),
           row.names = FALSE)
 
+agecare <- agecare %>%
+  arrange(age_cat, carehome, date) 
 
+write.csv(agecare, file = here::here("output", "time series", "ts_agecare.csv"),
+          row.names = FALSE)
+  
