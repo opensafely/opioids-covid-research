@@ -77,6 +77,12 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f/",
       "downloaded_at": "2022-09-28 14:32:51.814440Z",
       "sha": "3fc91ee3233d04fc7cb15266195dfa62415b696b"
+    },
+    "opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
+      "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
+      "downloaded_at": "2022-11-14 15:07:08.183792Z",
+      "sha": "3ea446349db9e9fff80f89e9646f8f935bc5cc6d"
     }
   }
 }
