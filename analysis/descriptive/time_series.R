@@ -37,7 +37,9 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
                       label = col_character(),
                       date = col_date(format = "%Y-%m-%d"))) %>%
    dplyr::select(c("cancer", "group", "label", "date", "population", "opioid_any",
-                  "hi_opioid_any")) 
+                  "hi_opioid_any", "long_opioid_any", "oral_opioid_any",
+                  "trans_opioid_any", "par_opioid_any", "buc_opioid_any",
+                  "rec_opioid_any", "inh_opioid_any")) 
 
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
   col_types = cols(
@@ -52,60 +54,99 @@ new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
 # Prevalence
 ###################################
 
+redact <- function(vars) {
+ case_when(vars >5 ~ vars )
+}
+rounding <- function(vars) {
+  round(vars/7)*7
+}
 
 ## Create dataset for opioid prescribing in 
 ##  full population (combine cancer/no cancer)
 prev_full <- prev_ts %>%
   group_by(date, group, label) %>%
-  summarise(opioid_any = sum(opioid_any), hi_opioid_any = sum(hi_opioid_any), 
+  summarise(opioid_any = sum(opioid_any), 
+            hi_opioid_any = sum(hi_opioid_any), 
+            long_opioid_any = sum(long_opioid_any),
+            oral_opioid_any = sum(oral_opioid_any),
+            trans_opioid_any = sum(trans_opioid_any),
+            par_opioid_any = sum(par_opioid_any),
+            rec_opioid_any = sum(rec_opioid_any),
+            buc_opioid_any = sum(buc_opioid_any),
+            inh_opioid_any = sum(inh_opioid_any),
             population = sum(population)) %>%
-  mutate(
-    
-    hi_opioid_any = ifelse(group %in% c("Ethnicity16", "SCD"), NA, hi_opioid_any),
-
     # Suppression and rounding 
-    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
-      opioid_any = round(opioid_any / 7) * 7,
-    hi_opioid_any = case_when(hi_opioid_any > 5 ~ hi_opioid_any), 
-      hi_opioid_any = round(hi_opioid_any / 7) * 7,
-    population = case_when(population > 5 ~ population), 
-      population = round(population / 7) * 7,
-    
+  mutate_at(c(vars(c("population", contains("opioid")))), redact) %>%
+  mutate_at(c(vars(c("population", contains("opioid")))), rounding) %>%
+  mutate(
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
-    prev_hi_rate = hi_opioid_any / population * 1000
-    )   %>%
-    rename(any_opioid_prescribing = opioid_any,
-               any_high_dose_opioid_prescribing = hi_opioid_any,
+    prev_hi_rate = hi_opioid_any / population * 1000,
+    prev_long_rate = long_opioid_any / population * 1000,
+    prev_oral_rate = oral_opioid_any / population * 1000,
+    prev_trans_rate = trans_opioid_any / population * 1000,
+    prev_par_rate = par_opioid_any / population * 1000,
+    prev_rec_rate = rec_opioid_any / population * 1000,
+    prev_buc_rate = buc_opioid_any / population * 1000,
+    prev_inh_rate = inh_opioid_any / population * 1000
+    
+  )   %>%
+    rename(any_opioid = opioid_any,
+               high_dose_opioid = hi_opioid_any,
+               long_act_opioid = long_opioid_any,
+               oral_opioid = oral_opioid_any,
+               transdermal_opioid = trans_opioid_any,
+               parenteral_opioid = par_opioid_any,
+              buccal_opioid = buc_opioid_any,
+              rectal_opioid = rec_opioid_any,
+              inhaled_opioid = inh_opioid_any,
                total_population = population,
                prevalence_per_1000 = prev_rate,
-               high_dose_prevalence_per_1000 = prev_hi_rate)
+               high_dose_prevalence_per_1000 = prev_hi_rate,
+               long_act_prevalence_per_1000 = prev_long_rate,
+               oral_prevalence_per_1000 = prev_oral_rate,
+               parenteral_prevalence_per_1000 = prev_par_rate,
+               transdermal_prevalence_per_1000 = prev_trans_rate)
 
 
 ## Create dataset for any opioid prescribing in people without cancer only
 prev_nocancer <- prev_ts %>%
   subset(cancer == 0) %>%
+  # Suppression and rounding 
+  mutate_at(c(vars(c("population", contains("opioid")))), redact) %>%
+  mutate_at(c(vars(c("population", contains("opioid")))), rounding) %>%
   mutate(
-
-    hi_opioid_any = ifelse(group %in% c("Ethnicity16", "SCD"), NA, hi_opioid_any),
-
-    # Suppression and rounding 
-    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
-     opioid_any = round(opioid_any / 7) * 7,
-    hi_opioid_any = case_when(hi_opioid_any > 5 ~ hi_opioid_any), 
-     hi_opioid_any = round(hi_opioid_any / 7) * 7,
-    population = case_when(population > 5 ~ population), 
-     population = round(population / 7) * 7,
-    
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
-    prev_hi_rate = hi_opioid_any / population * 1000
-  ) %>%
-  rename(any_opioid_prescribing = opioid_any,
-         any_high_dose_opioid_prescribing = hi_opioid_any,
+    prev_hi_rate = hi_opioid_any / population * 1000,
+    prev_long_rate = long_opioid_any / population * 1000,
+    prev_oral_rate = oral_opioid_any / population * 1000,
+    prev_trans_rate = trans_opioid_any / population * 1000,
+    prev_par_rate = par_opioid_any / population * 1000,
+    prev_rec_rate = rec_opioid_any / population * 1000,
+    prev_buc_rate = buc_opioid_any / population * 1000,
+    prev_inh_rate = inh_opioid_any / population * 1000
+    
+  )   %>%
+  rename(any_opioid = opioid_any,
+         high_dose_opioid = hi_opioid_any,
+         long_act_opioid = long_opioid_any,
+         oral_opioid = oral_opioid_any,
+         transdermal_opioid = trans_opioid_any,
+         parenteral_opioid = par_opioid_any,
+         buccal_opioid = buc_opioid_any,
+         rectal_opioid = rec_opioid_any,
+         inhaled_opioid = inh_opioid_any,
          total_population = population,
          prevalence_per_1000 = prev_rate,
-         high_dose_prevalence_per_1000 = prev_hi_rate) 
+         high_dose_prevalence_per_1000 = prev_hi_rate,
+         long_act_prevalence_per_1000 = prev_long_rate,
+         oral_prevalence_per_1000 = prev_oral_rate,
+         parenteral_prevalence_per_1000 = prev_par_rate,
+         transdermal_prevalence_per_1000 = prev_trans_rate,
+         rectal_prevalence_per_1000 = prev_rec_rate,
+         buccal_prevalence_per_1000 = prev_buc_rate,
+         inhaled_prevalence_per_1000 = prev_inh_rate)
 
 print(dim(prev_full))
 print(dim(prev_nocancer))
@@ -123,14 +164,10 @@ new_full <- new_ts %>%
     opioid_new = sum(opioid_new),
     opioid_naive = sum(opioid_naive)
     ) %>%
+  # Suppression and rounding 
+  mutate_at(c(vars(contains("opioid"))), redact) %>%
+  mutate_at(c(vars(contains("opioid"))), rounding) %>%
   mutate(
-
-    # Suppression and rounding
-    opioid_new = case_when(opioid_new > 5 ~ opioid_new),
-      opioid_new = round(opioid_new / 7) * 7,
-    opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
-      opioid_naive = round(opioid_naive / 7) * 7,
-    
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000
   ) %>%
@@ -140,20 +177,16 @@ new_full <- new_ts %>%
 ## Create dataset for new opioid prescribing in people without cancer only
 new_nocancer <- new_ts %>%
   subset(cancer == 0) %>%
+  # Suppression and rounding 
+  mutate_at(c(vars(contains("opioid"))), redact) %>%
+  mutate_at(c(vars(contains("opioid"))), rounding) %>%
   mutate(
-    
-    # Suppression and rounding
-    opioid_new = case_when(opioid_new > 5 ~ opioid_new),
-      opioid_new = round(opioid_new / 7) * 7,
-    opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive),
-      opioid_naive = round(opioid_naive / 7) * 7,
-    
     # calculating rates
     new_rate = opioid_new / opioid_naive * 1000
   ) %>%
-  rename(new_opioid_prescribing = opioid_new, 
+  rename(new_opioid = opioid_new, 
          incidence_per_1000 = new_rate) %>%
-  select(!c(cancer))
+  dplyr::select(!c(cancer))
 
 print(dim(new_full))
 print(dim(new_nocancer))
@@ -175,24 +208,16 @@ agecare_ts <- read_csv(here::here("output", "joined", "final_ts_agecare.csv"),
 ## Create dataset for opioid prescribing by care home
 agecare <- agecare_ts %>%
   group_by(date, age_cat, carehome) %>%
+  # Suppression and rounding 
+  mutate_at(c(vars(c("population", contains("opioid")))), redact) %>%
+  mutate_at(c(vars(c("population", contains("opioid")))), rounding) %>%
   mutate(
-  
-    # Suppression and rounding 
-    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
-      opioid_any = round(opioid_any / 7) * 7,
-    population = case_when(population > 5 ~ population), 
-      population = round(population / 7) * 7,
-    opioid_new = case_when(opioid_new > 5 ~ opioid_new), 
-      opioid_new = round(opioid_new / 7) * 7,
-    opioid_naive = case_when(opioid_naive > 5 ~ opioid_naive), 
-      opioid_naive = round(opioid_naive / 7) * 7,
-    
     # calculating rates
     prev_rate = opioid_any / population * 1000, 
     new_rate = opioid_new / opioid_naive * 1000
     )   %>%
-    rename(any_opioid_prescribing = opioid_any,
-               new_opioid_prescribing = opioid_new,
+    rename(any_opioid = opioid_any,
+               new_opioid = opioid_new,
                total_population = population,
                prevalence_per_1000 = prev_rate,
                incidence_per_1000 = new_rate)

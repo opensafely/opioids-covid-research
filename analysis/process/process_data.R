@@ -33,32 +33,101 @@ source(here("analysis", "lib", "custom_functions.R"))
 ###############################
 
 # Combine data on any opioid prescribing
-prevalence <- full_join(
-  (bind_rows(
+any <- bind_rows(
     read_csv(here::here("output", "data", "measure_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_reg_any.csv")), list(region = "Missing")), 
     replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_any.csv")), list(imd = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth16_any.csv")), list(ethnicity16 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_opioid_care_any.csv")), 
-    read_csv(here::here("output", "data", "measure_opioid_scd_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_sex_any.csv")), list(sex = "Missing")),
-    read_csv(here::here("output", "data", "measure_opioid_age_any.csv")))
-  ),
-  (bind_rows(
+    read_csv(here::here("output", "data", "measure_opioid_age_any.csv"))) %>%
+    dplyr::select(!c(value))
+
+hi <- bind_rows(
     read_csv(here::here("output", "data", "measure_hi_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_reg_any.csv")), list(region = "Missing")), 
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_imd_any.csv")), list(imd = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth16_any.csv")), list(ethnicity16 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_hi_opioid_care_any.csv")),
-    read_csv(here::here("output", "data", "measure_hi_opioid_scd_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_sex_any.csv")), list(sex = "Missing")),
-    read_csv(here::here("output", "data", "measure_hi_opioid_age_any.csv"))
-  )), 
-  by = c("date", "population", "cancer", "age_cat", "sex", "region", 
-         "ethnicity6", "ethnicity16", "carehome", "scd", "imdq10")) %>%
-  dplyr::select(!c(value.x, value.y)) %>%
+    read_csv(here::here("output", "data", "measure_hi_opioid_age_any.csv"))) %>%
+    dplyr::select(!c(value))
+
+long <- bind_rows(
+    read_csv(here::here("output", "data", "measure_long_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_reg_any.csv")), list(region = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_long_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_long_opioid_age_any.csv"))) %>%
+    dplyr::select(!c(value))
+  
+oral <- bind_rows(
+    read_csv(here::here("output", "data", "measure_oral_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_oral_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_oral_opioid_age_any.csv")))  %>%
+    dplyr::select(!c(value))
+
+buc <- bind_rows(
+    read_csv(here::here("output", "data", "measure_buc_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_buc_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_buc_opioid_age_any.csv")))  %>%
+    dplyr::select(!c(value))
+
+trans <- bind_rows(
+    read_csv(here::here("output", "data", "measure_trans_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_trans_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_trans_opioid_age_any.csv")))  %>%
+    dplyr::select(!c(value))
+
+rec <- bind_rows(
+    read_csv(here::here("output", "data", "measure_rec_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_rec_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_rec_opioid_age_any.csv"))) %>%
+    dplyr::select(!c(value))
+
+inh<- bind_rows(
+    read_csv(here::here("output", "data", "measure_inh_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_inh_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_inh_opioid_age_any.csv"))) %>%
+    dplyr::select(!c(value))
+
+par <- bind_rows(
+    read_csv(here::here("output", "data", "measure_par_opioid_all_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_reg_any.csv")), list(regionion = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
+    read_csv(here::here("output", "data", "measure_par_opioid_care_any.csv")),
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_sex_any.csv")), list(sex = "Missing")),
+    read_csv(here::here("output", "data", "measure_par_opioid_age_any.csv")))  %>%
+    dplyr::select(!c(value))
+
+
+prevalence <- Reduce(function(x,y) 
+  merge(x, y, by=c("date", "population", "cancer", "age_cat", "sex", "region", 
+               "ethnicity6", "carehome", "imdq10"), all=TRUE) ,
+          list(any, oral, par, trans, hi, long, inh, rec, buc)) %>%
   mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"),     
     # Sex
     sex = fct_case_when(
@@ -100,30 +169,28 @@ prevalence <- full_join(
       carehome == 1 ~ "Yes"
       ),
          
-    #Sickle cell
-    scd = fct_case_when(
-      scd == 0 ~ "No",
-      scd == 1 ~ "Yes"
-      ),
-         
     # Convert to integer to avoid scientific notation in csv
     population = as.integer(population),
     opioid_any = as.integer(opioid_any),
     hi_opioid_any = as.integer(hi_opioid_any),
+    long_opioid_any = as.integer(long_opioid_any),    
+    oral_opioid_any = as.integer(oral_opioid_any),
+    trans_opioid_any = as.integer(trans_opioid_any),
+    par_opioid_any = as.integer(par_opioid_any),
+    buc_opioid_any = as.integer(buc_opioid_any),
+    inh_opioid_any = as.integer(inh_opioid_any),
+    rec_opioid_any = as.integer(rec_opioid_any),
     
-    label = coalesce(region, imdq10, ethnicity6, ethnicity16, carehome, scd, age_cat),
-    label = ifelse(is.na(label) & is.na(sex), "Total", 
-                   ifelse(is.na(label) &  sex == "Male", "Male",
-                          ifelse(is.na(label) & sex == "Female", "Female", label))),
+  
+    label = coalesce(region, imdq10, ethnicity6,  carehome, sex, age_cat),
     group = ifelse(!is.na(region), "Region",
               ifelse(!is.na(imdq10), "IMD decile",
-                ifelse(!is.na(ethnicity16), "Ethnicity16",
                 ifelse(!is.na(ethnicity6), "Ethnicity6",
                   ifelse(!is.na(carehome), "Care home",
-                    ifelse(!is.na(scd), "SCD",
                       ifelse(!is.na(age_cat), "Age", 
-                          ifelse(!is.na(sex), "Sex", "Total"))))))))) %>%
-  dplyr::select(!c(region, imdq10, ethnicity6, ethnicity16, carehome, scd, age_cat, sex))
+                          ifelse(!is.na(sex), "Sex", "Total"))))))
+    ) %>%
+    dplyr::select(!c(region, imdq10, ethnicity6, carehome, age_cat, sex))
 
 
 ###############################
@@ -135,10 +202,8 @@ incidence <- bind_rows(
     read_csv(here::here("output", "data", "measure_opioid_all_new.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_reg_new.csv")), list(region = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_new.csv")), list(imd = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth16_new.csv")), list(ethnicity16 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_new.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_opioid_care_new.csv")),
-    read_csv(here::here("output", "data", "measure_opioid_scd_new.csv")),
     read_csv(here::here("output", "data", "measure_opioid_age_new.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_sex_new.csv")), list(sex = "Missing"))
     ) %>%
@@ -183,30 +248,22 @@ incidence <- bind_rows(
       carehome == 0 ~ "No",
       carehome == 1 ~ "Yes"
       ),
-         
-    #Sickle cell
-    scd = fct_case_when(
-      scd == 0 ~ "No",
-      scd == 1 ~ "Yes"
-      ),
-         
+
     # Convert to integer to avoid scientific notation in csv
     opioid_new = as.integer(opioid_new),
     opioid_naive = as.integer(opioid_naive),
     
-    label = coalesce(region, imdq10, ethnicity6, ethnicity16, carehome, scd, age_cat),
+    label = coalesce(region, imdq10, ethnicity6, carehome, age_cat),
     label = ifelse(is.na(label) & is.na(sex), "Total", 
                    ifelse(is.na(label) &  sex == "Male", "Male",
                           ifelse(is.na(label) & sex == "Female", "Female", label))),
     group = ifelse(!is.na(region), "Region",
                    ifelse(!is.na(imdq10), "IMD decile",
-                          ifelse(!is.na(ethnicity16), "Ethnicity16",
                                  ifelse(!is.na(ethnicity6), "Ethnicity6",
                                         ifelse(!is.na(carehome), "Care home",
-                                               ifelse(!is.na(scd), "SCD",
                                                       ifelse(!is.na(age_cat), "Age", 
-                                                             ifelse(!is.na(sex), "Sex","Total"))))))))) %>%
-  dplyr::select(!c(region, imdq10, ethnicity6, ethnicity16, carehome, scd, sex, age_cat))
+                                                             ifelse(!is.na(sex), "Sex","Total"))))))) %>%
+  dplyr::select(!c(region, imdq10, ethnicity6,  carehome, sex, age_cat))
 
 
 
@@ -217,95 +274,9 @@ incidence <- bind_rows(
 write.csv(prevalence, file = here::here("output", "joined", "final_ts_prev.csv"))
 write.csv(incidence, file = here::here("output", "joined", "final_ts_new.csv"))
 
-
-
-###############################
-# Prevalence datasets by age/sex
-###############################
-
-# Combine data on any opioid prescribing
-prevalence_agesex <- full_join(
-  (bind_rows(
-    read_csv(here::here("output", "data", "measure_opioid_agesex_any.csv")),
-    read_csv(here::here("output", "data", "measure_opioid_reg_agesex_any.csv")), 
-    read_csv(here::here("output", "data", "measure_opioid_imd_agesex_any.csv")), 
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_agesex_any.csv")), list(ethnicity6 = "Missing"))
-  )),
-  (bind_rows(
-    read_csv(here::here("output", "data", "measure_hi_opioid_agesex_any.csv")),
-    read_csv(here::here("output", "data", "measure_hi_opioid_reg_agesex_any.csv")), 
-    read_csv(here::here("output", "data", "measure_hi_opioid_imd_agesex_any.csv")), 
-    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth6_agesex_any.csv")), list(ethnicity6 = "Missing"))
-  )), 
-  by = c("date", "population", "cancer", "age_cat", "sex", "region", 
-         "ethnicity6", "imdq10")) %>%
-  dplyr::select(!c(value.x, value.y)) %>%
-  mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"),     
-         # Sex
-         sex = fct_case_when(
-           sex == "F" ~ "Female",
-           sex == "M" ~ "Male",
-           TRUE ~ NA_character_),
-         
-         # IMD deciles
-         imdq10 = fct_case_when(
-           imdq10 == 0 ~ "Missing",
-           imdq10 == 1 ~ "1 most deprived",
-           imdq10 == 2 ~ "2",
-           imdq10 == 3 ~ "3",
-           imdq10 == 4 ~ "4",
-           imdq10 == 5 ~ "5",
-           imdq10 == 6 ~ "6",
-           imdq10 == 7 ~ "7",
-           imdq10 == 8 ~ "8",
-           imdq10 == 9 ~ "9",
-           imdq10 == 10 ~ "10 least deprived"
-         ),
-         
-         # Age
-         age_cat = fct_case_when(
-           age_cat == 0 ~ "Missing",
-           age_cat == 1 ~ "18-29 y",
-           age_cat == 2 ~ "30-39 y",
-           age_cat == 3 ~ "40-49 y",
-           age_cat == 4 ~ "50-59 y",
-           age_cat == 5 ~ "60-69 y",
-           age_cat == 6 ~ "70-79 y",
-           age_cat == 7 ~ "80-89 y",
-           age_cat == 8 ~ "90+ y"
-         ),
-         
-         #Carehome
-         
-         # Convert to integer to avoid scientific notation in csv
-         population = as.integer(population),
-         opioid_any = as.integer(opioid_any),
-         hi_opioid_any = as.integer(hi_opioid_any),
-         
-         label = coalesce(region, imdq10, ethnicity6),
-         label = ifelse(is.na(label) & is.na(sex), "Total", 
-                        ifelse(is.na(label) &  sex == "Male", "Male",
-                               ifelse(is.na(label) & sex == "Female", "Female", label))),
-         group = ifelse(!is.na(region), "Region",
-                        ifelse(!is.na(imdq10), "IMD decile",
-                                      ifelse(!is.na(ethnicity6), "Ethnicity6",
-                                                           ifelse(!is.na(age_cat), "Age", 
-                                                                  ifelse(!is.na(sex) , "Sex","Total")))))) %>%
-  dplyr::select(!c(region, imdq10, ethnicity6))
-
-
-
-###############################
-## Save as .csv
-###############################
-
-write.csv(prevalence_agesex, file = here::here("output", "joined", "final_ts_prev_agesex.csv"))
-
 ###########################################
 ## Sensitivity - age in/not in aged care
 ###########################################
-
-
 
 ###############################
 # Prevalence datasets - with/without care home
@@ -349,17 +320,6 @@ write.csv(carehome, file = here::here("output", "joined", "final_ts_agecare.csv"
 # Read in data for tables
 ###############################
 
-## Read in data before COVID and combine
-# apr19 <- read_csv(here::here("output", "data", "input_2019-04-01.csv")) 
-# may19 <- read_csv(here::here("output", "data", "input_2019-05-01.csv")) %>%
-#   filter(!(patient_id %in% apr19$patient_id))
-# jun19 <- read_csv(here::here("output", "data", "input_2019-06-01.csv")) %>%
-#   filter(!(patient_id %in% c(apr19$patient_id, may19$patient_id)))
-# 
-# cohort_before <- rbind(apr19, may19, jun19) %>%
-#   dplyr::select(!(c(opioid_any_date, hi_opioid_any_date))) %>%
-#   mutate(time = 0)
-
 ## Read in data and combine - people prescribed opioids during COVID and combine
 apr22 <- read_csv(here::here("output", "data", "input_2022-01-01.csv")) 
 may22 <- read_csv(here::here("output", "data", "input_2022-02-01.csv")) %>%
@@ -367,13 +327,14 @@ may22 <- read_csv(here::here("output", "data", "input_2022-02-01.csv")) %>%
 jun22 <- read_csv(here::here("output", "data", "input_2022-03-01.csv")) %>%
   filter(!patient_id %in% c(apr22$patient_id, may22$patient_id))
 
-cohort <- rbind(apr22, may22, jun22) %>%
-  dplyr::select(!(c(opioid_any_date, hi_opioid_any_date))) 
+cohort <- rbind(apr22, may22, jun22) 
 
 
 # Number check----
 print(dim(cohort))
 head(cohort)
+
+
 
 
 #################################################
@@ -442,7 +403,8 @@ for_tables <-
       scd == 0 ~ "No",
       scd == 1 ~ "Yes"
     )
-  )
+  ) %>%
+  dplyr::select(!c(contains("any_date")))
 
 
 ###############################

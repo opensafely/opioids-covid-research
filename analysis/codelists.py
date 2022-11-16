@@ -80,7 +80,6 @@ long_opioid_codes = combine_codelists(
   non_hi_opioid_codes,
 )
 
-
 ### Buccal opioids
 buc_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv",
@@ -121,6 +120,13 @@ trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
   system = "snomed",
   column = "dmd_id",
+)
+
+### Other opioid
+oth_opioid_codes = combine_codelists(
+  buc_opioid_codes,
+  inh_opioid_codes,
+  rec_opioid_codes,
 )
 
 ### Any opioid
