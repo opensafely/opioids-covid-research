@@ -72,6 +72,23 @@ study = StudyDefinition(
     }
     ),
 
+  age_cat = patients.categorised_as(
+    {"0": "DEFAULT",
+      "1": """age < 13""",
+      "2": """age >= 13""",
+    },
+
+    return_expectations = {
+      "rate": "universal",
+      "category": {
+        "ratios": {
+          "0": 0.01,
+          "1": 0.49,
+          "2": 0.50,
+        }},
+    },
+  ),
+
   ### Index of multiple deprivation
   imdq10 = patients.categorised_as(
     {"0": "DEFAULT",
@@ -180,6 +197,22 @@ measures = [
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["sex"],
+    
+  ),
+
+  Measure(
+    id = "opioid_age_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["age_cat"],
+    
+  ),
+
+  Measure(
+    id = "opioid_agesex_any",
+    numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["age_cat", "sex"],
     
   ),
 

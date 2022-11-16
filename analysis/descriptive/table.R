@@ -40,7 +40,6 @@ f <- function(var,name) {
     summarise(
       tot = n(),
       opioid_any = sum(opioid_any),
-      hi_opioid_any = sum(hi_opioid_any),
       opioid_new = sum(opioid_new),
       opioid_naive = sum(opioid_naive),
     )  %>%
@@ -64,51 +63,65 @@ combined <- rbind(
 # Rounding and redaction
 ########################################################
 
-# People without cancer
+redact <- function(vars) {
+  case_when(vars >5 ~ vars )
+}
+rounding <- function(vars) {
+  round(vars/7)*7
+}
+
+# People without cancer - overall prescribing
 bycancer <- combined %>%
+  # Suppression and rounding 
+  mutate_at(c(vars(c("tot", "opioid_any"))), redact) %>%
+  mutate_at(c(vars(c("tot", "opioid_any"))), rounding) %>%
   mutate(
-    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
-      opioid_any = round(opioid_any / 7) * 7,
-    tot = case_when(tot > 5 ~ tot), 
-      tot = round(tot / 7) * 7,
-    
    # Calculate rates
-    p_prev = opioid_any / tot * 1000
+    p_prev = opioid_any / tot * 1000,
   ) %>%
-  select(c(cancer, group, label, opioid_any, tot, p_prev)) %>%
+  dplyr::select(contains(c("cancer", "label",
+          "tot", "group", "p_prev", "opioid_any"))) %>%
   rename(cancer_diagnosis = cancer,
-         any_opioid_prescribing = opioid_any, total_population = tot, 
+         any_opioid = opioid_any, 
+         total_population = tot, 
          prevalence_per_1000 = p_prev)
 
-# Full population
+# Full population - overall prescribing
 fullpop <- combined %>%
   group_by(group, label) %>%
   summarise(
     tot = sum(tot),
-    opioid_any = sum(opioid_any)
-    #hi_opioid_any = sum(hi_opioid_any),
-    #opioid_new = sum(opioid_new),
-    #opioid_naive = sum(opioid_naive),
-    ) %>%
+    opioid_any = sum(opioid_any)) %>%
+  mutate_at(c(vars(c("tot", "opioid_any"))), redact) %>%
+  mutate_at(c(vars(c("tot", "opioid_any"))), rounding) %>%
   mutate(    
-    opioid_any = case_when(opioid_any > 5 ~ opioid_any), 
-      opioid_any = round(opioid_any / 7) * 7,
-    tot = case_when(tot > 5 ~ tot), 
-      tot = round(tot / 7) * 7,
-    
-    # Calculate rates
-    p_prev = opioid_any / tot * 1000
-    #p_prev_hi = hi_opioid_any / tot * 1000,
-    #p_new = opioid_new / opioid_naive * 1000,
-    #p_new_hi = hi_opioid_new / hi_opioid_naive * 1000
+      # Calculate rates
+    p_prev = opioid_any / tot * 1000,
   ) %>%
   rename(
-       any_opioid_prescribing = opioid_any, total_population = tot, 
+       any_opioid = opioid_any, 
+       total_population = tot, 
        prevalence_per_1000 = p_prev)
 
+# Full population - breakdown of admin route
 
-head(bycancer)
-head(fullpop)
+admin <- rbind(
+  cbind(sum(for_tables$opioid_any), "Any"),
+  cbind(sum(for_tables$hi_opioid_any), "High dose"),
+  cbind(sum(for_tables$long_opioid_any), "Long acting"),
+  cbind(sum(for_tables$oral_opioid_any), "Oral"),
+  cbind(sum(for_tables$par_opioid_any), "Parenteral"),
+  cbind(sum(for_tables$trans_opioid_any), "Transdermal"),
+  cbind(sum(for_tables$buc_opioid_any), "Buccal"),
+  cbind(sum(for_tables$inh_opioid_any), "Inhaled"),
+  cbind(sum(for_tables$rec_opioid_any), "Rectal")
+  ) %>%
+  as.data.frame() %>%
+  rename(no_people = V1, formulation = V2) %>%
+  mutate(no_people = as.numeric(no_people),
+         tot = as.numeric(count(for_tables))) %>%
+       mutate( prevalence_per_1000 = no_people/tot*1000)
+
 
 
 ###################
@@ -119,9 +132,11 @@ fullpop <- fullpop %>% arrange(group, label)
 write.csv(fullpop, here::here("output", "tables", "table_full_population.csv"),
           row.names = FALSE)
 
-bycancer <- bycancer %>% arrange(group, label) %>%
-  subset(group != "Sickle cell disease")
+bycancer <- bycancer %>% arrange(group, label) 
 write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"),
+          row.names = FALSE)
+
+write.csv(admin, here::here("output", "tables", "table_by_admin_route.csv"),
           row.names = FALSE)
 
 

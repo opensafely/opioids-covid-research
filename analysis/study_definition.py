@@ -215,12 +215,10 @@ study = StudyDefinition(
           """,
         0: "DEFAULT",
         },
-    ),
-
      return_expectations = {
       "incidence": 0.05,
     },
-
+  ),
   ),
 
   ### Cancer in past year
@@ -261,6 +259,125 @@ study = StudyDefinition(
       },
   ),
 
+  ## Oral opioid
+  oral_opioid_any = patients.with_these_medications(
+    oral_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## Buccal opioid
+  buc_opioid_any = patients.with_these_medications(
+    buc_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+  
+  ## inhaled opioid
+  inh_opioid_any = patients.with_these_medications(
+    inh_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## Parenteral opioid
+  par_opioid_any = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## rectal opioid
+  rec_opioid_any = patients.with_these_medications(
+    rec_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## transdermal opioid
+  trans_opioid_any = patients.with_these_medications(
+    trans_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## Other opioid
+  oth_opioid_any = patients.with_these_medications(
+    oth_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
   ### High dose prescribing
   hi_opioid_any = patients.with_these_medications(
     hi_opioid_codes,
@@ -278,8 +395,25 @@ study = StudyDefinition(
       },
   ),
 
+  
+  ### Long acting prescribing
+  long_opioid_any = patients.with_these_medications(
+    long_opioid_codes,
+    between = ["first_day_of_month(index_date)", "last_day_of_month(index_date)"],
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.05
+      },
+  ),
+
   ### Any new prescribing (2-year washout)
-  ### TODO: should patients be registered for 2+ years for defining new use?? 
   opioid_new = patients.satisfying(
     """
     opioid_any
@@ -306,34 +440,6 @@ study = StudyDefinition(
     ),
   ),
 
-  ### New high dose opioid prescribing
-  hi_opioid_new = patients.satisfying(
-    
-    """
-    hi_opioid_any
-    AND 
-    NOT hi_opioid_last
-    """, 
-    
-    return_expectations = {
-      "incidence": 0.05,
-    },
-    
-    hi_opioid_last = patients.with_these_medications(
-      hi_opioid_codes,
-      returning = "date",
-      find_first_match_in_period = True,
-      between = ["hi_opioid_any_date - 2 year", "hi_opioid_any_date - 1 day"],
-      date_format = "YYYY-MM-DD",
-      return_expectations = {
-        "date": {
-          "earliest": "first_day_of_month(index_date) - 2 year",
-          "latest": "last_day_of_month(index_date)- 1 day",
-        },
-        "incidence": 0.1}
-    ),
-  ),
-
   # Opioid naive in past 2 years (for denominator for new use)
   opioid_naive = patients.satisfying(
     """
@@ -343,29 +449,69 @@ study = StudyDefinition(
       "incidence": 0.2,
     },
     ),
-
-  # High dose opioid naive in past 2 years (for denominator for new use)
-  hi_opioid_naive = patients.satisfying(
-    """
-    NOT hi_opioid_last
-    """, 
-    return_expectations = {
-      "incidence": 0.1,
-    },
-    ),
 )
 
 
 # --- DEFINE MEASURES ---
 
 measures = [
-  
- #  Monthly rates #
-  # Full population ####
+
+  ####  Monthly rates #####
+
+  ### Full population ###
+
   ## Any opioid 
   Measure(
     id = "opioid_all_any",
     numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+  ## Oral opioid 
+  Measure(
+    id = "oral_opioid_all_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+  ## Transdermal opioid 
+  Measure(
+    id = "trans_opioid_all_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+  ## Parenteral opioid 
+  Measure(
+    id = "par_opioid_all_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+  ## Inhaled opioid 
+  Measure(
+    id = "inh_opioid_all_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+    ## Buccal opioid 
+  Measure(
+    id = "buc_opioid_all_any",
+    numerator = "buc_opioid_any",
+    denominator = "population",
+    group_by = ["cancer"],
+  ),
+
+    ## Rectal opioid 
+  Measure(
+    id = "rec_opioid_all_any",
+    numerator = "rec_opioid_any",
     denominator = "population",
     group_by = ["cancer"],
   ),
@@ -378,25 +524,16 @@ measures = [
     group_by = ["cancer"],
   ),
   
-  # Age and sex ####
-  ## Any opioid - age and sex 
+  ## Long-acting opioid 
   Measure(
-    id = "opioid_agesex_any",
-    numerator = "opioid_any",
+    id = "long_opioid_all_any",
+    numerator = "long_opioid_any",
     denominator = "population",
-    group_by = ["age_cat","sex","cancer"],
+    group_by = ["cancer"],
   ),
 
-  ## High dose opioid - age and sex 
-  Measure(
-    id = "hi_opioid_agesex_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["age_cat","sex","cancer"],
-  ),
-
-  # Age and sex ####
-  ## Any opioid - age and sex 
+  ### Age ### 
+  ## Any opioid - age 
   Measure(
     id = "opioid_age_any",
     numerator = "opioid_any",
@@ -404,33 +541,143 @@ measures = [
     group_by = ["age_cat","cancer"],
   ),
 
-  ## High dose opioid - age and sex 
+  ## High dose opioid - age 
   Measure(
     id = "hi_opioid_age_any",
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["age_cat","cancer"],
+  ),  
+  
+  ## Long acting opioid - age 
+  Measure(
+    id = "long_opioid_age_any",
+    numerator = "long_opioid_any",
+    denominator = "population",
+    group_by = ["age_cat","cancer"],
   ),
 
-  # Age and sex ####
-  ## Any opioid - age and sex 
+  ## Oral opioid - age 
+  Measure(
+    id = "oral_opioid_age_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "age_cat"],
+  ),
+
+  ## Buccal opioid - age 
+  Measure(
+    id = "buc_opioid_age_any",
+    numerator = "buc_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "age_cat"],
+  ),
+
+  ## Rectal opioid  - age 
+  Measure(
+    id = "rec_opioid_age_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "age_cat"],
+  ),
+
+  ## Transdermal opioid  - age 
+  Measure(
+    id = "trans_opioid_age_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "age_cat"],
+  ),
+
+  ## Parenteral opioid  - age 
+  Measure(
+    id = "par_opioid_age_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["cancer" , "age_cat"],
+  ),
+
+  ## Inhaled opioid  - age 
+  Measure(
+    id = "inh_opioid_age_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "age_cat"],
+  ),
+
+  ### Sex ###
+
+  ## Any opioid -  sex 
   Measure(
     id = "opioid_sex_any",
     numerator = "opioid_any",
     denominator = "population",
     group_by = ["sex","cancer"],
   ),
-
-  ## High dose opioid - age and sex 
+  ## High dose opioid - sex
   Measure(
     id = "hi_opioid_sex_any",
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["sex","cancer"],
-    
+  ),  
+  
+  ## Long acting opioid - sex 
+  Measure(
+    id = "long_opioid_sex_any",
+    numerator = "long_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+## Oral opioid -  sex 
+  Measure(
+    id = "oral_opioid_sex_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
   ),
 
-  # Carehomes ####
+  ## Buccal opioid -  sex 
+  Measure(
+    id = "buc_opioid_sex_any",
+    numerator = "buc_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+
+  ## Rectal opioid -  sex 
+  Measure(
+    id = "rec_opioid_sex_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+
+  ## Transdermal opioid -  sex 
+  Measure(
+    id = "trans_opioid_sex_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+
+  ## Parenteral opioid -  sex 
+  Measure(
+    id = "par_opioid_sex_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+
+  ## Inhaled opioid -  sex 
+  Measure(
+    id = "inh_opioid_sex_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["sex","cancer"],
+  ),
+
+  ### Carehomes ###
   ## ANy opioid - carehomes 
   Measure(
     id = "opioid_care_any",
@@ -446,7 +693,62 @@ measures = [
     numerator = "hi_opioid_any",
     denominator = "population",
     group_by = ["carehome","cancer"],
-    
+  ),  
+  
+  ## Long acting  opioid - carehomes 
+  Measure(
+    id = "long_opioid_care_any",
+    numerator = "long_opioid_any",
+    denominator = "population",
+    group_by = ["carehome","cancer"],
+  ),
+
+    ## Oral opioid - carehomes 
+  Measure(
+    id = "oral_opioid_care_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "carehome"],
+  ),
+
+  ## Buccal opioid - carehomes 
+  Measure(
+    id = "buc_opioid_care_any",
+    numerator = "buc_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "carehome"],
+  ),
+
+  ## Rectal opioid - carehomes 
+  Measure(
+    id = "rec_opioid_care_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "carehome"],
+  ),
+
+  ## Transdermal opioid - carehomes 
+  Measure(
+    id = "trans_opioid_care_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "carehome"],
+  ),
+
+  ## Parenteral opioid - carehomes 
+  Measure(
+    id = "par_opioid_care_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["cancer" , "carehome"],
+  ),
+
+  ## Inhaled opioid - carehomes 
+  Measure(
+    id = "inh_opioid_care_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["cancer", "carehome"],
   ),
   
   # Sickle cell ####
@@ -459,18 +761,8 @@ measures = [
     
   ),
 
-  ## High dose opioid - sickle cell 
-  Measure(
-    id = "hi_opioid_scd_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["scd","cancer"],
-    
-  ),
-
-  # Ethnicity ####
+  ### Ethnicity ####
   ## Any opioid - ethnicity16 
-
   Measure(
     id = "opioid_eth16_any",
     numerator = "opioid_any",
@@ -478,15 +770,7 @@ measures = [
     group_by = ["ethnicity16","cancer"],
   ),
 
-  ## High dose opioid - ethnicity16 
-  Measure(
-    id = "hi_opioid_eth16_any",
-    numerator = "hi_opioid_any",
-    denominator = "population",
-    group_by = ["ethnicity16","cancer"],
-  ),
-
-    ## Any opioid - ethnicity6
+  ## Any opioid - ethnicity6
   Measure(
     id = "opioid_eth6_any",
     numerator = "opioid_any",
@@ -502,24 +786,63 @@ measures = [
     group_by = ["ethnicity6","cancer"],
   ),
 
-
-    ## Any opioid - ethnicity6 by age and sex
+  ## Long acting opioid - ethnicity6 
   Measure(
-    id = "opioid_eth6_agesex_any",
-    numerator = "opioid_any",
+    id = "long_opioid_eth6_any",
+    numerator = "long_opioid_any",
     denominator = "population",
-    group_by = ["ethnicity6","age_cat","sex","cancer"],
+    group_by = ["ethnicity6","cancer"],
   ),
 
-  ## High dose opioid - ethnicity6 by age and sex
+  ## Oral opioid -  eth6 
   Measure(
-    id = "hi_opioid_eth6_agesex_any",
-    numerator = "hi_opioid_any",
+    id = "oral_opioid_eth6_any",
+    numerator = "oral_opioid_any",
     denominator = "population",
-    group_by = ["ethnicity6","age_cat","sex","cancer"],
+    group_by = ["ethnicity6","cancer"],
   ),
 
-  # Region ####
+  ## Buccal opioid -  eth6 
+  Measure(
+    id = "buc_opioid_eth6_any",
+    numerator = "buc_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","cancer"],
+  ),
+
+  ## Rectal opioid -  eth6 
+  Measure(
+    id = "rec_opioid_eth6_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","cancer"],
+  ),
+
+  ## Transdermal opioid -  eth6 
+  Measure(
+    id = "trans_opioid_eth6_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","cancer"],
+  ),
+
+  ## Parenteral opioid -  eth6 
+  Measure(
+    id = "par_opioid_eth6_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","cancer"],
+  ),
+
+  ## Inhaled opioid -  eth6 
+  Measure(
+    id = "inh_opioid_eth6_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["ethnicity6","cancer"],
+  ),
+
+  ### Region ####
   ## Any opioid - region
   Measure(
     id = "opioid_reg_any",
@@ -535,25 +858,64 @@ measures = [
     denominator = "population",
     group_by = ["region","cancer"],
   ),
-
-    # Region ####
-  ## Any opioid - region by age and sex
+  
+  ## Long acting opioid - region 
   Measure(
-    id = "opioid_reg_agesex_any",
-    numerator = "opioid_any",
+    id = "long_opioid_reg_any",
+    numerator = "long_opioid_any",
     denominator = "population",
-    group_by = ["region","age_cat","sex","cancer"],
+    group_by = ["region","cancer"],
+  ),
+  
+  ## Oral opioid -  region 
+  Measure(
+    id = "oral_opioid_reg_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["region","cancer"],
   ),
 
-  ## High dose opioid - region by age and sex
+  ## Buccal opioid -  region 
   Measure(
-    id = "hi_opioid_reg_agesex_any",
-    numerator = "hi_opioid_any",
+    id = "buc_opioid_reg_any",
+    numerator = "buc_opioid_any",
     denominator = "population",
-    group_by = ["region","age_cat","sex","cancer"],
+    group_by = ["region","cancer"],
   ),
 
-  # IMD deciles
+  ## Rectal opioid -  region 
+  Measure(
+    id = "rec_opioid_reg_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["region","cancer"],
+  ),
+
+  ## Transdermal opioid -  region 
+  Measure(
+    id = "trans_opioid_reg_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["region","cancer"],
+  ),
+
+  ## Parenteral opioid -  region 
+  Measure(
+    id = "par_opioid_reg_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["region","cancer"],
+  ),
+
+  ## Inhaled opioid -  region 
+  Measure(
+    id = "inh_opioid_reg_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["region","cancer"],
+  ),
+
+  ### IMD deciles ###
   ## Any opioid - imd
   Measure(
     id = "opioid_imd_any",
@@ -569,26 +931,66 @@ measures = [
     denominator = "population",
     group_by = ["imdq10","cancer"],
   ),
-
-  # IMD deciles
-  ## Any opioid - imd by age and sex
+  
+  ## High dose opioid - imd
   Measure(
-    id = "opioid_imd_agesex_any",
-    numerator = "opioid_any",
+    id = "long_opioid_imd_any",
+    numerator = "long_opioid_any",
     denominator = "population",
-    group_by = ["imdq10","age_cat","sex","cancer"],
+    group_by = ["imdq10","cancer"],
+
+  ), 
+  
+  ## Oral opioid -  imd 
+  Measure(
+    id = "oral_opioid_imd_any",
+    numerator = "oral_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","cancer"],
   ),
 
-  ## High dose opioid - imd by age and sex
+  ## Buccal opioid -  imd 
   Measure(
-    id = "hi_opioid_imd_agesex_any",
-    numerator = "hi_opioid_any",
+    id = "buc_opioid_imd_any",
+    numerator = "buc_opioid_any",
     denominator = "population",
-    group_by = ["imdq10","age_cat","sex","cancer"],
+    group_by = ["imdq10","cancer"],
   ),
 
-  #  Monthly rates - initiation #
-  ## Any opioid 
+  ## Rectal opioid -  imd 
+  Measure(
+    id = "rec_opioid_imd_any",
+    numerator = "rec_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","cancer"],
+  ),
+
+  ## Transdermal opioid -  imd 
+  Measure(
+    id = "trans_opioid_imd_any",
+    numerator = "trans_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","cancer"],
+  ),
+
+  ## Parenteral opioid -  imd 
+  Measure(
+    id = "par_opioid_imd_any",
+    numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","cancer"],
+  ),
+
+  ## Inhaled opioid -  imd 
+  Measure(
+    id = "inh_opioid_imd_any",
+    numerator = "inh_opioid_any",
+    denominator = "population",
+    group_by = ["imdq10","cancer"],
+  ),
+
+  ###  NEW PRESCRIBING ###
+  ## Any new opioid
   Measure(
     id = "opioid_all_new",
     numerator = "opioid_new",
@@ -596,17 +998,7 @@ measures = [
     group_by = ["cancer"],
   ),
   
-  # Age and sex #
-  ## new opioid
-  Measure(
-    id = "opioid_agesex_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["age_cat","sex","cancer"],
-  ),
-
-    # Age and sex #
-  ## new opioid
+  ### Age ###
   Measure(
     id = "opioid_age_new",
     numerator = "opioid_new",
@@ -614,8 +1006,7 @@ measures = [
     group_by = ["age_cat","cancer"],
   ),
 
-    # Age and sex #
-  ## new opioid
+  ### Sex ###
   Measure(
     id = "opioid_sex_new",
     numerator = "opioid_new",
@@ -623,8 +1014,7 @@ measures = [
     group_by = ["sex","cancer"],
   ),
   
-  # Carehomes #
-  ## new opioid - carehomes
+  ### Carehomes ###
   Measure(
     id = "opioid_care_new",
     numerator = "opioid_new",
@@ -632,26 +1022,7 @@ measures = [
     group_by = ["carehome","cancer"],
   ),
   
-  # Sickle cell #
-  ## new opioid - sickle cell
-  Measure(
-    id = "opioid_scd_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["scd","cancer"],
-  ),
-
-  #  Ethnicity #
-  ## new opioid - ethnicity16
-  Measure(
-    id = "opioid_eth16_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["ethnicity16","cancer"],
-  ),
-
-    #  Ethnicity #
-  ## new opioid - ethnicity6
+  ### Ethnicity ###
   Measure(
     id = "opioid_eth6_new",
     numerator = "opioid_new",
@@ -659,33 +1030,15 @@ measures = [
     group_by = ["ethnicity6","cancer"],
   ),
 
-  ## new opioid - ethnicity6 by gae and sex
-  Measure(
-    id = "opioid_eth6_agesex_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["ethnicity6","age_cat","sex","cancer"],
-  ),
-
-  # Region #
-  ## new opioid - region
+  ### Region ###
   Measure(
     id = "opioid_reg_new",
     numerator = "opioid_new",
     denominator = "opioid_naive",
     group_by = ["region","cancer"],
   ),
-
-    ## new opioid - region
-  Measure(
-    id = "opioid_reg_agesex_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["region","age_cat","sex","cancer"],
-  ),
   
-  # IMD decile #
-  ## new opioid - imd
+  ### IMD decile ###
   Measure(
     id = "opioid_imd_new",
     numerator = "opioid_new",
@@ -693,16 +1046,8 @@ measures = [
     group_by = ["imdq10","cancer"],
   ),
 
-    ## new opioid - imd by age and sex
-  Measure(
-    id = "opioid_imd_agesex_new",
-    numerator = "opioid_new",
-    denominator = "opioid_naive",
-    group_by = ["imdq10","age_cat","sex","cancer"],
-  ),
-
-  #####Sensitivity - without care home
-  # any opioid
+  ### Sensitivity - by age, not in care home
+  # Any opioid prescribing
     Measure(
     id = "opioid_age_care_any",
     numerator = "opioid_any",
@@ -710,7 +1055,7 @@ measures = [
     group_by = ["age_cat","carehome"],
   ),
   
-  # new opioid
+  # New opioid prescribing
     Measure(
     id = "opioid_age_care_new",
     numerator = "opioid_new",

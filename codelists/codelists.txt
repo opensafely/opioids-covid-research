@@ -11,3 +11,4 @@ opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse
 opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd/55a533f9
 opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd/3c95c0c4
 opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f
+opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce

@@ -50,8 +50,7 @@ combined <- rbind(
   f(sex, "Sex"),
   f(region, "Region"),
   f(imdq10, "IMD decile"),
-  f(ethnicity6, "Ethnicity")
-  ) 
+  f(age_cat, "Age")  ) 
 
 ########################################################
 # Rounding and redaction
