@@ -74,8 +74,8 @@ study = StudyDefinition(
 
   age_cat = patients.categorised_as(
     {"0": "DEFAULT",
-      "1": """age < 13""",
-      "2": """age >= 13""",
+      "1": """age < 12""",
+      "2": """age >= 12""",
     },
 
     return_expectations = {

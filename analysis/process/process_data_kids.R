@@ -50,8 +50,8 @@ prevalence <- bind_rows(
     # Age
     age_cat = fct_case_when(
       age_cat == 0 ~ "Missing",
-      age_cat == 1 ~ "<13 y",
-      age_cat == 2 ~ "13+ y"
+      age_cat == 1 ~ "<12 y",
+      age_cat == 2 ~ "12+ y"
       ),
          
     # IMD deciles
@@ -145,8 +145,8 @@ for_tables <-
     # Age
     age_cat = fct_case_when(
       age_cat == 0 ~ "Missing",
-      age_cat == 1 ~ "<13 y",
-      age_cat == 2 ~ "14+ y",
+      age_cat == 1 ~ "<12 y",
+      age_cat == 2 ~ "12+ y",
       TRUE ~ NA_character_
     ),
     
