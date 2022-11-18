@@ -38,8 +38,7 @@ prev_ts <- read_csv(here::here("output", "joined", "final_ts_prev.csv"),
                       date = col_date(format = "%Y-%m-%d"))) %>%
    dplyr::select(c("cancer", "group", "label", "date", "population", "opioid_any",
                   "hi_opioid_any", "long_opioid_any", "oral_opioid_any",
-                  "trans_opioid_any", "par_opioid_any", "buc_opioid_any",
-                  "rec_opioid_any", "inh_opioid_any")) 
+                  "trans_opioid_any", "par_opioid_any", "buc_opioid_any")) 
 
 new_ts <- read_csv(here::here("output", "joined", "final_ts_new.csv"),
   col_types = cols(
