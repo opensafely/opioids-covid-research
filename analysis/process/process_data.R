@@ -107,7 +107,7 @@ par <- bind_rows(
 prevalence <- Reduce(function(x,y) 
   merge(x, y, by=c("date", "population", "cancer", "age_cat", "sex", "region", 
                "ethnicity6", "carehome", "imdq10"), all=TRUE) ,
-          list(any, oral, par, trans, hi, long, inh, rec, buc)) %>%
+          list(any, oral, par, trans, hi, long, buc)) %>%
   mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"),     
     # Sex
     sex = fct_case_when(
@@ -159,10 +159,11 @@ prevalence <- Reduce(function(x,y)
     par_opioid_any = as.integer(par_opioid_any),
     buc_opioid_any = as.integer(buc_opioid_any),
     
+    label = coalesce(region, imdq10, ethnicity6, carehome, sex, age_cat),
     label = ifelse(is.na(label), "Total", 
                    ifelse(is.na(label) &  sex == "Male", "Male",
                           ifelse(is.na(label) & sex == "Female", "Female", label))),
-    label = coalesce(region, imdq10, ethnicity6, carehome, sex, age_cat),
+    
     group = ifelse(!is.na(region), "Region",
               ifelse(!is.na(imdq10), "IMD decile",
                 ifelse(!is.na(ethnicity6), "Ethnicity6",
