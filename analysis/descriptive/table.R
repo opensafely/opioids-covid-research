@@ -116,9 +116,12 @@ admin <- rbind(
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%
   mutate(no_people = as.numeric(no_people),
-         tot = as.numeric(count(for_tables)),
-         prevalence_per_1000 = no_people / tot*1000,
-               group = "Full population")
+         tot = as.numeric(count(for_tables))) %>%
+  mutate_at(c(vars(c("no_people", "tot"))), redact) %>%
+  mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
+  mutate(prevalence_per_1000 = no_people / tot*1000,
+               group = "Full population") 
+  
 
 # in care home - breakdown of admin route
 admin.care <- rbind(
@@ -133,8 +136,10 @@ admin.care <- rbind(
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%
   mutate(no_people = as.numeric(no_people),
-         tot = as.numeric(count(subset(for_tables, carehome == "Yes"))),
-         prevalence_per_1000 = no_people / tot*1000,
+         tot = as.numeric(count(subset(for_tables, carehome == "Yes")))) %>%
+  mutate_at(c(vars(c("no_people", "tot"))), redact) %>%
+  mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
+  mutate(prevalence_per_1000 = no_people / tot*1000,
           group = "Care home")
 
 admin.both <- rbind(admin, admin.care)
