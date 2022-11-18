@@ -158,8 +158,11 @@ prevalence <- Reduce(function(x,y)
     trans_opioid_any = as.integer(trans_opioid_any),
     par_opioid_any = as.integer(par_opioid_any),
     buc_opioid_any = as.integer(buc_opioid_any),
-
-    label = coalesce(region, imdq10, ethnicity6,  carehome, sex, age_cat),
+    
+    label = ifelse(is.na(label), "Total", 
+                   ifelse(is.na(label) &  sex == "Male", "Male",
+                          ifelse(is.na(label) & sex == "Female", "Female", label))),
+    label = coalesce(region, imdq10, ethnicity6, carehome, sex, age_cat),
     group = ifelse(!is.na(region), "Region",
               ifelse(!is.na(imdq10), "IMD decile",
                 ifelse(!is.na(ethnicity6), "Ethnicity6",
@@ -231,7 +234,7 @@ incidence <- bind_rows(
     opioid_naive = as.integer(opioid_naive),
     
     label = coalesce(region, imdq10, ethnicity6, carehome, age_cat),
-    label = ifelse(is.na(label) & is.na(sex), "Total", 
+    label = ifelse(is.na(label), "Total", 
                    ifelse(is.na(label) &  sex == "Male", "Male",
                           ifelse(is.na(label) & sex == "Female", "Female", label))),
     group = ifelse(!is.na(region), "Region",
