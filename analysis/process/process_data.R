@@ -36,7 +36,7 @@ source(here("analysis", "lib", "custom_functions.R"))
 any <- bind_rows(
     read_csv(here::here("output", "data", "measure_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_reg_any.csv")), list(region = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_opioid_care_any.csv")), 
     replace_na(read_csv(here::here("output", "data", "measure_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -46,7 +46,7 @@ any <- bind_rows(
 hi <- bind_rows(
     read_csv(here::here("output", "data", "measure_hi_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_reg_any.csv")), list(region = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_hi_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_hi_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -56,7 +56,7 @@ hi <- bind_rows(
 long <- bind_rows(
     read_csv(here::here("output", "data", "measure_long_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_long_opioid_reg_any.csv")), list(region = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_long_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_long_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_long_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_long_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -65,8 +65,8 @@ long <- bind_rows(
   
 oral <- bind_rows(
     read_csv(here::here("output", "data", "measure_oral_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_reg_any.csv")), list(region = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_oral_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_oral_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -75,8 +75,8 @@ oral <- bind_rows(
 
 buc <- bind_rows(
     read_csv(here::here("output", "data", "measure_buc_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_reg_any.csv")), list(region = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_buc_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_buc_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -85,8 +85,8 @@ buc <- bind_rows(
 
 trans <- bind_rows(
     read_csv(here::here("output", "data", "measure_trans_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_reg_any.csv")), list(region = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_trans_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_trans_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -95,8 +95,8 @@ trans <- bind_rows(
 
 par <- bind_rows(
     read_csv(here::here("output", "data", "measure_par_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_imd_any.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_reg_any.csv")), list(region = "Missing")), 
+    replace_na(read_csv(here::here("output", "data", "measure_par_opioid_imd_any.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_par_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_par_opioid_care_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_par_opioid_sex_any.csv")), list(sex = "Missing")),
@@ -105,10 +105,11 @@ par <- bind_rows(
 
 
 prevalence <- Reduce(function(x,y) 
-  merge(x, y, by=c("date", "population", "cancer", "age_cat", "sex", "region", 
-               "ethnicity6", "carehome", "imdq10"), all=TRUE) ,
+  merge(x, y, by = c("date", "population", "cancer", "age_cat", "sex", "region", 
+               "ethnicity6", "carehome", "imdq10"), all = TRUE) ,
           list(any, oral, par, trans, hi, long, buc)) %>%
-  mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"),     
+  mutate(date = as.Date(as.character(date), format = "%Y-%m-%d"), 
+         
     # Sex
     sex = fct_case_when(
      sex == "F" ~ "Female",
@@ -160,10 +161,7 @@ prevalence <- Reduce(function(x,y)
     buc_opioid_any = as.integer(buc_opioid_any),
     
     label = coalesce(region, imdq10, ethnicity6, carehome, sex, age_cat),
-    label = ifelse(is.na(label), "Total", 
-                   ifelse(is.na(label) &  sex == "Male", "Male",
-                          ifelse(is.na(label) & sex == "Female", "Female", label))),
-    
+    label = ifelse(is.na(label), "Total", label),
     group = ifelse(!is.na(region), "Region",
               ifelse(!is.na(imdq10), "IMD decile",
                 ifelse(!is.na(ethnicity6), "Ethnicity6",
@@ -182,7 +180,7 @@ prevalence <- Reduce(function(x,y)
 incidence <- bind_rows(
     read_csv(here::here("output", "data", "measure_opioid_all_new.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_reg_new.csv")), list(region = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_new.csv")), list(imd = "Missing")),
+    replace_na(read_csv(here::here("output", "data", "measure_opioid_imd_new.csv")), list(imdq10 = "Missing")),
     replace_na(read_csv(here::here("output", "data", "measure_opioid_eth6_new.csv")), list(ethnicity6 = "Missing")),
     read_csv(here::here("output", "data", "measure_opioid_care_new.csv")),
     read_csv(here::here("output", "data", "measure_opioid_age_new.csv")),
@@ -235,9 +233,7 @@ incidence <- bind_rows(
     opioid_naive = as.integer(opioid_naive),
     
     label = coalesce(region, imdq10, ethnicity6, carehome, age_cat),
-    label = ifelse(is.na(label), "Total", 
-                   ifelse(is.na(label) &  sex == "Male", "Male",
-                          ifelse(is.na(label) & sex == "Female", "Female", label))),
+    label = ifelse(is.na(label), "Total", label),
     group = ifelse(!is.na(region), "Region",
                    ifelse(!is.na(imdq10), "IMD decile",
                                  ifelse(!is.na(ethnicity6), "Ethnicity6",
