@@ -104,7 +104,6 @@ fullpop <- combined %>%
        prevalence_per_1000 = p_prev)
 
 # Full population - breakdown of admin route
-
 admin <- rbind(
   cbind(sum(for_tables$opioid_any), "Any"),
   cbind(sum(for_tables$hi_opioid_any), "High dose"),
@@ -117,8 +116,28 @@ admin <- rbind(
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%
   mutate(no_people = as.numeric(no_people),
-         tot = as.numeric(count(for_tables))) %>%
-       mutate( prevalence_per_1000 = no_people/tot*1000)
+         tot = as.numeric(count(for_tables)),
+         prevalence_per_1000 = no_people / tot*1000,
+               group = "Full population")
+
+# in care home - breakdown of admin route
+admin.care <- rbind(
+  cbind(sum(subset(for_tables, carehome == "Yes")$opioid_any), "Any"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$hi_opioid_any), "High dose"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$long_opioid_any), "Long acting"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$oral_opioid_any), "Oral"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$par_opioid_any), "Parenteral"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$trans_opioid_any), "Transdermal"),
+  cbind(sum(subset(for_tables, carehome == "Yes")$buc_opioid_any), "Buccal")
+) %>%
+  as.data.frame() %>%
+  rename(no_people = V1, formulation = V2) %>%
+  mutate(no_people = as.numeric(no_people),
+         tot = as.numeric(count(subset(for_tables, carehome == "Yes"))),
+         prevalence_per_1000 = no_people / tot*1000,
+          group = "Care home")
+
+admin.both <- rbind(admin, admin.care)
 
 
 
@@ -134,9 +153,8 @@ bycancer <- bycancer %>% arrange(group, label)
 write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"),
           row.names = FALSE)
 
-write.csv(admin, here::here("output", "tables", "table_by_admin_route.csv"),
+write.csv(admin.both, here::here("output", "tables", "table_by_admin_route.csv"),
           row.names = FALSE)
-
 
 
 
