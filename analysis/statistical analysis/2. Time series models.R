@@ -41,29 +41,30 @@ combined <- read_csv(here::here("output", "released_outputs", "ts_combined_full.
                         label = col_character(),
                         date = col_date(format="%Y-%m-%d")))
 
-## Create variables to estimate change during
-##    lockdown and recovery periods
-data1 <- ts(subset(combined, group == "Total")$prevalence_per_1000, 
-            start = c(2018,01,01), frequency = 12)
-
-
+## Create ITS variables
+its.vars <- dplyr::select(subset(combined, group == "Total"), c("date")) %>%
+            mutate(mar20 = ifelse(date == as.Date("2020-03-01"), 1, 0),
+                    apr20 = ifelse(date == as.Date("2020-04-01"), 1, 0),
+                    may20 = ifelse(date == as.Date("2020-05-01"), 1, 0),
+                    step = ifelse(date < as.Date("2020-03-01"), 0, 1),
+                    step2 = ifelse(date < as.Date("2021-04-01"), 0, 1),
+                    month = as.factor(month(date)),
+                    time = seq(1, by = 1, length.out = nrow(subset(combined, group == "Total"))),
+                    slope = ifelse(date < as.Date("2020-03-01"), 0, 
+                                  time - sum(step == 0)),
+                    slope2 = ifelse(date < as.Date("2021-04-01"), 0, 
+                                   time - sum(step2 == 0)))
+                                
 combined.its <- combined %>% arrange(group, label, date) %>%
-  mutate(time = rep(1:51, 40),
-         mar20 = ifelse(date == as.Date("2020-03-01"), 1, 0),
-         apr20 = ifelse(date == as.Date("2020-04-01"), 1, 0),
-         may20 = ifelse(date == as.Date("2020-05-01"), 1, 0),
-         step = ifelse(date < as.Date("2020-03-01"), 0, 1),
-         step2 = ifelse(date < as.Date("2021-04-01"), 0, 1),
-         slope = ifelse(date < as.Date("2020-03-01"), 0, time-26),
-         slope2 = ifelse(date < as.Date("2021-04-01"), 0, time-39), 
-         month = as.factor(month(date))
-        )
+                  merge(its.vars, by = "date")
 
 write.csv(combined.its, file = here::here("output", "released_outputs", "ts_combined_full.csv"),
                 row.names = FALSE)
 
-# Functions
+### Functions
 
+# Extracting coefficients and 95%CIs with standard errors 
+#    adjusted for autocorrelation
 coef <- function(mod){
   data.frame(est = exp(mod$coef), 
         exp(coefci(mod, vcov = NeweyWest(mod, lag = 2, prewhite = F)))) %>%
@@ -72,15 +73,16 @@ coef <- function(mod){
            uci = round(uci, 3))
 }
 
+# Calculating predicted values
 pred.val <- function(mod, group, pop, var, obs){
   pred <- predict(mod, se.fit = TRUE, interval = "confidence")
   pred2 <- data.frame(pred_n = exp(pred$fit), 
-             lci_n = exp(pred$fit-1.96*pred$se.fit),
-             uci_n = exp(pred$fit+1.96*pred$se.fit),
+             lci_n = exp(pred$fit - 1.96 * pred$se.fit),
+             uci_n = exp(pred$fit + 1.96 * pred$se.fit),
              subset(combined, group == group)) %>% 
-  mutate(pred = pred_n/!!enquo(pop)*1000, 
-         pred_lci = lci_n/ !!enquo(pop)*1000,
-         pred_uci = uci_n/ !!enquo(pop) * 1000, 
+  mutate(pred = pred_n / !!enquo(pop) * 1000, 
+         pred_lci = lci_n / !!enquo(pop) * 1000,
+         pred_uci = uci_n / !!enquo(pop) * 1000, 
          var = var) %>%
   rename(obs = !!enquo(obs))%>%
   dplyr::select(c(date, pred, obs, var, pred_lci, pred_uci, period))
@@ -109,7 +111,7 @@ summary(mod2)
   
 AIC(mod1)
 AIC(mod2)
-lrtest(mod1,mod2)
+lrtest(mod1, mod2)
 
 ## Check autocorrelation of residuals
 Box.test(mod2$residuals, type = 'Ljung-Box')
@@ -146,7 +148,7 @@ summary(mod2)
 
 AIC(mod1)
 AIC(mod2)
-lrtest(mod1,mod2)
+lrtest(mod1, mod2)
 
 ## Check autocorrelation of residuals
 Box.test(mod1$residuals, type = 'Ljung-Box')

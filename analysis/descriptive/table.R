@@ -112,9 +112,7 @@ admin <- rbind(
   cbind(sum(for_tables$oral_opioid_any), "Oral"),
   cbind(sum(for_tables$par_opioid_any), "Parenteral"),
   cbind(sum(for_tables$trans_opioid_any), "Transdermal"),
-  cbind(sum(for_tables$buc_opioid_any), "Buccal"),
-  cbind(sum(for_tables$inh_opioid_any), "Inhaled"),
-  cbind(sum(for_tables$rec_opioid_any), "Rectal")
+  cbind(sum(for_tables$buc_opioid_any), "Buccal")
   ) %>%
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%

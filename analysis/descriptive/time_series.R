@@ -71,9 +71,7 @@ prev_full <- prev_ts %>%
             oral_opioid_any = sum(oral_opioid_any),
             trans_opioid_any = sum(trans_opioid_any),
             par_opioid_any = sum(par_opioid_any),
-            rec_opioid_any = sum(rec_opioid_any),
             buc_opioid_any = sum(buc_opioid_any),
-            inh_opioid_any = sum(inh_opioid_any),
             population = sum(population)) %>%
     # Suppression and rounding 
   mutate_at(c(vars(c("population", contains("opioid")))), redact) %>%
@@ -86,10 +84,8 @@ prev_full <- prev_ts %>%
     prev_oral_rate = oral_opioid_any / population * 1000,
     prev_trans_rate = trans_opioid_any / population * 1000,
     prev_par_rate = par_opioid_any / population * 1000,
-    prev_rec_rate = rec_opioid_any / population * 1000,
     prev_buc_rate = buc_opioid_any / population * 1000,
-    prev_inh_rate = inh_opioid_any / population * 1000
-    
+
   )   %>%
     rename(any_opioid = opioid_any,
                high_dose_opioid = hi_opioid_any,
@@ -98,15 +94,14 @@ prev_full <- prev_ts %>%
                transdermal_opioid = trans_opioid_any,
                parenteral_opioid = par_opioid_any,
               buccal_opioid = buc_opioid_any,
-              rectal_opioid = rec_opioid_any,
-              inhaled_opioid = inh_opioid_any,
                total_population = population,
                prevalence_per_1000 = prev_rate,
                high_dose_prevalence_per_1000 = prev_hi_rate,
                long_act_prevalence_per_1000 = prev_long_rate,
                oral_prevalence_per_1000 = prev_oral_rate,
                parenteral_prevalence_per_1000 = prev_par_rate,
-               transdermal_prevalence_per_1000 = prev_trans_rate)
+               transdermal_prevalence_per_1000 = prev_trans_rate, 
+               buccal_prevalence_per_1000 = prev_buc_rate)
 
 
 ## Create dataset for any opioid prescribing in people without cancer only
@@ -123,9 +118,7 @@ prev_nocancer <- prev_ts %>%
     prev_oral_rate = oral_opioid_any / population * 1000,
     prev_trans_rate = trans_opioid_any / population * 1000,
     prev_par_rate = par_opioid_any / population * 1000,
-    prev_rec_rate = rec_opioid_any / population * 1000,
-    prev_buc_rate = buc_opioid_any / population * 1000,
-    prev_inh_rate = inh_opioid_any / population * 1000
+    prev_buc_rate = buc_opioid_any / population * 1000
     
   )   %>%
   rename(any_opioid = opioid_any,
@@ -135,8 +128,6 @@ prev_nocancer <- prev_ts %>%
          transdermal_opioid = trans_opioid_any,
          parenteral_opioid = par_opioid_any,
          buccal_opioid = buc_opioid_any,
-         rectal_opioid = rec_opioid_any,
-         inhaled_opioid = inh_opioid_any,
          total_population = population,
          prevalence_per_1000 = prev_rate,
          high_dose_prevalence_per_1000 = prev_hi_rate,
@@ -144,9 +135,7 @@ prev_nocancer <- prev_ts %>%
          oral_prevalence_per_1000 = prev_oral_rate,
          parenteral_prevalence_per_1000 = prev_par_rate,
          transdermal_prevalence_per_1000 = prev_trans_rate,
-         rectal_prevalence_per_1000 = prev_rec_rate,
-         buccal_prevalence_per_1000 = prev_buc_rate,
-         inhaled_prevalence_per_1000 = prev_inh_rate)
+         buccal_prevalence_per_1000 = prev_buc_rate)
 
 print(dim(prev_full))
 print(dim(prev_nocancer))

@@ -93,26 +93,6 @@ trans <- bind_rows(
     read_csv(here::here("output", "data", "measure_trans_opioid_age_any.csv")))  %>%
     dplyr::select(!c(value))
 
-rec <- bind_rows(
-    read_csv(here::here("output", "data", "measure_rec_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_imd_any.csv")), list(imd = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
-    read_csv(here::here("output", "data", "measure_rec_opioid_care_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_rec_opioid_sex_any.csv")), list(sex = "Missing")),
-    read_csv(here::here("output", "data", "measure_rec_opioid_age_any.csv"))) %>%
-    dplyr::select(!c(value))
-
-inh<- bind_rows(
-    read_csv(here::here("output", "data", "measure_inh_opioid_all_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_reg_any.csv")), list(regionion = "Missing")), 
-    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_imd_any.csv")), list(imd = "Missing")),
-    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_eth6_any.csv")), list(ethnicity6 = "Missing")),
-    read_csv(here::here("output", "data", "measure_inh_opioid_care_any.csv")),
-    replace_na(read_csv(here::here("output", "data", "measure_inh_opioid_sex_any.csv")), list(sex = "Missing")),
-    read_csv(here::here("output", "data", "measure_inh_opioid_age_any.csv"))) %>%
-    dplyr::select(!c(value))
-
 par <- bind_rows(
     read_csv(here::here("output", "data", "measure_par_opioid_all_any.csv")),
     replace_na(read_csv(here::here("output", "data", "measure_par_opioid_reg_any.csv")), list(regionion = "Missing")), 
@@ -178,10 +158,7 @@ prevalence <- Reduce(function(x,y)
     trans_opioid_any = as.integer(trans_opioid_any),
     par_opioid_any = as.integer(par_opioid_any),
     buc_opioid_any = as.integer(buc_opioid_any),
-    inh_opioid_any = as.integer(inh_opioid_any),
-    rec_opioid_any = as.integer(rec_opioid_any),
-    
-  
+
     label = coalesce(region, imdq10, ethnicity6,  carehome, sex, age_cat),
     group = ifelse(!is.na(region), "Region",
               ifelse(!is.na(imdq10), "IMD decile",

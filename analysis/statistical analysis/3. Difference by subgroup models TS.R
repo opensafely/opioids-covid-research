@@ -249,7 +249,7 @@ eth_pred <- pred.val(eth)
 
 #### By region ####
 
-region <- subset(combined.its, group == "Region" & !(label %in% c("Missing",NA))) %>% arrange(label, date)
+region <- subset(combined.its, group == "Region" & !(label %in% c("Missing", NA))) %>% arrange(label, date)
 
 # Run NegBin models, extract coefficients and 
 #    calculate predicted values
