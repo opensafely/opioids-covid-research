@@ -65,17 +65,6 @@ actions:
       highly_sensitive:
         cohort: output/in*.csv
 
-  generate_study_population_kids:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition_kids
-      --index-date-range "2018-01-01 to 2022-03-01 by month" 
-      --output-dir=output/kids
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/kids/input_*.csv
-
-
   ## Ethnicity      
   generate_ethnicity_cohort:
     run: >
@@ -102,17 +91,6 @@ actions:
       highly_sensitive:
         cohort: output/data/input_*.csv 
 
-  join_cohorts_kids:
-    run: >
-      cohort-joiner:v0.0.48
-        --lhs output/kids/input_*.csv
-        --rhs output/input_ethnicity.csv
-        --output-dir output/kids/data
-    needs: [generate_study_population_kids, generate_ethnicity_cohort]
-    outputs:
-      highly_sensitive:
-        cohort: output/kids/data/input_*.csv
-
   ## Generate measures
   generate_measures:
     run: >
@@ -124,17 +102,6 @@ actions:
       moderately_sensitive:
         measure_csv: output/data/measure_*.csv
 
-  generate_measures_kids:
-    run: >
-      cohortextractor:latest generate_measures
-        --study-definition study_definition_kids
-        --output-dir output/kids/data
-    needs: [join_cohorts_kids]
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/kids/data/measure_*.csv
-
-
   ## Process data
   process_data:
    run: r:latest analysis/process/process_data.R
@@ -142,17 +109,9 @@ actions:
    outputs:
       moderately_sensitive:
         measure_csv: output/joined/final_*.csv
-  
-  process_data_kids:
-   run: r:latest analysis/process/process_data_kids.R
-   needs: [generate_measures_kids, join_cohorts_kids]
-   outputs:
-      moderately_sensitive:
-        measure_csv: output/kids/joined/final_*.csv
 
 
   # Results ---
-
 
   ## Time series
   timeseries:
@@ -178,29 +137,5 @@ actions:
       moderately_sensitive:
         table: output/tables/table_*.csv
 
-  ## Time series
-  timeseries_kids:
-    run: r:latest analysis/descriptive/time_series_kids.R
-    needs: [process_data_kids]
-    outputs:
-      moderately_sensitive:
-        table: output/kids/time series/ts_*.csv  
   
-  ## Time series graphs
-  #graphs_kids:
-  #  run: r:latest analysis/descriptive/graphs_kids.R
-  #  needs: [timeseries_kids]
-  #  outputs:
-  #    moderately_sensitive:
-  #      plot: output/kids/time series/graphs/graph*.png
-
-  ## Table 
-  table_kids:
-    run: r:latest analysis/descriptive/table_kids.R
-    needs: [process_data_kids]
-    outputs:
-      moderately_sensitive:
-        table: output/kids/tables/table_*.csv
-      
-
  
