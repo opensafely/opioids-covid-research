@@ -72,7 +72,7 @@ rounding <- function(vars) {
 combined <- rbind(
   left_join(subset(prev_ts, age_stand != "Missing" & !(group %in% c("Age", "Sex"))), 
             ons_pop_stand,
-            by = c("age_stand", "sex")),
+            by = c("age_stand", "sex"))
   ) 
 
 # FUll population - aggregate over cancer/no cancer 
