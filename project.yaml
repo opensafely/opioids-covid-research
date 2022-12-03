@@ -102,21 +102,29 @@ actions:
       moderately_sensitive:
         measure_csv: output/data/measure_*.csv
 
-  ## Process data
-  process_data:
-   run: r:latest analysis/process/process_data.R
+  ## Process data - time series
+  process_data_ts:
+   run: r:latest analysis/process/process_data_ts.R
    needs: [generate_measures, join_cohorts]
    outputs:
       moderately_sensitive:
         measure_csv: output/joined/final_*.csv
+
+  ## Process data - table
+  process_data_table:
+   run: r:latest analysis/process/process_data_table.R
+   needs: [generate_measures, join_cohorts]
+   outputs:
+      moderately_sensitive:
+        measure_csv: output/joined/final*.csv
 
 
   # Results ---
 
   ## Time series
   timeseries:
-    run: r:latest analysis/descriptive/time_series.R
-    needs: [process_data]
+    run: r:latest analysis/descriptive/time_series_stand.R
+    needs: [process_data_ts]
     outputs:
       moderately_sensitive:
         table: output/time series/ts_*.csv  
@@ -131,8 +139,8 @@ actions:
 
   ## Table 
   table:
-    run: r:latest analysis/descriptive/table.R
-    needs: [process_data]
+    run: r:latest analysis/descriptive/table_stand.R
+    needs: [process_data_table]
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv
