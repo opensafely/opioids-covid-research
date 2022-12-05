@@ -68,12 +68,15 @@ rounding <- function(vars) {
   round(vars / 7) * 7
 }
 
+# Prepare for standarisation
+prev_ts <- prev_ts %>% 
+  mutate(age_stand = ifelse(is.na(age_stand) & group == "Age", "Total", age_stand),
+         sex = ifelse(is.na(sex) & group == "Sex", "Total", sex))
+
 # Combine with UK population
-combined <- rbind(
-  left_join(subset(prev_ts, age_stand != "Missing" & !(group %in% c("Age", "Sex"))), 
+combined <- left_join(prev_ts,
             ons_pop_stand,
             by = c("age_stand", "sex"))
-  ) 
 
 # FUll population - aggregate over cancer/no cancer 
 prev_full <- combined %>%
@@ -200,18 +203,16 @@ write.csv(prev_nocancer_stand, file = here::here("output", "time series", "ts_pr
 ## Create dataset for new opioid prescribing in
 ##  full population (combine cancer/no cancer)
 
+
+# Prepare for standarisation
+new_ts <- new_ts %>% 
+  mutate(age_stand = ifelse(is.na(age_stand) & group == "Age", "Total", age_stand),
+         sex = ifelse(is.na(sex) & group == "Sex", "Total", sex))
+
+
 # Combine with UK population
-# Note - need to do age/sex separately as above
-combined <- rbind(
-  left_join(subset(new_ts, age_stand != "Missing" & !(group %in% c("Age", "Sex"))), 
-            ons_pop_stand,
-            by = c("age_stand", "sex")),
-  left_join(subset(new_ts, group == "Age"), 
-            dplyr::select(subset(ons_pop_stand, age_stand == "Total"), !age_stand),
-            by = "sex"),
-  left_join(subset(new_ts, age_stand != c("Missing") & group == "Sex"), 
-            dplyr::select(subset(ons_pop_stand, sex == "Total"), !sex),
-            by = "age_stand")) 
+combined <- left_join(new_ts, ons_pop_stand, by = c("age_stand", "sex"))
+  
 
 # FUll population - aggregate over cancer/no cancer 
 new_full <- combined %>%
@@ -227,7 +228,7 @@ new_stand <- new_full %>%
   summarise(uk_pop = sum(uk_pop), 
             opioid_naive = sum(opioid_naive),
             new_opioid = sum(opioid_new),
-            new_opioid_std = sum((opioid_new / opioid_naive) * uk_pop)) %>%
+            new_opioid_std = sum(new_opioid_std)) %>%
   # Suppression and rounding 
   mutate_at(c(vars(c(contains("opioid")))), redact) %>%
   mutate_at(c(vars(c(contains("opioid")))), rounding) %>%
