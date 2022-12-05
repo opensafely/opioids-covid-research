@@ -265,7 +265,7 @@ study = StudyDefinition(
   ),
   ),
 
-  ### Cancer in past year
+  ### Cancer in past 5 year
   cancer = patients.with_these_clinical_events(
     cancer_codes,
     between = ["first_day_of_month(index_date) - 5 year", "last_day_of_month(index_date)"],
@@ -472,7 +472,7 @@ study = StudyDefinition(
     opioid_last = patients.with_these_medications(
       opioid_codes,
       returning = "binary_flag",
-      between = ["opioid_any_date - 2 year", "opioid_any_date - 1 day"],
+      between = ["first_day_of_month(index_date) - 2 years", "first_day_of_month(index_date) - 1 day"],
       find_first_match_in_period = True,
       return_expectations = {
         "date": {
