@@ -146,4 +146,38 @@ actions:
         table: output/tables/table_*.csv
 
   
+ ##################### TESTING ########################
+
  
+  generate_study_population_test:
+    run: cohortextractor:latest generate_cohort 
+      --study-definition study_definition_test
+      --index-date-range "2020-01-01 to 2022-03-01 by month" 
+      --output-dir=output 
+      --output-format=csv
+    outputs:
+      highly_sensitive:
+        cohort: output/i*.csv
+
+  ## Add ethnicity
+  join_cohorts_test:
+    run: >
+      cohort-joiner:v0.0.48
+        --lhs output/i*.csv
+        --rhs output/input_ethnicity.csv
+        --output-dir output/data
+    needs: [generate_study_population_test, generate_ethnicity_cohort]
+    outputs:
+      highly_sensitive:
+        cohort: output/data/input*.csv 
+        
+  ## Generate measures
+  generate_measures_test:
+    run: >
+      cohortextractor:latest generate_measures 
+        --study-definition study_definition_test
+        --output-dir output/data
+    needs: [join_cohorts_test]
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/data/measure*.csv
