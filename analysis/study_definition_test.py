@@ -151,6 +151,7 @@ measures = [
     id = "opioid_all_any",
     numerator = "opioid_any",
     denominator = "population",
+    group_by = ["population"],
   ),
 
   ## Oral opioid 
@@ -158,6 +159,7 @@ measures = [
     id = "oral_opioid_all_any",
     numerator = "oral_opioid_any",
     denominator = "population",
+    group_by = ["population"],
   ),
 
   ## Parenteral opioid 
@@ -165,5 +167,6 @@ measures = [
     id = "par_opioid_all_any",
     numerator = "par_opioid_any",
     denominator = "population",
+    group_by = ["population"],
   ),
 ]
