@@ -35,19 +35,12 @@ study = StudyDefinition(
   # Define the study population
   population = patients.satisfying(
       """
-      NOT has_died
-      AND
       registered
       AND 
       (sex = "M" OR sex = "F")
       AND
       (age >=18 AND age < 110)
       """,
-    
-      has_died = patients.died_from_any_cause(
-        on_or_before = "first_day_of_month(index_date)",
-        returning = "binary_flag",
-      ),
     
       registered = patients.registered_as_of("index_date"),
       ), 
@@ -72,14 +65,6 @@ study = StudyDefinition(
     ),
 
 
-  ### Cancer in past 5 year
-  cancer = patients.with_these_clinical_events(
-    cancer_codes,
-    between = ["first_day_of_month(index_date) - 5 year", "last_day_of_month(index_date)"],
-    returning = "binary_flag",
-    return_expectations = {"incidence": 0.15}
-  ),
-
   #####################
   ## Medication DM&D ##
   
@@ -88,23 +73,6 @@ study = StudyDefinition(
   ### Any prescribing
   opioid_any = patients.with_these_medications(
     opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15
-      },
-  ),
-
-  ## Oral opioid
-  oral_opioid_any = patients.with_these_medications(
-    oral_opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "binary_flag",
     find_first_match_in_period = True,
@@ -150,14 +118,6 @@ measures = [
   Measure(
     id = "opioid_all_any",
     numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-
-  ## Oral opioid 
-  Measure(
-    id = "oral_opioid_all_any",
-    numerator = "oral_opioid_any",
     denominator = "population",
     group_by = ["population"],
   ),
