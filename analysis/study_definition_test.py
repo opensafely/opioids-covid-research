@@ -37,6 +37,8 @@ study = StudyDefinition(
       """
       registered
       AND 
+      NOT has_died
+      AND
       (sex = "M" OR sex = "F")
       AND
       (age >=18 AND age < 110)
@@ -44,6 +46,11 @@ study = StudyDefinition(
     
       registered = patients.registered_as_of("index_date"),
       ), 
+      
+      has_died = patients.died_from_any_cause(
+            on_or_before = "index_date",
+            returning = "binary_flag",
+      ),
 
  ## Variables ##
 
@@ -70,7 +77,7 @@ study = StudyDefinition(
   
   ## Opioid prescribing
 
-  ### Any prescribing
+  ### Any prescribing - num of people
   opioid_any = patients.with_these_medications(
     opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
@@ -87,7 +94,18 @@ study = StudyDefinition(
       },
   ),
 
-  ## Parenteral opioid
+  ### Any prescribing - num of items
+  opioid_itm = patients.with_these_medications(
+    opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    }
+  ),
+
+  ## Parenteral opioid - num of people
   par_opioid_any = patients.with_these_medications(
     par_opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
@@ -103,6 +121,17 @@ study = StudyDefinition(
       "incidence": 0.15
       },
   ),
+
+  ## Parenteral opioid - num of items
+  par_opioid_itm = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    }
+  ),
 )
 
 
@@ -116,16 +145,31 @@ measures = [
 
   ## Any opioid 
   Measure(
-    id = "opioid_all_any",
+    id = "opioid_any",
     numerator = "opioid_any",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+
+   Measure(
+    id = "opioid_itm",
+    numerator = "opioid_itm",
     denominator = "population",
     group_by = ["population"],
   ),
 
   ## Parenteral opioid 
   Measure(
-    id = "par_opioid_all_any",
+    id = "par_opioid_any",
     numerator = "par_opioid_any",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+
+  ## Parenteral opioid 
+  Measure(
+    id = "par_opioid_itm",
+    numerator = "par_opioid_itm",
     denominator = "population",
     group_by = ["population"],
   ),
