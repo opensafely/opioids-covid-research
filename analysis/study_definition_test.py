@@ -132,6 +132,63 @@ study = StudyDefinition(
         "incidence": 0.6,
     }
   ),
+
+    ## Oxy subq opioid - num of people
+  oxy_opioid_any = patients.with_these_medications(
+    oxy_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## Oxy subq opioid - num of items
+  oxy_opioid_itm = patients.with_these_medications(
+    oxy_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    }
+  ),
+
+      ## Morphine subq opioid - num of people
+  morph_opioid_any = patients.with_these_medications(
+    morph_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "binary_flag",
+    find_first_match_in_period = True,
+    include_date_of_match = True,
+    date_format = "YYYY-MM-DD",
+    return_expectations= {
+      "date": {
+        "earliest": "first_day_of_month(index_date)",
+        "latest": "last_day_of_month(index_date)",
+        },
+      "incidence": 0.15
+      },
+  ),
+
+  ## Morphine subq opioid - num of items
+  morph_opioid_itm = patients.with_these_medications(
+    morph_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    }
+  ),
+
 )
 
 
@@ -170,6 +227,38 @@ measures = [
   Measure(
     id = "par_opioid_itm",
     numerator = "par_opioid_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+  
+  ## Oxycodone opioid 
+  Measure(
+    id = "oxy_opioid_any",
+    numerator = "oxy_opioid_any",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+
+  ## Oxycodone opioid 
+  Measure(
+    id = "oxy_opioid_itm",
+    numerator = "oxy_opioid_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+  
+  ## Morphine opioid 
+  Measure(
+    id = "morph_opioid_any",
+    numerator = "morph_opioid_any",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+
+  ## MOrphine opioid 
+  Measure(
+    id = "morph_opioid_itm",
+    numerator = "morph_opioid_itm",
     denominator = "population",
     group_by = ["population"],
   ),

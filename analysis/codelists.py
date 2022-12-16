@@ -115,6 +115,20 @@ rec_opioid_codes = codelist_from_csv(
   column = "dmd_id",
 )
 
+### Oxycodone subq opioids
+oxy_opioid_codes = codelist_from_csv(
+  "codelists/opensafely-oxycodone-subcutaneous-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
+### Morph subq opioids
+morph_opioid_codes = codelist_from_csv(
+  "codelists/opensafely-morphine-subcutaneous-dmd.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
