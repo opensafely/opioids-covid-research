@@ -77,90 +77,6 @@ study = StudyDefinition(
   
   ## Opioid prescribing
 
-  ### Any prescribing - num of people
-  opioid_any = patients.with_these_medications(
-    opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15
-      },
-  ),
-
-  ### Any prescribing - num of items
-  opioid_itm = patients.with_these_medications(
-    opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "number_of_matches_in_period",
-    return_expectations = {
-      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
-        "incidence": 0.6,
-    }
-  ),
-
-  ## Parenteral opioid - num of people
-  par_opioid_any = patients.with_these_medications(
-    par_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15
-      },
-  ),
-
-  ## Parenteral opioid - num of items
-  par_opioid_itm = patients.with_these_medications(
-    par_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "number_of_matches_in_period",
-    return_expectations = {
-      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
-        "incidence": 0.6,
-    }
-  ),
-
-    ## Oxy subq opioid - num of people
-  oxy_opioid_any = patients.with_these_medications(
-    oxy_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15
-      },
-  ),
-
-  ## Oxy subq opioid - num of items
-  oxy_opioid_itm = patients.with_these_medications(
-    oxy_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "number_of_matches_in_period",
-    return_expectations = {
-      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
-        "incidence": 0.6,
-    }
-  ),
-
       ## Morphine subq opioid - num of people
   morph_opioid_any = patients.with_these_medications(
     morph_opioid_codes,
@@ -189,8 +105,19 @@ study = StudyDefinition(
     }
   ),
 
+    ## Morphine subq opioid - num of items
+  morph10_opioid_itm = patients.with_these_medications(
+    morph10_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    }
+  ),
 
-  morph_opioids_dmd=patients.with_these_medications(
+
+  morph_opioid_dmd=patients.with_these_medications(
     morph_opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "code",
@@ -270,6 +197,27 @@ study = StudyDefinition(
 
             "incidence": 1,
         },
+  ),
+
+morph10_opioid_dmd=patients.with_these_medications(
+    morph10_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+    return_expectations={
+      "category": {"ratios": {
+    "36128211000001100":  .1,
+    "4382711000001100": .1,
+    "39146711000001100": .1,
+    "4383611000001100": .1,
+    "24403511000001100": .1,
+    "40838611000001100": .1,
+    "4383411000001100": .1,
+    "4383011000001100": .1,
+    "4383211000001100": .1,
+    "10678011000001100": .1,
+      }},
+            "incidence": 1,
+        },
   )
 )
 
@@ -282,37 +230,7 @@ measures = [
 
   ### Full population ###
 
-  ## Any opioid 
-  Measure(
-    id = "opioid_any",
-    numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["population"],
-  ),
 
-   Measure(
-    id = "opioid_itm",
-    numerator = "opioid_itm",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-
-  ## Parenteral opioid 
-  Measure(
-    id = "par_opioid_any",
-    numerator = "par_opioid_any",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-
-  ## Parenteral opioid 
-  Measure(
-    id = "par_opioid_itm",
-    numerator = "par_opioid_itm",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-  
   ## Morphine opioid 
   Measure(
     id = "morph_opioid_any",
@@ -328,13 +246,28 @@ measures = [
     denominator = "population",
     group_by = ["population"],
   ),
-
+  
+  ## MOrphine opioid 
+  Measure(
+    id = "morph10_opioid_itm",
+    numerator = "morph10_opioid_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
 
   ## MOrphine opioid 
   Measure(
     id = "morph_opioid_dmd",
     numerator = "morph_opioid_itm",
     denominator = "population",
-    group_by = ["morph_opioids_dmd"],
+    group_by = ["morph_opioid_dmd"],
+  ),
+
+  ## MOrphine opioid 
+  Measure(
+    id = "morph10_opioid_dmd",
+    numerator = "morph10_opioid_itm",
+    denominator = "population",
+    group_by = ["morph10_opioid_dmd"],
   ),
 ]

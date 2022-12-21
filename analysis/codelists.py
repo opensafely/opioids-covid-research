@@ -129,6 +129,22 @@ morph_opioid_codes = codelist_from_csv(
   column = "dmd_id",
 )
 
+### Morph subq opioids
+morph10_opioid_codes = codelist(
+    ["36128211000001100", 
+    "4382711000001100",
+    "39146711000001100",
+    "4383611000001100",
+    "24403511000001100",
+    "40838611000001100",
+    "4383411000001100",
+    "4383011000001100",
+    "4383211000001100",
+    "10678011000001100",
+    ], 
+    system="snomed", 
+)
+
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
