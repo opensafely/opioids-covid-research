@@ -131,7 +131,7 @@ morph_opioid_codes = codelist_from_csv(
 
 ### Morph subq opioids
 morph10_opioid_codes = codelist_from_csv(
-    "codelists/chriswood-morphine-sulfate-10mg1ml-solution-for-injection-ampoules-2f5a6b48-dmd.csv",
+    "codelists/user-anschaf-morphine-sulfate-10mg1ml-solution-for-injection-ampoules-dmd.csv",
     system="snomed", 
     column = "dmd_id",
   )
