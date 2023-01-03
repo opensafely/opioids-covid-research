@@ -188,19 +188,7 @@ study = StudyDefinition(
   ),
 
 morph10_opioid_dmd=patients.with_these_medications(
-   codelist(
-    ["36128211000001100", 
-     "4382711000001100",
-     "39146711000001100",
-     "4383611000001100",
-     "24403511000001100",
-     "40838611000001100",
-     "4383411000001100",
-     "4383011000001100",
-     "4383211000001100",
-     "10678011000001100"], 
-     system="snomed", 
-  ),
+   morph10_opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "code",
     return_expectations={
