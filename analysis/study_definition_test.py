@@ -175,14 +175,6 @@ measures = [
 
   ## MOrphine opioid 
   Measure(
-    id = "morph_opioid_dmd",
-    numerator = "morph_opioid_itm",
-    denominator = "population",
-    group_by = ["morph_opioid_dmd"],
-  ),
-
-  ## MOrphine opioid 
-  Measure(
     id = "morph10_opioid_dmd",
     numerator = "morph10_opioid_itm",
     denominator = "population",
