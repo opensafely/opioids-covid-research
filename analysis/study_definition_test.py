@@ -77,38 +77,9 @@ study = StudyDefinition(
   
   ## Opioid prescribing
 
-      ## Morphine subq opioid - num of people
-  morph_opioid_any = patients.with_these_medications(
-    morph_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "binary_flag",
-    find_first_match_in_period = True,
-    include_date_of_match = True,
-    date_format = "YYYY-MM-DD",
-    return_expectations= {
-      "date": {
-        "earliest": "first_day_of_month(index_date)",
-        "latest": "last_day_of_month(index_date)",
-        },
-      "incidence": 0.15
-      },
-  ),
-
-  ## Morphine subq opioid - num of items
-  morph_opioid_itm = patients.with_these_medications(
-    morph_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "number_of_matches_in_period",
-    return_expectations = {
-      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
-        "incidence": 0.6,
-    },
-  ),
-
-  
 ## Morphine subq opioid - num of items
-  morph10_opioid_itm = patients.with_these_medications(
-    morph10_opioid_codes,
+  morph10_pf_itm = patients.with_these_medications(
+    morph10_pf_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "number_of_matches_in_period",
     return_expectations = {
@@ -117,28 +88,7 @@ study = StudyDefinition(
     },
   ),
 
-morph10_opioid_dmd=patients.with_these_medications(
-   morph10_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "code",
-    return_expectations={
-      "category": {"ratios": {
-        "36128211000001109":  .1,
-        "4382711000001105": .1,
-        "39146711000001105": .1,
-        "4383611000001106": .1,
-        "24403511000001100": .1,
-        "40838611000001106": .1,
-        "4383411000001108": .1,
-        "4383011000001104": .1,
-        "4383211000001109": .1,
-        "10678011000001108": .1,
-      }},
-            "incidence": 1,
-        },
-  ),
 )
-
 
 # --- DEFINE MEASURES ---
 
@@ -148,36 +98,11 @@ measures = [
 
   ### Full population ###
 
-
-  ## Morphine opioid 
+    ## MOrphine opioid 
   Measure(
-    id = "morph_opioid_any",
-    numerator = "morph_opioid_any",
+    id = "morph10_pf_itm",
+    numerator = "morph10_pf_itm",
     denominator = "population",
     group_by = ["population"],
-  ),
-
-  ## MOrphine opioid 
-  Measure(
-    id = "morph_opioid_itm",
-    numerator = "morph_opioid_itm",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-  
-  ## MOrphine opioid 
-  Measure(
-    id = "morph10_opioid_itm",
-    numerator = "morph10_opioid_itm",
-    denominator = "population",
-    group_by = ["population"],
-  ),
-
-  ## MOrphine opioid 
-  Measure(
-    id = "morph10_opioid_dmd",
-    numerator = "morph10_opioid_itm",
-    denominator = "population",
-    group_by = ["morph10_opioid_dmd"],
   ),
 ]

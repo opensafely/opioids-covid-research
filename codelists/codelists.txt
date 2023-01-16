@@ -15,3 +15,4 @@ opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce
 opensafely/oxycodone-subcutaneous-dmd/2a956f90
 opensafely/morphine-subcutaneous-dmd/1185fc5b
 user/anschaf/morphine-sulfate-10mg1ml-solution-for-injection-ampoules-dmd/0ab944ac
+user/anschaf/morphine-sulfate-10mg1ml-injection/21d3427d/

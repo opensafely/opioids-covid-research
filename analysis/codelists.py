@@ -136,6 +136,12 @@ morph10_opioid_codes = codelist_from_csv(
     column = "dmd_id",
   )
 
+morph10_pf_codes = codelist_from_csv(
+  "codelists/user-anschaf-morphine-sulfate-10mg1ml-injection.csv",
+  system = "snomed",
+  column = "dmd_id",
+)
+
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",

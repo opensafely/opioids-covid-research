@@ -101,6 +101,12 @@
       "url": "https://codelists.opensafely.org/codelist/user/anschaf/morphine-sulfate-10mg1ml-solution-for-injection-ampoules-dmd/0ab944ac/",
       "downloaded_at": "2023-01-03 22:04:59.733541Z",
       "sha": "922a15640eacb6ade7494b04877514b7b6ad5010"
+    },
+    "user-anschaf-morphine-sulfate-10mg1ml-injection.csv": {
+      "id": "user/anschaf/morphine-sulfate-10mg1ml-injection/21d3427d",
+      "url": "https://codelists.opensafely.org/codelist/user/anschaf/morphine-sulfate-10mg1ml-injection/21d3427d/",
+      "downloaded_at": "2023-01-16 14:20:04.615185Z",
+      "sha": "3f3821c5c4859cb80cefb1e1a76c65f9a18200b0"
     }
   }
 }
