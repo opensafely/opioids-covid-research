@@ -88,6 +88,29 @@ study = StudyDefinition(
     },
   ),
 
+## Parenteral
+  par_itm = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    },
+  ),
+  
+## Parenteral
+  par_dmd = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+     return_expectations={
+      "category": {"ratios": {
+        "36128211000001100":  1,
+      }},
+            "incidence": 1,
+        },
+  ),
 )
 
 # --- DEFINE MEASURES ---
@@ -98,11 +121,26 @@ measures = [
 
   ### Full population ###
 
-    ## MOrphine opioid 
+  ## Morphine opioid 
   Measure(
     id = "morph10_pf_itm",
     numerator = "morph10_pf_itm",
     denominator = "population",
     group_by = ["population"],
   ),
-]
+
+  Measure(
+    id = "par_itm",
+    numerator = "par_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+  
+  Measure(
+    id = "par_dmd",
+    numerator = "par_itm",
+    denominator = "population",
+    group_by = ["par_dmd"],
+  ),
+  
+  ]
