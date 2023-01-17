@@ -273,14 +273,6 @@ study = StudyDefinition(
     return_expectations = {"incidence": 0.15}
   ),
 
-  ### Sickle cell disease
-  scd = patients.with_these_clinical_events(
-    scd_codes,
-    on_or_before = "last_day_of_month(index_date)",
-    returning = "binary_flag",
-    return_expectations = {"incidence": .01}
-  ),
-
   #####################
   ## Medication DM&D ##
   
@@ -582,7 +574,7 @@ measures = [
     id = "opioid_age_any",
     numerator = "opioid_any",
     denominator = "population",
-    group_by = ["age_cat","cancer", "sex"],
+    group_by = ["age_cat","sex","cancer"],
   ),
 
   ## High dose opioid - age 
@@ -590,7 +582,7 @@ measures = [
     id = "hi_opioid_age_any",
     numerator = "hi_opioid_any",
     denominator = "population",
-    group_by = ["age_cat","cancer", "sex"],
+    group_by = ["age_cat","sex","cancer"],
   ),  
   
   ## Long acting opioid - age 
@@ -598,7 +590,7 @@ measures = [
     id = "long_opioid_age_any",
     numerator = "long_opioid_any",
     denominator = "population",
-    group_by = ["age_cat", "cancer", "sex"],
+    group_by = ["age_cat","sex","cancer"],
   ),
 
   ## Oral opioid - age 
@@ -606,7 +598,7 @@ measures = [
     id = "oral_opioid_age_any",
     numerator = "oral_opioid_any",
     denominator = "population",
-    group_by = ["cancer", "age_cat",  "sex"],
+    group_by = ["age_cat",  "sex","cancer"],
   ),
 
   ## Buccal opioid - age 
@@ -614,7 +606,7 @@ measures = [
     id = "buc_opioid_age_any",
     numerator = "buc_opioid_any",
     denominator = "population",
-    group_by = ["cancer", "age_cat", "sex"],
+    group_by = ["age_cat", "sex", "cancer"],
   ),
 
   ## Rectal opioid  - age 
@@ -622,7 +614,7 @@ measures = [
     id = "rec_opioid_age_any",
     numerator = "rec_opioid_any",
     denominator = "population",
-    group_by = ["cancer", "age_cat", "sex"],
+    group_by = ["age_cat", "sex","cancer"],
   ),
 
   ## Transdermal opioid  - age 
@@ -630,7 +622,7 @@ measures = [
     id = "trans_opioid_age_any",
     numerator = "trans_opioid_any",
     denominator = "population",
-    group_by = ["cancer", "age_cat",  "sex"],
+    group_by = ["age_cat",  "sex","cancer"],
   ),
 
   ## Parenteral opioid  - age 
@@ -638,7 +630,7 @@ measures = [
     id = "par_opioid_age_any",
     numerator = "par_opioid_any",
     denominator = "population",
-    group_by = ["cancer" , "age_cat",  "sex"],
+    group_by = ["age_cat",  "sex", "cancer"],
   ),
 
   ## Inhaled opioid  - age 
@@ -646,7 +638,7 @@ measures = [
     id = "inh_opioid_age_any",
     numerator = "inh_opioid_any",
     denominator = "population",
-    group_by = ["cancer", "age_cat",  "sex"],
+    group_by = ["age_cat","sex","cancer"],
   ),
 
   ### Sex ###
@@ -656,8 +648,9 @@ measures = [
     id = "opioid_sex_any",
     numerator = "opioid_any",
     denominator = "population",
-    group_by = ["sex","cancer", "age_stand"],
+    group_by = ["sex","age_stand","cancer"],
   ),
+
   ## High dose opioid - sex
   Measure(
     id = "hi_opioid_sex_any",
@@ -673,6 +666,7 @@ measures = [
     denominator = "population",
     group_by = ["sex","cancer", "age_stand"],
   ),
+
 ## Oral opioid -  sex 
   Measure(
     id = "oral_opioid_sex_any",
@@ -793,16 +787,6 @@ measures = [
     numerator = "inh_opioid_any",
     denominator = "population",
     group_by = ["cancer", "carehome", "age_stand", "sex"],
-  ),
-  
-  # Sickle cell ####
-  ## Any opioid - sickle cell 
-  Measure(
-    id = "opioid_scd_any",
-    numerator = "opioid_any",
-    denominator = "population",
-    group_by = ["scd","cancer", "age_stand", "sex"],
-    
   ),
 
   ### Ethnicity ####

@@ -129,6 +129,13 @@ morph10_opioid_codes = codelist_from_csv(
     column = "dmd_id",
   )
 
+
+### Morph inactive codes
+morph_inactive_test_codes = codelist(
+    ["354043009", "395250002", "407884006", "36129811000001103"],
+    system="snomed",
+  )
+
 ### Morph inactive codes
 morph_inactive_codes = codelist(
     ["354043009", "395250002", "407884006"],
