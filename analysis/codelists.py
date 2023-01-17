@@ -52,13 +52,6 @@ cancer_codes = combine_codelists(
   haem_ca_codes
 )
 
-## Sickle cell disease
-scd_codes = codelist_from_csv(
-  "codelists/opensafely-sickle-cell-disease-snomed.csv",
-  system = "snomed",
-  column = "id"
-)
-
 ## Medication DM&D
 ### High dose, long-acting opioids 
 hi_opioid_codes = codelist_from_csv(
@@ -136,11 +129,12 @@ morph10_opioid_codes = codelist_from_csv(
     column = "dmd_id",
   )
 
-morph10_pf_codes = codelist_from_csv(
-  "codelists/user-anschaf-morphine-sulfate-10mg1ml-injection.csv",
-  system = "snomed",
-  column = "dmd_id",
-)
+### Morph inactive codes
+morph_inactive_codes = codelist(
+    ["354043009", "395250002", "407884006"],
+    system="snomed",
+  )
+
 
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(

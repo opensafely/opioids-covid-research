@@ -78,8 +78,8 @@ study = StudyDefinition(
   ## Opioid prescribing
 
 ## Morphine subq opioid - num of items
-  morph10_pf_itm = patients.with_these_medications(
-    morph10_pf_codes,
+  morph_inactive_itm = patients.with_these_medications(
+    morph_inactive_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "number_of_matches_in_period",
     return_expectations = {
@@ -120,11 +120,9 @@ measures = [
   ####  Monthly rates #####
 
   ### Full population ###
-
-  ## Morphine opioid 
   Measure(
-    id = "morph10_pf_itm",
-    numerator = "morph10_pf_itm",
+    id = "morph_inactive_itm",
+    numerator = "morph_inactive_itm",
     denominator = "population",
     group_by = ["population"],
   ),
