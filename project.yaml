@@ -154,7 +154,7 @@ actions:
   generate_study_population_test:
     run: cohortextractor:latest generate_cohort 
       --study-definition study_definition_test
-      --index-date-range "2020-01-01 to 2022-03-01 by month" 
+      --index-date-range "2020-01-01 to 2022-12-01 by month" 
       --output-dir=output 
       --output-format=csv
     outputs:

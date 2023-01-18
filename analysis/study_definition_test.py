@@ -27,7 +27,7 @@ study = StudyDefinition(
   
   # Configure the expectations framework
   default_expectations={
-    "date": {"earliest": "2020-01-01", "latest": "2022-03-01"},
+    "date": {"earliest": "2020-01-01", "latest": "2022-12-01"},
     "rate": "uniform",
     "incidence": 0.15,
   },
@@ -77,7 +77,29 @@ study = StudyDefinition(
   
   ## Opioid prescribing
 
-## Morphine subq opioid - num of items
+  ## Morphine subq 10mg/ml opioid - num of items
+  morph10_itm = patients.with_these_medications(
+    morph10_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    },
+  ),
+
+  ## Parenteral opioid - num of items
+  par_itm = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    },
+  ),
+
+## Morphine subq opioid (inactive codes)- num of items
   morph_inactive_itm = patients.with_these_medications(
     morph_inactive_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
@@ -88,7 +110,7 @@ study = StudyDefinition(
     },
   ),
 
-  ## Morphine subq opioid - num of items
+  ## Morphine subq opioid (inactive codes with positive control) - num of items
   morph_inactive_test_itm = patients.with_these_medications(
     morph_inactive_test_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
@@ -108,7 +130,19 @@ measures = [
 
   ####  Monthly rates #####
 
-  ### Full population ###
+  Measure(
+    id = "par_itm",
+    numerator = "par_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+  Measure(
+    id = "morph10_itm",
+    numerator = "morph10_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+    ### Full population ###
   Measure(
     id = "morph_inactive_itm",
     numerator = "morph_inactive_itm",
