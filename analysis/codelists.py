@@ -109,39 +109,36 @@ rec_opioid_codes = codelist_from_csv(
 )
 
 ### Oxycodone subq opioids
-oxy_opioid_codes = codelist_from_csv(
+oxy_codes = codelist_from_csv(
   "codelists/opensafely-oxycodone-subcutaneous-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
 
 ### Morph subq opioids
-morph_opioid_codes = codelist_from_csv(
+morph_codes = codelist_from_csv(
   "codelists/opensafely-morphine-subcutaneous-dmd.csv",
   system = "snomed",
   column = "dmd_id",
 )
 
 ### Morph subq opioids
-morph10_opioid_codes = codelist_from_csv(
+morph10_codes = codelist_from_csv(
     "codelists/user-anschaf-morphine-sulfate-10mg1ml-solution-for-injection-ampoules-dmd.csv",
     system="snomed", 
     column = "dmd_id",
   )
 
-
 ### Morph inactive codes
-morph_inactive_test_codes = codelist(
-    ["354043009", "395250002", "407884006", "36129811000001103"],
-    system="snomed",
-  )
-
-### Morph inactive codes
-morph_inactive_codes = codelist(
+morph10_inactive_codes = codelist(
     ["354043009", "395250002", "407884006"],
     system="snomed",
   )
 
+#### Morph - active AND inactive
+morph10_all_codes = combine_codelists(
+  morph10_codes, morph10_inactive_codes
+)
 
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(

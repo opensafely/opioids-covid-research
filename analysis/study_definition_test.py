@@ -77,17 +77,6 @@ study = StudyDefinition(
   
   ## Opioid prescribing
 
-  ## Morphine subq 10mg/ml opioid - num of items
-  morph10_itm = patients.with_these_medications(
-    morph10_opioid_codes,
-    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
-    returning = "number_of_matches_in_period",
-    return_expectations = {
-      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
-        "incidence": 0.6,
-    },
-  ),
-
   ## Parenteral opioid - num of items
   par_itm = patients.with_these_medications(
     par_opioid_codes,
@@ -99,9 +88,21 @@ study = StudyDefinition(
     },
   ),
 
-## Morphine subq opioid (inactive codes)- num of items
-  morph_inactive_itm = patients.with_these_medications(
-    morph_inactive_codes,
+  par_dmd = patients.with_these_medications(
+    par_opioid_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+    return_expectations={
+      "category": {"ratios": {
+        "36128211000001100":  1,
+          }},
+      "incidence": 1,
+      },
+  ),
+
+  ## Morphine subq 10mg/ml opioid - num of items
+  morph10_itm = patients.with_these_medications(
+    morph10_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "number_of_matches_in_period",
     return_expectations = {
@@ -110,15 +111,62 @@ study = StudyDefinition(
     },
   ),
 
-  ## Morphine subq opioid (inactive codes with positive control) - num of items
-  morph_inactive_test_itm = patients.with_these_medications(
-    morph_inactive_test_codes,
+  morph10_dmd = patients.with_these_medications(
+    morph10_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+    return_expectations={
+      "category": {"ratios": {
+        "36128211000001100":  1,
+          }},
+      "incidence": 1,
+      },
+  ),
+
+  ## Morphine subq 10mg/ml opioid (inactive codes) - num of items
+  morph10_inactive_itm = patients.with_these_medications(
+    morph10_inactive_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "number_of_matches_in_period",
     return_expectations = {
       "int": {"distribution": "normal", "mean": 6, "stddev": 3},
         "incidence": 0.6,
     },
+  ),
+
+  morph10_inactive_dmd = patients.with_these_medications(
+    morph10_inactive_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+    return_expectations={
+      "category": {"ratios": {
+        "36128211000001100":  1,
+          }},
+      "incidence": 1,
+      },
+  ),
+
+## Morphine subq opioid (inactive codes)- num of items
+  morph10_all_itm = patients.with_these_medications(
+    morph10_all_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "number_of_matches_in_period",
+    return_expectations = {
+      "int": {"distribution": "normal", "mean": 6, "stddev": 3},
+        "incidence": 0.6,
+    },
+  ),
+
+  morph10_all_dmd = patients.with_these_medications(
+    morph10_all_codes,
+    between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
+    returning = "code",
+    return_expectations={
+      "category": {"ratios": {
+        "36128211000001100":  1,
+          }},
+      "incidence": 1,
+      },
   ),
 
 
@@ -136,25 +184,54 @@ measures = [
     denominator = "population",
     group_by = ["population"],
   ),
+  
+  Measure(
+    id = "par_dmd",
+    numerator = "par_itm",
+    denominator = "population",
+    group_by = ["par_dmd"],
+  ),
+
   Measure(
     id = "morph10_itm",
     numerator = "morph10_itm",
     denominator = "population",
     group_by = ["population"],
   ),
-    ### Full population ###
+
   Measure(
-    id = "morph_inactive_itm",
-    numerator = "morph_inactive_itm",
+    id = "morph10_dmd",
+    numerator = "morph10_itm",
     denominator = "population",
-    group_by = ["population"],
+    group_by = ["morph10_dmd"],
   ),
-    Measure(
-    id = "morph_inactive_test_itm",
-    numerator = "morph_inactive_test_itm",
+
+  Measure(
+    id = "morph10_inactive_itm",
+    numerator = "morph10_inactive_itm",
     denominator = "population",
     group_by = ["population"],
   ),
 
+  Measure(
+    id = "morph10_inactive_dmd",
+    numerator = "morph10_inactive_itm",
+    denominator = "population",
+    group_by = ["morph10_inactive_dmd"],
+  ),
+  
+  Measure(
+    id = "morph10_all_itm",
+    numerator = "morph10_all_itm",
+    denominator = "population",
+    group_by = ["population"],
+  ),
+
+  Measure(
+    id = "morph10_all_dmd",
+    numerator = "morph10_all_itm",
+    denominator = "population",
+    group_by = ["morph10_all_dmd"],
+  ),
   
   ]
