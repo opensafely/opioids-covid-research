@@ -121,7 +121,7 @@ study = StudyDefinition(
 
   ## Morphine subq 10mg/ml opioid - num of items
   opioid_itm = patients.with_these_medications(
-    morph10_codes,
+    opioid_codes,
     between=["first_day_of_month(index_date)", "last_day_of_month(index_date)"],    
     returning = "number_of_matches_in_period",
     return_expectations = {
