@@ -71,6 +71,37 @@ study = StudyDefinition(
     }
     ),
 
+      ### Age categories
+  age_cat = patients.categorised_as(
+    {"0": "DEFAULT",
+      "1": """age >= 18 AND age < 30""",
+      "2": """age >= 30 AND age < 40""",
+      "3": """age >= 40 AND age < 50""",
+      "4": """age >= 50 AND age < 60""",
+      "5": """age >= 60 AND age < 70""",
+      "6": """age >= 70 AND age < 80""",
+      "7": """age >= 80 AND age < 90""",
+      "8": """age >= 90""",
+    },
+
+    return_expectations = {
+      "rate": "universal",
+      "category": {
+        "ratios": {
+          "0": 0.01,
+          "1": 0.12,
+          "2": 0.12,
+          "3": 0.13,
+          "4": 0.13,
+          "5": 0.13,          
+          "6": 0.12,
+          "7": 0.12,
+          "8": 0.12,
+        }},
+    },
+  ),
+
+
 
   #####################
   ## Medication DM&D ##
