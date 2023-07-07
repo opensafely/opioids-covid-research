@@ -14,9 +14,9 @@ index_date = "2020-03-01"
 
 ### Define population ##########################
 dataset.define_population(
-    (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110) \
-    & ((patients.sex == "male") | (patients.sex == "female")) \
-    & (patients.date_of_death >= index_date) \
+    (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
+    & ((patients.sex == "male") | (patients.sex == "female"))
+    & (patients.date_of_death >= index_date)
     & (practice_registrations.for_patient_on(index_date).practice_pseudo_id.is_not_null())
 )
 
@@ -24,7 +24,7 @@ dataset.define_population(
 
 # Age
 dataset.age = patients.age_on(index_date)
-dataset.age_band = case(
+dataset.age_group = case(
         when(dataset.age < 30).then("18-29"),
         when(dataset.age < 40).then("20-39"),
         when(dataset.age < 50).then("40-49"),
@@ -56,11 +56,12 @@ dataset.sex = patients.sex
 # )
 
 # Ethnicity
-ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)) \
-    .where(clinical_events.date.is_on_or_before(index_date))
-    .sort_by(clinical_events.date) \
-    .last_for_patient() \
-    .snomedct_code.to_category(codelists.ethnicity_codes_16)
+ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
+    ).where(
+        clinical_events.date.is_on_or_before(index_date)
+    ).sort_by(
+        clinical_events.date
+    ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
 
 dataset.ethnicity16 = case(
     when(ethnicity16 == "1").then("White - British"),
@@ -82,11 +83,12 @@ dataset.ethnicity16 = case(
     default="Unknown"
 )
 
-ethnicity6 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)) \
-    .where(clinical_events.date.is_on_or_before(index_date)) \
-    .sort_by(clinical_events.date) \
-    .last_for_patient() \
-    .snomedct_code.to_category(codelists.ethnicity_codes_6)
+ethnicity6 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
+    ).where(
+        clinical_events.date.is_on_or_before(index_date)
+    ).sort_by(
+        clinical_events.date
+    ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
 
 dataset.ethnicity6 = case(
     when(ethnicity6 == "1").then("White"),
@@ -103,10 +105,12 @@ dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts
 
 # In care home based on primis codes/TPP address match
 dataset.carehome_primis = clinical_events.where(
-        clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)) \
-            .where(clinical_events.date.is_on_or_before(index_date)) \
-            .exists_for_patient() 
-dataset.carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match 
+        clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
+    ).where(
+        clinical_events.date.is_on_or_before(index_date)
+    ).exists_for_patient() 
+
+dataset.carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
 
 dataset.carehome = case(
     when(dataset.carehome_primis).then(1),
@@ -116,24 +120,28 @@ dataset.carehome = case(
 
 # Cancer diagnosis in past 5 years
 dataset.cancer = case(
-    when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)) \
-        .where(clinical_events.date.is_between(index_date, index_date - years(5))) \
-        .exists_for_patient()) \
-        .then(1),
-        default=0
+    when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
+        ).where(
+            clinical_events.date.is_between(index_date, index_date - years(5))
+        ).exists_for_patient()
+    ).then(1),
+    default=0
 )
 
 ### No. people with opioid prescription ##########################################
+
 def has_med_event(codelist, where=True):
-    med_event_exists = medications.where(medications.dmd_code.is_in(codelist))\
-        .where(medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))) \
-        .exists_for_patient()
+    med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
+        ).where(
+            medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+        ).exists_for_patient()
     return (
         case(
             when(med_event_exists).then(1),
             when(~med_event_exists).then(0)
             )
     )
+
 
 dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
 
@@ -155,10 +163,11 @@ dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-act
 
 # Date of last prescription
 last_rx = medications.where(
-    medications.dmd_code.is_in(codelists.opioid_codes)) \
-        .where(medications.date.is_before(index_date)) \
-        .sort_by(medications.date) \
-        .last_for_patient().date
+    medications.dmd_code.is_in(codelists.opioid_codes)
+    ).where(
+        medications.date.is_before(index_date)
+    ).sort_by(
+        medications.date).last_for_patient().date
 
 # Is opioid naive (two year lookback) (for denominator)
 dataset.opioid_naive = case(
@@ -169,10 +178,11 @@ dataset.opioid_naive = case(
 
 # Number of people with new prescriptions
 dataset.opioid_new = case(
-    when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)) \
-        .where(medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))) \
-        .where(dataset.opioid_naive == 1) \
-        .exists_for_patient()) \
-        .then(1),
-        default=0
+    when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
+        ).where(
+            medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+        ).where(dataset.opioid_naive == 1).exists_for_patient()
+    ).then(1),
+    default=0
 )
+

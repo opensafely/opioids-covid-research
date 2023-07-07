@@ -1,8 +1,6 @@
 ######################################
-
 # This script defines the project pipeline - it specifies the execution orders for all the code in this
 # repo using a series of actions.
-
 ######################################
 
 version: '3.0'
