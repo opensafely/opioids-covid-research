@@ -19,138 +19,138 @@ actions:
       highly_sensitive:
         cohort: output/dataset.csv.gz
 
-  ## Cohort data
-  generate_study_population_1:
-    run: cohortextractor:latest generate_cohort
-      --study-definition study_definition
-      --index-date-range "2018-01-01 to 2018-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/input_*.csv
+  # ## Cohort data
+  # generate_study_population_1:
+  #   run: cohortextractor:latest generate_cohort
+  #     --study-definition study_definition
+  #     --index-date-range "2018-01-01 to 2018-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input_*.csv
 
-  generate_study_population_2:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2019-01-01 to 2019-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/input*.csv
+  # generate_study_population_2:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2019-01-01 to 2019-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input*.csv
 
-  generate_study_population_3:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2020-01-01 to 2020-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/inpu*.csv
+  # generate_study_population_3:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2020-01-01 to 2020-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/inpu*.csv
 
-  generate_study_population_4:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2021-01-01 to 2021-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/inp*.csv
+  # generate_study_population_4:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2021-01-01 to 2021-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/inp*.csv
   
-  generate_study_population_5:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2022-01-01 to 2022-03-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/in*.csv
+  # generate_study_population_5:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2022-01-01 to 2022-03-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/in*.csv
 
-  ## Ethnicity      
-  generate_ethnicity_cohort:
-    run: >
-      cohortextractor:latest generate_cohort
-        --study-definition study_definition_ethnicity
-    outputs:
-      highly_sensitive:
-        cohort: output/input_ethnicity.csv
+  # ## Ethnicity      
+  # generate_ethnicity_cohort:
+  #   run: >
+  #     cohortextractor:latest generate_cohort
+  #       --study-definition study_definition_ethnicity
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input_ethnicity.csv
 
 
-  # Data processing ----
+  # # Data processing ----
   
-  ## Add ethnicity
-  join_cohorts:
-    run: >
-      cohort-joiner:v0.0.48
-        --lhs output/input_*.csv
-        --rhs output/input_ethnicity.csv
-        --output-dir output/data
-    needs: [generate_study_population_1,  generate_study_population_2, 
-      generate_study_population_5, generate_study_population_3, 
-      generate_study_population_4, generate_ethnicity_cohort]
-    outputs:
-      highly_sensitive:
-        cohort: output/data/input_*.csv 
+  # ## Add ethnicity
+  # join_cohorts:
+  #   run: >
+  #     cohort-joiner:v0.0.48
+  #       --lhs output/input_*.csv
+  #       --rhs output/input_ethnicity.csv
+  #       --output-dir output/data
+  #   needs: [generate_study_population_1,  generate_study_population_2, 
+  #     generate_study_population_5, generate_study_population_3, 
+  #     generate_study_population_4, generate_ethnicity_cohort]
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/data/input_*.csv 
 
 
-  ## Generate measures - full population
-  generate_measures:
-    run: >
-      cohortextractor:latest generate_measures 
-        --study-definition study_definition
-        --output-dir output/data
-    needs: [join_cohorts]
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/data/measure_*.csv
-
-
-  ## Process data - time series
-  process_data_ts:
-   run: r:latest analysis/process/process_data_ts.R
-   needs: [generate_measures, join_cohorts]
-   outputs:
-      moderately_sensitive:
-        measure_csv: output/joined/final_*.csv
-
-  ## Process data - table
-  process_data_table:
-   run: r:latest analysis/process/process_data_table.R
-   needs: [generate_measures, join_cohorts]
-   outputs:
-      moderately_sensitive:
-        measure_csv: output/joined/final*.csv
-
-
-  # Results ---
-
-  ## Time series
-  timeseries:
-    run: r:latest analysis/descriptive/time_series_stand.R
-    needs: [process_data_ts]
-    outputs:
-      moderately_sensitive:
-        table: output/time series/ts_*.csv  
-  
-  ## Time series graphs
-  # graphs:
-  #   run: r:latest analysis/descriptive/graphs.R
-  #   needs: [timeseries]
+  # ## Generate measures - full population
+  # generate_measures:
+  #   run: >
+  #     cohortextractor:latest generate_measures 
+  #       --study-definition study_definition
+  #       --output-dir output/data
+  #   needs: [join_cohorts]
   #   outputs:
   #     moderately_sensitive:
-  #       plot: output/time series/graphs/graph*.png
+  #       measure_csv: output/data/measure_*.csv
 
-  ## Table 
-  table:
-    run: r:latest analysis/descriptive/table_stand.R
-    needs: [process_data_table]
-    outputs:
-      moderately_sensitive:
-        table: output/tables/table_*.csv
+
+  # ## Process data - time series
+  # process_data_ts:
+  #  run: r:latest analysis/process/process_data_ts.R
+  #  needs: [generate_measures, join_cohorts]
+  #  outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/joined/final_*.csv
+
+  # ## Process data - table
+  # process_data_table:
+  #  run: r:latest analysis/process/process_data_table.R
+  #  needs: [generate_measures, join_cohorts]
+  #  outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/joined/final*.csv
+
+
+  # # Results ---
+
+  # ## Time series
+  # timeseries:
+  #   run: r:latest analysis/descriptive/time_series_stand.R
+  #   needs: [process_data_ts]
+  #   outputs:
+  #     moderately_sensitive:
+  #       table: output/time series/ts_*.csv  
+  
+  # ## Time series graphs
+  # # graphs:
+  # #   run: r:latest analysis/descriptive/graphs.R
+  # #   needs: [timeseries]
+  # #   outputs:
+  # #     moderately_sensitive:
+  # #       plot: output/time series/graphs/graph*.png
+
+  # ## Table 
+  # table:
+  #   run: r:latest analysis/descriptive/table_stand.R
+  #   needs: [process_data_table]
+  #   outputs:
+  #     moderately_sensitive:
+  #       table: output/tables/table_*.csv
 
   
  

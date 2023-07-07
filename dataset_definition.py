@@ -59,15 +59,15 @@ dataset.sex = patients.sex
 dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
 
 # In care home based on primis codes/TPP address match
-carehome_primis = clinical_events.where(
+dataset.carehome_primis = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)) \
             .where(clinical_events.date.is_on_or_before(index_date)) \
             .exists_for_patient() 
-carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match 
+dataset.carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match 
 
 dataset.carehome = case(
-    when(carehome_primis).then(1),
-    when(carehome_tpp).then(1),
+    when(dataset.carehome_primis).then(1),
+    when(dataset.carehome_tpp).then(1),
     default=0
 )
 
