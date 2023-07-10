@@ -13,6 +13,8 @@ dataset = Dataset()
 index_date = "2020-03-01"
 
 ### Define population ##########################
+# Interested in people registered with *any* practice on the index date,
+#   regardless of length of registration
 dataset.define_population(
     (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
     & ((patients.sex == "male") | (patients.sex == "female"))
@@ -55,7 +57,7 @@ dataset.sex = patients.sex
 #         default="unknown"
 # )
 
-# Ethnicity
+# Ethnicity 16 categories
 ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
     ).where(
         clinical_events.date.is_on_or_before(index_date)
@@ -83,7 +85,9 @@ dataset.ethnicity16 = case(
     default="Unknown"
 )
 
-ethnicity6 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
+# Ethnicity 6 categories
+ethnicity6 = clinical_events.where(
+        clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
     ).where(
         clinical_events.date.is_on_or_before(index_date)
     ).sort_by(
@@ -104,17 +108,17 @@ dataset.ethnicity6 = case(
 dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
 
 # In care home based on primis codes/TPP address match
-dataset.carehome_primis = clinical_events.where(
+carehome_primis = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
     ).where(
         clinical_events.date.is_on_or_before(index_date)
     ).exists_for_patient() 
 
-dataset.carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
+carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
 
 dataset.carehome = case(
-    when(dataset.carehome_primis).then(1),
-    when(dataset.carehome_tpp).then(1),
+    when(carehome_primis).then(1),
+    when(carehome_tpp).then(1),
     default=0
 )
 
@@ -160,8 +164,9 @@ dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-act
 
 
 ### No. people with a new opioid prescription (2 year lookback) ######################
+# Note: for all opioids only 
 
-# Date of last prescription
+# Date of last prescription before index date
 last_rx = medications.where(
     medications.dmd_code.is_in(codelists.opioid_codes)
     ).where(
@@ -169,14 +174,14 @@ last_rx = medications.where(
     ).sort_by(
         medications.date).last_for_patient().date
 
-# Is opioid naive (two year lookback) (for denominator)
+# Is opioid naive (using two year lookback) (for denominator)
 dataset.opioid_naive = case(
     when(last_rx.is_before(index_date - years(2))).then(1),
     when(last_rx.is_null()).then(1),
     default=0
 )
 
-# Number of people with new prescriptions
+# Number of people with new prescriptions (among naive only)
 dataset.opioid_new = case(
     when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
         ).where(
@@ -185,4 +190,3 @@ dataset.opioid_new = case(
     ).then(1),
     default=0
 )
-
