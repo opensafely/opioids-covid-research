@@ -132,7 +132,7 @@ dataset.cancer = case(
     default=0
 )
 
-### No. people with opioid prescription ##########################################
+### No. people with opioid prescription in a given month ####################################
 
 def has_med_event(codelist, where=True):
     med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
@@ -146,7 +146,7 @@ def has_med_event(codelist, where=True):
             )
     )
 
-
+# Any 
 dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
 
 # By admin route
