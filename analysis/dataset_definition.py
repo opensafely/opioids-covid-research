@@ -22,11 +22,6 @@ dataset.define_population(
     & (practice_registrations.for_patient_on(index_date).exists_for_patient())
 )
 
-# Extract prior clinical events for further use in variable definitions below
-prior_events = clinical_events.where(
-        clinical_events.date.is_on_or_before(index_date)
-    )
-
 # Demographics ###############################
 
 # Age
@@ -63,7 +58,7 @@ dataset.sex = patients.sex
 # )
 
 # Ethnicity 16 categories
-ethnicity16 = prior_events.where(prior_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
+ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
     ).sort_by(
         clinical_events.date
     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
@@ -89,7 +84,7 @@ dataset.ethnicity16 = case(
 )
 
 # Ethnicity 6 categories
-ethnicity6 = prior_events.where(
+ethnicity6 = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
     ).sort_by(
         clinical_events.date
@@ -109,7 +104,7 @@ dataset.ethnicity6 = case(
 dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
 
 # In care home based on primis codes/TPP address match
-carehome_primis = prior_events.where(
+carehome_primis = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
     ).exists_for_patient() 
 
@@ -123,9 +118,9 @@ dataset.carehome = case(
 
 # Cancer diagnosis in past 5 years
 dataset.cancer = case(
-    when(prior_events.where(prior_events.snomedct_code.is_in(codelists.cancer_codes)
+    when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
         ).where(
-            prior_events.date.is_between(index_date, index_date - years(5))
+            clinical_events.date.is_between(index_date, index_date - years(5))
         ).exists_for_patient()
     ).then(1),
     default=0
@@ -193,18 +188,18 @@ dataset.opioid_new = case(
 
 ################################################
 
-# Testing use of measures to get monthly rates
-measures = Measures()
+# # Testing use of measures to get monthly rates
+# measures = Measures()
 
-# Numerator = (No. people where opioid_new == 1)
-# Denominator = (No. people where opioid_naive == 1)
-measures.define_measure(
-        name="opioid_new",
-        numerator=dataset.opioid_new,
-        denominator=dataset.population & dataset.opioid_naive,
-        intervals=months(12).starting_on(index_date),
-        group_by={
-            "sex": dataset.sex
-        },
-    )
+# # Numerator = (No. people where opioid_new == 1)
+# # Denominator = (No. people where opioid_naive == 1)
+# measures.define_measure(
+#         name="opioid_new",
+#         numerator=dataset.opioid_new,
+#         denominator=dataset.population & dataset.opioid_naive,
+#         intervals=months(12).starting_on(index_date),
+#         group_by={
+#             "sex": dataset.sex
+#         },
+#     )
 
