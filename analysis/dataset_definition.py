@@ -188,18 +188,18 @@ dataset.opioid_new = case(
 
 ################################################
 
-# # Testing use of measures to get monthly rates
-# measures = Measures()
+# Testing use of measures to get monthly rates
+measures = Measures()
 
-# # Numerator = (No. people where opioid_new == 1)
-# # Denominator = (No. people where opioid_naive == 1)
-# measures.define_measure(
-#         name="opioid_new",
-#         numerator=dataset.opioid_new,
-#         denominator=dataset.population & dataset.opioid_naive,
-#         intervals=months(12).starting_on(index_date),
-#         group_by={
-#             "sex": dataset.sex
-#         },
-#     )
+# Numerator = (No. people where opioid_new == 1)
+# Denominator = (No. people where opioid_naive == 1)
+measures.define_measure(
+        name="opioid_new",
+        numerator=dataset.opioid_new,
+        denominator=dataset.population & dataset.opioid_naive,
+        intervals=months(12).starting_on(index_date),
+        group_by={
+            "sex": dataset.sex
+        },
+    )
 
