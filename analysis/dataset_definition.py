@@ -120,7 +120,7 @@ dataset.carehome = case(
 dataset.cancer = case(
     when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
         ).where(
-            clinical_events.date.is_between(index_date, index_date - years(5))
+            clinical_events.date.is_on_or_between(index_date, index_date - years(5))
         ).exists_for_patient()
     ).then(1),
     default=0
