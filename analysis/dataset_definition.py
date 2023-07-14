@@ -12,9 +12,7 @@ dataset = Dataset()
 
 index_date = "2020-03-01"
 
-# Define population ##########################
-# Interested in people registered with *any* practice on the index date,
-#   regardless of length of registration
+# Define population #
 dataset.define_population(
     (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
     & ((patients.sex == "male") | (patients.sex == "female"))
@@ -22,7 +20,7 @@ dataset.define_population(
     & (practice_registrations.for_patient_on(index_date).exists_for_patient())
 )
 
-# Demographics ###############################
+# Demographics #
 
 # Age
 dataset.age = patients.age_on(index_date)
@@ -111,22 +109,22 @@ carehome_primis = clinical_events.where(
 carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
 
 dataset.carehome = case(
-    when(carehome_primis).then(1),
-    when(carehome_tpp).then(1),
-    default=0
+    when(carehome_primis).then(True),
+    when(carehome_tpp).then(True),
+    default=False
 )
 
 # Cancer diagnosis in past 5 years
 dataset.cancer = case(
     when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
         ).where(
-            clinical_events.date.is_on_or_between(index_date, index_date - years(5))
+            clinical_events.date.is_on_or_between(index_date - years(5), index_date)
         ).exists_for_patient()
-    ).then(1),
-    default=0
+    ).then(True),
+    default=False
 )
 
-# No. people with opioid prescription ##########################################
+# No. people with opioid prescription #
 
 def has_med_event(codelist, where=True):
     med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
@@ -135,8 +133,8 @@ def has_med_event(codelist, where=True):
         ).exists_for_patient()
     return (
         case(
-            when(med_event_exists).then(1),
-            when(~med_event_exists).then(0)
+            when(med_event_exists).then(True),
+            when(~med_event_exists).then(False)
             )
     )
 
@@ -157,7 +155,7 @@ dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose op
 dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
 
 
-# No. people with a new opioid prescription (2 year lookback) ######################
+# No. people with a new opioid prescription (2 year lookback) #
 # Note: for all opioids only 
 
 # Date of last prescription before index date
@@ -170,9 +168,9 @@ last_rx = medications.where(
 
 # Is opioid naive (using two year lookback) (for denominator)
 dataset.opioid_naive = case(
-    when(last_rx.is_before(index_date - years(2))).then(1),
-    when(last_rx.is_null()).then(1),
-    default=0
+    when(last_rx.is_before(index_date - years(2))).then(True),
+    when(last_rx.is_null()).then(True),
+    default=False
 )
 
 # Number of people with new prescriptions (among naive only)
@@ -180,26 +178,32 @@ dataset.opioid_new = case(
     when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
         ).where(
             medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
-        ).where(dataset.opioid_naive == 1).exists_for_patient()
-    ).then(1),
-    default=0
+        ).where(dataset.opioid_naive).exists_for_patient()
+    ).then(True),
+    default=False
 )
 
+##############################################
 
-################################################
-
-# Testing use of measures to get monthly rates
+# Testing measures to calculate monthly rates #
 measures = Measures()
 
-# Numerator = (No. people where opioid_new == 1)
-# Denominator = (No. people where opioid_naive == 1)
-measures.define_measure(
-        name="opioid_new",
-        numerator=dataset.opioid_new,
-        denominator=dataset.population & dataset.opioid_naive,
-        intervals=months(12).starting_on(index_date),
-        group_by={
-            "sex": dataset.sex
+measures.define_defaults(
+    denominator=dataset.population,
+    group_by={
+        "sex": dataset.sex,
         },
-    )
+    intervals=months(12).starting_on("2018-01-01"),
+)
 
+# Any opioid prescribing
+measures.define_measure(
+    name="opioid_any",
+    numerator=dataset.opioid_any,
+)
+
+# Any oral opioid prescribing
+measures.define_measure(
+    name="oral_opioid_any",
+    numerator=dataset.oral_opioid_any,
+)

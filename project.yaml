@@ -10,18 +10,18 @@ expectations:
 
 actions:
 
-  # Extract data ----
   generate_dataset:
     run: ehrql:v0 generate-dataset analysis/dataset_definition.py --output output/dataset.csv.gz
     outputs:
       highly_sensitive:
         cohort: output/dataset.csv.gz
 
-  measures_ehrql:
-    run: ehrql:v0 generate-measures analysis/dataset_definition.py --output output/measures.csv
+  measures_ehrql_any:
+    run: ehrql:v0 generate-measures analysis/dataset_definition.py --output output/measures_any.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures.csv
+        measure_csv: output/measures_any.csv
+        
 
   # ## Cohort data
   # generate_study_population_1:
