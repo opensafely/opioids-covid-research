@@ -12,7 +12,7 @@ from dataset_definition import make_dataset
 
 index_date = INTERVAL.start_date
 
-dataset = make_dataset(index_date)
+dataset = make_dataset(index_date=index_date)
 
 # Any opioid prescribing
 measures = Measures()
