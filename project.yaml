@@ -11,18 +11,35 @@ expectations:
 actions:
 
   generate_dataset:
-    run: ehrql:v0 generate-dataset analysis/dataset_definition.py --output output/dataset.csv.gz
+    run: ehrql:v0 generate-dataset analysis/dataset_definition.py --output output/dataset_mar22.csv.gz
     outputs:
       highly_sensitive:
-        cohort: output/dataset.csv.gz
+        cohort: output/dataset_mar22.csv.gz
 
-  measures_ehrql_any:
-    run: ehrql:v0 generate-measures analysis/dataset_definition.py --output output/measures_any.csv
+  measures_any:
+    run: ehrql:v0 generate-measures analysis/measures_any.py --output output/measures_any.csv
     outputs:
-      moderately_sensitive:
+      highly_sensitive:
         measure_csv: output/measures_any.csv
         
-
+  # measures_hi:
+  #   run: ehrql:v0 generate-measures analysis/measures_hi.py --output output/measures_hi.csv
+  #   outputs:
+  #     highly_sensitive:
+  #       measure_csv: output/measures_hi.csv
+        
+  # measures_long:
+  #   run: ehrql:v0 generate-measures analysis/measures_long.py --output output/measures_long.csv
+  #   outputs:
+  #     highly_sensitive:
+  #       measure_csv: output/measures_long.csv
+        
+  # measures_by_type:
+  #   run: ehrql:v0 generate-measures analysis/measures_by_type.py --output output/measures_by_type.csv
+  #   outputs:
+  #     highly_sensitive:
+  #       measure_csv: output/measures_by_type.csv
+      
   # ## Cohort data
   # generate_study_population_1:
   #   run: cohortextractor:latest generate_cohort

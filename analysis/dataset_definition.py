@@ -10,200 +10,202 @@ import codelists
 
 dataset = Dataset()
 
-index_date = "2020-03-01"
+def make_dataset(index_date):
 
-# Define population #
-dataset.define_population(
-    (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
-    & ((patients.sex == "male") | (patients.sex == "female"))
-    & (patients.date_of_death >= index_date)
-    & (practice_registrations.for_patient_on(index_date).exists_for_patient())
-)
-
-# Demographics #
-
-# Age
-dataset.age = patients.age_on(index_date)
-dataset.age_group = case(
-        when(dataset.age < 30).then("18-29"),
-        when(dataset.age < 40).then("20-39"),
-        when(dataset.age < 50).then("40-49"),
-        when(dataset.age < 60).then("50-59"),
-        when(dataset.age < 70).then("60-69"),
-        when(dataset.age < 80).then("70-79"),
-        when(dataset.age < 90).then("80-89"),
-        when(dataset.age >= 90).then("90+"),
-        default="missing",
-)
-
-# Sex
-dataset.sex = patients.sex 
-
-# IMD decile
-# imd = addresses.for_patient_on(index_date).imd_rounded
-# dataset.imd_band = case(
-#         when(imd < 32844 * 1 / 10).then("1 (most deprived)"),
-#         when(imd < 32844 * 2 / 10).then("2"),
-#         when(imd < 32844 * 3 / 10).then("3"),
-#         when(imd < 32844 * 4 / 10).then("4"),
-#         when(imd < 32844 * 5 / 10).then("5"),
-#         when(imd < 32844 * 6 / 10).then("6"),
-#         when(imd < 32844 * 7 / 10).then("7"),
-#         when(imd < 32844 * 8 / 10).then("8"),
-#         when(imd < 32844 * 9 / 10).then("9"),
-#         when(imd >= 32844 * 9 / 10).then("10 (least deprived)"),
-#         default="unknown"
-# )
-
-# Ethnicity 16 categories
-ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
-    ).sort_by(
-        clinical_events.date
-    ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
-
-dataset.ethnicity16 = case(
-    when(ethnicity16 == "1").then("White - British"),
-    when(ethnicity16 == "2").then("White - Irish"),
-    when(ethnicity16 == "3").then("White - Other"),
-    when(ethnicity16 == "4").then("Mixed - White/Black Caribbean"),
-    when(ethnicity16 == "5").then("Mixed - White/Black African"),
-    when(ethnicity16 == "6").then("Mixed - White/Asian"),
-    when(ethnicity16 == "7").then("Mixed - Other"),
-    when(ethnicity16 == "8").then("Asian or Asian British - Indian"),
-    when(ethnicity16 == "9").then("Asian or Asian British - Pakistani"),
-    when(ethnicity16 == "10").then("Asian or Asian British - Bangladeshi"),
-    when(ethnicity16 == "11").then("Asian or Asian British - Other"),
-    when(ethnicity16 == "12").then("Black - Caribbean"),    
-    when(ethnicity16 == "13").then("Black - African"),
-    when(ethnicity16 == "14").then("Black - Other"),
-    when(ethnicity16 == "15").then("Other - Chinese"),
-    when(ethnicity16 == "16").then("Other - Other"),
-    default="Unknown"
-)
-
-# Ethnicity 6 categories
-ethnicity6 = clinical_events.where(
-        clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
-    ).sort_by(
-        clinical_events.date
-    ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
-
-dataset.ethnicity6 = case(
-    when(ethnicity6 == "1").then("White"),
-    when(ethnicity6 == "2").then("Mixed"),
-    when(ethnicity6 == "3").then("South Asian"),
-    when(ethnicity6 == "4").then("Black"),
-    when(ethnicity6 == "5").then("Other"),
-    when(ethnicity6 == "6").then("Not stated"),
-    default="Unknown"
-)
-
-# Practice region
-dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
-
-# In care home based on primis codes/TPP address match
-carehome_primis = clinical_events.where(
-        clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
-    ).exists_for_patient() 
-
-carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
-
-dataset.carehome = case(
-    when(carehome_primis).then(True),
-    when(carehome_tpp).then(True),
-    default=False
-)
-
-# Cancer diagnosis in past 5 years
-dataset.cancer = case(
-    when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
-        ).where(
-            clinical_events.date.is_on_or_between(index_date - years(5), index_date)
-        ).exists_for_patient()
-    ).then(True),
-    default=False
-)
-
-# No. people with opioid prescription #
-
-def has_med_event(codelist, where=True):
-    med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
-        ).where(
-            medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
-        ).exists_for_patient()
-    return (
-        case(
-            when(med_event_exists).then(True),
-            when(~med_event_exists).then(False)
-            )
+    # Define population #
+    dataset.define_population(
+        (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
+        & ((patients.sex == "male") | (patients.sex == "female"))
+        & ((patients.date_of_death.is_on_or_after(index_date)) | (patients.date_of_death.is_null()))
+        & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
+    # Demographics #
 
-dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
+    # Age
+    dataset.age = patients.age_on(index_date)
+    dataset.age_group = case(
+            when(dataset.age < 30).then("18-29"),
+            when(dataset.age < 40).then("30-39"),
+            when(dataset.age < 50).then("40-49"),
+            when(dataset.age < 60).then("50-59"),
+            when(dataset.age < 70).then("60-69"),
+            when(dataset.age < 80).then("70-79"),
+            when(dataset.age < 90).then("80-89"),
+            when(dataset.age >= 90).then("90+"),
+            default="missing",
+    )
 
-# By admin route
-dataset.oral_opioid_any = has_med_event(codelists.opioid_codes)  # Oral opioid
-dataset.buc_opioid_any = has_med_event(codelists.opioid_codes)  # Buccal opioid
-dataset.inh_opioid_any = has_med_event(codelists.opioid_codes)  # Inhaled opioid
-dataset.rec_opioid_any = has_med_event(codelists.opioid_codes)  # Rectal opioid
-dataset.par_opioid_any = has_med_event(codelists.opioid_codes)  # Parenteral opioid
-dataset.trans_opioid_any = has_med_event(codelists.opioid_codes)  # Transdermal opioid
-dataset.oth_opioid_any = has_med_event(codelists.opioid_codes)  # Other admin route opioid
+    # Age for standardisation
+    dataset.age_stand = case(
+            when(dataset.age < 25).then("18-24"),
+            when(dataset.age < 30).then("25-29"),
+            when(dataset.age < 35).then("30-34"),
+            when(dataset.age < 40).then("35-39"),
+            when(dataset.age < 45).then("40-44"),
+            when(dataset.age < 50).then("45-49"),
+            when(dataset.age < 55).then("50-54"),
+            when(dataset.age < 60).then("55-59"),
+            when(dataset.age < 65).then("60-64"),
+            when(dataset.age < 70).then("65-69"),
+            when(dataset.age < 75).then("70-74"),
+            when(dataset.age < 80).then("75-79"),
+            when(dataset.age < 85).then("80-84"),
+            when(dataset.age < 90).then("85-89"),
+            when(dataset.age >= 90).then("90+"),
+            default="missing",
+    )
 
-# By strength/type
-dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose opioid
-dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
+    # Sex
+    dataset.sex = patients.sex 
+
+    # IMD decile
+    # imd = addresses.for_patient_on(index_date).imd_rounded
+    # dataset.imd5 = case(
+    #         when(imd < 32844 * 1 / 10).then("1 (most deprived)"),
+    #         when(imd < 32844 * 2 / 10).then("2"),
+    #         when(imd < 32844 * 3 / 10).then("3"),
+    #         when(imd < 32844 * 4 / 10).then("4"),
+    #         when(imd < 32844 * 5 / 10).then("5"),
+    #         when(imd < 32844 * 6 / 10).then("6"),
+    #         when(imd < 32844 * 7 / 10).then("7"),
+    #         when(imd < 32844 * 8 / 10).then("8"),
+    #         when(imd < 32844 * 9 / 10).then("9"),
+    #         when(imd >= 32844 * 9 / 10).then("10 (least deprived)"),
+    #         default="unknown"
+    # )
+
+    # Ethnicity 16 categories
+    ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
+        ).sort_by(
+            clinical_events.date
+        ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
+
+    dataset.ethnicity16 = case(
+        when(ethnicity16 == "1").then("White - British"),
+        when(ethnicity16 == "2").then("White - Irish"),
+        when(ethnicity16 == "3").then("White - Other"),
+        when(ethnicity16 == "4").then("Mixed - White/Black Caribbean"),
+        when(ethnicity16 == "5").then("Mixed - White/Black African"),
+        when(ethnicity16 == "6").then("Mixed - White/Asian"),
+        when(ethnicity16 == "7").then("Mixed - Other"),
+        when(ethnicity16 == "8").then("Asian or Asian British - Indian"),
+        when(ethnicity16 == "9").then("Asian or Asian British - Pakistani"),
+        when(ethnicity16 == "10").then("Asian or Asian British - Bangladeshi"),
+        when(ethnicity16 == "11").then("Asian or Asian British - Other"),
+        when(ethnicity16 == "12").then("Black - Caribbean"),    
+        when(ethnicity16 == "13").then("Black - African"),
+        when(ethnicity16 == "14").then("Black - Other"),
+        when(ethnicity16 == "15").then("Other - Chinese"),
+        when(ethnicity16 == "16").then("Other - Other"),
+        default="Unknown"
+    )
+
+    # Ethnicity 6 categories
+    ethnicity6 = clinical_events.where(
+            clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
+        ).sort_by(
+            clinical_events.date
+        ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
+
+    dataset.ethnicity6 = case(
+        when(ethnicity6 == "1").then("White"),
+        when(ethnicity6 == "2").then("Mixed"),
+        when(ethnicity6 == "3").then("South Asian"),
+        when(ethnicity6 == "4").then("Black"),
+        when(ethnicity6 == "5").then("Other"),
+        when(ethnicity6 == "6").then("Not stated"),
+        default="Unknown"
+    )
+
+    # Practice region
+    dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
+
+    # In care home based on primis codes/TPP address match
+    carehome_primis = clinical_events.where(
+            clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
+        ).exists_for_patient() 
+
+    carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
+
+    dataset.carehome = case(
+        when(carehome_primis).then(True),
+        when(carehome_tpp).then(True),
+        default=False
+    )
+
+    # Cancer diagnosis in past 5 years
+    dataset.cancer = case(
+        when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
+            ).where(
+                clinical_events.date.is_on_or_between(index_date - years(5), index_date)
+            ).exists_for_patient()
+        ).then(True),
+        default=False
+    )
+
+    # No. people with opioid prescription #
+
+    def has_med_event(codelist, where=True):
+        med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
+            ).where(
+                medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+            ).exists_for_patient()
+        return (
+            case(
+                when(med_event_exists).then(True),
+                when(~med_event_exists).then(False)
+                )
+        )
+
+    dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
+
+    # By admin route
+    dataset.oral_opioid_any = has_med_event(codelists.opioid_codes)  # Oral opioid
+    dataset.buc_opioid_any = has_med_event(codelists.opioid_codes)  # Buccal opioid
+    dataset.inh_opioid_any = has_med_event(codelists.opioid_codes)  # Inhaled opioid
+    dataset.rec_opioid_any = has_med_event(codelists.opioid_codes)  # Rectal opioid
+    dataset.par_opioid_any = has_med_event(codelists.opioid_codes)  # Parenteral opioid
+    dataset.trans_opioid_any = has_med_event(codelists.opioid_codes)  # Transdermal opioid
+    dataset.oth_opioid_any = has_med_event(codelists.opioid_codes)  # Other admin route opioid
+
+    # By strength/type
+    dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose opioid
+    dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
 
 
-# No. people with a new opioid prescription (2 year lookback) #
-# Note: for all opioids only 
+    # No. people with a new opioid prescription (2 year lookback) #
+    # Note: for all opioids only 
 
-# Date of last prescription before index date
-last_rx = medications.where(
-    medications.dmd_code.is_in(codelists.opioid_codes)
-    ).where(
-        medications.date.is_before(index_date)
-    ).sort_by(
-        medications.date).last_for_patient().date
-
-# Is opioid naive (using two year lookback) (for denominator)
-dataset.opioid_naive = case(
-    when(last_rx.is_before(index_date - years(2))).then(True),
-    when(last_rx.is_null()).then(True),
-    default=False
-)
-
-# Number of people with new prescriptions (among naive only)
-dataset.opioid_new = case(
-    when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
+    # Date of last prescription before index date
+    last_rx = medications.where(
+        medications.dmd_code.is_in(codelists.opioid_codes)
         ).where(
-            medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
-        ).where(dataset.opioid_naive).exists_for_patient()
-    ).then(True),
-    default=False
-)
+            medications.date.is_before(index_date)
+        ).sort_by(
+            medications.date).last_for_patient().date
+
+    # Is opioid naive (using two year lookback) (for denominator)
+    dataset.opioid_naive = case(
+        when(last_rx.is_before(index_date - years(2))).then(True),
+        when(last_rx.is_null()).then(True),
+        default=False
+    )
+
+    # Number of people with new prescriptions (among naive only)
+    dataset.opioid_new = case(
+        when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
+            ).where(
+                medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+            ).where(dataset.opioid_naive).exists_for_patient()
+        ).then(True),
+        default=False
+    )
+
+    return dataset
+
 
 ##############################################
 
-# Testing measures to calculate monthly rates #
-measures = Measures()
-
-measures.define_defaults(
-    denominator=dataset.population,
-    group_by={
-        "sex": dataset.sex,
-        },
-    intervals=months(12).starting_on("2018-01-01"),
-)
-
-# Any opioid prescribing
-measures.define_measure(
-    name="opioid_any",
-    numerator=dataset.opioid_any,
-)
-
-# Any oral opioid prescribing
-measures.define_measure(
-    name="oral_opioid_any",
-    numerator=dataset.oral_opioid_any,
-)
+# Save data for March 2022 (for tables)
+dataset_mar22 = make_dataset(index_date="2022-03-01")
