@@ -8,51 +8,52 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-dataset = Dataset()
-
+# Function to define dataset
 def make_dataset(index_date):
+    
+    dataset = Dataset()
 
     # Define population #
     dataset.define_population(
         (patients.age_on(index_date) >= 18) & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
-        & ((patients.date_of_death.is_on_or_after(index_date)) | (patients.date_of_death.is_null()))
+        & ((patients.date_of_death.is_after(index_date)) | (patients.date_of_death.is_null()))
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
     # Demographics #
 
     # Age
-    dataset.age = patients.age_on(index_date)
+    age = patients.age_on(index_date)
     dataset.age_group = case(
-            when(dataset.age < 30).then("18-29"),
-            when(dataset.age < 40).then("30-39"),
-            when(dataset.age < 50).then("40-49"),
-            when(dataset.age < 60).then("50-59"),
-            when(dataset.age < 70).then("60-69"),
-            when(dataset.age < 80).then("70-79"),
-            when(dataset.age < 90).then("80-89"),
-            when(dataset.age >= 90).then("90+"),
+            when(age < 30).then("18-29"),
+            when(age < 40).then("30-39"),
+            when(age < 50).then("40-49"),
+            when(age < 60).then("50-59"),
+            when(age < 70).then("60-69"),
+            when(age < 80).then("70-79"),
+            when(age < 90).then("80-89"),
+            when(age >= 90).then("90+"),
             default="missing",
     )
 
     # Age for standardisation
     dataset.age_stand = case(
-            when(dataset.age < 25).then("18-24"),
-            when(dataset.age < 30).then("25-29"),
-            when(dataset.age < 35).then("30-34"),
-            when(dataset.age < 40).then("35-39"),
-            when(dataset.age < 45).then("40-44"),
-            when(dataset.age < 50).then("45-49"),
-            when(dataset.age < 55).then("50-54"),
-            when(dataset.age < 60).then("55-59"),
-            when(dataset.age < 65).then("60-64"),
-            when(dataset.age < 70).then("65-69"),
-            when(dataset.age < 75).then("70-74"),
-            when(dataset.age < 80).then("75-79"),
-            when(dataset.age < 85).then("80-84"),
-            when(dataset.age < 90).then("85-89"),
-            when(dataset.age >= 90).then("90+"),
+            when(age < 25).then("18-24"),
+            when(age < 30).then("25-29"),
+            when(age < 35).then("30-34"),
+            when(age < 40).then("35-39"),
+            when(age < 45).then("40-44"),
+            when(age < 50).then("45-49"),
+            when(age < 55).then("50-54"),
+            when(age < 60).then("55-59"),
+            when(age < 65).then("60-64"),
+            when(age < 70).then("65-69"),
+            when(age < 75).then("70-74"),
+            when(age < 80).then("75-79"),
+            when(age < 85).then("80-84"),
+            when(age < 90).then("85-89"),
+            when(age >= 90).then("90+"),
             default="missing",
     )
 
@@ -208,4 +209,4 @@ def make_dataset(index_date):
 ##############################################
 
 # Save data for March 2022 (for tables)
-dataset_mar22 = make_dataset(index_date="2022-03-01")
+dataset = make_dataset(index_date="2022-03-01")

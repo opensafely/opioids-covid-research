@@ -1,14 +1,9 @@
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
-from ehrql.tables.beta.tpp import (
-    patients, 
-    medications, 
-    addresses,
-    practice_registrations,
-    clinical_events)
+from dataset_definition import make_dataset
+from ehrql import INTERVAL, Dataset, Measures, case, days, months, when, years
+from ehrql.tables.beta.tpp import (addresses, clinical_events, medications,
+                                   patients, practice_registrations)
 
 import codelists
-
-from dataset_definition import make_dataset
 
 index_date = INTERVAL.start_date
 
@@ -23,9 +18,9 @@ measures.define_defaults(
     intervals=months(51).starting_on("2018-01-01"),
 )
 
-measures.define_measure(name="opioid_any", group_by={"age_group": dataset.age_group})
-measures.define_measure(name="opioid_any", group_by={"sex": dataset.sex})
-measures.define_measure(name="opioid_any", group_by={"region": dataset.region})
-# measures.define_measure(name="opioid_any", group_by={"imd": dataset.imd5})
-measures.define_measure(name="opioid_any", group_by={"ethnicity6": dataset.ethnicity6})
-measures.define_measure(name="opioid_any", group_by={"carehome": dataset.carehome})
+measures.define_measure(name="opioid_any_age", group_by={"age_group": dataset.age_group})
+measures.define_measure(name="opioid_any_sex", group_by={"sex": dataset.sex})
+measures.define_measure(name="opioid_any_region", group_by={"region": dataset.region})
+#measures.define_measure(name="opioid_any", group_by={"imd": dataset.imd5})
+measures.define_measure(name="opioid_any_eth6", group_by={"ethnicity6": dataset.ethnicity6})
+measures.define_measure(name="opioid_any_carehome", group_by={"carehome": dataset.carehome})
