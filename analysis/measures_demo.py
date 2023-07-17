@@ -86,42 +86,42 @@ measures.define_measure(
 # By demograhpics - new prescribing
 measures.define_measure(
     name="opioid_new_age", 
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     group_by={"age_group": dataset.age_group}
     )
 
 measures.define_measure(
     name="opioid_new_sex", 
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     group_by={"sex": dataset.sex}
     )
 
 measures.define_measure(
     name="opioid_new_region", 
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     group_by={"region": dataset.region}
     )
 
 measures.define_measure(
     name="opioid_new_imd", 
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     group_by={"imd": dataset.imd10}
     )
 
 measures.define_measure(
     name="opioid_new_eth6", 
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     group_by={"ethnicity6": dataset.ethnicity6}
     )
 
 measures.define_measure(
     name="opioid_new_carehome",
-    numerator=dataset.opioid_any,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive, 
     group_by={"carehome": dataset.carehome}
     )
@@ -129,42 +129,42 @@ measures.define_measure(
 # By demograhpics - high dose/long acting
 measures.define_measure(
     name="hi_opioid_new_age", 
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     group_by={"age_group": dataset.age_group}
     )
 
 measures.define_measure(
     name="hopioid_new_sex", 
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     group_by={"sex": dataset.sex}
     )
 
 measures.define_measure(
     name="opioid_new_region", 
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     group_by={"region": dataset.region}
     )
 
 measures.define_measure(
     name="opioid_new_imd", 
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     group_by={"imd": dataset.imd10}
     )
 
 measures.define_measure(
     name="opioid_new_eth6", 
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     group_by={"ethnicity6": dataset.ethnicity6}
     )
 
 measures.define_measure(
     name="opioid_new_carehome",
-    numerator=opioid.hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator, 
     group_by={"carehome": dataset.carehome}
     )
