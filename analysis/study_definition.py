@@ -630,7 +630,7 @@ measures = [
     id = "par_opioid_age_any",
     numerator = "par_opioid_any",
     denominator = "population",
-    group_by = ["age_cat",  "sex", "cancer"],
+    group_by = ["age_cat", "sex", "cancer"],
   ),
 
   ## Inhaled opioid  - age 

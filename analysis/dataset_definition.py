@@ -53,20 +53,20 @@ def make_dataset(index_date):
     dataset.sex = patients.sex 
 
     # IMD decile
-    # imd = addresses.for_patient_on(index_date).imd_rounded
-    # dataset.imd5 = case(
-    #         when(imd < 32844 * 1 / 10).then("1 (most deprived)"),
-    #         when(imd < 32844 * 2 / 10).then("2"),
-    #         when(imd < 32844 * 3 / 10).then("3"),
-    #         when(imd < 32844 * 4 / 10).then("4"),
-    #         when(imd < 32844 * 5 / 10).then("5"),
-    #         when(imd < 32844 * 6 / 10).then("6"),
-    #         when(imd < 32844 * 7 / 10).then("7"),
-    #         when(imd < 32844 * 8 / 10).then("8"),
-    #         when(imd < 32844 * 9 / 10).then("9"),
-    #         when(imd >= 32844 * 9 / 10).then("10 (least deprived)"),
-    #         default="unknown"
-    # )
+    imd = addresses.for_patient_on(index_date).imd_rounded
+    dataset.imd10 = case(
+            when((imd >= 0) & (imd < int(32844 * 1 / 10))).then("1 (most deprived)"),
+            when(imd < int(32844 * 2 / 10)).then("2"),
+            when(imd < int(32844 * 3 / 10)).then("3"),
+            when(imd < int(32844 * 4 / 10)).then("4"),
+            when(imd < int(32844 * 5 / 10)).then("5"),
+            when(imd < int(32844 * 6 / 10)).then("6"),
+            when(imd < int(32844 * 7 / 10)).then("7"),
+            when(imd < int(32844 * 8 / 10)).then("8"),
+            when(imd < int(32844 * 9 / 10)).then("9"),
+            when(imd >= int(32844 * 9 / 10)).then("10 (least deprived)"),
+            default="unknown"
+    )
 
     # Ethnicity 16 categories
     ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)

@@ -27,6 +27,18 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures_new.csv
+  
+  measures_type:
+    run: ehrql:v0 generate-measures analysis/measures_type.py --output output/measures_type.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_type.csv
+          
+  measures_hi:
+    run: ehrql:v0 generate-measures analysis/measures_hi.py --output output/measures_hi.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_hi.csv
         
   # measures_hi:
   #   run: ehrql:v0 generate-measures analysis/measures_hi.py --output output/measures_hi.csv
