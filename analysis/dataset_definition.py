@@ -8,7 +8,7 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-# Function to define dataset
+# Function to define dataset #
 def make_dataset(index_date):
     
     dataset = Dataset()
@@ -199,16 +199,3 @@ def make_dataset(index_date):
 
 
 ##############################################
-
-# Save data for March 2022 (for tables)
-dataset = make_dataset(index_date="2022-03-01")
-
-# Define population #
-dataset.define_population(
-        (patients.age_on("2022-03-01") >= 18) 
-        & (patients.age_on("2022-03-01") < 110)
-        & ((patients.sex == "male") | (patients.sex == "female"))
-        & (patients.date_of_death.is_after("2022-03-01") | patients.date_of_death.is_null())
-        & (practice_registrations.for_patient_on("2022-03-01").exists_for_patient())
-    )
-
