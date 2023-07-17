@@ -1,9 +1,14 @@
-from dataset_definition import make_dataset
-from ehrql import INTERVAL, Dataset, Measures, case, days, months, when, years
-from ehrql.tables.beta.tpp import (addresses, clinical_events, medications,
-                                   patients, practice_registrations)
+from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
+from ehrql.tables.beta.tpp import (
+    patients, 
+    medications, 
+    addresses,
+    practice_registrations,
+    clinical_events)
 
 import codelists
+
+from dataset_definition import make_dataset
 
 index_date = INTERVAL.start_date
 

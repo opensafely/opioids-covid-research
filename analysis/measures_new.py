@@ -6,14 +6,13 @@ from ehrql.tables.beta.tpp import (
     practice_registrations,
     clinical_events)
 
-index_date = "2018-01-01"
+import codelists
 
 from dataset_definition import make_dataset
 
-import codelists
+index_date = INTERVAL.start_date
 
 dataset = make_dataset(index_date=index_date)
-
 
 # New opioid prescribing
 measures = Measures()
