@@ -1,3 +1,8 @@
+###################################################
+# This script creates monthly counts/rates of opioid
+# prescribing for any opioid prescribing by mode of administration
+###################################################
+
 from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 
@@ -14,7 +19,6 @@ index_date = INTERVAL.start_date
 
 dataset = make_dataset(index_date=index_date)
 
-# Any opioid prescribing
 measures = Measures()
 
 denominator = (
@@ -30,31 +34,37 @@ measures.define_defaults(
     intervals=months(51).starting_on("2018-01-01"),
 )
 
-# Overall
+
 measures.define_measure(
     name="oral_opioid", 
     numerator=dataset.oral_opioid_any
     )
+
 measures.define_measure(
     name="trans_opioid", 
     numerator=dataset.trans_opioid_any
     )
+
 measures.define_measure(
     name="par_opioid", 
     numerator=dataset.par_opioid_any
     )
+
 measures.define_measure(
     name="rec_opioid", 
     numerator=dataset.rec_opioid_any
     )
+
 measures.define_measure(
     name="inh_opioid", 
     numerator=dataset.inh_opioid_any
     )
+
 measures.define_measure(
     name="buc_opioid", 
     numerator=dataset.buc_opioid_any
     )
+
 measures.define_measure(
     name="oth_opioid", 
     numerator=dataset.oth_opioid_any
@@ -66,33 +76,15 @@ measures.define_measure(
     numerator=dataset.oral_opioid_any,
     group_by={"carehome": dataset.carehome}
     )
+
 measures.define_measure(
     name="trans_opioid_carehome", 
     numerator=dataset.trans_opioid_any,
     group_by={"carehome": dataset.carehome}
     )
+
 measures.define_measure(
     name="par_opioid_carehome", 
     numerator=dataset.par_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-measures.define_measure(
-    name="rec_opioid_carehome",  
-    numerator=dataset.rec_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-measures.define_measure(
-    name="inh_opioid_carehome",  
-    numerator=dataset.inh_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-measures.define_measure(
-    name="buc_opioid_carehome",  
-    numerator=dataset.buc_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-measures.define_measure(
-    name="oth_opioid_carehome", 
-    numerator=dataset.oth_opioid_any,
     group_by={"carehome": dataset.carehome}
     )

@@ -1,3 +1,9 @@
+###################################################
+# This script defines all necessary variables
+# including demographics and opioid prescribing
+###################################################
+
+
 from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
 from ehrql.tables.beta.tpp import (
     patients, 

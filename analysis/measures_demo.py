@@ -1,3 +1,9 @@
+###################################################
+# This script creates monthly counts/rates of opioid
+# prescribing for any opioid prescribing, new opioid prescribing,
+# and high dose/long-acting prescribing by demographics categories
+###################################################
+
 from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 

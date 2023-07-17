@@ -1,3 +1,9 @@
+###################################################
+# This script defines creates a dataset for
+# everyone in the cohort on 1 Mar 2023,
+# for the purposes of creating Table 1
+###################################################
+
 from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
 from ehrql.tables.beta.tpp import (
     patients, 
