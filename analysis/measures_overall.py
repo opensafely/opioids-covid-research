@@ -42,18 +42,18 @@ measures.define_defaults(intervals=months(51).starting_on("2018-01-01"),)
 
 measures.define_measure(
     name="opioid_any",
-    numerator=opioid_any,
+    numerator=dataset.opioid_any,
     denominator=denominator,
     )
 
 measures.define_measure(
     name="opioid_new",
-    numerator=opioid_new,
+    numerator=dataset.opioid_new,
     denominator=denominator_naive,
     )
 
 measures.define_measure(
     name="hi_opioid_any",
-    numerator=hi_opioid_any,
+    numerator=dataset.hi_opioid_any,
     denominator=denominator,
     )
