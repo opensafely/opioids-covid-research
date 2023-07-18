@@ -38,21 +38,19 @@ measures.define_measure(
     name="opioid_any",
     numerator=dataset.opioid_any,
     denominator=denominator,
-    group_by={"sex": dataset.sex}
+    group_by={"sex": dataset.sex},
     )
 
 measures.define_measure(
     name="opioid_new",
     numerator=dataset.opioid_new,
     denominator=denominator & dataset.opioid_naive,
-    group_by=None,
     )
 
 measures.define_measure(
     name="hi_opioid_any",
     numerator=dataset.hi_opioid_any,
     denominator=denominator,
-    group_by=None,
     )
 
 
