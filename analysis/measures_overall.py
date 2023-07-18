@@ -31,13 +31,6 @@ denominator = (
         & (practice_registrations.for_patient_on("2022-03-01").exists_for_patient())
     )
 
-# Opioid naive denominator
-denominator_naive = (
-       denominator 
-       & dataset.opioid_naive
-    )
-
-
 measures.define_defaults(intervals=months(51).starting_on("2018-01-01"),)
 
 measures.define_measure(
@@ -49,11 +42,30 @@ measures.define_measure(
 measures.define_measure(
     name="opioid_new",
     numerator=dataset.opioid_new,
-    denominator=denominator_naive,
+    denominator=denominator & dataset.opioid_naive,
     )
 
 measures.define_measure(
     name="hi_opioid_any",
     numerator=dataset.hi_opioid_any,
     denominator=denominator,
+    )
+
+# Without cancer
+measures.define_measure(
+    name="opioid_any_nocancer",
+    numerator=dataset.opioid_any,
+    denominator=denominator & ~dataset.cancer,
+    )
+
+measures.define_measure(
+    name="opioid_new_nocancer",
+    numerator=dataset.opioid_new,
+    denominator=denominator & dataset.opioid_naive & ~dataset.cancer,
+    )
+
+measures.define_measure(
+    name="hi_opioid_any_nocancer",
+    numerator=dataset.hi_opioid_any,
+    denominator=denominator & ~dataset.cancer,
     )

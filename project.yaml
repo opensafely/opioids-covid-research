@@ -16,7 +16,7 @@ actions:
       highly_sensitive:
         cohort: output/dataset_mar22.csv.gz
 
-  measures_any:
+  measures_overall:
     run: ehrql:v0 generate-measures analysis/measures_overall.py --output output/measures_overall.csv
     outputs:
       moderately_sensitive:
@@ -33,6 +33,12 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures_demo.csv
+
+  measures_sens:
+    run: ehrql:v0 generate-measures analysis/measures_sens.py --output output/measures_sens.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_sens.csv
         
   
       
