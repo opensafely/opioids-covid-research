@@ -33,6 +33,12 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures_overall.csv
+
+  measures_overall_test:
+    run: ehrql:v0 generate-measures analysis/measures_overall_test.py --output output/measures_overall_test.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_overall_test.csv
   
   measures_overall_nocancer:
     run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py --output output/measures_overall_nocancer.csv
