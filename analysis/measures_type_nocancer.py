@@ -27,6 +27,7 @@ denominator = (
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
+        & (~dataset.cancer)
     )
 
 measures.define_defaults(
@@ -36,56 +37,36 @@ measures.define_defaults(
 
 # Overall
 measures.define_measure(
-    name="oral_opioid", 
+    name="oral_opioid_nocancer", 
     numerator=dataset.oral_opioid_any
     )
 
 measures.define_measure(
-    name="trans_opioid", 
+    name="trans_opioid_nocancer", 
     numerator=dataset.trans_opioid_any
     )
 
 measures.define_measure(
-    name="par_opioid", 
+    name="par_opioid_nocancer", 
     numerator=dataset.par_opioid_any
     )
 
 measures.define_measure(
-    name="rec_opioid", 
+    name="rec_opioid_nocancer", 
     numerator=dataset.rec_opioid_any
     )
 
 measures.define_measure(
-    name="inh_opioid", 
+    name="inh_opioid_nocancer", 
     numerator=dataset.inh_opioid_any
     )
 
 measures.define_measure(
-    name="buc_opioid", 
+    name="buc_opioid_nocancer", 
     numerator=dataset.buc_opioid_any
     )
 
 measures.define_measure(
-    name="oth_opioid", 
+    name="oth_opioid_nocancer", 
     numerator=dataset.oth_opioid_any
     )
-
-# By care home
-measures.define_measure(
-    name="oral_opioid_carehome", 
-    numerator=dataset.oral_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-
-measures.define_measure(
-    name="trans_opioid_carehome", 
-    numerator=dataset.trans_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-
-measures.define_measure(
-    name="par_opioid_carehome", 
-    numerator=dataset.par_opioid_any,
-    group_by={"carehome": dataset.carehome}
-    )
-

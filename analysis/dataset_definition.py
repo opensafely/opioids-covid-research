@@ -182,7 +182,8 @@ def make_dataset(index_date):
         ).where(
             medications.date.is_before(index_date)
         ).sort_by(
-            medications.date).last_for_patient().date
+            medications.date
+        ).last_for_patient().date
 
     # Is opioid naive (using two year lookback) (for denominator)
     dataset.opioid_naive = case(

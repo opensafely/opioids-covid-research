@@ -24,14 +24,14 @@ measures = Measures()
 
 # Total denominator - restrict to >=65 years
 denominator = (
-        (patients.age_on("2022-03-01") >= 65) 
-        & (patients.age_on("2022-03-01") < 110)
+        (patients.age_on(index_date) >= 65) 
+        & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
-        & (patients.date_of_death.is_after("2022-03-01") | patients.date_of_death.is_null())
-        & (practice_registrations.for_patient_on("2022-03-01").exists_for_patient())
+        & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
+        & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
-measures.define_defaults(intervals=months(51).starting_on("2018-01-01"))
+measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
 
 # By demographics - overall prescribing

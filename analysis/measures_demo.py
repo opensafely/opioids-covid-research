@@ -24,11 +24,11 @@ measures = Measures()
 
 # Total denominator
 denominator = (
-        (patients.age_on("2022-03-01") >= 18) 
-        & (patients.age_on("2022-03-01") < 110)
+        (patients.age_on(index_date) >= 18) 
+        & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
-        & (patients.date_of_death.is_after("2022-03-01") | patients.date_of_death.is_null())
-        & (practice_registrations.for_patient_on("2022-03-01").exists_for_patient())
+        & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
+        & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
 # Opioid naive denominator
@@ -37,7 +37,7 @@ denominator_naive = (
        & dataset.opioid_naive
     )
 
-measures.define_defaults(intervals=months(51).starting_on("2018-01-01"))
+measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
 
 # By demographics - overall prescribing
@@ -83,7 +83,7 @@ measures.define_measure(
     group_by={"carehome": dataset.carehome}
     )
 
-# By demograhpics - new prescribing
+# By demographics - new prescribing
 measures.define_measure(
     name="opioid_new_age", 
     numerator=dataset.opioid_new,
@@ -126,176 +126,4 @@ measures.define_measure(
     group_by={"carehome": dataset.carehome}
     )
 
-# By demograhpics - high dose/long acting
-measures.define_measure(
-    name="hi_opioid_age", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    group_by={"age_group": dataset.age_group}
-    )
 
-measures.define_measure(
-    name="hi_opioid_sex", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="hi_opioid_region", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="hi_opioid_imd", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="hi_opioid_eth6", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
-
-measures.define_measure(
-    name="hi_opioid_carehome",
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator, 
-    group_by={"carehome": dataset.carehome}
-    )
-
-# Without cancer
-
-# By demographics - overall prescribing
-measures.define_measure(
-    name="opioid_any_age_nocancer", 
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="opioid_any_sex_nocancer", 
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="opioid_any_region_nocancer", 
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="opioid_any_imd_nocancer",  
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="opioid_any_eth6_nocancer", 
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer, 
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
-
-measures.define_measure(
-    name="opioid_any_carehome_nocancer", 
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"carehome": dataset.carehome}
-    )
-
-# By demographics - new prescribing
-measures.define_measure(
-    name="opioid_new_age_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="opioid_new_sex_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="opioid_new_region_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="opioid_new_imd_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="opioid_new_eth6_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
-
-measures.define_measure(
-    name="opioid_new_carehome_nocancer", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive & ~dataset.cancer,
-    group_by={"carehome": dataset.carehome}
-    )
-
-# By demograhpics - high dose/long acting
-measures.define_measure(
-    name="hi_opioid_age_nocancer", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="hi_opioid_sex_nocancer", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="hi_opioid_region_nocancer",  
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="hi_opioid_imd_nocancer",  
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="hi_opioid_eth6_nocancer",  
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
-
-measures.define_measure(
-    name="hi_opioid_carehome_nocancer", 
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer, 
-    group_by={"carehome": dataset.carehome}
-    )

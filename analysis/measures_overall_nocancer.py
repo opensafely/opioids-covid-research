@@ -30,24 +30,25 @@ denominator = (
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
+        & (~dataset.cancer)
     )
 
 measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
 measures.define_measure(
-    name="opioid_any",
+    name="opioid_any_nocancer",
     numerator=dataset.opioid_any,
     denominator=denominator,
     )
 
 measures.define_measure(
-    name="opioid_new",
+    name="opioid_new_nocancer",
     numerator=dataset.opioid_new,
     denominator=denominator & dataset.opioid_naive,
     )
 
 measures.define_measure(
-    name="hi_opioid_any",
+    name="hi_opioid_any_nocancer",
     numerator=dataset.hi_opioid_any,
     denominator=denominator,
     )
