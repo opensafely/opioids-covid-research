@@ -10,7 +10,7 @@
 # --- IMPORT STATEMENTS ---
 
 ## Import code building blocks from cohort extractor package
-from cohortextractor import (codelist, codelist_from_csv, combine_codelists)
+from databuilder.ehrql import codelist_from_csv
 
  
 # --- CODELISTS ---
@@ -18,7 +18,6 @@ from cohortextractor import (codelist, codelist_from_csv, combine_codelists)
 ## Care home - use primis based on Schultze et al report (10.12688/wellcomeopenres.16737.1)
 carehome_primis_codes = codelist_from_csv(
   "codelists/primis-covid19-vacc-uptake-longres.csv", 
-  system = "snomed", 
   column = "code",
 )
 
@@ -27,28 +26,25 @@ carehome_primis_codes = codelist_from_csv(
 ###  Cancer - excluding lung/haem
 oth_ca_codes = codelist_from_csv(
   "codelists/opensafely-cancer-excluding-lung-and-haematological-snomed.csv",
-  system = "snomed",
   column = "id"
 )
 
 ### Cancer - lung
 lung_ca_codes = codelist_from_csv(
   "codelists/opensafely-lung-cancer-snomed.csv",
-  system = "snomed",
   column = "id"
 )
 
 ### Cancer - haematological
 haem_ca_codes = codelist_from_csv(
   "codelists/opensafely-haematological-cancer-snomed.csv",
-  system = "snomed",
   column = "id"
 )
 
 ### All cancer combined
-cancer_codes = combine_codelists(
-  oth_ca_codes,
-  lung_ca_codes,
+cancer_codes = (
+  oth_ca_codes +
+  lung_ca_codes +
   haem_ca_codes
 )
 
@@ -56,118 +52,77 @@ cancer_codes = combine_codelists(
 ### High dose, long-acting opioids 
 hi_opioid_codes = codelist_from_csv(
   "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Non high dose, long-acting opioids 
 non_hi_opioid_codes = codelist_from_csv(
   "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Any long-acting opioid
-long_opioid_codes = combine_codelists(
-  hi_opioid_codes,
-  non_hi_opioid_codes,
+long_opioid_codes = (
+  hi_opioid_codes +
+  non_hi_opioid_codes
 )
 
 ### Buccal opioids
 buc_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Inhaled opioids
 inh_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Oral opioids
 oral_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Parenteral opioids
 par_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Rectal opioids
 rec_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
-)
-
-### Oxycodone subq opioids
-oxy_codes = codelist_from_csv(
-  "codelists/opensafely-oxycodone-subcutaneous-dmd.csv",
-  system = "snomed",
-  column = "dmd_id",
-)
-
-### Morph subq opioids
-morph_codes = codelist_from_csv(
-  "codelists/opensafely-morphine-subcutaneous-dmd.csv",
-  system = "snomed",
-  column = "dmd_id",
-)
-
-### Morph subq opioids
-morph10_codes = codelist_from_csv(
-    "codelists/user-anschaf-morphine-sulfate-10mg1ml-solution-for-injection-ampoules-dmd.csv",
-    system="snomed", 
-    column = "dmd_id",
-  )
-
-### Morph inactive codes
-morph10_inactive_codes = codelist(
-    ["354043009", "395250002", "407884006"],
-    system="snomed",
-  )
-
-#### Morph - active AND inactive
-morph10_all_codes = combine_codelists(
-  morph10_codes, morph10_inactive_codes
 )
 
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
-  system = "snomed",
   column = "dmd_id",
 )
 
 ### Other opioid
-oth_opioid_codes = combine_codelists(
-  buc_opioid_codes,
-  inh_opioid_codes,
-  rec_opioid_codes,
+oth_opioid_codes = (
+  buc_opioid_codes +
+  inh_opioid_codes +
+  rec_opioid_codes
 )
 
 ### Any opioid
-opioid_codes = combine_codelists(
-  buc_opioid_codes,
-  inh_opioid_codes,
-  oral_opioid_codes,
-  par_opioid_codes,
-  rec_opioid_codes,
-  trans_opioid_codes,
+opioid_codes = (
+  buc_opioid_codes +
+  inh_opioid_codes +
+  oral_opioid_codes +
+  par_opioid_codes +
+  rec_opioid_codes +
+  trans_opioid_codes
 )
 
 ## Ethnicity
 ethnicity_codes_16 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    system="snomed",
     column="snomedcode",
     category_column="Grouping_16",
 )
@@ -175,7 +130,6 @@ ethnicity_codes_16 = codelist_from_csv(
 ## Ethnicity
 ethnicity_codes_6 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    system="snomed",
     column="snomedcode",
     category_column="Grouping_6",
 )

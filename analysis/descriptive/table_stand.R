@@ -1,12 +1,12 @@
 ######################################
-
 # This script:
 # - Produces counts of patients prescribed opioids (prevalence and incidence)
 #     by demographic characteristics before and during COVID (Apr-Jun 2019 vs 2020)
 # - Both overall in full population, and people without a cancer diagnosis
 # - Both crude and age/sex standardised
 # - saves data summaries (as table)
-
+#
+# Updated: 19 Jul 2023
 ######################################
 
 ## For running locally only
@@ -25,10 +25,10 @@ source(here("analysis", "lib", "custom_functions.R"))
 
 ## Create directories if needed
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
-for_tables <- read_csv(here::here("output", "joined", "final_for_tables.csv"))
+for_tables <- read_csv(here::here("output", "processed", "final_for_tables.csv"))
 ons_pop_stand <- read_csv(here::here("ONS-data", "ons_pop_stand.csv"))
 
 
@@ -55,14 +55,14 @@ f <- function(var, name) {
 # Need to do age/sex separately
 # Age is sex-standardised only
 age <- for_tables %>%
-  group_by(age_cat, cancer, sex) %>%
+  group_by(age_group, cancer, sex) %>%
   summarise(
     tot = n(),
     opioid_any = sum(opioid_any),
     opioid_new = sum(opioid_new),
     opioid_naive = sum(opioid_naive),
   )  %>%
-  rename(label = age_cat) %>%
+  rename(label = age_group) %>%
   mutate(group = "Age", 
          age_stand = as.character("Total")) %>%
   dplyr::select(contains(c("cancer", "label", "age_stand", 
@@ -87,7 +87,7 @@ combined <- rbind(age, sex,
   f(ethnicity16, "Ethnicity16"),
   f(ethnicity6, "Ethnicity6"),
   f(region, "Region"),
-  f(imdq10, "IMD decile"),
+  f(imd10, "IMD decile"),
   f(carehome, "Care home")  
 ) %>%
   dplyr::select(contains(c("cancer", "label", "age_stand", 
@@ -99,7 +99,7 @@ combined <- rbind(age, sex,
 
 # Rounding and redaction
 redact <- function(vars) {
-  case_when(vars >5 ~ vars)
+  case_when(vars > 5 ~ vars)
 }
 rounding <- function(vars) {
   round(vars/7)*7

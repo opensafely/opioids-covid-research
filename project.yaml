@@ -1,8 +1,6 @@
 ######################################
-
 # This script defines the project pipeline - it specifies the execution orders for all the code in this
 # repo using a series of actions.
-
 ######################################
 
 version: '3.0'
@@ -12,134 +10,193 @@ expectations:
 
 actions:
 
-  # Extract data ----
+  generate_dataset_apr22:
+    run: ehrql:v0 generate-dataset analysis/define_dataset_apr22.py --output output/dataset_apr22.csv.gz
+    outputs:
+      highly_sensitive:
+        cohort: output/dataset_apr22.csv.gz  
   
-  ## Cohort data
-  generate_study_population_1:
-    run: cohortextractor:latest generate_cohort
-      --study-definition study_definition
-      --index-date-range "2018-01-01 to 2018-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
+  generate_dataset_may22:
+    run: ehrql:v0 generate-dataset analysis/define_dataset_may22.py --output output/dataset_may22.csv.gz
     outputs:
       highly_sensitive:
-        cohort: output/input_*.csv
+        cohort: output/dataset_may22.csv.gz
 
-  generate_study_population_2:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2019-01-01 to 2019-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
+  generate_dataset_jun22:
+    run: ehrql:v0 generate-dataset analysis/define_dataset_jun22.py --output output/dataset_jun22.csv.gz
     outputs:
       highly_sensitive:
-        cohort: output/input*.csv
+        cohort: output/dataset_jun22.csv.gz
 
-  generate_study_population_3:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2020-01-01 to 2020-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/inpu*.csv
-
-  generate_study_population_4:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2021-01-01 to 2021-12-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/inp*.csv
-  
-  generate_study_population_5:
-    run: cohortextractor:latest generate_cohort 
-      --study-definition study_definition
-      --index-date-range "2022-01-01 to 2022-03-01 by month" 
-      --output-dir=output 
-      --output-format=csv
-    outputs:
-      highly_sensitive:
-        cohort: output/in*.csv
-
-  ## Ethnicity      
-  generate_ethnicity_cohort:
-    run: >
-      cohortextractor:latest generate_cohort
-        --study-definition study_definition_ethnicity
-    outputs:
-      highly_sensitive:
-        cohort: output/input_ethnicity.csv
-
-
-  # Data processing ----
-  
-  ## Add ethnicity
-  join_cohorts:
-    run: >
-      cohort-joiner:v0.0.48
-        --lhs output/input_*.csv
-        --rhs output/input_ethnicity.csv
-        --output-dir output/data
-    needs: [generate_study_population_1,  generate_study_population_2, 
-      generate_study_population_5, generate_study_population_3, 
-      generate_study_population_4, generate_ethnicity_cohort]
-    outputs:
-      highly_sensitive:
-        cohort: output/data/input_*.csv 
-
-
-  ## Generate measures - full population
-  generate_measures:
-    run: >
-      cohortextractor:latest generate_measures 
-        --study-definition study_definition
-        --output-dir output/data
-    needs: [join_cohorts]
+  measures_overall:
+    run: ehrql:v0 generate-measures analysis/measures_overall.py --output output/measures_overall.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/data/measure_*.csv
+        measure_csv: output/measures_overall.csv
+  
+  measures_overall_nocancer:
+    run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py --output output/measures_overall_nocancer.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_overall_nocancer.csv
+    
+  measures_demo:
+    run: ehrql:v0 generate-measures analysis/measures_demo.py --output output/measures_demo.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_demo.csv
+
+  measures_demo_nocancer:
+    run: ehrql:v0 generate-measures analysis/measures_demo_nocancer.py --output output/measures_demo_nocancer.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_demo_nocancer.csv
+
+  measures_type:
+    run: ehrql:v0 generate-measures analysis/measures_type.py --output output/measures_type.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_type.csv
+
+  measures_type_nocancer:
+    run: ehrql:v0 generate-measures analysis/measures_type_nocancer.py --output output/measures_type_nocancer.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_type_nocancer.csv
+
+  measures_sens:
+    run: ehrql:v0 generate-measures analysis/measures_sens.py --output output/measures_sens.csv
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures_sens.csv
+        
+  
+  # ## Cohort data
+  # generate_study_population_1:
+  #   run: cohortextractor:latest generate_cohort
+  #     --study-definition study_definition
+  #     --index-date-range "2018-01-01 to 2018-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input_*.csv
+
+  # generate_study_population_2:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2019-01-01 to 2019-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input*.csv
+
+  # generate_study_population_3:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2020-01-01 to 2020-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/inpu*.csv
+
+  # generate_study_population_4:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2021-01-01 to 2021-12-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/inp*.csv
+  
+  # generate_study_population_5:
+  #   run: cohortextractor:latest generate_cohort 
+  #     --study-definition study_definition
+  #     --index-date-range "2022-01-01 to 2022-03-01 by month" 
+  #     --output-dir=output 
+  #     --output-format=csv
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/in*.csv
+
+  # ## Ethnicity      
+  # generate_ethnicity_cohort:
+  #   run: >
+  #     cohortextractor:latest generate_cohort
+  #       --study-definition study_definition_ethnicity
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/input_ethnicity.csv
+
+
+  # # Data processing ----
+  
+  # ## Add ethnicity
+  # join_cohorts:
+  #   run: >
+  #     cohort-joiner:v0.0.48
+  #       --lhs output/input_*.csv
+  #       --rhs output/input_ethnicity.csv
+  #       --output-dir output/data
+  #   needs: [generate_study_population_1,  generate_study_population_2, 
+  #     generate_study_population_5, generate_study_population_3, 
+  #     generate_study_population_4, generate_ethnicity_cohort]
+  #   outputs:
+  #     highly_sensitive:
+  #       cohort: output/data/input_*.csv 
+
+
+  # ## Generate measures - full population
+  # generate_measures:
+  #   run: >
+  #     cohortextractor:latest generate_measures 
+  #       --study-definition study_definition
+  #       --output-dir output/data
+  #   needs: [join_cohorts]
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/data/measure_*.csv
 
 
   ## Process data - time series
   process_data_ts:
    run: r:latest analysis/process/process_data_ts.R
-   needs: [generate_measures, join_cohorts]
+   needs: [measures_overall, measures_overall_nocancer, measures_demo, measures_demo_nocancer, measures_type, measures_type_nocancer, measures_sens]
    outputs:
       moderately_sensitive:
-        measure_csv: output/joined/final_*.csv
+        ts_csv: output/processed/final_*.csv
 
   ## Process data - table
   process_data_table:
    run: r:latest analysis/process/process_data_table.R
-   needs: [generate_measures, join_cohorts]
+   needs: [generate_dataset_apr22, generate_dataset_may22, generate_dataset_jun22]
    outputs:
-      moderately_sensitive:
-        measure_csv: output/joined/final*.csv
+      highly_sensitive:
+        table_csv: output/processed/final*.csv
 
 
-  # Results ---
+  # # Results ---
 
-  ## Time series
-  timeseries:
-    run: r:latest analysis/descriptive/time_series_stand.R
-    needs: [process_data_ts]
-    outputs:
-      moderately_sensitive:
-        table: output/time series/ts_*.csv  
-  
-  ## Time series graphs
-  # graphs:
-  #   run: r:latest analysis/descriptive/graphs.R
-  #   needs: [timeseries]
+  # ## Time series
+  # timeseries:
+  #   run: r:latest analysis/descriptive/time_series_stand.R
+  #   needs: [process_data_ts]
   #   outputs:
   #     moderately_sensitive:
-  #       plot: output/time series/graphs/graph*.png
+  #       table: output/time series/ts_*.csv  
+  
+  # ## Time series graphs
+  # # graphs:
+  # #   run: r:latest analysis/descriptive/graphs.R
+  # #   needs: [timeseries]
+  # #   outputs:
+  # #     moderately_sensitive:
+  # #       plot: output/time series/graphs/graph*.png
 
-  ## Table 
+  # ## Table 
   table:
     run: r:latest analysis/descriptive/table_stand.R
     needs: [process_data_table]
