@@ -23,6 +23,7 @@ dataset = make_dataset(index_date=index_date)
 #
 measures = Measures()
 
+
 # Total denominator
 denominator = (
         (patients.age_on(index_date) >= 18) 

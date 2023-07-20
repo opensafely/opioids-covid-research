@@ -1,7 +1,7 @@
 ###################################################
 # This script creates monthly counts/rates of opioid
 # prescribing for any opioid prescribing, new opioid prescribing,
-# and high dose/long-acting prescribing
+# and high dose/long-acting prescribing by demographics categories
 ###################################################
 
 from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
@@ -20,7 +20,6 @@ index_date = INTERVAL.start_date
 
 dataset = make_dataset(index_date=index_date)
 
-#
 measures = Measures()
 
 # Total denominator
@@ -32,25 +31,40 @@ denominator = (
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
+# Opioid naive denominator
+denominator_naive = (
+       denominator 
+       & dataset.opioid_naive
+    )
+
 measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
+
+# By demographics - overall prescribing
 measures.define_measure(
-    name="opioid_any",
+    name="opioid_any_age", 
     numerator=dataset.opioid_any,
     denominator=denominator,
-    group_by={"sex": dataset.sex},
+    group_by={"age_group": dataset.age_group,
+              "sex": dataset.sex,
+              "region": dataset.region,
+              "imd": dataset.imd10,
+              "ethnicity": dataset.ethnicity6,
+              "carehome": dataset.carehome
+              }
     )
 
+
+# By demographics - new prescribing
 measures.define_measure(
-    name="opioid_new",
+    name="opioid_new_age", 
     numerator=dataset.opioid_new,
-    denominator=denominator & dataset.opioid_naive,
+    denominator=denominator_naive,
+    group_by={"age_group": dataset.age_group,
+              "sex": dataset.sex,
+              "region": dataset.region,
+              "imd": dataset.imd10,
+              "ethnicity": dataset.ethnicity6,
+              "carehome": dataset.carehome
+              }
     )
-
-measures.define_measure(
-    name="hi_opioid_any",
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator,
-    )
-
-

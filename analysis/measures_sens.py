@@ -24,7 +24,7 @@ measures = Measures()
 
 # Total denominator - restrict to >=65 years
 denominator = (
-        (patients.age_on(index_date) >= 65) 
+        (patients.age_on(index_date) >= 60) 
         & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())

@@ -33,12 +33,6 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures_overall.csv
-
-  measures_overall_test:
-    run: ehrql:v0 generate-measures analysis/measures_overall_test.py --output output/measures_overall_test.csv
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures_overall_test.csv
   
   measures_overall_nocancer:
     run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py --output output/measures_overall_nocancer.csv
@@ -77,7 +71,6 @@ actions:
         measure_csv: output/measures_sens.csv
         
   
-      
   # ## Cohort data
   # generate_study_population_1:
   #   run: cohortextractor:latest generate_cohort
@@ -168,21 +161,21 @@ actions:
   #       measure_csv: output/data/measure_*.csv
 
 
-  # ## Process data - time series
-  # process_data_ts:
-  #  run: r:latest analysis/process/process_data_ts.R
-  #  needs: [generate_measures, join_cohorts]
-  #  outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/joined/final_*.csv
+  ## Process data - time series
+  process_data_ts:
+   run: r:latest analysis/process/process_data_ts.R
+   needs: [measures_overall, measures_overall_nocancer, measures_demo, measures_demo_nocancer, measures_type, measures_type_nocancer, measures_sens]
+   outputs:
+      moderately_sensitive:
+        ts_csv: output/processed/final_*.csv
 
-  # ## Process data - table
-  # process_data_table:
-  #  run: r:latest analysis/process/process_data_table.R
-  #  needs: [generate_measures, join_cohorts]
-  #  outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/joined/final*.csv
+  ## Process data - table
+  process_data_table:
+   run: r:latest analysis/process/process_data_table.R
+   needs: [generate_dataset_apr22, generate_dataset_may22, generate_dataset_jun22]
+   outputs:
+      highly_sensitive:
+        table_csv: output/processed/final*.csv
 
 
   # # Results ---
@@ -204,12 +197,12 @@ actions:
   # #       plot: output/time series/graphs/graph*.png
 
   # ## Table 
-  # table:
-  #   run: r:latest analysis/descriptive/table_stand.R
-  #   needs: [process_data_table]
-  #   outputs:
-  #     moderately_sensitive:
-  #       table: output/tables/table_*.csv
+  table:
+    run: r:latest analysis/descriptive/table_stand.R
+    needs: [process_data_table]
+    outputs:
+      moderately_sensitive:
+        table: output/tables/table_*.csv
 
   
  
