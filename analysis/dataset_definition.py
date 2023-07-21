@@ -35,25 +35,25 @@ def make_dataset(index_date):
             default="missing",
     )
 
-    # Age for standardisation
-    dataset.age_stand = case(
-            when(age < 25).then("18-24"),
-            when(age < 30).then("25-29"),
-            when(age < 35).then("30-34"),
-            when(age < 40).then("35-39"),
-            when(age < 45).then("40-44"),
-            when(age < 50).then("45-49"),
-            when(age < 55).then("50-54"),
-            when(age < 60).then("55-59"),
-            when(age < 65).then("60-64"),
-            when(age < 70).then("65-69"),
-            when(age < 75).then("70-74"),
-            when(age < 80).then("75-79"),
-            when(age < 85).then("80-84"),
-            when(age < 90).then("85-89"),
-            when(age >= 90).then("90+"),
-            default="missing",
-    )
+    # # Age for standardisation
+    # dataset.age_stand = case(
+    #         when(age < 25).then("18-24"),
+    #         when(age < 30).then("25-29"),
+    #         when(age < 35).then("30-34"),
+    #         when(age < 40).then("35-39"),
+    #         when(age < 45).then("40-44"),
+    #         when(age < 50).then("45-49"),
+    #         when(age < 55).then("50-54"),
+    #         when(age < 60).then("55-59"),
+    #         when(age < 65).then("60-64"),
+    #         when(age < 70).then("65-69"),
+    #         when(age < 75).then("70-74"),
+    #         when(age < 80).then("75-79"),
+    #         when(age < 85).then("80-84"),
+    #         when(age < 90).then("85-89"),
+    #         when(age >= 90).then("90+"),
+    #         default="missing",
+    # )
 
     # Sex
     dataset.sex = patients.sex 
@@ -74,31 +74,31 @@ def make_dataset(index_date):
             default="unknown"
     )
 
-    # Ethnicity 16 categories
-    ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
-        ).sort_by(
-            clinical_events.date
-        ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
+    # # Ethnicity 16 categories
+    # ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
+    #     ).sort_by(
+    #         clinical_events.date
+    #     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
 
-    dataset.ethnicity16 = case(
-        when(ethnicity16 == "1").then("White - British"),
-        when(ethnicity16 == "2").then("White - Irish"),
-        when(ethnicity16 == "3").then("White - Other"),
-        when(ethnicity16 == "4").then("Mixed - White/Black Caribbean"),
-        when(ethnicity16 == "5").then("Mixed - White/Black African"),
-        when(ethnicity16 == "6").then("Mixed - White/Asian"),
-        when(ethnicity16 == "7").then("Mixed - Other"),
-        when(ethnicity16 == "8").then("Asian or Asian British - Indian"),
-        when(ethnicity16 == "9").then("Asian or Asian British - Pakistani"),
-        when(ethnicity16 == "10").then("Asian or Asian British - Bangladeshi"),
-        when(ethnicity16 == "11").then("Asian or Asian British - Other"),
-        when(ethnicity16 == "12").then("Black - Caribbean"),    
-        when(ethnicity16 == "13").then("Black - African"),
-        when(ethnicity16 == "14").then("Black - Other"),
-        when(ethnicity16 == "15").then("Other - Chinese"),
-        when(ethnicity16 == "16").then("Other - Other"),
-        default="Unknown"
-    )
+    # dataset.ethnicity16 = case(
+    #     when(ethnicity16 == "1").then("White - British"),
+    #     when(ethnicity16 == "2").then("White - Irish"),
+    #     when(ethnicity16 == "3").then("White - Other"),
+    #     when(ethnicity16 == "4").then("Mixed - White/Black Caribbean"),
+    #     when(ethnicity16 == "5").then("Mixed - White/Black African"),
+    #     when(ethnicity16 == "6").then("Mixed - White/Asian"),
+    #     when(ethnicity16 == "7").then("Mixed - Other"),
+    #     when(ethnicity16 == "8").then("Asian or Asian British - Indian"),
+    #     when(ethnicity16 == "9").then("Asian or Asian British - Pakistani"),
+    #     when(ethnicity16 == "10").then("Asian or Asian British - Bangladeshi"),
+    #     when(ethnicity16 == "11").then("Asian or Asian British - Other"),
+    #     when(ethnicity16 == "12").then("Black - Caribbean"),    
+    #     when(ethnicity16 == "13").then("Black - African"),
+    #     when(ethnicity16 == "14").then("Black - Other"),
+    #     when(ethnicity16 == "15").then("Other - Chinese"),
+    #     when(ethnicity16 == "16").then("Other - Other"),
+    #     default="Unknown"
+    # )
 
     # Ethnicity 6 categories
     ethnicity6 = clinical_events.where(

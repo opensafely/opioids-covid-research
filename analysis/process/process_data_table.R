@@ -25,6 +25,7 @@ library(data.table)
 
 # Create directory
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "data"), showWarnings = FALSE, recurse = TRUE)
 
 # Custom functions
@@ -35,15 +36,8 @@ source(here("analysis", "lib", "custom_functions.R"))
 # Read in data for tables
 ###############################
 
-## Read in data and combine - people prescribed opioids during COVID and combine
-apr22 <- read_csv(here::here("output", "dataset_apr22.csv.gz"))
-may22 <- read_csv(here::here("output", "dataset_may22.csv.gz")) %>%
-  filter(!patient_id %in% apr22$patient_id)
-jun22 <- read_csv(here::here("output", "dataset_jun22.csv.gz")) %>%
-  filter(!patient_id %in% c(apr22$patient_id, may22$patient_id))
-
-cohort <- rbind(apr22, may22, jun22) 
-
+## Read in data 
+cohort <- read_csv(here::here("output", "dataset_table.csv.gz"))
 
 # Number check----
 print(dim(cohort))
@@ -88,6 +82,11 @@ for_tables <-
 ###############################
 
 write.csv(for_tables, file = here::here("output", "processed", "final_for_tables.csv"))
+
+
+tmp <- for_tables %>%
+  subset(sex == "XX")
+write.csv(tmp, file = here::here("output", "joined", "final_for_tables.csv"))
 
 
 

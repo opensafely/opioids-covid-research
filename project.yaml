@@ -10,23 +10,11 @@ expectations:
 
 actions:
 
-  generate_dataset_apr22:
-    run: ehrql:v0 generate-dataset analysis/define_dataset_apr22.py --output output/dataset_apr22.csv.gz
+  generate_dataset_table:
+    run: ehrql:v0 generate-dataset analysis/define_dataset_table.py --output output/dataset_table.csv.gz
     outputs:
       highly_sensitive:
-        cohort: output/dataset_apr22.csv.gz  
-  
-  generate_dataset_may22:
-    run: ehrql:v0 generate-dataset analysis/define_dataset_may22.py --output output/dataset_may22.csv.gz
-    outputs:
-      highly_sensitive:
-        cohort: output/dataset_may22.csv.gz
-
-  generate_dataset_jun22:
-    run: ehrql:v0 generate-dataset analysis/define_dataset_jun22.py --output output/dataset_jun22.csv.gz
-    outputs:
-      highly_sensitive:
-        cohort: output/dataset_jun22.csv.gz
+        cohort: output/dataset_table.csv.gz  
 
   measures_overall:
     run: ehrql:v0 generate-measures analysis/measures_overall.py --output output/measures_overall.csv
@@ -172,10 +160,11 @@ actions:
   ## Process data - table
   process_data_table:
    run: r:latest analysis/process/process_data_table.R
-   needs: [generate_dataset_apr22, generate_dataset_may22, generate_dataset_jun22]
+   needs: [generate_dataset_table]
    outputs:
       highly_sensitive:
         table_csv: output/processed/final*.csv
+        table2_csv: output/joined/final*.csv
 
 
   # # Results ---
