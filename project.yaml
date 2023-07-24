@@ -166,37 +166,37 @@ actions:
 
 
   ## Process data - time series
-  process_data_ts:
-   run: r:latest analysis/process/process_data_ts.R
-   needs: [measures_overall, measures_demo, measures_type, measures_carehome]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/ts_*.csv
+  # process_data_ts:
+  #  run: r:latest analysis/process/process_data_ts.R
+  #  needs: [measures_overall, measures_demo, measures_type, measures_carehome]
+  #  outputs:
+  #     moderately_sensitive:
+  #       timeseries_csv: output/timeseries/ts_*.csv
 
-  ## Time series - rates and rounding
-  rounding_ts:
-   run: r:latest analysis/process/rounding_ts.R
-   needs: [process_data_ts]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/ts*.csv
+  # ## Time series - rates and rounding
+  # rounding_ts:
+  #  run: r:latest analysis/process/rounding_ts.R
+  #  needs: [process_data_ts]
+  #  outputs:
+  #     moderately_sensitive:
+  #       timeseries_csv: output/timeseries/ts*.csv
 
-  ## Process data - table
-  process_data_table:
-   run: r:latest analysis/process/process_data_table.R
-   needs: [generate_dataset_table]
-   outputs:
-      highly_sensitive:
-        table_csv: output/processed/final*.csv
-        table2_csv: output/joined/final*.csv
+  # ## Process data - table
+  # process_data_table:
+  #  run: r:latest analysis/process/process_data_table.R
+  #  needs: [generate_dataset_table]
+  #  outputs:
+  #     highly_sensitive:
+  #       table_csv: output/processed/final*.csv
+  #       table2_csv: output/joined/final*.csv
 
-  ## Results table 
-  table:
-    run: r:latest analysis/descriptive/table_stand.R
-    needs: [process_data_table]
-    outputs:
-      moderately_sensitive:
-        table: output/tables/table_*.csv
+  # ## Results table 
+  # table:
+  #   run: r:latest analysis/descriptive/table_stand.R
+  #   needs: [process_data_table]
+  #   outputs:
+  #     moderately_sensitive:
+  #       table: output/tables/table_*.csv
 
   
  
