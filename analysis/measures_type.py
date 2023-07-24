@@ -13,13 +13,17 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-from dataset_definition import make_dataset
+from dataset_definition import make_dataset_opioids
 
 index_date = INTERVAL.start_date
 
-dataset = make_dataset(index_date=index_date)
+dataset = make_dataset_opioids(index_date=index_date)
+
+#########################
 
 measures = Measures()
+
+measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
 denominator = (
         (patients.age_on(index_date) >= 18) 
@@ -29,63 +33,94 @@ denominator = (
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
-measures.define_defaults(
-    denominator=denominator,
-    intervals=months(54).starting_on("2018-01-01"),
-)
+#########################
 
-# Overall
+## Overall
 measures.define_measure(
     name="oral_opioid", 
-    numerator=dataset.oral_opioid_any
+    numerator=dataset.oral_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="trans_opioid", 
-    numerator=dataset.trans_opioid_any
+    numerator=dataset.trans_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="par_opioid", 
-    numerator=dataset.par_opioid_any
+    numerator=dataset.par_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="rec_opioid", 
-    numerator=dataset.rec_opioid_any
+    numerator=dataset.rec_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="inh_opioid", 
-    numerator=dataset.inh_opioid_any
+    numerator=dataset.inh_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="buc_opioid", 
-    numerator=dataset.buc_opioid_any
+    numerator=dataset.buc_opioid_any,
+    denominator=denominator
     )
 
 measures.define_measure(
     name="oth_opioid", 
-    numerator=dataset.oth_opioid_any
+    numerator=dataset.oth_opioid_any,
+    denominator=denominator
     )
 
-# By care home
+#########################
+
+## In people without cancer
+denominator_nocancer = denominator & ~dataset.cancer
+
 measures.define_measure(
-    name="oral_opioid_carehome", 
+    name="oral_opioid_nocancer", 
     numerator=dataset.oral_opioid_any,
-    group_by={"carehome": dataset.carehome}
+    denominator=denominator_nocancer
     )
 
 measures.define_measure(
-    name="trans_opioid_carehome", 
+    name="trans_opioid_nocancer", 
     numerator=dataset.trans_opioid_any,
-    group_by={"carehome": dataset.carehome}
+    denominator=denominator_nocancer
     )
 
 measures.define_measure(
-    name="par_opioid_carehome", 
+    name="par_opioid_nocancer", 
     numerator=dataset.par_opioid_any,
-    group_by={"carehome": dataset.carehome}
+    denominator=denominator_nocancer
     )
 
+measures.define_measure(
+    name="rec_opioid_nocancer", 
+    numerator=dataset.rec_opioid_any,
+    denominator=denominator_nocancer
+    )
+
+measures.define_measure(
+    name="inh_opioid_nocancer", 
+    numerator=dataset.inh_opioid_any,
+    denominator=denominator_nocancer
+    )
+
+measures.define_measure(
+    name="buc_opioid_nocancer", 
+    numerator=dataset.buc_opioid_any,
+    denominator=denominator_nocancer
+    )
+
+measures.define_measure(
+    name="oth_opioid_nocancer", 
+    numerator=dataset.oth_opioid_any,
+    denominator=denominator_nocancer
+    )
