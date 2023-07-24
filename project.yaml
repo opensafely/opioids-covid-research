@@ -1,5 +1,6 @@
 ######################################
-# This script defines the project pipeline - it specifies the execution orders for all the code in this
+# This script defines the project pipeline - 
+# it specifies the execution orders for all the code in this
 # repo using a series of actions.
 ######################################
 
@@ -11,52 +12,67 @@ expectations:
 actions:
 
   generate_dataset_table:
-    run: ehrql:v0 generate-dataset analysis/define_dataset_table.py --output output/dataset_table.csv.gz
+    run: ehrql:v0 generate-dataset analysis/define_dataset_table.py 
+      --output output/data/dataset_table.csv.gz
     outputs:
       highly_sensitive:
-        cohort: output/dataset_table.csv.gz  
+        cohort: output/data/dataset_table.csv.gz  
 
   measures_overall:
-    run: ehrql:v0 generate-measures analysis/measures_overall.py --output output/measures_overall.csv
+    run: ehrql:v0 generate-measures analysis/measures_overall.py 
+      --output output/measures/measures_overall.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures_overall.csv
+        measure_csv: output/measures/measures_overall.csv
   
-  measures_overall_nocancer:
-    run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py --output output/measures_overall_nocancer.csv
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures_overall_nocancer.csv
+  # measures_overall_nocancer:
+  #   run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py 
+  #     --output output/measures/measures_overall_nocancer.csv
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures/measures_overall_nocancer.csv
     
   measures_demo:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py --output output/measures_demo.csv
+    run: ehrql:v0 generate-measures analysis/measures_demo.py 
+      --output output/measures/measures_demo.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures_demo.csv
+        measure_csv: output/measures/measures_demo.csv
 
-  measures_demo_nocancer:
-    run: ehrql:v0 generate-measures analysis/measures_demo_nocancer.py --output output/measures_demo_nocancer.csv
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures_demo_nocancer.csv
+  # measures_demo_nocancer:
+  #   run: ehrql:v0 generate-measures analysis/measures_demo_nocancer.py 
+  #     --output output/measures/measures_demo_nocancer.csv
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures/measures_demo_nocancer.csv
 
   measures_type:
-    run: ehrql:v0 generate-measures analysis/measures_type.py --output output/measures_type.csv
+    run: ehrql:v0 generate-measures analysis/measures_type.py 
+      --output output/measures/measures_type.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures_type.csv
+        measure_csv: output/measures/measures_type.csv
 
-  measures_type_nocancer:
-    run: ehrql:v0 generate-measures analysis/measures_type_nocancer.py --output output/measures_type_nocancer.csv
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures_type_nocancer.csv
+  # measures_type_nocancer:
+  #   run: ehrql:v0 generate-measures analysis/measures_type_nocancer.py 
+  #     --output output/measures/measures_type_nocancer.csv
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures_type_nocancer.csv
 
-  measures_sens:
-    run: ehrql:v0 generate-measures analysis/measures_sens.py --output output/measures_sens.csv
+  measures_carehome:
+    run: ehrql:v0 generate-measures analysis/measures_carehome.py 
+      --output output/measures/measures_carehome.csv
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures_sens.csv
+        measure_csv: output/measures/measures_carehome.csv
+        
+  # measures_carehome_sens:
+  #   run: ehrql:v0 generate-measures analysis/measures_carehome_sens.py 
+  #     --output output/measures/measures_carehome_sens.csv
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures/measures_carehome_sens.csv
         
   
   # ## Cohort data
@@ -152,10 +168,18 @@ actions:
   ## Process data - time series
   process_data_ts:
    run: r:latest analysis/process/process_data_ts.R
-   needs: [measures_overall, measures_overall_nocancer, measures_demo, measures_demo_nocancer, measures_type, measures_type_nocancer, measures_sens]
+   needs: [measures_overall, measures_demo, measures_type, measures_carehome]
    outputs:
       moderately_sensitive:
-        ts_csv: output/processed/final_*.csv
+        timeseries_csv: output/timeseries/ts_*.csv
+
+  ## Time series - rates and rounding
+  rounding_ts:
+   run: r:latest analysis/process/rounding_ts.R
+   needs: [process_data_ts]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts*.csv
 
   ## Process data - table
   process_data_table:
@@ -166,26 +190,7 @@ actions:
         table_csv: output/processed/final*.csv
         table2_csv: output/joined/final*.csv
 
-
-  # # Results ---
-
-  # ## Time series
-  # timeseries:
-  #   run: r:latest analysis/descriptive/time_series_stand.R
-  #   needs: [process_data_ts]
-  #   outputs:
-  #     moderately_sensitive:
-  #       table: output/time series/ts_*.csv  
-  
-  # ## Time series graphs
-  # # graphs:
-  # #   run: r:latest analysis/descriptive/graphs.R
-  # #   needs: [timeseries]
-  # #   outputs:
-  # #     moderately_sensitive:
-  # #       plot: output/time series/graphs/graph*.png
-
-  # ## Table 
+  ## Results table 
   table:
     run: r:latest analysis/descriptive/table_stand.R
     needs: [process_data_table]

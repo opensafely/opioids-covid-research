@@ -14,17 +14,19 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-from dataset_definition import make_dataset
+from dataset_definition import make_dataset_opioids
 
 index_date = INTERVAL.start_date
 
-dataset = make_dataset(index_date=index_date)
+dataset = make_dataset_opioids(index_date=index_date)
 
-#
+##########
+
 measures = Measures()
 
+measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
-# Total denominator
+## In full population
 denominator = (
         (patients.age_on(index_date) >= 18) 
         & (patients.age_on(index_date) < 110)
@@ -32,8 +34,6 @@ denominator = (
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
-
-measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
 
 measures.define_measure(
     name="opioid_any",
@@ -53,4 +53,21 @@ measures.define_measure(
     denominator=denominator,
     )
 
+## People without cancer
+measures.define_measure(
+    name="opioid_any_nocancer",
+    numerator=dataset.opioid_any,
+    denominator=denominator & ~dataset.cancer,
+    )
 
+measures.define_measure(
+    name="opioid_new_nocancer",
+    numerator=dataset.opioid_new,
+    denominator=denominator & ~dataset.cancer & dataset.opioid_naive,
+    )
+
+measures.define_measure(
+    name="hi_opioid_any_nocancer",
+    numerator=dataset.hi_opioid_any,
+    denominator=denominator & ~dataset.cancer,
+    )

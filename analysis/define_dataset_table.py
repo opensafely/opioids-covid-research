@@ -1,8 +1,8 @@
 ###################################################
-# This script defines all necessary variables
-# including demographics and opioid prescribing
+# This script extracts relevant demographics and
+# opioid prescribing data for people from Apr-Jun 2022
+# for inclusion in Table 1
 ###################################################
-
 
 from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
 from ehrql.tables.beta.tpp import (
@@ -15,8 +15,9 @@ from ehrql.tables.beta.tpp import (
 import codelists
 
 
-dataset = Dataset()
+from dataset_definition import make_dataset_opioids
 
+dataset = make_dataset_opioids(index_date="2022-04-01")
 
 # Define population #
 dataset.define_population(
@@ -84,6 +85,8 @@ dataset.imd10 = case(
 
 # Ethnicity 16 categories
 ethnicity16 = clinical_events.where(clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_16)
+    ).where(
+        clinical_events.date.is_on_or_before("2022-04-01")
     ).sort_by(
         clinical_events.date
     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_16)
@@ -111,6 +114,8 @@ dataset.ethnicity16 = case(
 # Ethnicity 6 categories
 ethnicity6 = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
+    ).where(
+        clinical_events.date.is_on_or_before("2022-04-01")
     ).sort_by(
         clinical_events.date
     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
@@ -131,82 +136,15 @@ dataset.region = practice_registrations.for_patient_on("2022-04-01").practice_nu
 # In care home based on primis codes/TPP address match
 carehome_primis = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
+    ).where(
+        clinical_events.date.is_on_or_before("2022-04-01")
     ).exists_for_patient() 
 
-carehome_tpp = addresses.for_patient_on("2022-04-01").care_home_is_potential_match
+carehome_tpp = addresses.for_patient_on("2022-04-01").care_home_is_potential_match 
 
 dataset.carehome = case(
     when(carehome_primis).then(True),
     when(carehome_tpp).then(True),
-    default=False
-)
-
-# Cancer diagnosis in past 5 years
-dataset.cancer = case(
-    when(clinical_events.where(clinical_events.snomedct_code.is_in(codelists.cancer_codes)
-        ).where(
-            clinical_events.date.is_on_or_between("2017-04-01", "2022-04-01")
-        ).exists_for_patient()
-    ).then(True),
-    default=False
-)
-
-# No. people with opioid prescription #
-
-def has_med_event(codelist, where=True):
-    med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
-        ).where(
-            medications.date.is_on_or_between("2022-04-01", "2022-06-30")
-        ).exists_for_patient()
-    return (
-        case(
-            when(med_event_exists).then(True),
-            when(~med_event_exists).then(False)
-            )
-    )
-
-dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
-
-# By admin route
-dataset.oral_opioid_any = has_med_event(codelists.opioid_codes)  # Oral opioid
-dataset.buc_opioid_any = has_med_event(codelists.opioid_codes)  # Buccal opioid
-dataset.inh_opioid_any = has_med_event(codelists.opioid_codes)  # Inhaled opioid
-dataset.rec_opioid_any = has_med_event(codelists.opioid_codes)  # Rectal opioid
-dataset.par_opioid_any = has_med_event(codelists.opioid_codes)  # Parenteral opioid
-dataset.trans_opioid_any = has_med_event(codelists.opioid_codes)  # Transdermal opioid
-dataset.oth_opioid_any = has_med_event(codelists.opioid_codes)  # Other admin route opioid
-
-# By strength/type
-dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose opioid
-dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
-
-
-# No. people with a new opioid prescription (2 year lookback) #
-# Note: for all opioids only 
-
-# Date of last prescription before index date
-last_rx = medications.where(
-    medications.dmd_code.is_in(codelists.opioid_codes)
-    ).where(
-        medications.date.is_before("2022-04-01")
-    ).sort_by(
-        medications.date
-    ).last_for_patient().date
-
-# Is opioid naive (using two year lookback) (for denominator)
-dataset.opioid_naive = case(
-    when(last_rx.is_before("2022-04-01" - years(2))).then(True),
-    when(last_rx.is_null()).then(True),
-    default=False
-)
-
-# Number of people with new prescriptions (among naive only)
-dataset.opioid_new = case(
-    when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
-        ).where(
-            medications.date.is_on_or_between("2022-04-01", "2022-06-30")
-        ).where(dataset.opioid_naive).exists_for_patient()
-    ).then(True),
     default=False
 )
 
