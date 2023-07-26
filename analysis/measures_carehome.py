@@ -20,8 +20,16 @@ index_date = INTERVAL.start_date
 
 dataset = make_dataset_opioids(index_date=index_date)
  
+##########
 
-######
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument("--start-date", type=str)
+args = parser.parse_args()
+start_date = args.start_date
+
+##########
 
 ## Define relevant variables 
 
@@ -29,10 +37,10 @@ dataset = make_dataset_opioids(index_date=index_date)
 carehome_primis = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.carehome_primis_codes)
     ).where(
-        clinical_events.date.is_on_or_before("2022-04-01")
+        clinical_events.date.is_on_or_before(index_date)
     ).exists_for_patient() 
 
-carehome_tpp = addresses.for_patient_on("2022-04-01").care_home_is_potential_match 
+carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match 
 
 dataset.carehome = case(
     when(carehome_primis).then(True),
@@ -68,7 +76,7 @@ denominator = (
         & dataset.carehome
     )
 
-measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
+measures.define_defaults(intervals=months(12).starting_on(start_date))
 
 # By care home status
 measures.define_measure(
