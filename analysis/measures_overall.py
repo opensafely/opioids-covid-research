@@ -22,9 +22,18 @@ dataset = make_dataset_opioids(index_date=index_date)
 
 ##########
 
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+parser.add_argument("--start-date", type=str)
+args = parser.parse_args()
+start_date = args.start_date
+
+##########
+
 measures = Measures()
 
-measures.define_defaults(intervals=months(54).starting_on("2018-01-01"))
+measures.define_defaults(intervals=months(12).starting_on(start_date))
 
 ## In full population
 denominator = (
