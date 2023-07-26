@@ -25,7 +25,6 @@ library(data.table)
 
 # Create directory
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "data"), showWarnings = FALSE, recurse = TRUE)
 
 # Custom functions
@@ -37,7 +36,7 @@ source(here("analysis", "lib", "custom_functions.R"))
 ###############################
 
 ## Read in data 
-cohort <- read_csv(here::here("output", "dataset_table.csv.gz"))
+cohort <- read_csv(here::here("output", "data", "dataset_table.csv.gz"))
 
 # Number check----
 print(dim(cohort))
@@ -87,6 +86,4 @@ write.csv(for_tables, file = here::here("output", "processed", "final_for_tables
 tmp <- for_tables %>%
   subset(sex == "XX")
 write.csv(tmp, file = here::here("output", "joined", "final_for_tables.csv"))
-
-
 

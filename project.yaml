@@ -199,30 +199,33 @@ actions:
       moderately_sensitive:
         measure_csv: output/measures/measures_carehome_2022.csv
         
-  # ## Process data - time series
-  # process_data_ts:
-  #  run: r:latest analysis/process/process_data_ts.R
-  #  needs: [ measures_demo, measures_type, measures_carehome]
-  #  outputs:
-  #     moderately_sensitive:
-  #       timeseries_csv: output/timeseries/ts_*.csv
+  ## Process data - time series
+  process_data_ts:
+   run: r:latest analysis/process/process_data_ts.R
+   needs: [measures_overall_2018, measures_overall_2019, measures_overall_2020, measures_overall_2021, measures_overall_2022, 
+          measures_demo_2018, measures_demo_2019, measures_demo_2020, measures_demo_2021, measures_demo_2022, 
+          measures_type_2018, measures_type_2019, measures_type_2020, measures_type_2021, measures_type_2022, 
+          measures_carehome_2018, measures_carehome_2019, measures_carehome_2020, measures_carehome_2021, measures_carehome_2022]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts_*.csv
 
-  # ## Time series - rates and rounding
-  # rounding_ts:
-  #  run: r:latest analysis/process/rounding_ts.R
-  #  needs: [process_data_ts]
-  #  outputs:
-  #     moderately_sensitive:
-  #       timeseries_csv: output/timeseries/ts*.csv
+  ## Time series - rates and rounding
+  rounding_ts:
+   run: r:latest analysis/process/rounding_ts.R
+   needs: [process_data_ts]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts*.csv
 
-  # ## Process data - table
-  # process_data_table:
-  #  run: r:latest analysis/process/process_data_table.R
-  #  needs: [generate_dataset_table]
-  #  outputs:
-  #     highly_sensitive:
-  #       table_csv: output/processed/final*.csv
-  #       table2_csv: output/joined/final*.csv
+  ## Process data - table
+  process_data_table:
+   run: r:latest analysis/process/process_data_table.R
+   needs: [generate_dataset_table]
+   outputs:
+      highly_sensitive:
+        table_csv: output/processed/final*.csv
+        table2_csv: output/joined/final*.csv
 
   # ## Results table 
   # table:
