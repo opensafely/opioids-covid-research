@@ -16,7 +16,7 @@ import codelists
 
 
 # Function to define dataset #
-def make_dataset_opioids(index_date):
+def make_dataset_opioids(index_date, end_date):
     
     dataset = Dataset()
 
@@ -34,7 +34,7 @@ def make_dataset_opioids(index_date):
     def has_med_event(codelist, where=True):
         med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
             ).where(
-                medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+                medications.date.is_on_or_between(index_date, end_date)
             ).exists_for_patient()
         return (
             case(
@@ -82,7 +82,7 @@ def make_dataset_opioids(index_date):
     dataset.opioid_new = case(
         when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
             ).where(
-                medications.date.is_on_or_between(index_date, index_date + months(1) - days(1))
+                medications.date.is_on_or_between(index_date, end_date)
             ).where(dataset.opioid_naive).exists_for_patient()
         ).then(True),
         default=False

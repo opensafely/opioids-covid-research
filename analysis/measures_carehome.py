@@ -18,7 +18,7 @@ from dataset_definition import make_dataset_opioids
 
 index_date = INTERVAL.start_date
 
-dataset = make_dataset_opioids(index_date=index_date)
+dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + months(1) - days(1))
  
 ##########
 
