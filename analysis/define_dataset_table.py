@@ -17,7 +17,7 @@ import codelists
 
 from dataset_definition import make_dataset_opioids
 
-dataset = make_dataset_opioids(index_date="2022-04-01")
+dataset = make_dataset_opioids(index_date="2022-04-01", end_date="2022-06-30")
 
 # Define population #
 dataset.define_population(
