@@ -91,7 +91,8 @@ combined <- rbind(age, sex,
   f(carehome, "Care home")  
 ) %>%
   dplyr::select(contains(c("cancer", "label", "age_stand", 
-                           "sex", "tot", "group", "opioid_any")))
+                           "sex", "tot", "group", "opioid_any"))) %>%
+  mutate(age_stand = ifelse(age_stand != "Total", paste(age_stand, "y"), "Total"))
 
 
 
@@ -196,7 +197,7 @@ admin <- rbind(
          ) %>%
   mutate_at(c(vars(c("no_people", "tot"))), redact) %>%
   mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
-  mutate(prevalence_per_1000 = no_people / tot*1000,
+  mutate(prevalence_per_1000 = no_people / tot * 1000,
          group = "Full population") 
 
 
