@@ -229,14 +229,13 @@ actions:
       highly_sensitive:
         table_csv: output/processed/final_tables.csv
 
-
-  # ## Results table 
-  # table:
-  #   run: r:latest analysis/descriptive/table_stand.R
-  #   needs: [process_data_table]
-  #   outputs:
-  #     moderately_sensitive:
-  #       table: output/tables/table_*.csv
+  ## Results table 
+  table:
+    run: r:latest analysis/descriptive/table_stand.R
+    needs: [process_data_table]
+    outputs:
+      moderately_sensitive:
+        table: output/tables/table_*.csv
 
   
   # OLD COHORTEXTRACTOR CODE
