@@ -228,8 +228,7 @@ actions:
    outputs:
       highly_sensitive:
         table_csv: output/processed/final_tables.csv
-      moderately_sensitive: 
-        table2_csv: output/processed/final_for_tables.csv
+
 
   # ## Results table 
   # table:

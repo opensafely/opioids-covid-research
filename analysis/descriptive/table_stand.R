@@ -28,7 +28,7 @@ dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
 
 ## Read in data
-for_tables <- read_csv(here::here("output", "processed", "final_for_tables.csv"))
+for_tables <- read_csv(here::here("output", "processed", "final_tables.csv"))
 ons_pop_stand <- read_csv(here::here("ONS-data", "ons_pop_stand.csv"))
 
 
