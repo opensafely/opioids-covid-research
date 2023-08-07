@@ -47,12 +47,12 @@ def make_dataset_opioids(index_date, end_date):
 
     # By admin route
     dataset.oral_opioid_any = has_med_event(codelists.opioid_codes)  # Oral opioid
-    dataset.buc_opioid_any = has_med_event(codelists.opioid_codes)  # Buccal opioid
-    dataset.inh_opioid_any = has_med_event(codelists.opioid_codes)  # Inhaled opioid
-    dataset.rec_opioid_any = has_med_event(codelists.opioid_codes)  # Rectal opioid
-    dataset.par_opioid_any = has_med_event(codelists.opioid_codes)  # Parenteral opioid
-    dataset.trans_opioid_any = has_med_event(codelists.opioid_codes)  # Transdermal opioid
-    dataset.oth_opioid_any = has_med_event(codelists.opioid_codes)  # Other admin route opioid
+    dataset.buc_opioid_any = has_med_event(codelists.buc_opioid_codes)  # Buccal opioid
+    dataset.inh_opioid_any = has_med_event(codelists.inh_opioid_codes)  # Inhaled opioid
+    dataset.rec_opioid_any = has_med_event(codelists.rec_opioid_codes)  # Rectal opioid
+    dataset.par_opioid_any = has_med_event(codelists.par_opioid_codes)  # Parenteral opioid
+    dataset.trans_opioid_any = has_med_event(codelists.trans_opioid_codes)  # Transdermal opioid
+    dataset.oth_opioid_any = has_med_event(codelists.oth_opioid_codes)  # Other admin route opioid
 
     # By strength/type
     dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose opioid

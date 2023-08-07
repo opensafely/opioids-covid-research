@@ -26,7 +26,6 @@ library(data.table)
 # Create directory
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "data"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "joined"), showWarnings = FALSE, recurse = TRUE)
 
 # Custom functions
 source(here("analysis", "lib", "custom_functions.R"))
