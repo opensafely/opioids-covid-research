@@ -226,7 +226,7 @@ actions:
    run: r:latest analysis/process/process_data_table.R
    needs: [generate_dataset_table]
    outputs:
-      highly_sensitive:
+      moderately_sensitive:
         table_csv: output/processed/final*.csv
         table2_csv: output/joined/final*.csv
 
