@@ -81,10 +81,10 @@ for_tables <-
 ## Save as .csv
 ###############################
 
-write.csv(for_tables, file = here::here("output", "processed", "final_for_tables.csv"))
+write.csv(for_tables, file = here::here("output", "processed", "final_tables.csv"))
 
 
 tmp <- for_tables %>%
   subset(sex == "XX")
-write.csv(tmp, file = here::here("output", "joined", "final_for_tables.csv"))
+write.csv(tmp, file = here::here("output", "processed", "final_for_tables.csv"))
 
