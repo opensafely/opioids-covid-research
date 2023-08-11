@@ -46,7 +46,7 @@ def make_dataset_opioids(index_date, end_date):
     dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
 
     # By admin route
-    dataset.oral_opioid_any = has_med_event(codelists.opioid_codes)  # Oral opioid
+    dataset.oral_opioid_any = has_med_event(codelists.oral_opioid_codes)  # Oral opioid
     dataset.buc_opioid_any = has_med_event(codelists.buc_opioid_codes)  # Buccal opioid
     dataset.inh_opioid_any = has_med_event(codelists.inh_opioid_codes)  # Inhaled opioid
     dataset.rec_opioid_any = has_med_event(codelists.rec_opioid_codes)  # Rectal opioid
