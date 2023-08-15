@@ -16,9 +16,6 @@ import codelists
 
 from dataset_definition import make_dataset_opioids
 
-index_date = INTERVAL.start_date
-
-dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + months(1) - days(1))
  
 ##########
 
@@ -28,6 +25,13 @@ parser = ArgumentParser()
 parser.add_argument("--start-date", type=str)
 args = parser.parse_args()
 start_date = args.start_date
+
+##########
+
+
+index_date = INTERVAL.start_date
+
+dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + months(1) - days(1))
 
 ##########
 
@@ -76,7 +80,7 @@ denominator = (
         & dataset.carehome
     )
 
-measures.define_defaults(intervals=months(12).starting_on(start_date))
+measures.define_defaults(intervals=months(54).starting_on(start_date))
 
 # By care home status
 measures.define_measure(

@@ -1,8 +1,8 @@
-###################################################
+#########################################################
 # This script extracts relevant demographics and
-# opioid prescribing data for people from Apr-Jun 2022
-# for inclusion in Table 1
-###################################################
+#   opioid prescribing data for people from Apr-Jun 2022
+#   for inclusion in Table 1
+#########################################################
 
 from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
 from ehrql.tables.beta.tpp import (
@@ -13,7 +13,6 @@ from ehrql.tables.beta.tpp import (
     clinical_events)
 
 import codelists
-
 
 from dataset_definition import make_dataset_opioids
 

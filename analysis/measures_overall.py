@@ -16,9 +16,6 @@ import codelists
 
 from dataset_definition import make_dataset_opioids
 
-index_date = INTERVAL.start_date
-
-dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + months(1) - days(1))
 
 ##########
 
@@ -26,14 +23,24 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser()
 parser.add_argument("--start-date", type=str)
+parser.add_argument("--intervals", type=int)
+
 args = parser.parse_args()
+
 start_date = args.start_date
+intervals = args.intervals
+
+##########
+
+index_date = INTERVAL.start_date
+
+dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + months(1) - days(1))
 
 ##########
 
 measures = Measures()
 
-measures.define_defaults(intervals=months(12).starting_on(start_date))
+measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
 ## In full population
 denominator = (

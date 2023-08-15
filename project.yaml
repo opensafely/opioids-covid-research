@@ -19,188 +19,48 @@ actions:
         cohort: output/data/dataset_table.csv.gz  
 
   # Measures - overall
-  measures_overall_2018:
+  measures_overall:
     run: ehrql:v0 generate-measures analysis/measures_overall.py 
-      --output output/measures/measures_overall_2018.csv
+      --output output/measures/measures_overall.csv
       --
       --start-date "2018-01-01"
+      --intervals 3
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_overall_2018.csv
+        measure_csv: output/measures/measures_overall.csv
 
-  measures_overall_2019:
-    run: ehrql:v0 generate-measures analysis/measures_overall.py 
-      --output output/measures/measures_overall_2019.csv
-      --
-      --start-date "2019-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_overall_2019.csv
-
-  measures_overall_2020:
-    run: ehrql:v0 generate-measures analysis/measures_overall.py 
-      --output output/measures/measures_overall_2020.csv
-      --
-      --start-date "2020-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_overall_2020.csv
-
-  measures_overall_2021:
-    run: ehrql:v0 generate-measures analysis/measures_overall.py 
-      --output output/measures/measures_overall_2021.csv
-      --
-      --start-date "2021-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_overall_2021.csv
-
-  measures_overall_2022:
-    run: ehrql:v0 generate-measures analysis/measures_overall.py 
-      --output output/measures/measures_overall_2022.csv
-      --
-      --start-date "2022-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_overall_2022.csv
-  
   # Measures - by demographic categories
-  measures_demo_2018:
+  measures_demo:
     run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo_2018.csv
+      --output output/measures/measures_demo.csv
       --
       --start-date "2018-01-01"
+      --intervals 54
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_demo_2018.csv
-
-  measures_demo_2019:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo_2019.csv
-      --
-      --start-date "2019-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_demo_2019.csv
-
-  measures_demo_2020:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo_2020.csv
-      --
-      --start-date "2020-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_demo_2020.csv
-
-  measures_demo_2021:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo_2021.csv
-      --
-      --start-date "2021-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_demo_2021.csv
-
-  measures_demo_2022:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo_2022.csv
-      --
-      --start-date "2022-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_demo_2022.csv
+        measure_csv: output/measures/measures_demo.csv
 
   # Measures - by opioid type
-  measures_type_2018:
+  measures_type:
     run: ehrql:v0 generate-measures analysis/measures_type.py 
-      --output output/measures/measures_type_2018.csv
+      --output output/measures/measures_type.csv
       --
       --start-date "2018-01-01"
+      --intervals 54
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_type_2018.csv 
-
-  measures_type_2019:
-    run: ehrql:v0 generate-measures analysis/measures_type.py 
-      --output output/measures/measures_type_2019.csv
-      --
-      --start-date "2019-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_type_2019.csv  
-
-  measures_type_2020:
-    run: ehrql:v0 generate-measures analysis/measures_type.py 
-      --output output/measures/measures_type_2020.csv
-      --
-      --start-date "2020-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_type_2020.csv
-
-  measures_type_2021:
-    run: ehrql:v0 generate-measures analysis/measures_type.py 
-      --output output/measures/measures_type_2021.csv
-      --
-      --start-date "2021-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_type_2021.csv  
-
-  measures_type_2022:
-    run: ehrql:v0 generate-measures analysis/measures_type.py 
-      --output output/measures/measures_type_2022.csv
-      --
-      --start-date "2022-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_type_2022.csv  
+        measure_csv: output/measures/measures_type.csv 
 
   # Measures - in people in care home
-  measures_carehome_2018:
+  measures_carehome:
     run: ehrql:v0 generate-measures analysis/measures_carehome.py 
-      --output output/measures/measures_carehome_2018.csv
+      --output output/measures/measures_carehome.csv
       --
       --start-date "2018-01-01"
+      --intervals 54
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_carehome_2018.csv
-  
-  measures_carehome_2019:
-    run: ehrql:v0 generate-measures analysis/measures_carehome.py 
-      --output output/measures/measures_carehome_2019.csv
-      --
-      --start-date "2019-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_carehome_2019.csv
-  
-  measures_carehome_2020:
-    run: ehrql:v0 generate-measures analysis/measures_carehome.py 
-      --output output/measures/measures_carehome_2020.csv
-      --
-      --start-date "2020-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_carehome_2020.csv
-  
-  measures_carehome_2021:
-    run: ehrql:v0 generate-measures analysis/measures_carehome.py 
-      --output output/measures/measures_carehome_2021.csv
-      --
-      --start-date "2021-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_carehome_2021.csv
-  
-  measures_carehome_2022:
-    run: ehrql:v0 generate-measures analysis/measures_carehome.py 
-      --output output/measures/measures_carehome_2022.csv
-      --
-      --start-date "2022-01-01"
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_carehome_2022.csv
+        measure_csv: output/measures/measures_carehome.csv
         
   ## Process data - time series
   process_data_ts:

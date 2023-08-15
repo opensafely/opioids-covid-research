@@ -1,6 +1,8 @@
 ###################################################
-# This script defines all necessary variables
-# including demographics and opioid prescribing
+# This script defines a function that 
+#   creates opioid prescribing variables,
+#   and whether someone had a history of cancer
+#   for use in downstream code
 ###################################################
 
 
@@ -29,8 +31,7 @@ def make_dataset_opioids(index_date, end_date):
             clinical_events.date.is_on_or_between(index_date - years(5), index_date)
         ).exists_for_patient()
 
-    # No. people with opioid prescription #
-
+    # Function to define no. people with opioid prescription 
     def has_med_event(codelist, where=True):
         med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
             ).where(
@@ -43,6 +44,7 @@ def make_dataset_opioids(index_date, end_date):
                 )
         )
 
+    # Overall
     dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
 
     # By admin route
@@ -55,12 +57,12 @@ def make_dataset_opioids(index_date, end_date):
     dataset.oth_opioid_any = has_med_event(codelists.oth_opioid_codes)  # Other admin route opioid
 
     # By strength/type
-    dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose opioid
+    dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose / long-acting opioid
     dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
 
 
-    # No. people with a new opioid prescription (2 year lookback) #
-    # Note: for all opioids only 
+    # No. people with a new opioid prescription (2 year lookback) 
+    # Note: for any opioids only 
 
     # Date of last prescription before index date
     last_rx = medications.where(
@@ -71,7 +73,7 @@ def make_dataset_opioids(index_date, end_date):
             medications.date
         ).last_for_patient().date
 
-    # Is opioid naive (using two year lookback) (for denominator)
+    # Is opioid naive using two year lookback (for denominator)
     dataset.opioid_naive = case(
         when(last_rx.is_before(index_date - years(2))).then(True),
         when(last_rx.is_null()).then(True),
