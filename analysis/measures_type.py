@@ -34,7 +34,7 @@ dataset = make_dataset_opioids(index_date=index_date, end_date=index_date + mont
 
 measures = Measures()
 
-measures.define_defaults(intervals=months(54).starting_on(start_date))
+measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
 denominator = (
         (patients.age_on(index_date) >= 18) 

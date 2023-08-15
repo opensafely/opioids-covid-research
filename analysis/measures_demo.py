@@ -88,7 +88,7 @@ dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts
 
 measures = Measures()
 
-measures.define_defaults(intervals=months(54).starting_on(start_date))
+measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
 # Total denominator
 denominator = (
