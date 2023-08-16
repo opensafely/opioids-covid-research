@@ -35,11 +35,7 @@ source(here("analysis", "lib", "custom_functions.R"))
 ###############################
 
 # Overall counts 
-overall <- rbind(read_csv(here::here("output", "measures", "measures_overall_2018.csv")),
-                 read_csv(here::here("output", "measures", "measures_overall_2019.csv")),
-                 read_csv(here::here("output", "measures", "measures_overall_2020.csv")),
-                 read_csv(here::here("output", "measures", "measures_overall_2021.csv")),
-                 read_csv(here::here("output", "measures", "measures_overall_2022.csv"))) %>% 
+overall <- read_csv(here::here("output", "measures", "measures_overall.csv")) %>% 
   filter(str_detect(measure, "_nocancer", negate = TRUE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -63,11 +59,7 @@ write.csv(overall, file = here::here("output", "timeseries", "ts_overall.csv"),
 
 
 # Overall counts - without cancer
-overall_noca <- rbind(read_csv(here::here("output", "measures", "measures_overall_2018.csv")),
-                                 read_csv(here::here("output", "measures", "measures_overall_2019.csv")),
-                                 read_csv(here::here("output", "measures", "measures_overall_2020.csv")),
-                                 read_csv(here::here("output", "measures", "measures_overall_2021.csv")),
-                                 read_csv(here::here("output", "measures", "measures_overall_2022.csv"))) %>%
+overall_noca <- read_csv(here::here("output", "measures", "measures_overall.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -92,12 +84,8 @@ write.csv(overall_noca, file = here::here("output", "timeseries", "ts_overall_no
 
 
 # By demographics
-demo <- rbind(read_csv(here::here("output", "measures", "measures_demo_2018.csv")),
-                         read_csv(here::here("output", "measures", "measures_demo_2019.csv")),
-                         read_csv(here::here("output", "measures", "measures_demo_2020.csv")),
-                         read_csv(here::here("output", "measures", "measures_demo_2021.csv")),
-                         read_csv(here::here("output", "measures", "measures_demo_2022.csv"))) %>%
-  filter(str_detect(measure, "_nocancer", negate = TRUE)) %>%
+demo <- read_csv(here::here("output", "measures", "measures_demo.csv")) %>%
+  filter(str_detect(measure, "_nocancer", negate=TRUE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
                          ifelse(month >= as.Date("2021-04-01"), "Recovery", "Lockdown")),
@@ -120,11 +108,7 @@ write.csv(demo, file = here::here("output", "timeseries", "ts_demo.csv"),
 
 
 # By demographics - without cancer
-demo_noca <- rbind(read_csv(here::here("output", "measures", "measures_demo_2018.csv")),
-                              read_csv(here::here("output", "measures", "measures_demo_2019.csv")),
-                              read_csv(here::here("output", "measures", "measures_demo_2020.csv")),
-                              read_csv(here::here("output", "measures", "measures_demo_2021.csv")),
-                              read_csv(here::here("output", "measures", "measures_demo_2022.csv"))) %>%
+demo_noca <- read_csv(here::here("output", "measures", "measures_demo.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -148,11 +132,7 @@ write.csv(demo_noca, file = here::here("output", "timeseries", "ts_demo_nocancer
   
 
 # By admin route
-type <- rbind(read_csv(here::here("output", "measures", "measures_type_2018.csv")),
-                         read_csv(here::here("output", "measures", "measures_type_2019.csv")),
-                         read_csv(here::here("output", "measures", "measures_type_2020.csv")),
-                         read_csv(here::here("output", "measures", "measures_type_2021.csv")),
-                         read_csv(here::here("output", "measures", "measures_type_2022.csv"))) %>%
+type <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = TRUE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -174,11 +154,7 @@ write.csv(type, file = here::here("output", "timeseries", "ts_type.csv"),
           row.names = FALSE)
 
 # By admin route - without cancer
-type_noca <- rbind(read_csv(here::here("output", "measures", "measures_type_2018.csv")),
-                              read_csv(here::here("output", "measures", "measures_type_2019.csv")),
-                              read_csv(here::here("output", "measures", "measures_type_2020.csv")),
-                              read_csv(here::here("output", "measures", "measures_type_2021.csv")),
-                              read_csv(here::here("output", "measures", "measures_type_2022.csv"))) %>%
+type_noca <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -201,11 +177,7 @@ write.csv(type_noca, file = here::here("output", "timeseries", "ts_type_nocancer
 
 
 # In carehome
-carehome <- rbind(read_csv(here::here("output", "measures", "measures_carehome_2018.csv")),
-                             read_csv(here::here("output", "measures", "measures_carehome_2019.csv")),
-                             read_csv(here::here("output", "measures", "measures_carehome_2020.csv")),
-                             read_csv(here::here("output", "measures", "measures_carehome_2021.csv")),
-                             read_csv(here::here("output", "measures", "measures_carehome_2022.csv"))) %>%
+carehome <- read_csv(here::here("output", "measures", "measures_carehome.csv")) %>%
   filter(str_detect(measure, "carehome_age", negate = TRUE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -240,11 +212,7 @@ write.csv(carehome, file = here::here("output", "timeseries", "ts_carehome.csv")
 
 
 # In/not in carehome - sensitivity analysis 
-carehome_sens <- rbind(read_csv(here::here("output", "measures", "measures_carehome_2018.csv")),
-                                  read_csv(here::here("output", "measures", "measures_carehome_2019.csv")),
-                                  read_csv(here::here("output", "measures", "measures_carehome_2020.csv")),
-                                  read_csv(here::here("output", "measures", "measures_carehome_2021.csv")),
-                                  read_csv(here::here("output", "measures", "measures_carehome_2022.csv"))) %>%
+carehome_sens <- read_csv(here::here("output", "measures", "measures_carehome.csv")) %>%
   filter(str_detect(measure, "_carehome_age", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 

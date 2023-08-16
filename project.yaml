@@ -78,18 +78,10 @@ actions:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts*.csv
 
-  ## Process data - table
-  process_data_table:
-   run: r:latest analysis/process/process_data_table.R
-   needs: [generate_dataset_table]
-   outputs:
-      highly_sensitive:
-        table_csv: output/processed/final_tables.csv
-
   ## Results table 
   table:
     run: r:latest analysis/descriptive/table_stand.R
-    needs: [process_data_table]
+    needs: [generate_dataset_table]
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv

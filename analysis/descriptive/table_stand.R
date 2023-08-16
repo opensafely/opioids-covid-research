@@ -27,13 +27,51 @@ source(here("analysis", "lib", "custom_functions.R"))
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
 
-## Read in data
-for_tables <- read_csv(here::here("output", "processed", "final_tables.csv"))
+
+
+## Read in data 
+cohort <- read_csv(here::here("output", "data", "dataset_table.csv.gz"))
 ons_pop_stand <- read_csv(here::here("ONS-data", "ons_pop_stand.csv"))
+
+# Number check----
+print(dim(cohort))
+head(cohort)
+
+
+#################################################
+# Format variables as appropriate
+#################################################
+
+for_tables <- 
+  cohort %>%
+  mutate(
+    
+    # Sex
+    sex = fct_case_when(
+      sex == "female" ~ "Female",
+      sex == "male" ~ "Male",
+      TRUE ~ NA_character_),
+    
+    # Ethnicity
+    ethnicity16 = ifelse(ethnicity16 == "", "Missing", ethnicity16),
+    ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
+    
+    #Carehome
+    carehome = fct_case_when(
+      carehome == FALSE ~ "No",
+      carehome == TRUE ~ "Yes"
+    ),
+    
+    #Cancer
+    cancer = fct_case_when(
+      cancer == FALSE ~ "No",
+      cancer == TRUE ~ "Yes"
+    )
+  ) 
 
 
 ##############################################
-# SUmmarise data by groups 
+# Summarise data by groups 
 ##############################################
 
 # Function to summarise data over each variable
