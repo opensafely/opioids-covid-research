@@ -16,7 +16,6 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-
 # Function to define dataset #
 def make_dataset_opioids(index_date, end_date):
     
@@ -61,7 +60,7 @@ def make_dataset_opioids(index_date, end_date):
     dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
 
 
-    # No. people with a new opioid prescription (2 year lookback) 
+    # No. people with a new opioid prescription (1 year lookback) 
     # Note: for any opioids only 
 
     # Date of last prescription before index date
@@ -75,7 +74,7 @@ def make_dataset_opioids(index_date, end_date):
 
     # Is opioid naive using two year lookback (for denominator)
     dataset.opioid_naive = case(
-        when(last_rx.is_before(index_date - years(2))).then(True),
+        when(last_rx.is_before(index_date - years(1))).then(True),
         when(last_rx.is_null()).then(True),
         default=False
     )
@@ -92,6 +91,12 @@ def make_dataset_opioids(index_date, end_date):
 
     return dataset
 
+# Function to identify start/end date of registrations overlapping index date
+def registrations(index_date):
+    return practice_registrations.where(
+        practice_registrations.start_date.is_on_or_before(index_date - years(1))
+        & (practice_registrations.end_date.is_after(index_date) | practice_registrations.end_date.is_null())
+    )
 
 ##############################################
 
