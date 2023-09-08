@@ -73,9 +73,9 @@ def make_dataset_opioids(index_date, end_date):
             medications.date
         ).last_for_patient().date
 
-    # Is opioid naive using two year lookback (for denominator)
+    # Is opioid naive using one year lookback (for denominator)
     dataset.opioid_naive = case(
-        when(last_rx.is_before(index_date - years(2))).then(True),
+        when(last_rx.is_before(index_date - years(1))).then(True),
         when(last_rx.is_null()).then(True),
         default=False
     )
@@ -92,6 +92,11 @@ def make_dataset_opioids(index_date, end_date):
 
     return dataset
 
+def registrations(index_date, end_date):
+    return practice_registrations.where(
+        practice_registrations.start_date.is_on_or_before(index_date)
+        & (practice_registrations.end_date.is_after(end_date) | practice_registrations.end_date.is_null())
+    )
 
 ##############################################
 
