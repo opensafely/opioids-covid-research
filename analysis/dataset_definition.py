@@ -92,9 +92,9 @@ def make_dataset_opioids(index_date, end_date):
 
     return dataset
 
-def registrations(index_date, end_date):
+def registrations(start_date, end_date):
     return practice_registrations.where(
-        practice_registrations.start_date.is_on_or_before(index_date)
+        practice_registrations.start_date.is_on_or_before(start_date)
         & (practice_registrations.end_date.is_after(end_date) | practice_registrations.end_date.is_null())
     )
 
