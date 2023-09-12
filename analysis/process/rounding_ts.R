@@ -71,15 +71,15 @@ demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
 
 write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"))
 
-demo_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_demo_nocancer.csv")) %>%
-  mutate(opioid_any_round = rounding(opioid_any),
-         opioid_new_round = rounding(opioid_new),
-         pop_total_round = rounding(pop_total),
-         pop_naive_round = rounding(pop_naive),
-         rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
-         rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000))
+# demo_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_demo_nocancer.csv")) %>%
+#   mutate(opioid_any_round = rounding(opioid_any),
+#          opioid_new_round = rounding(opioid_new),
+#          pop_total_round = rounding(pop_total),
+#          pop_naive_round = rounding(pop_naive),
+#          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
+#          rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000))
 
-write.csv(demo_nocancer_round, here::here("output", "timeseries", "ts_demo_nocancer_rounded.csv"))
+# write.csv(demo_nocancer_round, here::here("output", "timeseries", "ts_demo_nocancer_rounded.csv"))
 
 # By admin route
 type_round <- read_csv(here::here("output", "timeseries", "ts_type.csv")) %>%
