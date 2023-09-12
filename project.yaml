@@ -28,17 +28,6 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_overall.csv
-        
-  # Measures - prevalent and new prescribing - people without cancer only (sensitivity)
-  measures_overall_nocancer:
-    run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py 
-      --output output/measures/measures_overall_nocancer.csv
-      --
-      --start-date "2018-01-01"
-      --intervals 54
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_overall_nocancer.csv
 
   # Measures - prevalent prescribing - by demographic categories
   measures_demo_prev:
@@ -87,7 +76,7 @@ actions:
   ## Process data - time series
   process_data_ts:
    run: r:latest analysis/process/process_data_ts.R
-   needs: [measures_overall, measures_overall_nocancer, measures_demo_prev, measures_demo_new, measures_type, measures_carehome]
+   needs: [measures_overall, measures_demo_prev, measures_demo_new, measures_type, measures_carehome]
    outputs:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_*.csv
