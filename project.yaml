@@ -89,21 +89,21 @@ actions:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts*.csv
   
-  ## Process data - time series
-  process_data_ts_nodemo:
-   run: r:latest analysis/process/process_data_ts_nodemo.R
-   needs: [measures_overall, measures_type, measures_carehome]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/t*.csv
+  # ## Process data - time series
+  # process_data_ts_nodemo:
+  #  run: r:latest analysis/process/process_data_ts_nodemo.R
+  #  needs: [measures_overall, measures_type, measures_carehome]
+  #  outputs:
+  #     moderately_sensitive:
+  #       timeseries_csv: output/timeseries/t*.csv
 
-  ## Time series - rounding
-  rounding_ts_nodemo:
-   run: r:latest analysis/process/rounding_ts_nodemo.R
-   needs: [process_data_ts_nodemo]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/*.csv
+  # ## Time series - rounding
+  # rounding_ts_nodemo:
+  #  run: r:latest analysis/process/rounding_ts_nodemo.R
+  #  needs: [process_data_ts_nodemo]
+  #  outputs:
+  #     moderately_sensitive:
+  #       timeseries_csv: output/timeseries/*.csv
 
   ## Results table 
   table:

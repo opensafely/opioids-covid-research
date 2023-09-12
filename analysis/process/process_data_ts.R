@@ -59,7 +59,7 @@ write.csv(overall, file = here::here("output", "timeseries", "ts_overall.csv"),
 
 
 # Overall counts - without cancer
-overall_noca <- read_csv(here::here("output", "measures", "measures_overall_nocancer.csv")) %>%
+overall_noca <- read_csv(here::here("output", "measures", "measures_overall.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
