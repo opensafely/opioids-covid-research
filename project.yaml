@@ -18,7 +18,7 @@ actions:
       highly_sensitive:
         cohort: output/data/dataset_table.csv.gz  
 
-  # Measures - overall
+  # Measures - prevalent and new prescribing - overall
   measures_overall:
     run: ehrql:v0 generate-measures analysis/measures_overall.py 
       --output output/measures/measures_overall.csv
@@ -29,27 +29,38 @@ actions:
       moderately_sensitive:
         measure_csv: output/measures/measures_overall.csv
         
-  # # Measures - overall
-  # measures_overall_nocancer:
-  #   run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py 
-  #     --output output/measures/measures_overall_nocancer.csv
-  #     --
-  #     --start-date "2018-01-01"
-  #     --intervals 54
-  #   outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/measures/measures_overall_nocancer.csv
-
-  # Measures - by demographic categories
-  measures_demo:
-    run: ehrql:v0 generate-measures analysis/measures_demo.py 
-      --output output/measures/measures_demo.csv
+  # Measures - prevalent and new prescribing - people without cancer only (sensitivity)
+  measures_overall_nocancer:
+    run: ehrql:v0 generate-measures analysis/measures_overall_nocancer.py 
+      --output output/measures/measures_overall_nocancer.csv
       --
       --start-date "2018-01-01"
       --intervals 54
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_demo.csv
+        measure_csv: output/measures/measures_overall_nocancer.csv
+
+  # Measures - prevalent prescribing - by demographic categories
+  measures_demo_prev:
+    run: ehrql:v0 generate-measures analysis/measures_demo_prev.py 
+      --output output/measures/measures_demo_prev.csv
+      --
+      --start-date "2018-01-01"
+      --intervals 54
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_demo_prev.csv
+  
+  # Measures - new prescribing - by demographic categories
+  measures_demo_new:
+    run: ehrql:v0 generate-measures analysis/measures_demo_new.py 
+      --output output/measures/measures_demo_new.csv
+      --
+      --start-date "2018-01-01"
+      --intervals 54
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_demo_new.csv
 
   # Measures - by opioid type
   measures_type:
@@ -76,7 +87,7 @@ actions:
   ## Process data - time series
   process_data_ts:
    run: r:latest analysis/process/process_data_ts.R
-   needs: [measures_overall, measures_demo, measures_type, measures_carehome]
+   needs: [measures_overall, measures_overall_nocancer, measures_demo_prev, measures_demo_new, measures_type, measures_carehome]
    outputs:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_*.csv
