@@ -68,22 +68,3 @@ measures.define_measure(
     numerator=dataset.hi_opioid_any,
     denominator=denominator,
     )
-
-## People without cancer
-measures.define_measure(
-    name="opioid_any_nocancer",
-    numerator=dataset.opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    )
-
-measures.define_measure(
-    name="opioid_new_nocancer",
-    numerator=dataset.opioid_new,
-    denominator=denominator & ~dataset.cancer & dataset.opioid_naive,
-    )
-
-measures.define_measure(
-    name="hi_opioid_any_nocancer",
-    numerator=dataset.hi_opioid_any,
-    denominator=denominator & ~dataset.cancer,
-    )

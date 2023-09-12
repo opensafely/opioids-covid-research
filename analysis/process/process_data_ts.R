@@ -59,7 +59,7 @@ write.csv(overall, file = here::here("output", "timeseries", "ts_overall.csv"),
 
 
 # Overall counts - without cancer
-overall_noca <- read_csv(here::here("output", "measures", "measures_overall.csv")) %>%
+overall_noca <- read_csv(here::here("output", "measures", "measures_overall_nocancer.csv")) %>%
   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
@@ -153,27 +153,27 @@ type <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
 write.csv(type, file = here::here("output", "timeseries", "ts_type.csv"),
           row.names = FALSE)
 
-# By admin route - without cancer
-type_noca <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
-  filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
-  mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
-         period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
-                         ifelse(month >= as.Date("2021-04-01"), "Recovery", "Lockdown")),
-         measure = case_when(
-           measure == "par_opioid_nocancer" ~ "Parenteral",
-           measure == "buc_opioid_nocancer" ~ "Buccal",
-           measure == "oral_opioid_nocancer" ~ "Oral",
-           measure == "trans_opioid_nocancer" ~ "Transdermal",
-           measure == "rec_opioid_nocancer" ~ "Rectal",
-           measure == "oth_opioid_nocancer" ~ "Other",
-           measure == "inh_opioid_nocancer" ~ "Inhaled"
-         ),
-         rate_opioid_any = (numerator / denominator * 1000)) %>%
-  rename(opioid_any = numerator, pop_total = denominator) %>%
-  dplyr::select(!c(interval_start, interval_end, ratio)) 
+# # By admin route - without cancer
+# type_noca <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
+#   filter(str_detect(measure, "_nocancer", negate = FALSE)) %>%
+#   mutate(month = as.Date(interval_start, format="%Y-%m-%d"),
+#          period = ifelse(month < as.Date("2020-03-01"), "Pre-COVID", 
+#                          ifelse(month >= as.Date("2021-04-01"), "Recovery", "Lockdown")),
+#          measure = case_when(
+#            measure == "par_opioid_nocancer" ~ "Parenteral",
+#            measure == "buc_opioid_nocancer" ~ "Buccal",
+#            measure == "oral_opioid_nocancer" ~ "Oral",
+#            measure == "trans_opioid_nocancer" ~ "Transdermal",
+#            measure == "rec_opioid_nocancer" ~ "Rectal",
+#            measure == "oth_opioid_nocancer" ~ "Other",
+#            measure == "inh_opioid_nocancer" ~ "Inhaled"
+#          ),
+#          rate_opioid_any = (numerator / denominator * 1000)) %>%
+#   rename(opioid_any = numerator, pop_total = denominator) %>%
+#   dplyr::select(!c(interval_start, interval_end, ratio)) 
 
-write.csv(type_noca, file = here::here("output", "timeseries", "ts_type_nocancer.csv"),
-          row.names = FALSE)
+# write.csv(type_noca, file = here::here("output", "timeseries", "ts_type_nocancer.csv"),
+#           row.names = FALSE)
 
 
 # In carehome
