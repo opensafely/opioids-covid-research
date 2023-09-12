@@ -1,6 +1,7 @@
 ###################################################
 # This script creates monthly counts/rates of opioid
-# prescribing for any opioid prescribing by mode of administration
+# prescribing for any opioid prescribing, new opioid prescribing,
+# and high dose/long-acting prescribing
 ###################################################
 
 from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
@@ -14,6 +15,7 @@ from ehrql.tables.beta.tpp import (
 import codelists
 
 from dataset_definition import make_dataset_opioids, registrations
+
 
 ##########
 
@@ -40,55 +42,32 @@ measures = Measures()
 
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
+
+## People without cancer
 denominator = (
         (patients.age_on(index_date) >= 18) 
         & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & registrations(index_date, index_date).exists_for_patient()
+        & ~dataset.cancer
     )
 
-#########################
-
-## Overall
-measures.define_measure(
-    name="oral_opioid", 
-    numerator=dataset.oral_opioid_any,
-    denominator=denominator
-    )
 
 measures.define_measure(
-    name="trans_opioid", 
-    numerator=dataset.trans_opioid_any,
-    denominator=denominator
+    name="opioid_any_nocancer",
+    numerator=dataset.opioid_any,
+    denominator=denominator,
     )
 
 measures.define_measure(
-    name="par_opioid", 
-    numerator=dataset.par_opioid_any,
-    denominator=denominator
+    name="opioid_new_nocancer",
+    numerator=dataset.opioid_new,
+    denominator=denominator & dataset.opioid_naive,
     )
 
 measures.define_measure(
-    name="rec_opioid", 
-    numerator=dataset.rec_opioid_any,
-    denominator=denominator
-    )
-
-measures.define_measure(
-    name="inh_opioid", 
-    numerator=dataset.inh_opioid_any,
-    denominator=denominator
-    )
-
-measures.define_measure(
-    name="buc_opioid", 
-    numerator=dataset.buc_opioid_any,
-    denominator=denominator
-    )
-
-measures.define_measure(
-    name="oth_opioid", 
-    numerator=dataset.oth_opioid_any,
-    denominator=denominator
+    name="hi_opioid_any_nocancer",
+    numerator=dataset.hi_opioid_any,
+    denominator=denominator,
     )

@@ -79,7 +79,7 @@ measures.define_measure(
 measures.define_measure(
     name="opioid_new_nocancer",
     numerator=dataset.opioid_new,
-    denominator=denominator & ~dataset.cancer & dataset.opioid_naive,
+    denominator=denominator & dataset.opioid_naive & ~dataset.cancer,
     )
 
 measures.define_measure(

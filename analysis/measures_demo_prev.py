@@ -103,8 +103,6 @@ denominator = (
         & registrations(index_date, index_date).exists_for_patient()
     )
 
-denominator_naive = denominator & dataset.opioid_naive
-
 #########################
 
 ## Overall 
@@ -144,39 +142,4 @@ measures.define_measure(
     group_by={"ethnicity6": dataset.ethnicity6}
     )
 
-# By demographics - new prescribing
-measures.define_measure(
-    name="opioid_new_age", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="opioid_new_sex", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="opioid_new_region", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="opioid_new_imd", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="opioid_new_eth6", 
-    numerator=dataset.opioid_new,
-    denominator=denominator_naive,
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
 

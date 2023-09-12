@@ -95,55 +95,18 @@ measures = Measures()
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
 # Total denominator
-denominator = (
+denominator_naive = (
         (patients.age_on(index_date) >= 18) 
         & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & registrations(index_date, index_date).exists_for_patient()
-    )
-
-denominator_naive = denominator & dataset.opioid_naive
+        & dataset.opioid_naive
+)
 
 #########################
 
 ## Overall 
-# By demographics - any prescribing
-measures.define_measure(
-    name="opioid_any_age", 
-    numerator=dataset.opioid_any,
-    denominator=denominator,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="opioid_any_sex", 
-    numerator=dataset.opioid_any,
-    denominator=denominator,
-    group_by={"sex": dataset.sex}
-    )
-
-measures.define_measure(
-    name="opioid_any_region", 
-    numerator=dataset.opioid_any,
-    denominator=denominator,
-    group_by={"region": dataset.region}
-    )
-
-measures.define_measure(
-    name="opioid_any_imd", 
-    numerator=dataset.opioid_any,
-    denominator=denominator,
-    group_by={"imd": dataset.imd10}
-    )
-
-measures.define_measure(
-    name="opioid_any_eth6",
-    numerator=dataset.opioid_any,
-    denominator=denominator, 
-    group_by={"ethnicity6": dataset.ethnicity6}
-    )
-
 # By demographics - new prescribing
 measures.define_measure(
     name="opioid_new_age", 

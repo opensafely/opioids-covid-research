@@ -61,15 +61,15 @@ overall_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_overal
 write.csv(overall_nocancer_round, here::here("output", "timeseries", "ts_overall_nocancer_rounded.csv"))
 
 # By demographics
-demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
-  mutate(opioid_any_round = rounding(opioid_any),
-         opioid_new_round = rounding(opioid_new),
-         pop_total_round = rounding(pop_total),
-         pop_naive_round = rounding(pop_naive),
-         rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
-         rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000))
+# demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
+#   mutate(opioid_any_round = rounding(opioid_any),
+#          opioid_new_round = rounding(opioid_new),
+#          pop_total_round = rounding(pop_total),
+#          pop_naive_round = rounding(pop_naive),
+#          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
+#          rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000))
 
-write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"))
+# write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"))
 
 # demo_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_demo_nocancer.csv")) %>%
 #   mutate(opioid_any_round = rounding(opioid_any),
@@ -89,12 +89,12 @@ type_round <- read_csv(here::here("output", "timeseries", "ts_type.csv")) %>%
 
 write.csv(type_round, here::here("output", "timeseries", "ts_type_rounded.csv"))
 
-# type_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_type_nocancer.csv")) %>%
-#   mutate(opioid_any_round = rounding(opioid_any),
-#          pop_total_round = rounding(pop_total),
-#          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000))
+type_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_type_nocancer.csv")) %>%
+  mutate(opioid_any_round = rounding(opioid_any),
+         pop_total_round = rounding(pop_total),
+         rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000))
 
-# write.csv(type_nocancer_round, here::here("output", "timeseries", "ts_type_nocancer_rounded.csv"))
+write.csv(type_nocancer_round, here::here("output", "timeseries", "ts_type_nocancer_rounded.csv"))
 
 
 # IN care home
