@@ -18,6 +18,28 @@ actions:
       highly_sensitive:
         cohort: output/data/dataset_table.csv.gz  
 
+  # Measures - test
+  measures_test_1:
+    run: ehrql:v0 generate-measures analysis/measures_test_1.py 
+      --output output/measures/measures_test_1.csv
+      --
+      --start-date "2018-01-01"
+      --intervals 12
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test_1.csv
+        
+  # Measures - test
+  measures_test_2:
+    run: ehrql:v0 generate-measures analysis/measures_test_2.py 
+      --output output/measures/measures_test_2.csv
+      --
+      --start-date "2018-01-01"
+      --intervals 12
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test_2.csv
+
   # Measures - prevalent and new prescribing - overall
   measures_overall:
     run: ehrql:v0 generate-measures analysis/measures_overall.py 
