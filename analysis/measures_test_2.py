@@ -79,13 +79,9 @@ measures.define_measure(
     name="opioid_any_age", 
     numerator=dataset.opioid_any,
     denominator=denominator,
-    group_by={"age_group": dataset.age_group}
-    )
-
-measures.define_measure(
-    name="opioid_any_sex", 
-    numerator=dataset.opioid_any,
-    denominator=denominator,
-    group_by={"sex": dataset.sex}
+    group_by={
+        "age_group": dataset.age_group,
+        "sex": dataset.sex
+              }
     )
 
