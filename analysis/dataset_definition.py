@@ -31,19 +31,13 @@ def make_dataset_opioids(index_date, end_date):
             clinical_events.date.is_on_or_between(index_date - years(5), index_date)
         ).exists_for_patient()
 
-    # Function to define no. people with opioid prescription 
-    def has_med_event(codelist, where=True):
-        med_event_exists = medications.where(medications.dmd_code.is_in(codelist)
+    # Function to define no. people with opioid prescription    
+    def has_med_event(codelist):
+        return medications.where(medications.dmd_code.is_in(codelist)
             ).where(
                 medications.date.is_on_or_between(index_date, end_date)
             ).exists_for_patient()
-        return (
-            case(
-                when(med_event_exists).then(True),
-                when(~med_event_exists).then(False)
-                )
-        )
-
+    
     # Overall
     dataset.opioid_any = has_med_event(codelists.opioid_codes) # Any opioid
 
@@ -74,24 +68,21 @@ def make_dataset_opioids(index_date, end_date):
         ).last_for_patient().date
 
     # Is opioid naive using one year lookback (for denominator)
-    dataset.opioid_naive = case(
-        when(last_rx.is_before(index_date - years(1))).then(True),
-        when(last_rx.is_null()).then(True),
-        default=False
-    )
+    dataset.opioid_naive = (
+        last_rx.is_before(index_date - years(1)) | last_rx.is_null()
+        )
 
     # Number of people with new prescriptions (among naive only)
-    dataset.opioid_new = case(
-        when(medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
+    dataset.opioid_new = (
+        medications.where(medications.dmd_code.is_in(codelists.opioid_codes)
             ).where(
                 medications.date.is_on_or_between(index_date, end_date)
             ).where(dataset.opioid_naive).exists_for_patient()
-        ).then(True),
-        default=False
-    )
-
+        )
+    
     return dataset
 
+# Practice registrations between given dates #
 def registrations(start_date, end_date):
     return practice_registrations.where(
         practice_registrations.start_date.is_on_or_before(start_date)

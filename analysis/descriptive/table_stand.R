@@ -1,13 +1,10 @@
-######################################
+##########################################################
 # This script:
-# - Produces counts of patients prescribed opioids (prevalence and incidence)
-#     by demographic characteristics before and during COVID (Apr-Jun 2019 vs 2020)
+# - Produces counts of patients prescribed opioids by demographic characteristics (Apr-Jun 2022)
 # - Both overall in full population, and people without a cancer diagnosis
 # - Both crude and age/sex standardised
 # - saves data summaries (as table)
-#
-# Updated: 19 Jul 2023
-######################################
+##########################################################
 
 ## For running locally only
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
@@ -26,7 +23,6 @@ source(here("analysis", "lib", "custom_functions.R"))
 ## Create directories if needed
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
-
 
 
 ## Read in data 
@@ -134,15 +130,9 @@ combined <- rbind(age, sex,
 
 
 
-##### FUNCTIONS ##################
-
-# Rounding and redaction
-redact <- function(vars) {
-  case_when(vars > 5 ~ vars)
-}
-rounding <- function(vars) {
-  round(vars/7)*7
-}
+############################################################
+# Summarise data for tables (including standardising rates)
+############################################################
 
 # Function for summarising and standardising data
 std <- function(data, ...){
@@ -164,7 +154,6 @@ std <- function(data, ...){
       total_population = sum(tot)
     ) %>%
     # Suppression and rounding 
-    mutate_at(c(vars(c("total_population", "opioid_any"))), redact) %>%
     mutate_at(c(vars(c("total_population", "opioid_any"))), rounding) %>%
     mutate(#crude rate (using redacted/rounded values)
       opioid_per_1000 = opioid_any / total_population * 1000,
@@ -175,12 +164,6 @@ std <- function(data, ...){
   
   return(stand_final)
 }
-
-
-
-############################################################
-# Summarise data for tables (including standardising rates)
-############################################################
 
 ### By cancer diagnosis - overall prescribing ###
 
@@ -212,7 +195,6 @@ write.csv(fullpop_stand, here::here("output", "tables", "table_full_population.c
           row.names = FALSE)
 
 
-
 ###############################################
 # Administration route (not standardised)
 #################################################
@@ -233,7 +215,6 @@ admin <- rbind(
   mutate(no_people = as.numeric(no_people),
          tot = as.numeric(count(for_tables)) #Total sample size
          ) %>%
-  mutate_at(c(vars(c("no_people", "tot"))), redact) %>%
   mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
   mutate(prevalence_per_1000 = no_people / tot * 1000,
          group = "Full population") 
@@ -255,7 +236,6 @@ admin.care <- rbind(
   mutate(no_people = as.numeric(no_people),
          tot = as.numeric(count(subset(for_tables, carehome == "Yes"))) # Total sample size
          ) %>%
-  mutate_at(c(vars(c("no_people", "tot"))), redact) %>%
   mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
   mutate(prevalence_per_1000 = no_people / tot*1000,
          group = "Care home")
