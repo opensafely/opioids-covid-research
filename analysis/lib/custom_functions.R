@@ -1,6 +1,5 @@
 ######################################
-# This script contains custom functions  for:
-# - data processing
+# This script contains custom functions  
 ######################################
 
 
@@ -12,4 +11,9 @@ fct_case_when <- function(...) {
   levels <- sapply(args[-1], function(f) f[[3]])  # extract RHS of formula
   levels <- levels[!is.na(levels)]
   factor(dplyr::case_when(...), levels=levels)
+}
+
+# Rounding and redaction
+rounding <- function(vars) {
+  case_when(vars > 5 ~ round(vars / 7) * 7)
 }
