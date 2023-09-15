@@ -91,7 +91,8 @@ overall_round <- read_csv(here::here("output", "timeseries", "ts_overall.csv")) 
          rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000),
          pcent_new = opioid_new_round / opioid_any_round * 100,
          pcent_hi = hi_opioid_any_round / opioid_any_round) %>%
-  dplyr::select(!c(opioid_any, hi_opioid_any, opioid_new, pop_total, pop_naive))
+  dplyr::select(!c(opioid_any, hi_opioid_any, opioid_new, pop_total, pop_naive,
+              rate_opioid_any, rate_hi_opioid_any, rate_opioid_new))
 
 write.csv(overall_round, here::here("output", "timeseries", "ts_overall_rounded.csv"),
           row.names = FALSE)
@@ -107,6 +108,7 @@ overall_nocancer_round <- read_csv(here::here("output", "timeseries", "ts_overal
          rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000),
          pcent_new = opioid_new_round / opioid_any_round * 100,
          pcent_hi = hi_opioid_any_round / opioid_any_round) %>%
-  dplyr::select(!c(opioid_any, hi_opioid_any, opioid_new, pop_total, pop_naive))
+  dplyr::select(!c(opioid_any, hi_opioid_any, opioid_new, pop_total, pop_naive,
+              rate_opioid_any, rate_hi_opioid_any, rate_opioid_new))
 
 write.csv(overall_nocancer_round, here::here("output", "timeseries", "ts_overall_nocancer_rounded.csv"))

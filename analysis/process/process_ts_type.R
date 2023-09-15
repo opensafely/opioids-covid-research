@@ -64,6 +64,6 @@ type_round <- read_csv(here::here("output", "timeseries", "ts_type.csv")) %>%
   mutate(opioid_any_round = rounding(opioid_any),
          pop_total_round = rounding(pop_total),
          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000)) %>%
-  dplyr::select(!c(opioid_any, pop_total))
+  dplyr::select(!c(opioid_any, pop_total, rate_opioid_any))
 
 write.csv(type_round, here::here("output", "timeseries", "ts_type_rounded.csv"))

@@ -83,6 +83,6 @@ demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
          pop_naive_round = rounding(pop_naive),
          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
          rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000)) %>%
-  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive))
+  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive, rate_opioid_any, rate_opioid_new))
 
 write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"))
