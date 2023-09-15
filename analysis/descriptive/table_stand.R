@@ -134,6 +134,26 @@ combined <- rbind(age, sex,
 # Summarise data for tables (including standardising rates)
 ############################################################
 
+### By cancer diagnosis - overall prescribing ###
+
+# Summarise 
+bycancer <- combined %>%
+  group_by(group, label, cancer) %>%
+  summarise(opioid_any = sum(opioid_any), total_population = sum(tot)) %>%
+  # Suppression and rounding 
+  mutate(
+    total_pop_round = rounding(total_population),
+    opioid_any_round = rounding(opioid_any),
+    opioid_per_1000 = opioid_any_round / total_pop_round * 1000) %>%
+  select(!c(total_population, opioid_any))
+
+# Save
+write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"),
+          row.names = FALSE)
+
+
+### Full population - overall prescribing     ###
+
 # Function for summarising and standardising data
 std <- function(data, ...){
   
@@ -154,29 +174,19 @@ std <- function(data, ...){
       total_population = sum(tot)
     ) %>%
     # Suppression and rounding 
-    mutate_at(c(vars(c("total_population", "opioid_any"))), rounding) %>%
-    mutate(#crude rate (using redacted/rounded values)
-      opioid_per_1000 = opioid_any / total_population * 1000,
+    mutate(
+      total_pop_round = rounding(total_population),
+      opioid_any_round = rounding(opioid_any),
+      opioid_any_std_round = rounding(opioid_any_std),
+      opioid_per_1000 = opioid_any_round / total_pop_round * 1000,
+      
       #standardised rate if same age/sex distribution as standard pop
-      opioid_per_1000_std = opioid_any_std / uk_pop * 1000 
+      opioid_per_1000_std = opioid_any_std_round / uk_pop * 1000 
     ) %>%
-    select(!c(uk_pop, opioid_any_std))
+    select(!c(total_population, opioid_any, opioid_any_std))
   
   return(stand_final)
 }
-
-### By cancer diagnosis - overall prescribing ###
-
-# Summarise and standardise                 
-bycancer_stand <- std(combined, group, label, cancer)
-
-# Save
-bycancer_stand <- bycancer_stand %>% arrange(group, label) 
-write.csv(bycancer_stand, here::here("output", "tables", "table_by_cancer.csv"),
-          row.names = FALSE)
-
-
-### Full population - overall prescribing     ###
 
 # First combine for people with/without cancer
 fullpop <- combined %>%
@@ -215,9 +225,11 @@ admin <- rbind(
   mutate(no_people = as.numeric(no_people),
          tot = as.numeric(count(for_tables)) #Total sample size
          ) %>%
-  mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
-  mutate(prevalence_per_1000 = no_people / tot * 1000,
-         group = "Full population") 
+  mutate(tot_round = rounding(tot),
+         no_people_round = rounding(no_people),
+         prevalence_per_1000 = no_people_round / tot_round * 1000,
+         group = "Full population") %>%
+  dplyr::select(!c("tot", "no_people"))
 
 
 # in care home - breakdown of admin route
@@ -236,9 +248,11 @@ admin.care <- rbind(
   mutate(no_people = as.numeric(no_people),
          tot = as.numeric(count(subset(for_tables, carehome == "Yes"))) # Total sample size
          ) %>%
-  mutate_at(c(vars(c("tot", "no_people"))), rounding) %>%
-  mutate(prevalence_per_1000 = no_people / tot*1000,
-         group = "Care home")
+  mutate(tot_round = rounding(tot),
+         no_people_round = rounding(no_people),
+         prevalence_per_1000 = no_people_round / tot_round*1000,
+         group = "Care home") %>%
+  dplyr::select(!c("tot","no_people"))
 
 admin.both <- rbind(admin, admin.care)
 
