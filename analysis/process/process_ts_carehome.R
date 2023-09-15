@@ -107,7 +107,9 @@ carehome_round <- read_csv(here::here("output", "timeseries", "ts_carehome.csv")
          rate_par_opioid_any_round = (par_opioid_any_round / pop_total_round * 1000),
          rate_oral_opioid_any_round = (oral_opioid_any_round / pop_total_round * 1000)) %>%
   dplyr::select(!c(opioid_any, opioid_new, hi_opioid_any, trans_opioid_any,
-                   par_opioid_any, oral_opioid_any, pop_naive, pop_total))
+                   par_opioid_any, oral_opioid_any, pop_naive, pop_total,
+                   rate_opioid_any, rate_hi_opioid_any, rate_opioid_new,
+                   rate_trans_opioid_any, rate_par_opioid_any, rate_oral_opioid_any))
 
 write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounded.csv"))
 
@@ -116,6 +118,6 @@ carehome_sens_round <- read_csv(here::here("output", "timeseries", "ts_carehome_
   mutate(opioid_any_round = rounding(opioid_any),
          pop_total_round = rounding(pop_total),
          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000)) %>%
-  dplyr::select(!c(opioid_any, pop_total))
+  dplyr::select(!c(opioid_any, pop_total, rate_opioid_any))
 
 write.csv(carehome_sens_round, here::here("output", "timeseries", "ts_carehome_sens_rounded.csv"))
