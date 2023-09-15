@@ -52,12 +52,7 @@ carehome <- read_csv(here::here("output", "measures", "measures_carehome.csv")) 
          pop_naive = denominator_opioid_new) %>%
   dplyr::select(!c(denominator_hi_opioid_any, denominator_oral_opioid,
                    denominator_trans_opioid, denominator_par_opioid)) %>%
-  mutate(pcent_new = opioid_new / opioid_any * 100,
-         pcent_hi = hi_opioid_any / opioid_any,
-         pcent_par = par_opioid_any / opioid_any,
-         pcent_trans = trans_opioid_any / opioid_any,
-         
-         rate_opioid_any = (opioid_any / pop_total * 1000),
+  mutate(rate_opioid_any = (opioid_any / pop_total * 1000),
          rate_hi_opioid_any = (hi_opioid_any / pop_total * 1000),
          rate_opioid_new = (opioid_new / pop_total * 1000),
          rate_oral_opioid_any = (oral_opioid_any / pop_total * 1000),
@@ -111,7 +106,7 @@ carehome_round <- read_csv(here::here("output", "timeseries", "ts_carehome.csv")
                    rate_opioid_any, rate_hi_opioid_any, rate_opioid_new,
                    rate_trans_opioid_any, rate_par_opioid_any, rate_oral_opioid_any))
 
-write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounded.csv"))
+write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounded.csv"), row.names = FALSE)
 
 # By care home (sensitivity analysis)
 carehome_sens_round <- read_csv(here::here("output", "timeseries", "ts_carehome_sens.csv")) %>%
@@ -120,4 +115,4 @@ carehome_sens_round <- read_csv(here::here("output", "timeseries", "ts_carehome_
          rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000)) %>%
   dplyr::select(!c(opioid_any, pop_total, rate_opioid_any))
 
-write.csv(carehome_sens_round, here::here("output", "timeseries", "ts_carehome_sens_rounded.csv"))
+write.csv(carehome_sens_round, here::here("output", "timeseries", "ts_carehome_sens_rounded.csv"), row.names = FALSE)
