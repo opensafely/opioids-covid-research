@@ -30,7 +30,9 @@ intervals = args.intervals
 
 ##########
 
-dataset = make_dataset_opioids(index_date=INTERVAL.start_date, end_date=INTERVAL.end_date)
+index_date = INTERVAL.start_date
+
+dataset = make_dataset_opioids(index_date=index_date, end_date=INTERVAL.end_date)
 
 ##########
 
