@@ -35,7 +35,7 @@ actions:
       --output output/measures/measures_demo_prev.csv
       --
       --start-date "2018-01-01"
-      --intervals 54
+      --intervals 3
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_demo_prev.csv
