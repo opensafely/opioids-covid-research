@@ -14,7 +14,7 @@ from ehrql.tables.beta.tpp import (
 
 import codelists
 
-from dataset_definition import make_dataset_opioids, registrations
+from dataset_definition import make_dataset_opioids
 
 dataset = make_dataset_opioids(index_date="2022-04-01", end_date="2022-06-30")
 
@@ -25,7 +25,7 @@ dataset.define_population(
     & (patients.age_on("2022-04-01") < 110)
     & ((patients.sex == "male") | (patients.sex == "female"))
     & (patients.date_of_death.is_after("2022-04-01") | patients.date_of_death.is_null())
-    & registrations("2022-04-01", "2022-04-01").exists_for_patient()
+    & (practice_registrations.for_patient_on("2022-04-01").exists_for_patient())
 )
 
 # Demographics #
