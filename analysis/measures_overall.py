@@ -48,7 +48,8 @@ denominator = (
         & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
-        & registrations(index_date, index_date).exists_for_patient()
+        & (practice_registrations.for_patient_on(index_date).exists_for_patient())
+
     )
 
 measures.define_measure(
