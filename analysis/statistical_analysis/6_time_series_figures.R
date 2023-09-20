@@ -154,7 +154,7 @@ graph5 <- fig("Ethnicity6", "Incident",
               pnw_palette("Sailboat", n = 6, "continuous"), NULL)
 
 
-png(here::here("output", "released_outputs", "graphs","Figure3.png"), 
+png(here::here("output", "released_outputs", "final", "Figure3.png"), 
     res = 300, units = "in", width = 6.8, height = 8)
 
 graph1 + theme(plot.tag.position  = c(.06,1.03)) +
@@ -190,7 +190,7 @@ pred.care$type <- factor(pred.care$type, levels =c("Prevalence", "Incidence"),
 
 
 
-png(here::here("output", "released_outputs", "final", "Figure3.png"), 
+png(here::here("output", "released_outputs", "final", "Figure4.png"), 
     res = 300, units = "in", width = 6, height = 2.5)
 
 ggplot(pred.care, aes(x=date)) +

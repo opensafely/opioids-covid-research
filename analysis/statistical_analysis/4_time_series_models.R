@@ -356,7 +356,7 @@ care <- ggplot(pred_carehome, aes(x =month)) +
         axis.text.x = element_text(angle = 45, hjust = 1))
 
 
-png("figure1.png", res = 300, units = "in", height = 4.5, width = 8)
+png(here::here("output", "released_outputs", "final", "figure1.png"), res = 300, units = "in", height = 4.5, width = 8)
 
 ggarrange(full, care, nrow = 2, labels = "auto", label.y = 1.15, common.legend = TRUE)
 

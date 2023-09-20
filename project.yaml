@@ -121,56 +121,7 @@ actions:
       moderately_sensitive:
         table: output/tables/table_*.csv
 
-  ## Clean up data for Table 1
-  table1:
-    run: r:latest analysis/statistical analysis/1_tables.R
-    needs: [table]
-    outputs:
-      moderately_sensitive:
-        table: output/released_outputs/final/table1.csv
 
-  ## Summary statistics for time series
-  summary_stats:
-    run: r:latest analysis/statisticalanalysis/2_summary_statistics.R
-    needs: [process_ts_overall, process_ts_demo, process_ts_carehome, process_ts_type]
-    outputs:
-      moderately_sensitive:
-        stats: output/released_outputs/final/summary_stats.csv
-  
-  ## Prepare data for interrupted time series
-  prep_its:
-    run: r:latest analysis/statisticalanalysis/3_time_series_prep.R
-    needs: [process_ts_overall, process_ts_demo, process_ts_carehome, process_ts_type]
-    outputs:
-      moderately_sensitive:
-        ts: output/released_outputs/final/ts_*.csv
-
-  ## ITS models
-  models_its:
-    run: r:latest analysis/statisticalanalysis/4_time_series_models.R
-    needs: [prep_ts]
-    outputs:
-      moderately_sensitive:
-        predicted: output/released_outputs/final/ts_pred*.csv
-        coefficients: output/released_outputs/final/ts_coef*.csv ITS models
-
-  ## Subgroup ITS models      
-  sub_models_its:
-    run: r:latest analysis/statisticalanalysis/5_subgroup_time_series_models.R
-    needs: [prep_ts]
-    outputs:
-      moderately_sensitive:
-        predicted: output/released_outputs/final/predicted*.csv
-        coefficients: output/released_outputs/final/coefficients*.csv
-        plots: output/released_outputs/final/*.png
-
-  ## ITS plots
-  plots_its:
-    run: r:latest analysis/statisticalanalysis/6_time_series_figures.R
-    needs: [sub_models_its]
-    outputs:
-      moderately_sensitive:
-        plots: output/released_outputs/final/*.png
 
   # OLD COHORTEXTRACTOR CODE
 
