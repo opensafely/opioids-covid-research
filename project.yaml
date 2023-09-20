@@ -105,6 +105,14 @@ actions:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_carehome*.csv
 
+  ## Check time series
+  figures_ts:
+    run: r:latest analysis/descriptive/ts_figures.R
+    needs: [process_ts_overall, process_ts_type, process_ts_carehome, process_ts_demo]
+    outputs:
+      moderately_sensitive:
+        table: output/descriptive/ts_plot*.png
+
   ## Results table 
   table:
     run: r:latest analysis/descriptive/table_stand.R
