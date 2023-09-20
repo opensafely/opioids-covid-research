@@ -1,10 +1,9 @@
-##########################################################
+####################################################################################################
 # This script:
 # - Produces counts of patients prescribed opioids by demographic characteristics (Apr-Jun 2022)
 # - Both overall in full population, and people without a cancer diagnosis
 # - Both crude and age/sex standardised
-# - saves data summaries (as table)
-##########################################################
+####################################################################################################
 
 ## For running locally only
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
@@ -24,7 +23,6 @@ source(here("analysis", "lib", "custom_functions.R"))
 dir_create(here::here("output", "tables"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "processed"), showWarnings = FALSE, recurse = TRUE)
 
-
 ## Read in data 
 cohort <- read_csv(here::here("output", "data", "dataset_table.csv.gz"))
 ons_pop_stand <- read_csv(here::here("ONS-data", "ons_pop_stand.csv"))
@@ -38,7 +36,7 @@ head(cohort)
 # Format variables as appropriate
 #################################################
 
-for_tables <- 
+for_tables <-
   cohort %>%
   mutate(
     
@@ -51,6 +49,14 @@ for_tables <-
     # Ethnicity
     ethnicity16 = ifelse(ethnicity16 == "", "Missing", ethnicity16),
     ethnicity6 = ifelse(ethnicity6 == "", "Missing", ethnicity6),
+    
+    # Region
+    region = ifelse(region == "", "Missing", region),
+    region = ifelse(region == "", "Missing", region),
+    
+    # IMD decile
+    imd10 = ifelse(imd10 == "", "Missing", imd10),
+    imd10 = ifelse(imd10 == "", "Missing", imd10),
     
     #Carehome
     carehome = fct_case_when(
@@ -145,7 +151,7 @@ bycancer <- combined %>%
     total_pop_round = rounding(total_population),
     opioid_any_round = rounding(opioid_any),
     opioid_per_1000 = opioid_any_round / total_pop_round * 1000) %>%
-  select(!c(total_population, opioid_any))
+  dplyr::select(!c(total_population, opioid_any))
 
 # Save
 write.csv(bycancer, here::here("output", "tables", "table_by_cancer.csv"),
@@ -183,7 +189,7 @@ std <- function(data, ...){
       #standardised rate if same age/sex distribution as standard pop
       opioid_per_1000_std = opioid_any_std_round / uk_pop * 1000 
     ) %>%
-    select(!c(total_population, opioid_any, opioid_any_std))
+    dplyr::select(!c(total_population, opioid_any, opioid_any_std))
   
   return(stand_final)
 }
@@ -209,6 +215,9 @@ write.csv(fullpop_stand, here::here("output", "tables", "table_full_population.c
 # Administration route (not standardised)
 #################################################
 
+for_tables <- for_tables %>%
+  mutate(oth_opioid_any = (buc_opioid_any | inh_opioid_any | rec_opioid_any))
+
 # Full population - breakdown of admin route
 admin <- rbind(
     # Count number of people with each formulation type
@@ -218,7 +227,7 @@ admin <- rbind(
     cbind(sum(for_tables$oral_opioid_any), "Oral"),
     cbind(sum(for_tables$par_opioid_any), "Parenteral"),
     cbind(sum(for_tables$trans_opioid_any), "Transdermal"),
-    cbind(sum(for_tables$buc_opioid_any), "Buccal")
+    cbind(sum(for_tables$oth_opioid_any), "Other")
   ) %>%
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%
@@ -241,7 +250,7 @@ admin.care <- rbind(
     cbind(sum(subset(for_tables, carehome == "Yes")$oral_opioid_any), "Oral"),
     cbind(sum(subset(for_tables, carehome == "Yes")$par_opioid_any), "Parenteral"),
     cbind(sum(subset(for_tables, carehome == "Yes")$trans_opioid_any), "Transdermal"),
-    cbind(sum(subset(for_tables, carehome == "Yes")$buc_opioid_any), "Buccal")
+    cbind(sum(subset(for_tables, carehome == "Yes")$oth_opioid_any), "Other")
   ) %>%
   as.data.frame() %>%
   rename(no_people = V1, formulation = V2) %>%

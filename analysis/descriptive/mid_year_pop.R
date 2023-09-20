@@ -1,12 +1,13 @@
 # # # # # # # # # # # # # # # # # # # # #
-# Purpose: Download and restructure mid pop estimates to be used to weight the
+# Purpose: Download and restructure mid pop 
+# estimates to be used to weight the
 # TPP population
 #
-# Notes: the 2020 mid year population estimates are used for standardisation
+# Notes: the 2020 mid year population estimates 
+# are used for standardisation
 # # # # # # # # # # # # # # # # # # # # #
 
-# preliminaries ----
-## import libraries ----
+
 library('tidyverse')
 library('onsr')
 library('here')

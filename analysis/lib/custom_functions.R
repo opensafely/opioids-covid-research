@@ -1,6 +1,6 @@
-######################################
+#########################################
 # This script contains custom functions  
-######################################
+#########################################
 
 
 # Factorise ----
@@ -15,5 +15,5 @@ fct_case_when <- function(...) {
 
 # Rounding and redaction
 rounding <- function(vars) {
-  case_when(vars > 5 ~ round(vars / 7) * 7)
+  case_when(vars > 10 ~ round(vars / 7) * 7)
 }
