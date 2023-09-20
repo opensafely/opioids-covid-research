@@ -30,20 +30,20 @@ dir_create(here::here("output", "released_outputs"), showWarnings = FALSE, recur
 dir_create(here::here("output", "released_outputs", "graphs"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
-predicted <- read_csv(here::here("output", "released_outputs", "predicted_vals_bygroup.csv"),
+predicted <- read_csv(here::here("output", "released_outputs", "final", "predicted_vals_bygroup.csv"),
                     col_types = cols(
-                      group  = col_character(),
-                      label = col_character(),
-                      date = col_date(format = "%Y-%m-%d")))
+                      var = col_character(),
+                      cat = col_character(),
+                      month = col_date(format = "%Y-%m-%d")))
 
-predicted$label <- factor(predicted$label,
-                        levels= c("90+ y", "80-89 y","70-79 y","60-69 y","50-59 y",
-                                  "40-49 y","30-39 y","18-29 y","Female","Male",
-                                  "1 most deprived","2","3","4","5","6","7","8","9","10 least deprived",
+predicted$cat <- factor(predicted$cat,
+                        levels= c("90+", "80-89","70-79","60-69","50-59",
+                                  "40-49","30-39","18-29","female","male",
+                                  "1 (most deprived)","2","3","4","5","6","7","8","9","10 (least deprived)",
                                   "Yorkshire and The Humber","West Midlands","South West",
                                   "South East","North West","North East","London",
-                                  "East Midlands","East","Unknown","Other","Mixed","Black or Black British",
-                                  "Asian or Asian British","White"),
+                                  "East Midlands","East","Unknown","Other","Mixed","Black",
+                                  "South Asian","White"),
                         labels= c("90+ y", "80-89 y","70-79 y","60-69 y","50-59 y",
                                   "40-49 y","30-39 y","18-29 y","Female","Male",
                                   "1 most deprived","2","3","4","5","6","7","8","9","10 least deprived",
@@ -59,12 +59,12 @@ predicted$label <- factor(predicted$label,
 
 
 fig <- function(grp, typ, pal, ylab){
-  graph <- ggplot(subset(predicted, group == grp & !(label %in% c("Missing", NA)) 
-                & type == typ), aes(x = date)) +
-    geom_point(aes(y = obs, col = label, fill = label), alpha = .3, size = .8) +
-    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = label), 
+  graph <- ggplot(subset(predicted, var == grp & !(cat %in% c("Missing", "Unknown", NA)) 
+                & type == typ), aes(x =month)) +
+    geom_point(aes(y = obs, col = cat, fill = cat), alpha = .3, size = .8) +
+    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = cat), 
                 alpha = .5, fill = "gray90")+
-    geom_line(aes(y = pred, col = label), size = .5) +
+    geom_line(aes(y = pred, col = cat), size = .5) +
     geom_vline(aes(xintercept = as.Date("2020-03-01")), 
                linetype = "longdash", col = "black") +
     geom_vline(aes(xintercept = as.Date("2021-04-01")), 
@@ -92,24 +92,24 @@ fig <- function(grp, typ, pal, ylab){
 }
 
 # By age
-graph1 <- fig("Age", "Prevalent",  
+graph1 <- fig("age", "Prevalent",  
               pnw_palette("Sailboat", n = 8, "continuous"), NULL)
 
 # By sex
-graph2 <- fig("Sex", "Prevalent", 
+graph2 <- fig("sex", "Prevalent", 
               pnw_palette("Sailboat", n = 2, "continuous"), NULL)
   
 # By IMD
-graph3 <- fig("IMD decile", "Prevalent", 
+graph3 <- fig("imd", "Prevalent", 
               pnw_palette("Sailboat", n = 10, "continuous"),
               ylab = "No. people prescribed opioids per 1000 registered patients") 
 
 # By region
-graph4 <- fig("Region", "Prevalent", 
+graph4 <- fig("region", "Prevalent", 
               pnw_palette("Sailboat", n = 10, "continuous"), NULL)
 
 # By ethnicity
-graph5 <- fig("Ethnicity6", "Prevalent", 
+graph5 <- fig("eth6", "Prevalent", 
               pnw_palette("Sailboat", n = 6, "continuous"), NULL)
 
 # Combined figure 
@@ -134,20 +134,20 @@ dev.off()
 
 
 # By age
-graph1 <- fig("Age", "Incident",  
+graph1 <- fig("age", "Incident",  
               pnw_palette("Sailboat", n = 8, "continuous"), NULL)
 
 # By sex
-graph2 <- fig("Sex", "Incident", 
+graph2 <- fig("sex", "Incident", 
               pnw_palette("Sailboat", n = 2, "continuous"), NULL)
 
 # By IMD
-graph3 <- fig("IMD decile", "Incident", 
+graph3 <- fig("imd", "Incident", 
               pnw_palette("Sailboat", n = 10, "continuous"),
               ylab = "No. people prescribed opioids per 1000 registered patients") 
 
 # By region
-graph4 <- fig("Region", "Incident", 
+graph4 <- fig("region", "Incident", 
               pnw_palette("Sailboat", n = 10, "continuous"), NULL)
 
 # By ethnicity
@@ -179,10 +179,10 @@ dev.off()
 pred.care <- read_csv(here::here("output", "released_outputs", "predicted_vals_bycarehome.csv"),
                       col_types = cols(
                         group  = col_character(),
-                        label = col_character(),
+                        cat = col_character(),
                         date = col_date(format = "%Y-%m-%d")))
 
-pred.care$label <- factor(pred.care$label,
+pred.care$cat <- factor(pred.care$cat,
                           levels= c("90+ y", "80-89 y","70-79 y"),
                           labels= c("90+ y", "80-89 y","70-79 y"))
 
@@ -195,10 +195,10 @@ png(here::here("output", "released_outputs", "graphs","Figure3.png"),
     res = 300, units = "in", width = 6, height = 2.5)
 
 ggplot(pred.care, aes(x=date)) +
-  geom_point(aes( y = obs, col = label, fill = label), alpha=.3, size=.8) +
-  geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = label), 
+  geom_point(aes( y = obs, col = cat, fill = cat), alpha=.3, size=.8) +
+  geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = cat), 
               alpha=.7, fill = "gray90")+
-  geom_line(aes(y = pred, col = label), size = .5) +
+  geom_line(aes(y = pred, col = cat), size = .5) +
   geom_vline(aes(xintercept = as.Date("2020-03-01")), 
              linetype = "longdash", col = "black") +
   geom_vline(aes(xintercept = as.Date("2021-03-01")), 
