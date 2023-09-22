@@ -1,7 +1,6 @@
 #######################################################
-#
 # This script creates time series graphs by subgroups
-#
+# with predicted values from models
 #######################################################
 
 # For running locally only #
@@ -27,7 +26,7 @@ library(patchwork)
 
 ## Create directories
 dir_create(here::here("output", "released_outputs"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "released_outputs", "graphs"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "released_outputs", "final"), showWarnings = FALSE, recurse = TRUE)
 
 # Read in data
 predicted <- read_csv(here::here("output", "released_outputs", "final", "predicted_vals_bygroup.csv"),
@@ -113,7 +112,7 @@ graph5 <- fig("eth6", "Prevalent",
               pnw_palette("Sailboat", n = 6, "continuous"), NULL)
 
 # Combined figure 
-png(here::here("output", "released_outputs", "graphs", "Figure2.png"), 
+png(here::here("output", "released_outputs", "final", "Figure2.png"), 
     res = 300, units = "in", width = 6.8, height = 8)
 
 graph1 + theme(plot.tag.position  = c(.06,1.03)) +
@@ -155,7 +154,7 @@ graph5 <- fig("Ethnicity6", "Incident",
               pnw_palette("Sailboat", n = 6, "continuous"), NULL)
 
 
-png(here::here("output", "released_outputs", "graphs","Figure3.png"), 
+png(here::here("output", "released_outputs", "final", "Figure3.png"), 
     res = 300, units = "in", width = 6.8, height = 8)
 
 graph1 + theme(plot.tag.position  = c(.06,1.03)) +
@@ -176,7 +175,7 @@ dev.off()
 ######################################
 
 
-pred.care <- read_csv(here::here("output", "released_outputs", "predicted_vals_bycarehome.csv"),
+pred.care <- read_csv(here::here("output", "released_outputs", "final", "predicted_vals_bycarehome.csv"),
                       col_types = cols(
                         group  = col_character(),
                         cat = col_character(),
@@ -191,7 +190,7 @@ pred.care$type <- factor(pred.care$type, levels =c("Prevalence", "Incidence"),
 
 
 
-png(here::here("output", "released_outputs", "graphs","Figure3.png"), 
+png(here::here("output", "released_outputs", "final", "Figure4.png"), 
     res = 300, units = "in", width = 6, height = 2.5)
 
 ggplot(pred.care, aes(x=date)) +

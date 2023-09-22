@@ -1,13 +1,11 @@
 #######################################################
-#
-# This script creates and save working datasets
-#    and calculates summary statistics for all 
-#    relevant variables in the study
-#
+# This script calculates summary statistics for all 
+#    relevant time series variables, 
+#    both overall and by time period (pre-COVID, lockdown, recovery)
 #######################################################
 
 # For running locally only #
-setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
+# setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
 # getwd()
 
 
@@ -32,9 +30,7 @@ dir_create(here::here("output", "released_outputs", "final"), showWarnings = FAL
 
 ##########################
 
-## Calculate summary statistics
-
-# Function for median/IQR
+## Function to calculate median/IQR
 options(scipen = 999)
 
 stats <- function(data){
@@ -60,21 +56,26 @@ stats <- function(data){
 }
 
 
-
 #############################
 
 ## Read in data 
+
+# Overall
 overall <- read_csv(here::here("output", "released_outputs", "ts_overall_rounded.csv"),
                       col_types = cols(month = col_date(format="%Y-%m-%d"))) %>%
   mutate(cat = "Overall", var = "Overall") 
 
+# People without cancer
 overall_nocancer <- read_csv(here::here("output", "released_outputs", "ts_overall_nocancer_rounded.csv"),
                     col_types = cols(month = col_date(format="%Y-%m-%d"))) %>%
   mutate(cat = "No cancer", var = "Overall") 
 
+# By demographics
 demo <-  read_csv(here::here("output", "released_outputs", "ts_demo_rounded.csv"),
-                  col_types = cols(month = col_date(format="%Y-%m-%d")))
+                  col_types = cols(month = col_date(format="%Y-%m-%d"))) %>%
+  mutate(cat = ifelse(is.na(cat), "Missing", cat))
 
+# BY admin route
 type <-  read_csv(here::here("output", "released_outputs", "ts_type_rounded.csv"),
                   col_types = cols(month = col_date(format="%Y-%m-%d"))) %>%
   mutate(cat = measure, var = "Admin route") %>%
@@ -87,7 +88,7 @@ carehome <-  read_csv(here::here("output", "released_outputs", "ts_carehome_roun
 
 ################################
 
-## Calculate summary statistics
+## Calculate summary statistics and save in one file
 overall_stats <- stats(overall)
 overall_nocancer_stats <- stats(overall_nocancer)
 demo_stats <- stats(demo)
@@ -96,7 +97,6 @@ carehome_stats <- stats(carehome)
 
 all_stats <- rbind(overall_stats, overall_nocancer_stats, demo_stats, type_stats, carehome_stats) %>%
   arrange(var, cat)
-
 
 write.csv(all_stats, file = here::here("output", "released_outputs", "final", "summary_stats.csv"),
           row.names = FALSE)

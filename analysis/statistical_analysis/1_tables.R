@@ -1,13 +1,9 @@
 #######################################################
-#
-# This script creates and save working datasets
-#    and calculates summary statistics for all 
-#    relevant variables in the study
-#
+# This script creates Table 1
 #######################################################
 
 # For running locally only #
-setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
+# setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
 # getwd()
 
 
@@ -34,7 +30,7 @@ dir_create(here::here("output", "released_outputs", "final"), showWarnings = FAL
 
 table_admin <- read_csv(here::here("output", "released_outputs", "table_by_admin_route.csv"))
 
-# Extract total population from table
+# Extract total population from table_admin
 pop <- as.numeric(table_admin[1,2])
 
 table <- read_csv(here::here("output", "released_outputs", "table_full_population.csv")) %>%
@@ -49,8 +45,6 @@ table <- read_csv(here::here("output", "released_outputs", "table_full_populatio
 table$label <- replace(table$label, is.na(table$label), "Missing")
 
 write.csv(table, here::here("output", "released_outputs", "final", "table1.csv"))
-
-
 
 
 ##############################

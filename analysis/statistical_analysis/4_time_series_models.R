@@ -35,64 +35,6 @@ dir_create(here::here("output", "released_outputs"), showWarnings = FALSE, recur
 dir_create(here::here("output", "released_outputs", "graphs"), showWarnings = FALSE, recurse = TRUE)
 
 
-## Read in data
-overall <- read_csv(here::here("output", "released_outputs", "ts_overall_rounded.csv"),
-                      col_types = cols(month = col_date(format="%Y-%m-%d")))
-demo <- read_csv(here::here("output", "released_outputs", "ts_demo_rounded.csv"),
-                    col_types = cols(month = col_date(format="%Y-%m-%d")))
-type <- read_csv(here::here("output", "released_outputs", "ts_type_rounded.csv"),
-                    col_types = cols(month = col_date(format="%Y-%m-%d")))
-carehome <- read_csv(here::here("output", "released_outputs", "ts_carehome_rounded.csv"),
-                    col_types = cols(month = col_date(format="%Y-%m-%d")))
-
-## Create ITS variables
-its.vars <- overall %>%
-            dplyr::select(month) %>%
-            mutate(mar20 = ifelse(month == as.Date("2020-03-01"), 1, 0),
-                    apr20 = ifelse(month == as.Date("2020-04-01"), 1, 0),
-                    may20 = ifelse(month == as.Date("2020-05-01"), 1, 0),
-                    step = ifelse(month < as.Date("2020-03-01"), 0, 1),
-                    step2 = ifelse(month < as.Date("2021-04-01"), 0, 1),
-                    month_dummy = as.factor(month(month)),
-                    time = seq(1, by = 1, length.out = nrow(overall)),
-                    slope = ifelse(as.Date(month, format="%Y-%m-%d") < as.Date("2020-03-01"), 0, 
-                                  time - sum(step == 0)),
-                    slope2 = ifelse(as.Date(month, format="%Y-%m-%d") < as.Date("2021-04-01"), 0, 
-                                   time - sum(step2 == 0)))
-
-## Merge ITS vars into datasets
-overall.its <- overall %>% 
-  arrange(month) %>% 
-  merge(its.vars, by = "month")
-
-write.csv(overall.its, file = here::here("output", "released_outputs", "ts_overall_its.csv"),
-          row.names = FALSE)
-
-
-demo.its <- demo %>%
-  arrange(month) %>%
-  merge(its.vars, by = "month")
-
-write.csv(demo.its, file = here::here("output", "released_outputs", "ts_demo_its.csv"),
-          row.names = FALSE)
-
-
-type.its <- type %>%
-  arrange(month) %>%
-  merge(its.vars, by = "month")
-
-write.csv(type.its, file = here::here("output", "released_outputs", "ts_type_its.csv"),
-          row.names = FALSE)
-
-
-carehome.its <- carehome %>%
-  arrange(month) %>%
-  merge(its.vars, by = "month")
-
-write.csv(carehome.its, file = here::here("output", "released_outputs", "ts_carehome_its.csv"),
-          row.names = FALSE)
-
-
 #################
 ### Functions ###
 #################
@@ -133,7 +75,7 @@ pred.val <- function(mod, data, pop, outcome, var, obs){
 
 #### Overall prescribing ####
 
-df.data1 <- overall.its %>%
+df.data1 <- read_csv(here::here("output", "released_outputs", "ts_overall_its.csv")) %>%
   rename(opioid = opioid_any_round, pop = pop_total_round)
 
 # Base model
@@ -165,7 +107,7 @@ pred_prev <- pred.val(mod2, overall.its, pop_total_round, "Prevalence", "Overall
 
 #### Overall incidence ####
 
-df.data1 <- overall.its %>%
+df.data1 <-  read_csv(here::here("output", "released_outputs", "ts_overall_its.csv")) %>%
   rename(opioid = opioid_new_round, pop = pop_naive_round)
 
 # Base model
@@ -197,7 +139,7 @@ pred_new <- pred.val(mod1, overall.its, pop_naive_round, "Incidence", "Overall",
 
 #### OVerall high dose prescribing ####
 
-df.data1 <- overall.its %>%
+df.data1 <-  read_csv(here::here("output", "released_outputs", "ts_overall_its.csv")) %>%
   rename(opioid = hi_opioid_any_round, pop = pop_total_round)
 
 # Base model
@@ -251,7 +193,7 @@ write.csv(pred_all, here::here("output", "released_outputs", "final", "ts_predic
 
 #### Overall prescribing ####
 
-df.data1 <- carehome.its %>%
+df.data1 <-  read_csv(here::here("output", "released_outputs", "ts_carehome_its.csv")) %>%
   rename(opioid = opioid_any_round,
          pop = pop_total_round)
 
@@ -284,7 +226,7 @@ pred_care_prev <- pred.val(mod2, carehome.its, pop_total_round, "Prevalence", "C
 
 #### Overall incidence ####
 
-df.data1 <- carehome.its %>%
+df.data1 <- read_csv(here::here("output", "released_outputs", "ts_carehome_its.csv")) %>%
   rename(opioid = opioid_new_round,
          pop = pop_naive_round)
 
@@ -318,7 +260,7 @@ pred_care_new <- pred.val(mod2, carehome.its, pop_naive_round, "Incidence", "Car
 
 #### High dose prescribing ####
 
-df.data1 <- carehome.its %>%
+df.data1 <- read_csv(here::here("output", "released_outputs", "ts_carehome_its.csv")) %>%
   rename(opioid = hi_opioid_any_round,
          pop = pop_naive_round)
 
@@ -414,7 +356,7 @@ care <- ggplot(pred_carehome, aes(x =month)) +
         axis.text.x = element_text(angle = 45, hjust = 1))
 
 
-png("figure1.png", res = 300, units = "in", height = 4.5, width = 8)
+png(here::here("output", "released_outputs", "final", "figure1.png"), res = 300, units = "in", height = 4.5, width = 8)
 
 ggarrange(full, care, nrow = 2, labels = "auto", label.y = 1.15, common.legend = TRUE)
 

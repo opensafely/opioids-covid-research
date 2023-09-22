@@ -108,7 +108,8 @@ carehome_round <- read_csv(here::here("output", "timeseries", "ts_carehome.csv")
 
 write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounded.csv"), row.names = FALSE)
 
-# By care home (sensitivity analysis)
+
+# By age and care home (sensitivity analysis)
 carehome_sens_round <- read_csv(here::here("output", "timeseries", "ts_carehome_sens.csv")) %>%
   mutate(opioid_any_round = rounding(opioid_any),
          pop_total_round = rounding(pop_total),

@@ -37,7 +37,7 @@ library(MASS)
 ## Create directories
 dir_create(here::here("output", "released_outputs"), showWarnings = FALSE, recurse = TRUE)
 dir_create(here::here("output", "released_outputs", "graphs"), showWarnings = FALSE, recurse = TRUE)
-dir_create(here::here("output", "released_outputs", "graphs"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "released_outputs", "final"), showWarnings = FALSE, recurse = TRUE)
 
 
 ##### Read in data #######
@@ -307,7 +307,7 @@ write.csv(all.pred, here::here("output", "released_outputs", "final", "predicted
 
 #### Figures with percent changes ####
 
-png(here::here("output", "released_outputs", "graphs", "prev IRR pcent.png"), 
+png(here::here("output", "released_outputs", "final", "prev IRR pcent.png"), 
     res = 300, units = "in", width = 5, height = 7)
 
 ggplot(data = subset(all.irr, type == "Prevalent"),
@@ -328,7 +328,7 @@ ggplot(data = subset(all.irr, type == "Prevalent"),
 dev.off()
 
 
-png(here::here("output", "released_outputs", "graphs","New IRR pcent.png"), 
+png(here::here("output", "released_outputs", "final", "New IRR pcent.png"), 
     res = 300, units = "in", width = 5, height = 7)
 
 ggplot(data = subset(all.irr, type == "Incident"),
@@ -389,7 +389,7 @@ age_coef_bycare <- rbind(age_coef, age_coef_nocare) %>%
   mutate(var = ifelse(var == "age", "Full population", var))
 
 write.csv(age_coef_bycare, 
-          here::here("output", "released_outputs", "coefficients_bycarehome.csv"),
+          here::here("output", "released_outputs", "final", "coefficients_bycarehome.csv"),
           row.names = FALSE)
 
 # Predicted values
@@ -401,7 +401,7 @@ age_pred_bycare <- rbind(age_pred_nocare, age_pred) %>%
   mutate(var = ifelse(var == "age", "Full population", "Not in care home"))
   
 write.csv(age_pred_bycare, 
-          here::here("output", "released_outputs", "predicted_vals_bycarehome.csv"),
+          here::here("output", "released_outputs", "final", "predicted_vals_bycarehome.csv"),
           row.names = FALSE)
 
 ################################
@@ -453,7 +453,7 @@ new <- ggplot(data = subset(age_pred_bycare, type == "Incident"),
   ggtitle("New prescribing")
 
 
-png(here::here("output", "released_outputs", "graphs","SuppFigureX.png"), 
+png(here::here("output", "released_outputs", "final","SuppFigureX.png"), 
     res = 300, units = "in", height = 3.5, width = 9)
 
 prev + 

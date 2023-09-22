@@ -23,30 +23,37 @@ dir_create(here::here("output", "timeseries"), showWarnings = FALSE, recurse = T
 dir_create(here::here("output", "descriptive"), showWarnings = FALSE, recurse = TRUE)
 
 
-# Read in data
+## Read in data
+
+# Overall 
 overall.ts <- read_csv(here::here("output", "timeseries", "ts_overall_rounded.csv"),
                       col_types = cols(month = col_date(format = "%Y-%m-%d"))) %>%
                 mutate(cat = "Overall", var = "Overall")
 
+# People without a history of cancer
 nocancer.ts <- read_csv(here::here("output", "timeseries", "ts_overall_nocancer_rounded.csv"),
                        col_types = cols(month = col_date(format = "%Y-%m-%d"))) %>%
                 mutate(cat = "No cancer", var = "No cancer")
   
+# By admin route
 type.ts <- read_csv(here::here("output", "timeseries", "ts_type_rounded.csv"),
                       col_types = cols(month = col_date(format = "%Y-%m-%d"))) %>%
                 mutate(var = "Admin route", cat = measure) %>%
                 dplyr::select(!measure)
 
+# People in care home
 carehome.ts <- read_csv(here::here("output", "timeseries", "ts_carehome_rounded.csv"),
                     col_types = cols(month = col_date(format = "%Y-%m-%d"))) %>%
                 mutate(cat = "Carehome", var = "Carehome")
 
+# By demographics
 demo.ts <- read_csv(here::here("output", "timeseries", "ts_demo_rounded.csv"),
                        col_types = cols(month = col_date(format = "%Y-%m-%d")))
 
 
 ######################################
 
+# Function to create and save figures
 fig <- function(data, subset, measure, suffix){
   
   graph <- ggplot(subset(data, var == subset), aes(x =month)) +

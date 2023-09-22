@@ -122,7 +122,7 @@ actions:
     needs: [process_ts_overall, process_ts_type, process_ts_carehome, process_ts_demo]
     outputs:
       moderately_sensitive:
-        table: output/descriptive/ts_plot*.png
+        plots: output/descriptive/ts_plot*.png
 
   ## Results table 
   table:
@@ -132,7 +132,8 @@ actions:
       moderately_sensitive:
         table: output/tables/table_*.csv
 
-  
+
+
   # OLD COHORTEXTRACTOR CODE
 
   # ## Cohort data
