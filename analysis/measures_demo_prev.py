@@ -4,17 +4,16 @@
 # and high dose/long-acting prescribing by demographics categories
 ###################################################
 
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
+from ehrql import case, when, months, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 
-    medications, 
     addresses,
     practice_registrations,
     clinical_events)
 
 import codelists
 
-from dataset_definition import make_dataset_opioids, registrations
+from dataset_definition import make_dataset_opioids
 
 ##########
 
@@ -100,7 +99,7 @@ denominator = (
         & (patients.age_on(index_date) < 110)
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
-        & registrations(index_date, index_date).exists_for_patient()
+        & (practice_registrations.for_patient_on(index_date).exists_for_patient())
     )
 
 #########################
