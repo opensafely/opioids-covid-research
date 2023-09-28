@@ -4,17 +4,14 @@
 # and high dose/long-acting prescribing
 ###################################################
 
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
+from ehrql import months, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 
-    medications, 
-    addresses,
-    practice_registrations,
-    clinical_events)
+    practice_registrations)
 
 import codelists
 
-from dataset_definition import make_dataset_opioids, registrations
+from dataset_definition import make_dataset_opioids
 
 
 ##########
@@ -49,7 +46,6 @@ denominator = (
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
-
     )
 
 measures.define_measure(

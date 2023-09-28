@@ -3,17 +3,14 @@
 # prescribing for any opioid prescribing by mode of administration
 ###################################################
 
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
+from ehrql import Dataset, months, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 
     medications, 
-    addresses,
-    practice_registrations,
-    clinical_events)
+    practice_registrations)
 
 import codelists
 
-from dataset_definition import make_dataset_opioids
 
 ##########
 
@@ -32,9 +29,25 @@ intervals = args.intervals
 
 index_date = INTERVAL.start_date
 
-dataset = make_dataset_opioids(index_date=index_date, end_date=INTERVAL.end_date)
+dataset = Dataset()
 
-##########
+dataset.number_par_rx = medications.where(
+        medications.dmd_code.is_in(codelists.par_opioid_codes)
+    ).where(
+        medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+    ).count_for_patient()
+
+dataset.number_trans_rx = medications.where(
+        medications.dmd_code.is_in(codelists.trans_opioid_codes)
+    ).where(
+        medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+    ).count_for_patient()
+
+dataset.number_opioid_rx = medications.where(
+        medications.dmd_code.is_in(codelists.opioid_codes)
+    ).where(
+        medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+    ).count_for_patient()
 
 measures = Measures()
 
@@ -52,25 +65,19 @@ denominator = (
 
 ## Overall
 measures.define_measure(
-    name="oral_opioid", 
-    numerator=dataset.oral_opioid_any,
-    denominator=denominator
-    )
-
-measures.define_measure(
-    name="trans_opioid", 
-    numerator=dataset.trans_opioid_any,
+    name="any_opioid", 
+    numerator=dataset.number_opioid_rx,
     denominator=denominator
     )
 
 measures.define_measure(
     name="par_opioid", 
-    numerator=dataset.par_opioid_any,
+    numerator=dataset.number_par_rx,
     denominator=denominator
     )
 
 measures.define_measure(
-    name="oth_opioid", 
-    numerator=dataset.oth_opioid_any,
+    name="trans_opioid", 
+    numerator=dataset.number_trans_rx,
     denominator=denominator
     )

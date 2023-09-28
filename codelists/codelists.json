@@ -3,25 +3,25 @@
     "opensafely-cancer-excluding-lung-and-haematological-snomed.csv": {
       "id": "opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15",
       "url": "https://codelists.opensafely.org/codelist/opensafely/cancer-excluding-lung-and-haematological-snomed/2020-04-15/",
-      "downloaded_at": "2022-07-29 13:37:07.220912Z",
-      "sha": "d43aff12fcb3b404c635e24f964ba2a368c96c98"
+      "downloaded_at": "2023-09-28 09:52:14.519711Z",
+      "sha": "c1c6f36e0d66412efedf0036fc5572cd18fda2ba"
     },
     "opensafely-haematological-cancer-snomed.csv": {
       "id": "opensafely/haematological-cancer-snomed/2020-04-15",
       "url": "https://codelists.opensafely.org/codelist/opensafely/haematological-cancer-snomed/2020-04-15/",
-      "downloaded_at": "2022-07-29 13:37:07.420809Z",
-      "sha": "c87e49e8d2965bc489f9baba670783f15ce73896"
+      "downloaded_at": "2023-09-28 09:52:14.644455Z",
+      "sha": "8cfecfc981cddc056347939a24516d428cf2ac32"
     },
     "opensafely-lung-cancer-snomed.csv": {
       "id": "opensafely/lung-cancer-snomed/2020-04-15",
       "url": "https://codelists.opensafely.org/codelist/opensafely/lung-cancer-snomed/2020-04-15/",
-      "downloaded_at": "2022-07-29 13:37:07.579704Z",
-      "sha": "f0debdf1c968242fa8790cd0b773662b8e169f43"
+      "downloaded_at": "2023-09-28 09:52:14.803798Z",
+      "sha": "e57cc043335a037095389bc46fd96a9a637eb483"
     },
     "opensafely-ethnicity-snomed-0removed.csv": {
       "id": "opensafely/ethnicity-snomed-0removed/2e641f61",
       "url": "https://codelists.opensafely.org/codelist/opensafely/ethnicity-snomed-0removed/2e641f61/",
-      "downloaded_at": "2022-08-02 09:37:45.116235Z",
+      "downloaded_at": "2023-09-28 13:15:09.076114Z",
       "sha": "8b849b5b785d80306e488d0109640c8c1d2da01b"
     },
     "primis-covid19-vacc-uptake-longres.csv": {
@@ -33,50 +33,50 @@
     "opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
       "id": "opensafely/high-dose-long-acting-opioids-openprescribing-dmd/52f27403",
       "url": "https://codelists.opensafely.org/codelist/opensafely/high-dose-long-acting-opioids-openprescribing-dmd/52f27403/",
-      "downloaded_at": "2022-08-30 15:37:15.986847Z",
-      "sha": "998d956447c4aa67f9b3b8f21a757b4bfbe6d9c1"
+      "downloaded_at": "2023-09-28 09:52:15.220766Z",
+      "sha": "961c5f136287f17c7164c27f87509fded8c0eadf"
     },
     "opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd/20d38d99",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd/20d38d99/",
-      "downloaded_at": "2022-09-28 14:32:50.481120Z",
-      "sha": "f02ec6bcfc5dcc0e4e5041d54c15d3cd744b04f1"
+      "downloaded_at": "2023-09-28 09:52:15.389548Z",
+      "sha": "e8c67af12a312661069e7c6a1ce898f6267846a0"
     },
     "opensafely-opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd/07c41a64",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd/07c41a64/",
-      "downloaded_at": "2022-09-28 14:32:50.684741Z",
-      "sha": "cf87bbb51fe5f4f32bb26627e835869c26bff738"
+      "downloaded_at": "2023-09-28 09:52:15.538014Z",
+      "sha": "394fd699ee0d8f2e76996895cef3a7256471b359"
     },
     "opensafely-opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd/6eb4a72e",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd/6eb4a72e/",
-      "downloaded_at": "2022-09-28 14:32:51.271825Z",
-      "sha": "a41e62e765935b71021cc065f2b805d1db5bdca5"
+      "downloaded_at": "2023-09-28 09:52:15.753875Z",
+      "sha": "6558f6bdc8e64f98ff1d6f75eaec098173ca6ba6"
     },
     "opensafely-opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd/55a533f9",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd/55a533f9/",
-      "downloaded_at": "2022-09-28 14:32:51.446356Z",
-      "sha": "044adae7ce3f0ec4d8e504d3091d858053ec3ec7"
+      "downloaded_at": "2023-09-28 09:52:16.005668Z",
+      "sha": "2f04ae6cdfb3ac845aa371ccee7e0285e03e0828"
     },
     "opensafely-opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd/3c95c0c4",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd/3c95c0c4/",
-      "downloaded_at": "2022-09-28 14:32:51.608816Z",
-      "sha": "7bd5331516dd6c0e371d262dd479a3918719a5ae"
+      "downloaded_at": "2023-09-28 09:52:16.207559Z",
+      "sha": "7be166a48f0815602e637e659ff11157b0af8dfd"
     },
     "opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv": {
       "id": "opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f",
       "url": "https://codelists.opensafely.org/codelist/opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f/",
-      "downloaded_at": "2022-09-28 14:32:51.814440Z",
-      "sha": "3fc91ee3233d04fc7cb15266195dfa62415b696b"
+      "downloaded_at": "2023-09-28 09:52:16.375564Z",
+      "sha": "ec0b05c478fdcfd3e59fb4ba0cce07ee1f00a718"
     },
     "opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv": {
       "id": "opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce",
       "url": "https://codelists.opensafely.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
-      "downloaded_at": "2022-11-14 15:07:08.183792Z",
-      "sha": "3ea446349db9e9fff80f89e9646f8f935bc5cc6d"
+      "downloaded_at": "2023-09-28 09:52:16.592512Z",
+      "sha": "e90460fc9cd564305fc7133df1df7031c9d9f49f"
     }
   }
 }
