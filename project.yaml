@@ -7,7 +7,9 @@
 version: '3.0'
 
 expectations:
+
   population_size: 10000
+
 
 actions:
 
@@ -61,6 +63,17 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_type.csv 
+  
+  # Measures - prevalent prescribing - checking overall counts
+  measures_test:
+    run: ehrql:v0 generate-measures analysis/measures_test.py 
+      --output output/measures/measures_test.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 36
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test.csv 
 
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:

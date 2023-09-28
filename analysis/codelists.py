@@ -26,19 +26,19 @@ carehome_primis_codes = codelist_from_csv(
 ###  Cancer - excluding lung/haem
 oth_ca_codes = codelist_from_csv(
   "codelists/opensafely-cancer-excluding-lung-and-haematological-snomed.csv",
-  column = "id"
+  column = "code"
 )
 
 ### Cancer - lung
 lung_ca_codes = codelist_from_csv(
   "codelists/opensafely-lung-cancer-snomed.csv",
-  column = "id"
+  column = "code"
 )
 
 ### Cancer - haematological
 haem_ca_codes = codelist_from_csv(
   "codelists/opensafely-haematological-cancer-snomed.csv",
-  column = "id"
+  column = "code"
 )
 
 ### All cancer combined
@@ -52,13 +52,13 @@ cancer_codes = (
 ### High dose, long-acting opioids 
 hi_opioid_codes = codelist_from_csv(
   "codelists/opensafely-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Non high dose, long-acting opioids 
 non_hi_opioid_codes = codelist_from_csv(
   "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Any long-acting opioid
@@ -70,37 +70,37 @@ long_opioid_codes = (
 ### Buccal opioids
 buc_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Inhaled opioids
 inh_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-inhalation-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Oral opioids
 oral_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-oral-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Parenteral opioids
 par_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-parenteral-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Rectal opioids
 rec_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-rectal-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Transdermal opioids
 trans_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd.csv",
-  column = "dmd_id",
+  column = "code",
 )
 
 ### Other opioid
@@ -123,13 +123,13 @@ opioid_codes = (
 ## Ethnicity
 ethnicity_codes_16 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    column="snomedcode",
+    column="snomedcodes",
     category_column="Grouping_16",
 )
 
 ## Ethnicity
 ethnicity_codes_6 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
-    column="snomedcode",
+    column="snomedcodes",
     category_column="Grouping_6",
 )
