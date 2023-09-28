@@ -37,7 +37,7 @@ actions:
       --output output/measures/measures_demo_prev.csv
       --
       --start-date "2018-01-01"
-      --intervals 54
+      --intervals 3
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_demo_prev.csv
@@ -86,6 +86,17 @@ actions:
       moderately_sensitive:
         measure_csv: output/measures/measures_carehome.csv
         
+  # Measures - test
+  measures_test:
+    run: ehrql:v0 generate-measures analysis/measures_type_test.py 
+      --output output/measures/measures_type_test.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 24
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_type_test.csv
+
   ## Process time series data - overall prescribing 
   process_ts_overall:
    run: r:latest analysis/process/process_ts_overall.R
