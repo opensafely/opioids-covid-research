@@ -69,8 +69,8 @@ actions:
     run: ehrql:v0 generate-measures analysis/measures_test.py 
       --output output/measures/measures_test.csv
       --
-      --start-date "2019-01-01"
-      --intervals 36
+      --start-date "2018-01-01"
+      --intervals 54
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_test.csv 
@@ -118,6 +118,14 @@ actions:
    outputs:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_carehome*.csv
+
+  ## Process time series data - checking overall prescribing counts
+  process_ts_test:
+   run: r:latest analysis/process/process_ts_test.R
+   needs: [measures_test]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts_test*.csv
 
   ## Check time series
   figures_ts:
