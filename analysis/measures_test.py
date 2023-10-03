@@ -31,23 +31,50 @@ index_date = INTERVAL.start_date
 
 dataset = Dataset()
 
-dataset.number_par_rx = medications.where(
+
+# dataset.number_trans_rx = medications.where(
+#         medications.dmd_code.is_in(codelists.trans_opioid_codes)
+#     ).where(
+#         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+#     ).count_for_patient()
+
+# dataset.number_opioid_rx = medications.where(
+#         medications.dmd_code.is_in(codelists.opioid_codes)
+#     ).where(
+#         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+#     ).count_for_patient()
+
+number_par_rx = medications.where(
         medications.dmd_code.is_in(codelists.par_opioid_codes)
     ).where(
         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
     ).count_for_patient()
 
-dataset.number_trans_rx = medications.where(
-        medications.dmd_code.is_in(codelists.trans_opioid_codes)
+number_diamorph_rx = medications.where(
+        medications.dmd_code.is_in(codelists.diamorph_opioid_codes)
     ).where(
         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
     ).count_for_patient()
 
-dataset.number_opioid_rx = medications.where(
-        medications.dmd_code.is_in(codelists.opioid_codes)
+diamorph_opioid_any = medications.where(
+        medications.dmd_code.is_in(codelists.diamorph_opioid_codes)
     ).where(
         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
-    ).count_for_patient()
+    ).exists_for_patient()
+
+par_opioid_any = medications.where(
+        medications.dmd_code.is_in(codelists.par_opioid_codes)
+    ).where(
+        medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+    ).exists_for_patient()
+
+par_notdiamorph_opioid_any = (
+    number_par_rx - number_diamorph_rx > 0
+)
+
+coprescribe_diamorph = (diamorph_opioid_any & par_notdiamorph_opioid_any)
+
+
 
 measures = Measures()
 
@@ -64,20 +91,47 @@ denominator = (
 #########################
 
 ## Overall
-measures.define_measure(
-    name="any_opioid", 
-    numerator=dataset.number_opioid_rx,
-    denominator=denominator
-    )
+# measures.define_measure(
+#     name="any_opioid", 
+#     numerator=dataset.number_opioid_rx,
+#     denominator=denominator
+#     )
+
+# measures.define_measure(
+#     name="par_opioid", 
+#     numerator=dataset.number_par_rx,
+#     denominator=denominator
+#     )
+
+# measures.define_measure(
+#     name="trans_opioid", 
+#     numerator=dataset.number_trans_rx,
+#     denominator=denominator
+#     )
 
 measures.define_measure(
-    name="par_opioid", 
-    numerator=dataset.number_par_rx,
+    name="diamorph_opioid",
+    numerator=number_diamorph_rx,
     denominator=denominator
-    )
+)
+measures.define_measure(
+    name="par_opioid_any",
+    numerator=par_opioid_any,
+    denominator=denominator
+)
+measures.define_measure(
+    name="diamorph_opioid_any",
+    numerator=diamorph_opioid_any,
+    denominator=denominator
+)
+measures.define_measure(
+    name="par_notdiamorph_opioid_any",
+    numerator=par_notdiamorph_opioid_any,
+    denominator=denominator
+)
 
 measures.define_measure(
-    name="trans_opioid", 
-    numerator=dataset.number_trans_rx,
+    name="co_diamorph_opioid_any",
+    numerator=coprescribe_diamorph,
     denominator=denominator
-    )
+)
