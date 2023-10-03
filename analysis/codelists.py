@@ -26,19 +26,19 @@ carehome_primis_codes = codelist_from_csv(
 ###  Cancer - excluding lung/haem
 oth_ca_codes = codelist_from_csv(
   "codelists/opensafely-cancer-excluding-lung-and-haematological-snomed.csv",
-  column = "code"
+  column = "id"
 )
 
 ### Cancer - lung
 lung_ca_codes = codelist_from_csv(
   "codelists/opensafely-lung-cancer-snomed.csv",
-  column = "code"
+  column = "id"
 )
 
 ### Cancer - haematological
 haem_ca_codes = codelist_from_csv(
   "codelists/opensafely-haematological-cancer-snomed.csv",
-  column = "code"
+  column = "id"
 )
 
 ### All cancer combined
@@ -120,6 +120,13 @@ opioid_codes = (
   trans_opioid_codes
 )
 
+## Diamorphine
+diamorph_opioid_codes = codelist_from_csv(
+  "codelists/opensafely-diamorphine-subcutaneous.csv",
+  column = "code",
+)
+
+
 ## Ethnicity
 ethnicity_codes_16 = codelist_from_csv(
     "codelists/opensafely-ethnicity-snomed-0removed.csv",
@@ -133,3 +140,4 @@ ethnicity_codes_6 = codelist_from_csv(
     column="snomedcode",
     category_column="Grouping_6",
 )
+
