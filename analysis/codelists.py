@@ -120,12 +120,11 @@ opioid_codes = (
   trans_opioid_codes
 )
 
-## Diamorphine
-diamorph_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-diamorphine-subcutaneous.csv",
-  column = "code",
-)
-
+# ## Diamorphine
+# diamorph_opioid_codes = codelist_from_csv(
+#   "codelists/anschaf-diamorphine-392faaa0-dmd.csv",
+#   column = "dmd_id",
+# )
 
 ## Ethnicity
 ethnicity_codes_16 = codelist_from_csv(
@@ -141,3 +140,12 @@ ethnicity_codes_6 = codelist_from_csv(
     category_column="Grouping_6",
 )
 
+oxy_par_codes = codelist_from_csv(
+  "codelists/opensafely-oxycodone-subcutaneous-dmd.csv",
+  column = "code",
+)
+
+morph_par_codes = codelist_from_csv(
+  "codelists/opensafely-morphine-subcutaneous-dmd.csv",
+  column = "code",
+)

@@ -78,11 +78,17 @@
       "downloaded_at": "2023-09-28 09:52:16.592512Z",
       "sha": "e90460fc9cd564305fc7133df1df7031c9d9f49f"
     },
-    "opensafely-diamorphine-subcutaneous.csv": {
-      "id": "opensafely/diamorphine-subcutaneous/1438bc51",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/diamorphine-subcutaneous/1438bc51/",
-      "downloaded_at": "2023-10-03 18:52:57.052809Z",
-      "sha": "3efb2c20734189252e608ec01e701024568a2fb1"
+    "opensafely-oxycodone-subcutaneous-dmd.csv": {
+      "id": "opensafely/oxycodone-subcutaneous-dmd/2a956f90",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/oxycodone-subcutaneous-dmd/2a956f90/",
+      "downloaded_at": "2023-10-04 14:31:03.025155Z",
+      "sha": "f8c633bee2db006176ec120f66f3c8b6df359bc7"
+    },
+    "opensafely-morphine-subcutaneous-dmd.csv": {
+      "id": "opensafely/morphine-subcutaneous-dmd/1185fc5b",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/morphine-subcutaneous-dmd/1185fc5b/",
+      "downloaded_at": "2023-10-04 14:31:03.247000Z",
+      "sha": "dc24119116b16613da8d5ac52b8cecffe06ab976"
     }
   }
 }

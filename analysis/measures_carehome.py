@@ -49,14 +49,14 @@ carehome_primis = clinical_events.where(
 
 carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match 
 
-dataset.carehome = case(
+carehome = case(
     when(carehome_primis).then(True),
     when(carehome_tpp).then(True),
     default=False
 )
 
 age = patients.age_on(index_date)
-dataset.age_group = case(
+age_group = case(
         when(age < 30).then("18-29"),
         when(age < 40).then("30-39"),
         when(age < 50).then("40-49"),
@@ -80,7 +80,7 @@ denominator = (
         & ((patients.sex == "male") | (patients.sex == "female"))
         & (patients.date_of_death.is_after(index_date) | patients.date_of_death.is_null())
         & (practice_registrations.for_patient_on(index_date).exists_for_patient())
-        & dataset.carehome
+        & carehome
     )
 
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
@@ -138,6 +138,6 @@ measures.define_measure(
     numerator=dataset.opioid_any,
     denominator=denominator_sens,
     group_by={
-        "age_group": dataset.age_group,
-        "carehome": dataset.carehome}
+        "age_group": age_group,
+        "carehome": carehome}
     )
