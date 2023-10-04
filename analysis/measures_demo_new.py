@@ -39,7 +39,7 @@ dataset = make_dataset_opioids(index_date=index_date, end_date=INTERVAL.end_date
 ## Define demographic variables
 
 age = patients.age_on(index_date)
-dataset.age_group = case(
+age_group = case(
         when(age < 30).then("18-29"),
         when(age < 40).then("30-39"),
         when(age < 50).then("40-49"),
@@ -51,10 +51,10 @@ dataset.age_group = case(
         default="missing",
 )
 
-dataset.sex = patients.sex 
+sex = patients.sex
 
 imd = addresses.for_patient_on(index_date).imd_rounded
-dataset.imd10 = case(
+imd10 = case(
         when((imd >= 0) & (imd < int(32844 * 1 / 10))).then("1 (most deprived)"),
         when(imd < int(32844 * 2 / 10)).then("2"),
         when(imd < int(32844 * 3 / 10)).then("3"),
@@ -68,23 +68,23 @@ dataset.imd10 = case(
         default="unknown"
 )
 
-ethnicity6 = clinical_events.where(
+ethnicity = clinical_events.where(
         clinical_events.snomedct_code.is_in(codelists.ethnicity_codes_6)
     ).sort_by(
         clinical_events.date
     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
 
-dataset.ethnicity6 = case(
-    when(ethnicity6 == "1").then("White"),
-    when(ethnicity6 == "2").then("Mixed"),
-    when(ethnicity6 == "3").then("South Asian"),
-    when(ethnicity6 == "4").then("Black"),
-    when(ethnicity6 == "5").then("Other"),
-    when(ethnicity6 == "6").then("Not stated"),
+ethnicity6 = case(
+    when(ethnicity == "1").then("White"),
+    when(ethnicity == "2").then("Mixed"),
+    when(ethnicity == "3").then("South Asian"),
+    when(ethnicity == "4").then("Black"),
+    when(ethnicity == "5").then("Other"),
+    when(ethnicity == "6").then("Not stated"),
     default="Unknown"
 )
 
-dataset.region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
+region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name
 
 
 #########################
@@ -111,34 +111,34 @@ measures.define_measure(
     name="opioid_new_age", 
     numerator=dataset.opioid_new,
     denominator=denominator_naive,
-    group_by={"age_group": dataset.age_group}
+    group_by={"age_group": age_group}
     )
 
 measures.define_measure(
     name="opioid_new_sex", 
     numerator=dataset.opioid_new,
     denominator=denominator_naive,
-    group_by={"sex": dataset.sex}
+    group_by={"sex": patients.sex}
     )
 
 measures.define_measure(
     name="opioid_new_region", 
     numerator=dataset.opioid_new,
     denominator=denominator_naive,
-    group_by={"region": dataset.region}
+    group_by={"region": region}
     )
 
 measures.define_measure(
     name="opioid_new_imd", 
     numerator=dataset.opioid_new,
     denominator=denominator_naive,
-    group_by={"imd": dataset.imd10}
+    group_by={"imd": imd10}
     )
 
 measures.define_measure(
     name="opioid_new_eth6", 
     numerator=dataset.opioid_new,
     denominator=denominator_naive,
-    group_by={"ethnicity6": dataset.ethnicity6}
+    group_by={"ethnicity6": ethnicity6}
     )
 
