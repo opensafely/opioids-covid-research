@@ -130,14 +130,6 @@ actions:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_carehome*.csv
 
-  ## Process time series data - checking overall prescribing counts
-  process_ts_test:
-   run: r:latest analysis/process/process_ts_test.R
-   needs: [measures_test]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/ts_test*.csv
-
   ## Check time series
   figures_ts:
     run: r:latest analysis/descriptive/ts_figures.R
