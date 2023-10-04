@@ -122,8 +122,8 @@ opioid_codes = (
 
 ## Diamorphine
 diamorph_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-diamorphine-subcutaneous.csv",
-  column = "code",
+  "codelists/anschaf-diamorphine-392faaa0-dmd.csv",
+  column = "dmd_id",
 )
 
 

@@ -78,11 +78,11 @@
       "downloaded_at": "2023-09-28 09:52:16.592512Z",
       "sha": "e90460fc9cd564305fc7133df1df7031c9d9f49f"
     },
-    "opensafely-diamorphine-subcutaneous.csv": {
-      "id": "opensafely/diamorphine-subcutaneous/1438bc51",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/diamorphine-subcutaneous/1438bc51/",
-      "downloaded_at": "2023-10-03 18:52:57.052809Z",
-      "sha": "3efb2c20734189252e608ec01e701024568a2fb1"
+    "user-anschaf-diamorphine.csv": {
+      "id": "user/anschaf/diamorphine/392faaa0",
+      "url": "https://codelists.opensafely.org/codelist/user/anschaf/diamorphine/392faaa0/",
+      "downloaded_at": "2023-10-04 08:44:47.802834Z",
+      "sha": "a34736640286f5712fd177c573982b4c83daa4f8"
     }
   }
 }
