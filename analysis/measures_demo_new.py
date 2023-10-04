@@ -75,12 +75,12 @@ ethnicity = clinical_events.where(
     ).last_for_patient().snomedct_code.to_category(codelists.ethnicity_codes_6)
 
 ethnicity6 = case(
-    when(ethnicity6 == "1").then("White"),
-    when(ethnicity6 == "2").then("Mixed"),
-    when(ethnicity6 == "3").then("South Asian"),
-    when(ethnicity6 == "4").then("Black"),
-    when(ethnicity6 == "5").then("Other"),
-    when(ethnicity6 == "6").then("Not stated"),
+    when(ethnicity == "1").then("White"),
+    when(ethnicity == "2").then("Mixed"),
+    when(ethnicity == "3").then("South Asian"),
+    when(ethnicity == "4").then("Black"),
+    when(ethnicity == "5").then("Other"),
+    when(ethnicity == "6").then("Not stated"),
     default="Unknown"
 )
 
