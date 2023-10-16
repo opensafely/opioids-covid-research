@@ -9,6 +9,7 @@ expectations:
 
   population_size: 10000
 
+version: '3.0'
 
 actions:
 
