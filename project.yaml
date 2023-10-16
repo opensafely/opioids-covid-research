@@ -4,7 +4,6 @@
 # repo using a series of actions.
 ######################################
 
-version: '3.0'
 
 expectations:
 
@@ -37,7 +36,7 @@ actions:
       --output output/measures/measures_demo_prev.csv
       --
       --start-date "2018-01-01"
-      --intervals 3
+      --intervals 54
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_demo_prev.csv
@@ -76,15 +75,15 @@ actions:
   #       measure_csv: output/measures/measures_test.csv 
 
   # Measures - prevalent prescribing - checking overall counts
-  measures_test_2:
-    run: ehrql:v0 generate-measures analysis/measures_test_2.py 
-      --output output/measures/measures_test_2.csv
-      --
-      --start-date "2019-01-01"
-      --intervals 42
-    outputs:
-      moderately_sensitive:
-        measure_csv: output/measures/measures_test_2.csv 
+  # measures_test_2:
+  #   run: ehrql:v0 generate-measures analysis/measures_test_2.py 
+  #     --output output/measures/measures_test_2.csv
+  #     --
+  #     --start-date "2019-01-01"
+  #     --intervals 42
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures/measures_test_2.csv 
 
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:
@@ -97,7 +96,6 @@ actions:
       moderately_sensitive:
         measure_csv: output/measures/measures_carehome.csv
         
-
   ## Process time series data - overall prescribing 
   process_ts_overall:
    run: r:latest analysis/process/process_ts_overall.R
