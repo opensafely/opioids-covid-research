@@ -89,6 +89,12 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/morphine-subcutaneous-dmd/1185fc5b/",
       "downloaded_at": "2023-10-04 14:31:03.247000Z",
       "sha": "dc24119116b16613da8d5ac52b8cecffe06ab976"
+    },
+    "opensafely-diamorphine-subcutaneous.csv": {
+      "id": "opensafely/diamorphine-subcutaneous/31a51cf8",
+      "url": "https://codelists.opensafely.org/codelist/opensafely/diamorphine-subcutaneous/31a51cf8/",
+      "downloaded_at": "2023-10-16 16:28:42.533753Z",
+      "sha": "c5489aeb803ea8e3ad53ea2d75f349dc57536054"
     }
   }
 }

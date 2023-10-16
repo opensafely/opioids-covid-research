@@ -13,4 +13,4 @@ opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance
 opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce
 opensafely/oxycodone-subcutaneous-dmd/2a956f90
 opensafely/morphine-subcutaneous-dmd/1185fc5b
-
+opensafely/diamorphine-subcutaneous/31a51cf8/
