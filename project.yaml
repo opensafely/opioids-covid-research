@@ -86,6 +86,17 @@ actions:
   #     moderately_sensitive:
   #       measure_csv: output/measures/measures_test_2.csv 
 
+  # Measures - prevalent prescribing - checking overall counts
+  measures_test_3:
+    run: ehrql:v0 generate-measures analysis/measures_test_3.py 
+      --output output/measures/measures_test_3.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 42
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test_3.csv 
+
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:
     run: ehrql:v0 generate-measures analysis/measures_carehome.py 
