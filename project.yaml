@@ -86,27 +86,35 @@ actions:
   # #     moderately_sensitive:
   # #       measure_csv: output/measures/measures_test_2.csv 
 
-  # # Measures - prevalent prescribing - checking overall counts
-  # measures_test_3:
-  #   run: ehrql:v0 generate-measures analysis/measures_test_3.py 
-  #     --output output/measures/measures_test_3.csv
-  #     --
-  #     --start-date "2019-01-01"
-  #     --intervals 42
-  #   outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/measures/measures_test_3.csv 
-
   # Measures - prevalent prescribing - checking overall counts
-  measures_test_4:
-    run: ehrql:v0 generate-measures analysis/measures_test_4.py 
-      --output output/measures/measures_test_4.csv
+  measures_test_3:
+    run: ehrql:v0 generate-measures analysis/measures_test_3.py 
+      --output output/measures/measures_test_3.csv
       --
       --start-date "2019-01-01"
       --intervals 42
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_test_4.csv 
+        measure_csv: output/measures/measures_test_3.csv 
+
+  # # Measures - prevalent prescribing - checking overall counts
+  # measures_test_4:
+  #   run: ehrql:v0 generate-measures analysis/measures_test_4.py 
+  #     --output output/measures/measures_test_4.csv
+  #     --
+  #     --start-date "2019-01-01"
+  #     --intervals 42
+  #   outputs:
+  #     moderately_sensitive:
+  #       measure_csv: output/measures/measures_test_4.csv 
+
+  ## Process time series data - overall prescribing 
+  process_check_prefilled:
+   run: r:latest analysis/process/process_check_prefilled.R
+   needs: [measures_test_3]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts_prefilled*.csv
 
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:
