@@ -78,24 +78,24 @@ actions:
   # Measures - prevalent prescribing - checking overall counts
   measures_test_2:
     run: ehrql:v0 generate-measures analysis/measures_test_2.py 
-      --output output/measures/measures_test_2.csv
+      --output output/measures/measures_test_2b.csv
       --
       --start-date "2019-01-01"
       --intervals 42
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_test_2.csv 
+        measure_csv: output/measures/measures_test_2b.csv 
 
   # Measures - prevalent prescribing - checking overall counts
   measures_test_3:
     run: ehrql:v0 generate-measures analysis/measures_test_3.py 
-      --output output/measures/measures_test_3.csv
+      --output output/measures/measures_test_3b.csv
       --
       --start-date "2019-01-01"
       --intervals 42
     outputs:
       moderately_sensitive:
-        measure_csv: output/measures/measures_test_3.csv 
+        measure_csv: output/measures/measures_test_3b.csv 
 
   # # Measures - prevalent prescribing - checking overall counts
   # measures_test_4:

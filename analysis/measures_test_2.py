@@ -77,7 +77,6 @@ measures.define_measure(
     denominator=denominator
     )
 
-
 measures.define_measure(
     name="diamorphine_rx", 
     numerator=number_dia_rx,

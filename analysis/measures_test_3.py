@@ -29,13 +29,13 @@ intervals = args.intervals
 
 index_date = INTERVAL.start_date
 
-par_rx_in_interval = (
+dia_in_interval = (
     medications.where(medications.dmd_code.is_in(codelists.par_opioid_codes))
     .where(medications.date.is_on_or_between(index_date, INTERVAL.end_date))
 )
 
-any_par_rx = par_rx_in_interval.exists_for_patient()
-first_par_rx = par_rx_in_interval.sort_by(medications.date).last_for_patient().dmd_code
+any_dia_rx = dia_in_interval.exists_for_patient()
+first_dia_rx = dia_in_interval.sort_by(medications.date).last_for_patient().dmd_code
     
 
 
@@ -59,7 +59,7 @@ denominator = (
 
 measures.define_measure(
     name="count", 
-    numerator=any_par_rx,
+    numerator=any_dia_rx,
     denominator=denominator,
-    group_by={"dmd_code": first_par_rx}
+    group_by={"dmd_code": first_dia_rx}
     )
