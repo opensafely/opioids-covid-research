@@ -42,6 +42,12 @@ number_oxy_rx = medications.where(
         medications.date.is_on_or_between(index_date, INTERVAL.end_date)
     ).count_for_patient()
 
+number_dia_rx = medications.where(
+        medications.dmd_code.is_in(codelists.diamorph_opioid_codes)
+    ).where(
+        medications.date.is_on_or_between(index_date, INTERVAL.end_date)
+    ).count_for_patient()
+
 
 measures = Measures()
 
@@ -60,13 +66,20 @@ denominator = (
 ## Overall
 
 measures.define_measure(
-    name="oxy_par_rx", 
+    name="oxycodone_rx", 
     numerator=number_oxy_rx,
     denominator=denominator
     )
 
 measures.define_measure(
-    name="morph_par_rx", 
+    name="morphine_rx", 
     numerator=number_morph_rx,
+    denominator=denominator
+    )
+
+
+measures.define_measure(
+    name="diamorphine_rx", 
+    numerator=number_dia_rx,
     denominator=denominator
     )
