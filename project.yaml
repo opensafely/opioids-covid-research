@@ -64,27 +64,27 @@ actions:
       moderately_sensitive:
         measure_csv: output/measures/measures_type.csv 
   
-  # # Measures - prevalent prescribing - checking overall counts
-  # measures_test:
-  #   run: ehrql:v0 generate-measures analysis/measures_test.py 
-  #     --output output/measures/measures_test.csv
+  # Measures - prevalent prescribing - checking overall counts
+  measures_test:
+    run: ehrql:v0 generate-measures analysis/measures_test.py 
+      --output output/measures/measures_test.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 42
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test.csv 
+
+  # Measures - prevalent prescribing - checking overall counts
+  # measures_test_2:
+  #   run: ehrql:v0 generate-measures analysis/measures_test_2.py 
+  #     --output output/measures/measures_test_2.csv
   #     --
   #     --start-date "2019-01-01"
   #     --intervals 42
   #   outputs:
   #     moderately_sensitive:
-  #       measure_csv: output/measures/measures_test.csv 
-
-  # # Measures - prevalent prescribing - checking overall counts
-  # # measures_test_2:
-  # #   run: ehrql:v0 generate-measures analysis/measures_test_2.py 
-  # #     --output output/measures/measures_test_2.csv
-  # #     --
-  # #     --start-date "2019-01-01"
-  # #     --intervals 42
-  # #   outputs:
-  # #     moderately_sensitive:
-  # #       measure_csv: output/measures/measures_test_2.csv 
+  #       measure_csv: output/measures/measures_test_2.csv 
 
   # Measures - prevalent prescribing - checking overall counts
   measures_test_3:
@@ -108,13 +108,22 @@ actions:
   #     moderately_sensitive:
   #       measure_csv: output/measures/measures_test_4.csv 
 
-  ## Process time series data - overall prescribing 
+  ##
+  
   process_check_prefilled:
    run: r:latest analysis/process/process_check_prefilled.R
    needs: [measures_test_3]
    outputs:
       moderately_sensitive:
         timeseries_csv: output/timeseries/ts_prefilled*.csv
+        
+  process_check_diamorphine:
+   run: r:latest analysis/process/process_check_diamorphine.R
+   needs: [measures_test_3, measures_test]
+   outputs:
+      moderately_sensitive:
+        timeseries_csv: output/timeseries/ts_dia*.csv
+        timeseries_csv2: output/timeseries/ts_dmd*.csv
 
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:
