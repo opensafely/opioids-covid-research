@@ -109,13 +109,6 @@ actions:
   #       measure_csv: output/measures/measures_test_4.csv 
 
   ##
-  
-  process_check_prefilled:
-   run: r:latest analysis/process/process_check_prefilled.R
-   needs: [measures_test_3]
-   outputs:
-      moderately_sensitive:
-        timeseries_csv: output/timeseries/ts_prefilled*.csv
         
   process_check_diamorphine:
    run: r:latest analysis/process/process_check_diamorphine.R
