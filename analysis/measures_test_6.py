@@ -30,7 +30,7 @@ intervals = args.intervals
 index_date = INTERVAL.start_date
 
 dia_in_interval = (
-    medications.where(medications.dmd_code.is_in(codelists.par_opioid_codes))
+    medications.where(medications.dmd_code.is_in(codelists.diamorph_opioid_codes))
     .where(medications.date.is_on_or_between(index_date, INTERVAL.end_date))
 )
 
