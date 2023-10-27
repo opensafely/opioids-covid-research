@@ -134,10 +134,9 @@ actions:
         
   process_check_diamorphine:
    run: r:latest analysis/process/process_check_diamorphine.R
-   needs: [measures_test_3, measures_test]
+   needs: [measures_test_6]
    outputs:
       moderately_sensitive:
-        timeseries_csv: output/timeseries/ts_dia*.csv
         timeseries_csv2: output/timeseries/ts_dmd*.csv
 
   # Measures - prevalent and new prescribing - in people in care home
