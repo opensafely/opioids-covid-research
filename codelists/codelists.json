@@ -95,12 +95,6 @@
       "url": "https://codelists.opensafely.org/codelist/opensafely/diamorphine-subcutaneous/31a51cf8/",
       "downloaded_at": "2023-10-23 15:50:17.704642Z",
       "sha": "39f49260a3c2f8989c3e0c987d3c7d01e9f2b106"
-    },
-    "opensafely-osteoarthritis.csv": {
-      "id": "opensafely/osteoarthritis/2020-06-04",
-      "url": "https://codelists.opensafely.org/codelist/opensafely/osteoarthritis/2020-06-04/",
-      "downloaded_at": "2023-10-23 15:50:34.718669Z",
-      "sha": "bc98452ef587e6eabbfa2e431adcc978f118b67e"
     }
   }
 }
