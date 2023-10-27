@@ -8,12 +8,11 @@ from ehrql import case, when, months, INTERVAL, Measures
 from ehrql.tables.beta.tpp import (
     patients, 
     addresses,
+    medications,
     practice_registrations,
     clinical_events)
 
 import codelists
-
-from dataset_definition import make_dataset_opioids
 
 ##########
 
@@ -87,7 +86,7 @@ denominator = (
 
 measures.define_measure(
     name="diamorph_opioid_region", 
-    numerator=number_dia_rx
+    numerator=number_dia_rx,
     denominator=denominator,
     group_by={"region": region}
     )
