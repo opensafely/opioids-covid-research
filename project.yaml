@@ -138,6 +138,8 @@ actions:
    outputs:
       moderately_sensitive:
         timeseries_csv2: output/timeseries/ts_dmd*.csv
+        png: output/timeseries/diamorphine*.png 
+
 
   # Measures - prevalent and new prescribing - in people in care home
   measures_carehome:
