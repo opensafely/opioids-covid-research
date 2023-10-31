@@ -108,16 +108,16 @@ actions:
   #     moderately_sensitive:
   #       measure_csv: output/measures/measures_test_4.csv 
 
-  # # Measures - prevalent prescribing - checking overall counts
-  # measures_test_5:
-  #   run: ehrql:v0 generate-measures analysis/measures_test_5.py 
-  #     --output output/measures/measures_test_5.csv
-  #     --
-  #     --start-date "2019-01-01"
-  #     --intervals 42
-  #   outputs:
-  #     moderately_sensitive:
-  #       measure_csv: output/measures/measures_test_5.csv 
+  # Measures - prevalent prescribing - checking overall counts
+  measures_test_5:
+    run: ehrql:v0 generate-measures analysis/measures_test_5.py 
+      --output output/measures/measures_test_5.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 42
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test_5.csv 
 
   # Measures - prevalent prescribing - checking overall counts
   measures_test_7:
