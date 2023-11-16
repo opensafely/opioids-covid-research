@@ -4,10 +4,9 @@
 #   for inclusion in Table 1
 #########################################################
 
-from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
+from ehrql import case, when
 from ehrql.tables.beta.tpp import (
     patients, 
-    medications, 
     addresses,
     practice_registrations,
     clinical_events)
@@ -17,7 +16,6 @@ import codelists
 from dataset_definition import make_dataset_opioids
 
 dataset = make_dataset_opioids(index_date="2022-04-01", end_date="2022-06-30")
-
 
 # Define population #
 dataset.define_population(

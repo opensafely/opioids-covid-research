@@ -6,7 +6,7 @@
 ###################################################
 
 
-from ehrql import Dataset, case, when, months, days, years, weeks, Measures, INTERVAL
+from ehrql import Dataset, years
 from ehrql.tables.beta.tpp import (
     patients, 
     medications, 
