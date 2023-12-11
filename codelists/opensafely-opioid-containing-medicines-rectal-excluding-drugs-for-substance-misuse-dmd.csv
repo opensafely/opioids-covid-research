@@ -1,73 +1,73 @@
-code,term
-21148211000001106,Codeine 5mg suppositories
-21130211000001107,Codeine 5mg suppositories
-18519311000001102,Codeine 10mg suppositories
-18511211000001109,Codeine 10mg suppositories
-21148311000001103,Codeine 6mg suppositories
-21130411000001106,Codeine 6mg suppositories
-21290211000001100,Codeine 15mg suppositories
-21269811000001105,Codeine 15mg suppositories
-20454511000001107,Codeine 30mg suppositories
-20421811000001109,Codeine 30mg suppositories
-20122011000001107,Codeine 20mg suppositories
-20116511000001109,Codeine 20mg suppositories
-21148111000001100,Codeine 1mg suppositories
-21130811000001108,Codeine 1mg suppositories
-12389111000001109,Diamorphine 5mg suppositories
-12316511000001108,Diamorphine 5mg suppositories
-322446009,Morphine hydrochloride 15mg suppositories
-4958711000001107,Morphine hydrochloride 15mg suppositories
-322447000,Morphine hydrochloride 30mg suppositories
-12321611000001105,Morphine hydrochloride 30mg suppositories
-12390511000001107,Morphine hydrochloride 10mg suppositories
-12321111000001102,Morphine hydrochloride 10mg suppositories
-370261003,Morphine sulfate 5mg suppositories
-12338511000001104,Morphine sulfate 5mg suppositories
-12391911000001107,Morphine sulfate 60mg suppositories
-12338811000001101,Morphine sulfate 60mg suppositories
-12390611000001106,Morphine sulfate 100mg suppositories
-12337011000001106,Morphine sulfate 100mg suppositories
-12391511000001100,Morphine sulfate 50mg suppositories
-12338111000001108,Morphine sulfate 50mg suppositories
-322432009,Morphine sulfate 10mg suppositories
-4036011000001100,Morphine sulfate 10mg suppositories
-4036711000001103,Morphine sulfate 10mg suppositories
-4036211000001105,Morphine sulfate 10mg suppositories
-322433004,Morphine sulfate 20mg suppositories
-4526211000001106,Morphine sulfate 20mg suppositories
-9762811000001100,Morphine sulfate 20mg suppositories
-4526611000001108,Morphine sulfate 20mg suppositories
-19947711000001107,Morphine sulfate 20mg suppositories
-12390911000001100,Morphine sulfate 2.5mg suppositories
-12337811000001100,Morphine sulfate 2.5mg suppositories
-12392011000001100,Morphine sulfate 750mg suppositories
-12339211000001107,Morphine sulfate 750mg suppositories
-322455007,Morphine sulfate 30mg suppositories
-4273611000001108,Morphine sulfate 30mg suppositories
-4039811000001100,Morphine sulfate 30mg suppositories
-4038911000001102,Morphine sulfate 30mg suppositories
-4039411000001102,Morphine sulfate 30mg suppositories
-35535611000001105,Morphine sulfate 30mg suppositories
-322428003,Morphine sulfate 15mg suppositories
-4037411000001106,Morphine sulfate 15mg suppositories
-4038111000001100,Morphine sulfate 15mg suppositories
-4037811000001108,Morphine sulfate 15mg suppositories
-35535311000001100,Morphine sulfate 15mg suppositories
-322604007,Pentazocine 50mg suppositories
-4084711000001104,Pentazocine 50mg suppositories
-4084211000001106,Pentazocine 50mg suppositories
-4084011000001101,Fortral 50mg suppositories
-12392111000001104,Oxycodone hydrochloride 30mg suppositories
-17632111000001100,Oxycodone pectinate 30mg suppositories
-12350511000001103,Oxycodone hydrochloride 30mg suppositories
-12424911000001109,Oxycodone hydrochloride 60mg suppositories
-12350811000001100,Oxycodone hydrochloride 60mg suppositories
-17589011000001108,Proladone 30mg suppositories
-42015111000001108,VMP subsequent to 42015111000001108
-42015211000001102,VMP subsequent to 42015211000001102
-42015311000001105,VMP subsequent to 42015311000001105
-42015411000001103,VMP subsequent to 42015411000001103
-42015511000001104,VMP subsequent to 42015511000001104
-42015611000001100,VMP subsequent to 42015611000001100
-42015711000001109,VMP subsequent to 42015711000001109
-42016411000001107,VMP subsequent to 42016411000001107
+code,term,dmd_id
+21148211000001106,Codeine 5mg suppositories,21148211000001106
+21130211000001107,Codeine 5mg suppositories,21130211000001107
+18519311000001102,Codeine 10mg suppositories,18519311000001102
+18511211000001109,Codeine 10mg suppositories,18511211000001109
+21148311000001103,Codeine 6mg suppositories,21148311000001103
+21130411000001106,Codeine 6mg suppositories,21130411000001106
+21290211000001100,Codeine 15mg suppositories,21290211000001100
+21269811000001105,Codeine 15mg suppositories,21269811000001105
+20454511000001107,Codeine 30mg suppositories,20454511000001107
+20421811000001109,Codeine 30mg suppositories,20421811000001109
+20122011000001107,Codeine 20mg suppositories,20122011000001107
+20116511000001109,Codeine 20mg suppositories,20116511000001109
+21148111000001100,Codeine 1mg suppositories,21148111000001100
+21130811000001108,Codeine 1mg suppositories,21130811000001108
+12389111000001109,Diamorphine 5mg suppositories,12389111000001109
+12316511000001108,Diamorphine 5mg suppositories,12316511000001108
+322446009,Morphine hydrochloride 15mg suppositories,322446009
+4958711000001107,Morphine hydrochloride 15mg suppositories,4958711000001107
+322447000,Morphine hydrochloride 30mg suppositories,322447000
+12321611000001105,Morphine hydrochloride 30mg suppositories,12321611000001105
+12390511000001107,Morphine hydrochloride 10mg suppositories,12390511000001107
+12321111000001102,Morphine hydrochloride 10mg suppositories,12321111000001102
+370261003,Morphine sulfate 5mg suppositories,370261003
+12338511000001104,Morphine sulfate 5mg suppositories,12338511000001104
+12391911000001107,Morphine sulfate 60mg suppositories,12391911000001107
+12338811000001101,Morphine sulfate 60mg suppositories,12338811000001101
+12390611000001106,Morphine sulfate 100mg suppositories,12390611000001106
+12337011000001106,Morphine sulfate 100mg suppositories,12337011000001106
+12391511000001100,Morphine sulfate 50mg suppositories,12391511000001100
+12338111000001108,Morphine sulfate 50mg suppositories,12338111000001108
+322432009,Morphine sulfate 10mg suppositories,322432009
+4036011000001100,Morphine sulfate 10mg suppositories,4036011000001100
+4036711000001103,Morphine sulfate 10mg suppositories,4036711000001103
+4036211000001105,Morphine sulfate 10mg suppositories,4036211000001105
+322433004,Morphine sulfate 20mg suppositories,322433004
+4526211000001106,Morphine sulfate 20mg suppositories,4526211000001106
+9762811000001100,Morphine sulfate 20mg suppositories,9762811000001100
+4526611000001108,Morphine sulfate 20mg suppositories,4526611000001108
+19947711000001107,Morphine sulfate 20mg suppositories,19947711000001107
+12390911000001100,Morphine sulfate 2.5mg suppositories,12390911000001100
+12337811000001100,Morphine sulfate 2.5mg suppositories,12337811000001100
+12392011000001100,Morphine sulfate 750mg suppositories,12392011000001100
+12339211000001107,Morphine sulfate 750mg suppositories,12339211000001107
+322455007,Morphine sulfate 30mg suppositories,322455007
+4273611000001108,Morphine sulfate 30mg suppositories,4273611000001108
+4039811000001100,Morphine sulfate 30mg suppositories,4039811000001100
+4038911000001102,Morphine sulfate 30mg suppositories,4038911000001102
+4039411000001102,Morphine sulfate 30mg suppositories,4039411000001102
+35535611000001105,Morphine sulfate 30mg suppositories,35535611000001105
+322428003,Morphine sulfate 15mg suppositories,322428003
+4037411000001106,Morphine sulfate 15mg suppositories,4037411000001106
+4038111000001100,Morphine sulfate 15mg suppositories,4038111000001100
+4037811000001108,Morphine sulfate 15mg suppositories,4037811000001108
+35535311000001100,Morphine sulfate 15mg suppositories,35535311000001100
+322604007,Pentazocine 50mg suppositories,322604007
+4084711000001104,Pentazocine 50mg suppositories,4084711000001104
+4084211000001106,Pentazocine 50mg suppositories,4084211000001106
+4084011000001101,Fortral 50mg suppositories,4084011000001101
+12392111000001104,Oxycodone hydrochloride 30mg suppositories,12392111000001104
+17632111000001100,Oxycodone pectinate 30mg suppositories,17632111000001100
+12350511000001103,Oxycodone hydrochloride 30mg suppositories,12350511000001103
+12424911000001109,Oxycodone hydrochloride 60mg suppositories,12424911000001109
+12350811000001100,Oxycodone hydrochloride 60mg suppositories,12350811000001100
+17589011000001108,Proladone 30mg suppositories,17589011000001108
+42015111000001108,VMP subsequent to 322446009,42015111000001108
+42015211000001102,VMP subsequent to 322447000,42015211000001102
+42015311000001105,VMP subsequent to 322432009,42015311000001105
+42015411000001103,VMP subsequent to 322428003,42015411000001103
+42015511000001104,VMP subsequent to 322433004,42015511000001104
+42015611000001100,VMP subsequent to 322455007,42015611000001100
+42015711000001109,VMP subsequent to 370261003,42015711000001109
+42016411000001107,VMP subsequent to 322604007,42016411000001107

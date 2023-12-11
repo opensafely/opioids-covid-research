@@ -1,66 +1,66 @@
-code,term
-11590911000001102,Diamorphine 10mg powder for solution for injection ampoules
-11591111000001106,Diamorphine 30mg powder for solution for injection ampoules
-12316211000001105,Diamorphine 15mg powder for solution for injection ampoules
-12389011000001108,Diamorphine 15mg powder for solution for injection ampoules
-13886511000001103,Diamorphine 100mg powder for solution for injection ampoules
-13887111000001105,Diamorphine 500mg powder for solution for injection ampoules
-15404411000001109,Diamorphine 5mg powder for solution for injection ampoules
-15405411000001105,Diamorphine 10mg powder for solution for injection ampoules
-15405511000001109,Diamorphine 30mg powder for solution for injection ampoules
-15405611000001108,Diamorphine 100mg powder for solution for injection ampoules
-15405711000001104,Diamorphine 500mg powder for solution for injection ampoules
-15422211000001107,Diamorphine 5mg powder for solution for injection ampoules
-15422411000001106,Diamorphine 10mg powder for solution for injection ampoules
-15422611000001109,Diamorphine 30mg powder for solution for injection ampoules
-16057511000001101,Diamorphine 5mg powder for solution for injection vials
-16057911000001108,Diamorphine 10mg powder for solution for injection vials
-16058311000001108,Diamorphine 30mg powder for solution for injection vials
-16058811000001104,Diamorphine 100mg powder for solution for injection vials
-16059511000001108,Diamorphine 500mg powder for solution for injection vials
-16073411000001109,Diamorphine 100mg powder for solution for injection vials
-16073511000001108,Diamorphine 10mg powder for solution for injection vials
-16073611000001107,Diamorphine 30mg powder for solution for injection vials
-16073711000001103,Diamorphine 500mg powder for solution for injection vials
-16073811000001106,Diamorphine 5mg powder for solution for injection vials
-16442411000001107,Diamorphine 5mg powder for solution for injection vials
-16442611000001105,Diamorphine 10mg powder for solution for injection vials
-16442811000001109,Diamorphine 30mg powder for solution for injection vials
-16443011000001107,Diamorphine 100mg powder for solution for injection vials
-16443411000001103,Diamorphine 500mg powder for solution for injection vials
-172311000001104,Diamorphine 100mg powder for solution for injection ampoules
-212411000001103,Diamorphine 100mg powder for solution for injection ampoules
-22411000001100,Diamorphine 5mg powder for solution for injection ampoules
-243011000001107,Diamorphine 5mg powder for solution for injection ampoules
-250111000001104,Diamorphine 5mg powder for solution for injection ampoules
-25211000001109,Diamorphine 10mg powder for solution for injection ampoules
-277811000001108,Diamorphine 30mg powder for solution for injection ampoules
-284911000001100,Diamorphine 500mg powder for solution for injection ampoules
-322524004,Diamorphine 10mg powder for solution for injection ampoules
-322525003,Diamorphine 30mg powder for solution for injection ampoules
-322526002,Diamorphine 100mg powder for solution for injection ampoules
-322527006,Diamorphine 500mg powder for solution for injection ampoules
-343211000001109,Diamorphine 500mg powder for solution for injection ampoules
-34819611000001105,Diamorphine 5mg powder for solution for injection ampoules
-37237411000001109,Diamorphine 5mg powder for solution for injection ampoules
-37237711000001103,Diamorphine 10mg powder for solution for injection ampoules
-37237911000001101,Diamorphine 30mg powder for solution for injection ampoules
-37238111000001103,Diamorphine 100mg powder for solution for injection ampoules
-37238311000001101,Diamorphine 500mg powder for solution for injection ampoules
-397811000001109,Diamorphine 100mg powder for solution for injection ampoules
-435111000001107,Diamorphine 500mg powder for solution for injection ampoules
-518611000001106,Diamorphine 500mg powder for solution for injection ampoules
-583111000001109,Diamorphine 30mg powder for solution for injection ampoules
-684411000001105,Diamorphine 10mg powder for solution for injection ampoules
-712711000001101,Diamorphine 10mg powder for solution for injection ampoules
-725011000001100,Diamorphine 100mg powder for solution for injection ampoules
-769411000001100,Diamorphine 30mg powder for solution for injection ampoules
-853711000001101,Diamorphine 5mg powder for solution for injection ampoules
-908611000001101,Diamorphine 30mg powder for solution for injection ampoules
-918811000001100,Diamorphine 10mg powder for solution for injection ampoules
-922811000001107,Diamorphine 30mg powder for solution for injection ampoules
-322523005,VMP previous to 34819611000001105
-42011211000001100,VMP subsequent to 42011211000001100
-42011311000001108,VMP subsequent to 42011311000001108
-42011511000001102,VMP subsequent to 42011511000001102
-42011611000001103,VMP subsequent to 42011611000001103
+code,term,dmd_id
+11590911000001102,Diamorphine 10mg powder for solution for injection ampoules,11590911000001102
+11591111000001106,Diamorphine 30mg powder for solution for injection ampoules,11591111000001106
+12316211000001105,Diamorphine 15mg powder for solution for injection ampoules,12316211000001105
+12389011000001108,Diamorphine 15mg powder for solution for injection ampoules,12389011000001108
+13886511000001103,Diamorphine 100mg powder for solution for injection ampoules,13886511000001103
+13887111000001105,Diamorphine 500mg powder for solution for injection ampoules,13887111000001105
+15404411000001109,Diamorphine 5mg powder for solution for injection ampoules,15404411000001109
+15405411000001105,Diamorphine 10mg powder for solution for injection ampoules,15405411000001105
+15405511000001109,Diamorphine 30mg powder for solution for injection ampoules,15405511000001109
+15405611000001108,Diamorphine 100mg powder for solution for injection ampoules,15405611000001108
+15405711000001104,Diamorphine 500mg powder for solution for injection ampoules,15405711000001104
+15422211000001107,Diamorphine 5mg powder for solution for injection ampoules,15422211000001107
+15422411000001106,Diamorphine 10mg powder for solution for injection ampoules,15422411000001106
+15422611000001109,Diamorphine 30mg powder for solution for injection ampoules,15422611000001109
+16057511000001101,Diamorphine 5mg powder for solution for injection vials,16057511000001101
+16057911000001108,Diamorphine 10mg powder for solution for injection vials,16057911000001108
+16058311000001108,Diamorphine 30mg powder for solution for injection vials,16058311000001108
+16058811000001104,Diamorphine 100mg powder for solution for injection vials,16058811000001104
+16059511000001108,Diamorphine 500mg powder for solution for injection vials,16059511000001108
+16073411000001109,Diamorphine 100mg powder for solution for injection vials,16073411000001109
+16073511000001108,Diamorphine 10mg powder for solution for injection vials,16073511000001108
+16073611000001107,Diamorphine 30mg powder for solution for injection vials,16073611000001107
+16073711000001103,Diamorphine 500mg powder for solution for injection vials,16073711000001103
+16073811000001106,Diamorphine 5mg powder for solution for injection vials,16073811000001106
+16442411000001107,Diamorphine 5mg powder for solution for injection vials,16442411000001107
+16442611000001105,Diamorphine 10mg powder for solution for injection vials,16442611000001105
+16442811000001109,Diamorphine 30mg powder for solution for injection vials,16442811000001109
+16443011000001107,Diamorphine 100mg powder for solution for injection vials,16443011000001107
+16443411000001103,Diamorphine 500mg powder for solution for injection vials,16443411000001103
+172311000001104,Diamorphine 100mg powder for solution for injection ampoules,172311000001104
+212411000001103,Diamorphine 100mg powder for solution for injection ampoules,212411000001103
+22411000001100,Diamorphine 5mg powder for solution for injection ampoules,22411000001100
+243011000001107,Diamorphine 5mg powder for solution for injection ampoules,243011000001107
+250111000001104,Diamorphine 5mg powder for solution for injection ampoules,250111000001104
+25211000001109,Diamorphine 10mg powder for solution for injection ampoules,25211000001109
+277811000001108,Diamorphine 30mg powder for solution for injection ampoules,277811000001108
+284911000001100,Diamorphine 500mg powder for solution for injection ampoules,284911000001100
+322524004,Diamorphine 10mg powder for solution for injection ampoules,322524004
+322525003,Diamorphine 30mg powder for solution for injection ampoules,322525003
+322526002,Diamorphine 100mg powder for solution for injection ampoules,322526002
+322527006,Diamorphine 500mg powder for solution for injection ampoules,322527006
+343211000001109,Diamorphine 500mg powder for solution for injection ampoules,343211000001109
+34819611000001105,Diamorphine 5mg powder for solution for injection ampoules,34819611000001105
+37237411000001109,Diamorphine 5mg powder for solution for injection ampoules,37237411000001109
+37237711000001103,Diamorphine 10mg powder for solution for injection ampoules,37237711000001103
+37237911000001101,Diamorphine 30mg powder for solution for injection ampoules,37237911000001101
+37238111000001103,Diamorphine 100mg powder for solution for injection ampoules,37238111000001103
+37238311000001101,Diamorphine 500mg powder for solution for injection ampoules,37238311000001101
+397811000001109,Diamorphine 100mg powder for solution for injection ampoules,397811000001109
+435111000001107,Diamorphine 500mg powder for solution for injection ampoules,435111000001107
+518611000001106,Diamorphine 500mg powder for solution for injection ampoules,518611000001106
+583111000001109,Diamorphine 30mg powder for solution for injection ampoules,583111000001109
+684411000001105,Diamorphine 10mg powder for solution for injection ampoules,684411000001105
+712711000001101,Diamorphine 10mg powder for solution for injection ampoules,712711000001101
+725011000001100,Diamorphine 100mg powder for solution for injection ampoules,725011000001100
+769411000001100,Diamorphine 30mg powder for solution for injection ampoules,769411000001100
+853711000001101,Diamorphine 5mg powder for solution for injection ampoules,853711000001101
+908611000001101,Diamorphine 30mg powder for solution for injection ampoules,908611000001101
+918811000001100,Diamorphine 10mg powder for solution for injection ampoules,918811000001100
+922811000001107,Diamorphine 30mg powder for solution for injection ampoules,922811000001107
+322523005,VMP previous to 34819611000001105,322523005
+42011211000001100,VMP subsequent to 322526002,42011211000001100
+42011311000001108,VMP subsequent to 322524004,42011311000001108
+42011511000001102,VMP subsequent to 322525003,42011511000001102
+42011611000001103,VMP subsequent to 322527006,42011611000001103
