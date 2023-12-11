@@ -74,6 +74,16 @@ actions:
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_carehome.csv
+    
+  measures_test_hi:
+    run: ehrql:v0 generate-measures analysis/measures_test_hi.py 
+      --output output/measures/measures_test_hi.csv
+      --
+      --start-date "2019-01-01"
+      --intervals 36
+    outputs:
+      moderately_sensitive:
+        measure_csv: output/measures/measures_test_hi.csv
         
   ## Process time series data - overall prescribing 
   process_ts_overall:
