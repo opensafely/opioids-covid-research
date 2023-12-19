@@ -51,7 +51,7 @@ carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
 carehome = case(
     when(carehome_primis).then(True),
     when(carehome_tpp).then(True),
-    default=False
+    otherwise=False
 )
 
 age = patients.age_on(index_date)

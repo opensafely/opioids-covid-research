@@ -143,7 +143,7 @@ carehome_tpp = addresses.for_patient_on("2022-04-01").care_home_is_potential_mat
 dataset.carehome = case(
     when(carehome_primis).then(True),
     when(carehome_tpp).then(True),
-    default=False
+    otherwise=False
 )
 
 
