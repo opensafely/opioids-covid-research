@@ -4,17 +4,16 @@
 # and high dose/long-acting prescribing
 ###################################################
 
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
-from ehrql.tables.beta.tpp import (
+from ehrql import case, when, months, INTERVAL, Measures
+from ehrql.tables.tpp import (
     patients, 
-    medications, 
     addresses,
     practice_registrations,
     clinical_events)
 
 import codelists
 
-from dataset_definition import make_dataset_opioids, registrations
+from dataset_definition import make_dataset_opioids
 
  
 ##########
@@ -52,7 +51,7 @@ carehome_tpp = addresses.for_patient_on(index_date).care_home_is_potential_match
 carehome = case(
     when(carehome_primis).then(True),
     when(carehome_tpp).then(True),
-    default=False
+    otherwise=False
 )
 
 age = patients.age_on(index_date)
@@ -65,7 +64,7 @@ age_group = case(
         when(age < 80).then("70-79"),
         when(age < 90).then("80-89"),
         when(age >= 90).then("90+"),
-        default="missing",
+        otherwise="missing",
 )
 
 ######

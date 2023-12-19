@@ -5,7 +5,7 @@
 ###################################################
 
 from ehrql import case, when, months, INTERVAL, Measures
-from ehrql.tables.beta.tpp import (
+from ehrql.tables.tpp import (
     patients, 
     addresses,
     practice_registrations,
@@ -48,7 +48,7 @@ age_group = case(
         when(age < 80).then("70-79"),
         when(age < 90).then("80-89"),
         when(age >= 90).then("90+"),
-        default="missing",
+        otherwise="missing",
 )
 
 sex = patients.sex
@@ -65,7 +65,7 @@ imd10 = case(
         when(imd < int(32844 * 8 / 10)).then("8"),
         when(imd < int(32844 * 9 / 10)).then("9"),
         when(imd >= int(32844 * 9 / 10)).then("10 (least deprived)"),
-        default="unknown"
+        otherwise="unknown"
 )
 
 ethnicity = clinical_events.where(
@@ -81,7 +81,7 @@ ethnicity6 = case(
     when(ethnicity == "4").then("Black"),
     when(ethnicity == "5").then("Other"),
     when(ethnicity == "6").then("Not stated"),
-    default="Unknown"
+    otherwise="Unknown"
 )
 
 region = practice_registrations.for_patient_on(index_date).practice_nuts1_region_name

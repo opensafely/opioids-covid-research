@@ -3,13 +3,10 @@
 # prescribing for any opioid prescribing by mode of administration
 ###################################################
 
-from ehrql import Dataset, case, when, months, days, years, INTERVAL, Measures
-from ehrql.tables.beta.tpp import (
+from ehrql import  months, INTERVAL, Measures
+from ehrql.tables.tpp import (
     patients, 
-    medications, 
-    addresses,
-    practice_registrations,
-    clinical_events)
+    practice_registrations)
 
 import codelists
 
