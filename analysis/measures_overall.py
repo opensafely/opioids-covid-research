@@ -5,7 +5,7 @@
 ###################################################
 
 from ehrql import months, INTERVAL, Measures
-from ehrql.tables.beta.tpp import (
+from ehrql.tables.tpp import (
     patients, 
     practice_registrations)
 

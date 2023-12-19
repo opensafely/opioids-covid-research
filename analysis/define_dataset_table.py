@@ -5,7 +5,7 @@
 #########################################################
 
 from ehrql import case, when
-from ehrql.tables.beta.tpp import (
+from ehrql.tables.tpp import (
     patients, 
     addresses,
     practice_registrations,
@@ -39,7 +39,7 @@ dataset.age_group = case(
         when(age < 80).then("70-79"),
         when(age < 90).then("80-89"),
         when(age >= 90).then("90+"),
-        default="missing",
+        otherwise="missing",
 )
 
 # Age for standardisation
@@ -59,7 +59,7 @@ dataset.age_stand = case(
         when(age < 85).then("80-84"),
         when(age < 90).then("85-89"),
         when(age >= 90).then("90+"),
-        default="missing",
+        otherwise="missing",
 )
 
 # Sex
@@ -78,7 +78,7 @@ dataset.imd10 = case(
         when(imd < int(32844 * 8 / 10)).then("8"),
         when(imd < int(32844 * 9 / 10)).then("9"),
         when(imd >= int(32844 * 9 / 10)).then("10 (least deprived)"),
-        default="unknown"
+        otherwise="unknown"
 )
 
 # Ethnicity 16 categories
@@ -106,7 +106,7 @@ dataset.ethnicity16 = case(
     when(ethnicity16 == "14").then("Black - Other"),
     when(ethnicity16 == "15").then("Other - Chinese"),
     when(ethnicity16 == "16").then("Other - Other"),
-    default="Unknown"
+    otherwise="Unknown"
 )
 
 # Ethnicity 6 categories
@@ -125,7 +125,7 @@ dataset.ethnicity6 = case(
     when(ethnicity6 == "4").then("Black"),
     when(ethnicity6 == "5").then("Other"),
     when(ethnicity6 == "6").then("Not stated"),
-    default="Unknown"
+    otherwise="Unknown"
 )
 
 # Practice region

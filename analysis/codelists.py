@@ -10,7 +10,7 @@
 # --- IMPORT STATEMENTS ---
 
 ## Import code building blocks from cohort extractor package
-from databuilder.ehrql import codelist_from_csv
+from ehrql import codelist_from_csv
 
  
 # --- CODELISTS ---

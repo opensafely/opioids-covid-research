@@ -7,10 +7,8 @@
 
 
 from ehrql import Dataset, years
-from ehrql.tables.beta.tpp import (
-    patients, 
+from ehrql.tables.tpp import (
     medications, 
-    addresses,
     practice_registrations,
     clinical_events)
 
