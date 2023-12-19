@@ -39,6 +39,8 @@ measures = Measures()
 
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
+measures.configure_dummy_data(population_size=5000)
+
 ## In full population
 denominator = (
         (patients.age_on(index_date) >= 18) 
