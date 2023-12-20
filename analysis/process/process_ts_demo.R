@@ -49,8 +49,7 @@ demo_prev <- read_csv(here::here("output", "measures", "measures_demo_prev.csv")
   dplyr::select(c(measure, month, cat, var, numerator, denominator, period)) %>%
   pivot_wider(names_from = measure, values_from = c(numerator, denominator)) %>%
   rename(opioid_any = numerator_opioid_any,
-         pop_total = denominator_opioid_any) %>%
-  mutate(rate_opioid_any = (opioid_any / pop_total * 1000))
+         pop_total = denominator_opioid_any) 
 
 ## New
 demo_new <- read_csv(here::here("output", "measures", "measures_demo_new.csv")) %>%
@@ -61,8 +60,7 @@ demo_new <- read_csv(here::here("output", "measures", "measures_demo_new.csv")) 
   dplyr::select(c(measure, month, cat, var, numerator, denominator)) %>%
   pivot_wider(names_from = measure, values_from = c(numerator, denominator)) %>%
   rename(opioid_new = numerator_opioid_new,
-         pop_naive = denominator_opioid_new) %>%
-  mutate(rate_opioid_new = (opioid_new / pop_naive * 1000))
+         pop_naive = denominator_opioid_new)
 
 demo <- merge(demo_new, demo_prev, by.x = c("month", "cat", "var"),
               by.y = c("month",  "cat", "var"))
@@ -80,9 +78,7 @@ demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
   mutate(opioid_any_round = rounding(opioid_any),
          opioid_new_round = rounding(opioid_new),
          pop_total_round = rounding(pop_total),
-         pop_naive_round = rounding(pop_naive),
-         rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000),
-         rate_opioid_new_round = (opioid_new_round / pop_naive_round * 1000)) %>%
-  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive, rate_opioid_any, rate_opioid_new))
+         pop_naive_round = rounding(pop_naive)) %>%
+  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive))
 
 write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"), row.names = FALSE)
