@@ -1,76 +1,76 @@
-code,term
-12391711000001105,Morphine sulfate 5mg/1ml solution for injection ampoules
-12335511000001107,Morphine sulfate 5mg/1ml solution for injection ampoules
-12391311000001106,Morphine sulfate 2mg/5ml solution for injection ampoules
-12333211000001105,Morphine sulfate 2mg/5ml solution for injection ampoules
-22401911000001100,Morphine sulfate 1mg/1ml solution for injection ampoules
-22402211000001102,Morphine sulfate 1mg/1ml solution for injection ampoules
-30947711000001109,Morphine sulfate 1mg/1ml solution for injection ampoules
-12391411000001104,Morphine sulfate 4mg/10ml solution for injection ampoules
-12333611000001107,Morphine sulfate 4mg/10ml solution for injection ampoules
-12391611000001101,Morphine sulfate 5mg/10ml solution for injection ampoules
-12334711000001101,Morphine sulfate 5mg/10ml solution for injection ampoules
-12391211000001103,Morphine sulfate 2mg/10ml solution for injection ampoules
-12332111000001105,Morphine sulfate 2mg/10ml solution for injection ampoules
-36128211000001109,Morphine sulfate 10mg/1ml solution for injection ampoules
-4382711000001105,Morphine sulfate 10mg/1ml solution for injection ampoules
-4383611000001106,Morphine sulfate 10mg/1ml solution for injection ampoules
-24403511000001100,Morphine sulfate 10mg/1ml solution for injection ampoules
-4383411000001108,Morphine sulfate 10mg/1ml solution for injection ampoules
-4383011000001104,Morphine sulfate 10mg/1ml solution for injection ampoules
-4383211000001109,Morphine sulfate 10mg/1ml solution for injection ampoules
-10678011000001108,Morphine sulfate 10mg/1ml solution for injection ampoules
-38895511000001108,Morphine sulfate 15mg/1ml solution for injection ampoules
-4045011000001105,Morphine sulfate 15mg/1ml solution for injection ampoules
-4047511000001106,Morphine sulfate 15mg/1ml solution for injection ampoules
-4047011000001103,Morphine sulfate 15mg/1ml solution for injection ampoules
-4046311000001103,Morphine sulfate 15mg/1ml solution for injection ampoules
-4046711000001104,Morphine sulfate 15mg/1ml solution for injection ampoules
-36128711000001102,Morphine sulfate 30mg/1ml solution for injection ampoules
-4048411000001106,Morphine sulfate 30mg/1ml solution for injection ampoules
-4049611000001100,Morphine sulfate 30mg/1ml solution for injection ampoules
-24403711000001105,Morphine sulfate 30mg/1ml solution for injection ampoules
-4049411000001103,Morphine sulfate 30mg/1ml solution for injection ampoules
-4048911000001103,Morphine sulfate 30mg/1ml solution for injection ampoules
-4049211000001102,Morphine sulfate 30mg/1ml solution for injection ampoules
-12391011000001108,Morphine sulfate 2.5mg/5ml solution for injection ampoules
-12329811000001105,Morphine sulfate 2.5mg/5ml solution for injection ampoules
-36128511000001107,Morphine sulfate 20mg/1ml solution for injection ampoules
-4478411000001100,Morphine sulfate 20mg/1ml solution for injection ampoules
-8436411000001104,Morphine sulfate 20mg/1ml solution for injection ampoules
-4478911000001108,Morphine sulfate 20mg/1ml solution for injection ampoules
-36128911000001100,Morphine sulfate 60mg/2ml solution for injection ampoules
-4476211000001100,Morphine sulfate 60mg/2ml solution for injection ampoules
-21507711000001104,Morphine sulfate 60mg/2ml solution for injection ampoules
-4477511000001100,Morphine sulfate 60mg/2ml solution for injection ampoules
-4476511000001102,Morphine sulfate 60mg/2ml solution for injection ampoules
-4477011000001108,Morphine sulfate 60mg/2ml solution for injection ampoules
-12390811000001105,Morphine sulfate 10mg/2ml solution for injection ampoules
-12329211000001109,Morphine sulfate 10mg/2ml solution for injection ampoules
-12391111000001109,Morphine sulfate 20mg/2ml solution for injection ampoules
-12332811000001103,Morphine sulfate 20mg/2ml solution for injection ampoules
-10075511000001100,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes
-10065911000001103,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes
-10066311000001109,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes
-9750511000001106,Morphine sulfate 10mg/10ml solution for injection pre-filled syringes
-19723011000001106,Morphine sulfate 300mg/10ml solution for injection ampoules
-19710611000001103,Morphine sulfate 300mg/10ml solution for injection ampoules
-20419411000001102,Morphine sulfate 100mg/50ml solution for infusion pre-filled syringes
-20418211000001106,Morphine sulfate 100mg/50ml solution for infusion pre-filled syringes
-21579811000001107,Morphine sulfate 100mg/10ml solution for injection ampoules
-21555311000001103,Morphine sulfate 100mg/10ml solution for injection ampoules
-21636011000001103,Morphine sulfate 50mg/5ml solution for injection ampoules
-21627711000001101,Morphine sulfate 50mg/5ml solution for injection ampoules
-12391811000001102,Morphine sulfate 5mg/5ml solution for injection ampoules
-12336111000001109,Morphine sulfate 5mg/5ml solution for injection ampoules
-30823211000001100,Morphine sulfate 5mg/5ml solution for injection ampoules
-21579911000001102,Morphine sulfate 10mg/10ml solution for injection ampoules
-21540711000001107,Morphine sulfate 10mg/10ml solution for injection ampoules
-30823411000001101,Morphine sulfate 10mg/10ml solution for injection ampoules
-30996711000001101,Morphine sulfate 10mg/10ml solution for injection ampoules
-9748311000001100,Morphine sulfate 10mg/10ml solution for injection Minijet pre-filled syringes
-333941005,VMP previous to 36128511000001107
-333942003,VMP previous to 36128711000001102
-354043009,VMP previous to 36128211000001109
-354044003,VMP previous to 38895511000001108
-354046001,VMP previous to 36128911000001100
+code,term,dmd_id,dmd_type,bnf_code
+12391711000001105,Morphine sulfate 5mg/1ml solution for injection ampoules,12391711000001105,VMP,0407020Q0AAA2A2
+12335511000001107,Morphine sulfate 5mg/1ml solution for injection ampoules,12335511000001107,AMP,0407020Q0AAA2A2
+12391311000001106,Morphine sulfate 2mg/5ml solution for injection ampoules,12391311000001106,VMP,0407020Q0AAA3A3
+12333211000001105,Morphine sulfate 2mg/5ml solution for injection ampoules,12333211000001105,AMP,0407020Q0AAA3A3
+22401911000001100,Morphine sulfate 1mg/1ml solution for injection ampoules,22401911000001100,VMP,0407020Q0AAA4A4
+22402211000001102,Morphine sulfate 1mg/1ml solution for injection ampoules,22402211000001102,AMP,0407020Q0AAA4A4
+30947711000001109,Morphine sulfate 1mg/1ml solution for injection ampoules,30947711000001109,AMP,0407020Q0AAA4A4
+12391411000001104,Morphine sulfate 4mg/10ml solution for injection ampoules,12391411000001104,VMP,0407020Q0AAA5A5
+12333611000001107,Morphine sulfate 4mg/10ml solution for injection ampoules,12333611000001107,AMP,0407020Q0AAA5A5
+12391611000001101,Morphine sulfate 5mg/10ml solution for injection ampoules,12391611000001101,VMP,0407020Q0AAA8A8
+12334711000001101,Morphine sulfate 5mg/10ml solution for injection ampoules,12334711000001101,AMP,0407020Q0AAA8A8
+12391211000001103,Morphine sulfate 2mg/10ml solution for injection ampoules,12391211000001103,VMP,0407020Q0AAAAAA
+12332111000001105,Morphine sulfate 2mg/10ml solution for injection ampoules,12332111000001105,AMP,0407020Q0AAAAAA
+36128211000001109,Morphine sulfate 10mg/1ml solution for injection ampoules,36128211000001109,VMP,0407020Q0AAABAB
+4382711000001105,Morphine sulfate 10mg/1ml solution for injection ampoules,4382711000001105,AMP,0407020Q0AAABAB
+4383611000001106,Morphine sulfate 10mg/1ml solution for injection ampoules,4383611000001106,AMP,0407020Q0AAABAB
+24403511000001100,Morphine sulfate 10mg/1ml solution for injection ampoules,24403511000001100,AMP,0407020Q0AAABAB
+4383411000001108,Morphine sulfate 10mg/1ml solution for injection ampoules,4383411000001108,AMP,0407020Q0AAABAB
+4383011000001104,Morphine sulfate 10mg/1ml solution for injection ampoules,4383011000001104,AMP,0407020Q0AAABAB
+4383211000001109,Morphine sulfate 10mg/1ml solution for injection ampoules,4383211000001109,AMP,0407020Q0AAABAB
+10678011000001108,Morphine sulfate 10mg/1ml solution for injection ampoules,10678011000001108,AMP,0407020Q0AAABAB
+38895511000001108,Morphine sulfate 15mg/1ml solution for injection ampoules,38895511000001108,VMP,0407020Q0AAACAC
+4045011000001105,Morphine sulfate 15mg/1ml solution for injection ampoules,4045011000001105,AMP,0407020Q0AAACAC
+4047511000001106,Morphine sulfate 15mg/1ml solution for injection ampoules,4047511000001106,AMP,0407020Q0AAACAC
+4047011000001103,Morphine sulfate 15mg/1ml solution for injection ampoules,4047011000001103,AMP,0407020Q0AAACAC
+4046311000001103,Morphine sulfate 15mg/1ml solution for injection ampoules,4046311000001103,AMP,0407020Q0AAACAC
+4046711000001104,Morphine sulfate 15mg/1ml solution for injection ampoules,4046711000001104,AMP,0407020Q0AAACAC
+36128711000001102,Morphine sulfate 30mg/1ml solution for injection ampoules,36128711000001102,VMP,0407020Q0AAADAD
+4048411000001106,Morphine sulfate 30mg/1ml solution for injection ampoules,4048411000001106,AMP,0407020Q0AAADAD
+4049611000001100,Morphine sulfate 30mg/1ml solution for injection ampoules,4049611000001100,AMP,0407020Q0AAADAD
+24403711000001105,Morphine sulfate 30mg/1ml solution for injection ampoules,24403711000001105,AMP,0407020Q0AAADAD
+4049411000001103,Morphine sulfate 30mg/1ml solution for injection ampoules,4049411000001103,AMP,0407020Q0AAADAD
+4048911000001103,Morphine sulfate 30mg/1ml solution for injection ampoules,4048911000001103,AMP,0407020Q0AAADAD
+4049211000001102,Morphine sulfate 30mg/1ml solution for injection ampoules,4049211000001102,AMP,0407020Q0AAADAD
+12391011000001108,Morphine sulfate 2.5mg/5ml solution for injection ampoules,12391011000001108,VMP,0407020Q0AAAEAE
+12329811000001105,Morphine sulfate 2.5mg/5ml solution for injection ampoules,12329811000001105,AMP,0407020Q0AAAEAE
+36128511000001107,Morphine sulfate 20mg/1ml solution for injection ampoules,36128511000001107,VMP,0407020Q0AAAFAF
+4478411000001100,Morphine sulfate 20mg/1ml solution for injection ampoules,4478411000001100,AMP,0407020Q0AAAFAF
+8436411000001104,Morphine sulfate 20mg/1ml solution for injection ampoules,8436411000001104,AMP,0407020Q0AAAFAF
+4478911000001108,Morphine sulfate 20mg/1ml solution for injection ampoules,4478911000001108,AMP,0407020Q0AAAFAF
+36128911000001100,Morphine sulfate 60mg/2ml solution for injection ampoules,36128911000001100,VMP,0407020Q0AAAMAM
+4476211000001100,Morphine sulfate 60mg/2ml solution for injection ampoules,4476211000001100,AMP,0407020Q0AAAMAM
+21507711000001104,Morphine sulfate 60mg/2ml solution for injection ampoules,21507711000001104,AMP,0407020Q0AAAMAM
+4477511000001100,Morphine sulfate 60mg/2ml solution for injection ampoules,4477511000001100,AMP,0407020Q0AAAMAM
+4476511000001102,Morphine sulfate 60mg/2ml solution for injection ampoules,4476511000001102,AMP,0407020Q0AAAMAM
+4477011000001108,Morphine sulfate 60mg/2ml solution for injection ampoules,4477011000001108,AMP,0407020Q0AAAMAM
+12390811000001105,Morphine sulfate 10mg/2ml solution for injection ampoules,12390811000001105,VMP,0407020Q0AABCBC
+12329211000001109,Morphine sulfate 10mg/2ml solution for injection ampoules,12329211000001109,AMP,0407020Q0AABCBC
+12391111000001109,Morphine sulfate 20mg/2ml solution for injection ampoules,12391111000001109,VMP,0407020Q0AADIDI
+12332811000001103,Morphine sulfate 20mg/2ml solution for injection ampoules,12332811000001103,AMP,0407020Q0AADIDI
+10075511000001100,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes,10075511000001100,VMP,0407020Q0AAFCFC
+10065911000001103,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes,10065911000001103,AMP,0407020Q0AAFCFC
+10066311000001109,Morphine sulfate 10mg/1ml solution for injection pre-filled syringes,10066311000001109,AMP,0407020Q0AAFCFC
+9750511000001106,Morphine sulfate 10mg/10ml solution for injection pre-filled syringes,9750511000001106,VMP,0407020Q0AAFJFJ
+19723011000001106,Morphine sulfate 300mg/10ml solution for injection ampoules,19723011000001106,VMP,0407020Q0AAFKFK
+19710611000001103,Morphine sulfate 300mg/10ml solution for injection ampoules,19710611000001103,AMP,0407020Q0AAFKFK
+20419411000001102,Morphine sulfate 100mg/50ml solution for infusion pre-filled syringes,20419411000001102,VMP,0407020Q0AAFTFT
+20418211000001106,Morphine sulfate 100mg/50ml solution for infusion pre-filled syringes,20418211000001106,AMP,0407020Q0AAFTFT
+21579811000001107,Morphine sulfate 100mg/10ml solution for injection ampoules,21579811000001107,VMP,0407020Q0AAFVFV
+21555311000001103,Morphine sulfate 100mg/10ml solution for injection ampoules,21555311000001103,AMP,0407020Q0AAFVFV
+21636011000001103,Morphine sulfate 50mg/5ml solution for injection ampoules,21636011000001103,VMP,0407020Q0AAFWFW
+21627711000001101,Morphine sulfate 50mg/5ml solution for injection ampoules,21627711000001101,AMP,0407020Q0AAFWFW
+12391811000001102,Morphine sulfate 5mg/5ml solution for injection ampoules,12391811000001102,VMP,0407020Q0AAFZFZ
+12336111000001109,Morphine sulfate 5mg/5ml solution for injection ampoules,12336111000001109,AMP,0407020Q0AAFZFZ
+30823211000001100,Morphine sulfate 5mg/5ml solution for injection ampoules,30823211000001100,AMP,0407020Q0AAFZFZ
+21579911000001102,Morphine sulfate 10mg/10ml solution for injection ampoules,21579911000001102,VMP,0407020Q0AAGAGA
+21540711000001107,Morphine sulfate 10mg/10ml solution for injection ampoules,21540711000001107,AMP,0407020Q0AAGAGA
+30823411000001101,Morphine sulfate 10mg/10ml solution for injection ampoules,30823411000001101,AMP,0407020Q0AAGAGA
+30996711000001101,Morphine sulfate 10mg/10ml solution for injection ampoules,30996711000001101,AMP,0407020Q0AAGAGA
+9748311000001100,Morphine sulfate 10mg/10ml solution for injection Minijet pre-filled syringes,9748311000001100,AMP,0407020Q0BEABFJ
+333941005,VMP previous to 36128511000001107,333941005,VMP,0407020Q0AAAFAF
+333942003,VMP previous to 36128711000001102,333942003,VMP,0407020Q0AAADAD
+354043009,VMP previous to 36128211000001109,354043009,VMP,0407020Q0AAABAB
+354044003,VMP previous to 38895511000001108,354044003,VMP,0407020Q0AAACAC
+354046001,VMP previous to 36128911000001100,354046001,VMP,0407020Q0AAAMAM

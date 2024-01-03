@@ -1,32 +1,32 @@
-code,term
-36129811000001103,Oxycodone 10mg/1ml solution for injection ampoules
-19671011000001103,Oxycodone 10mg/1ml solution for injection ampoules
-37995711000001100,Oxycodone 10mg/1ml solution for injection ampoules
-37761311000001108,Oxycodone 10mg/1ml solution for injection ampoules
-35537411000001101,Oxycodone 10mg/1ml solution for injection ampoules
-36640411000001107,Oxycodone 10mg/1ml solution for injection ampoules
-17474211000001101,Oxycodone 10mg/1ml solution for injection ampoules
-35576611000001103,Oxycodone 10mg/1ml solution for injection ampoules
-36130611000001105,Oxycodone 20mg/2ml solution for injection ampoules
-19671211000001108,Oxycodone 20mg/2ml solution for injection ampoules
-37995911000001103,Oxycodone 20mg/2ml solution for injection ampoules
-37760911000001102,Oxycodone 20mg/2ml solution for injection ampoules
-35537611000001103,Oxycodone 20mg/2ml solution for injection ampoules
-36641311000001105,Oxycodone 20mg/2ml solution for injection ampoules
-17474611000001104,Oxycodone 20mg/2ml solution for injection ampoules
-35576911000001109,Oxycodone 20mg/2ml solution for injection ampoules
-15613611000001105,Oxycodone 50mg/1ml solution for injection ampoules
-22827711000001106,Oxycodone 50mg/1ml solution for injection ampoules
-37996111000001107,Oxycodone 50mg/1ml solution for injection ampoules
-37761111000001106,Oxycodone 50mg/1ml solution for injection ampoules
-35537811000001104,Oxycodone 50mg/1ml solution for injection ampoules
-23607911000001102,Oxycodone 50mg/1ml solution for injection ampoules
-35584011000001106,Oxycodone 50mg/1ml solution for injection ampoules
-4635211000001105,OxyNorm 10mg/1ml solution for injection ampoules
-4636011000001109,OxyNorm 20mg/2ml solution for injection ampoules
-15545411000001108,OxyNorm 50mg/1ml solution for injection ampoules
-34025611000001102,Shortec 10mg/1ml solution for injection ampoules
-34025811000001103,Shortec 20mg/2ml solution for injection ampoules
-34026211000001105,Shortec 50mg/1ml solution for injection ampoules
-408078009,VMP previous to 36130611000001105
-408079001,VMP previous to 36129811000001103
+code,term,dmd_id,dmd_type,bnf_code
+36129811000001103,Oxycodone 10mg/1ml solution for injection ampoules,36129811000001103,VMP,0407020ADAAALAL
+19671011000001103,Oxycodone 10mg/1ml solution for injection ampoules,19671011000001103,AMP,0407020ADAAALAL
+37995711000001100,Oxycodone 10mg/1ml solution for injection ampoules,37995711000001100,AMP,0407020ADAAALAL
+37761311000001108,Oxycodone 10mg/1ml solution for injection ampoules,37761311000001108,AMP,0407020ADAAALAL
+35537411000001101,Oxycodone 10mg/1ml solution for injection ampoules,35537411000001101,AMP,0407020ADAAALAL
+36640411000001107,Oxycodone 10mg/1ml solution for injection ampoules,36640411000001107,AMP,0407020ADAAALAL
+17474211000001101,Oxycodone 10mg/1ml solution for injection ampoules,17474211000001101,AMP,0407020ADAAALAL
+35576611000001103,Oxycodone 10mg/1ml solution for injection ampoules,35576611000001103,AMP,0407020ADAAALAL
+36130611000001105,Oxycodone 20mg/2ml solution for injection ampoules,36130611000001105,VMP,0407020ADAAAMAM
+19671211000001108,Oxycodone 20mg/2ml solution for injection ampoules,19671211000001108,AMP,0407020ADAAAMAM
+37995911000001103,Oxycodone 20mg/2ml solution for injection ampoules,37995911000001103,AMP,0407020ADAAAMAM
+37760911000001102,Oxycodone 20mg/2ml solution for injection ampoules,37760911000001102,AMP,0407020ADAAAMAM
+35537611000001103,Oxycodone 20mg/2ml solution for injection ampoules,35537611000001103,AMP,0407020ADAAAMAM
+36641311000001105,Oxycodone 20mg/2ml solution for injection ampoules,36641311000001105,AMP,0407020ADAAAMAM
+17474611000001104,Oxycodone 20mg/2ml solution for injection ampoules,17474611000001104,AMP,0407020ADAAAMAM
+35576911000001109,Oxycodone 20mg/2ml solution for injection ampoules,35576911000001109,AMP,0407020ADAAAMAM
+15613611000001105,Oxycodone 50mg/1ml solution for injection ampoules,15613611000001105,VMP,0407020ADAAANAN
+22827711000001106,Oxycodone 50mg/1ml solution for injection ampoules,22827711000001106,AMP,0407020ADAAANAN
+37996111000001107,Oxycodone 50mg/1ml solution for injection ampoules,37996111000001107,AMP,0407020ADAAANAN
+37761111000001106,Oxycodone 50mg/1ml solution for injection ampoules,37761111000001106,AMP,0407020ADAAANAN
+35537811000001104,Oxycodone 50mg/1ml solution for injection ampoules,35537811000001104,AMP,0407020ADAAANAN
+23607911000001102,Oxycodone 50mg/1ml solution for injection ampoules,23607911000001102,AMP,0407020ADAAANAN
+35584011000001106,Oxycodone 50mg/1ml solution for injection ampoules,35584011000001106,AMP,0407020ADAAANAN
+4635211000001105,OxyNorm 10mg/1ml solution for injection ampoules,4635211000001105,AMP,0407020ADBBAFAL
+4636011000001109,OxyNorm 20mg/2ml solution for injection ampoules,4636011000001109,AMP,0407020ADBBAGAM
+15545411000001108,OxyNorm 50mg/1ml solution for injection ampoules,15545411000001108,AMP,0407020ADBBAHAN
+34025611000001102,Shortec 10mg/1ml solution for injection ampoules,34025611000001102,AMP,0407020ADBJADAL
+34025811000001103,Shortec 20mg/2ml solution for injection ampoules,34025811000001103,AMP,0407020ADBJAEAM
+34026211000001105,Shortec 50mg/1ml solution for injection ampoules,34026211000001105,AMP,0407020ADBJAFAN
+408078009,VMP previous to 36130611000001105,408078009,VMP,0407020ADAAAMAM
+408079001,VMP previous to 36129811000001103,408079001,VMP,0407020ADAAALAL
