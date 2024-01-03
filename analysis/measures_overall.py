@@ -36,6 +36,7 @@ dataset = make_dataset_opioids(index_date=index_date, end_date=INTERVAL.end_date
 ##########
 
 measures = Measures()
+measures.configure_disclosure_control(enabled=False)
 
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 

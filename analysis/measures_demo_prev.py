@@ -90,6 +90,7 @@ region = practice_registrations.for_patient_on(index_date).practice_nuts1_region
 #########################
 
 measures = Measures()
+measures.configure_disclosure_control(enabled=False)
 
 measures.define_defaults(intervals=months(intervals).starting_on(start_date))
 
