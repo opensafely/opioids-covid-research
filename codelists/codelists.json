@@ -77,24 +77,6 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
       "downloaded_at": "2024-01-03 15:08:39.184185Z",
       "sha": "8a6a1a599eaf9f595076c2aac6610f0e079dddce"
-    },
-    "opensafely-oxycodone-subcutaneous-dmd.csv": {
-      "id": "opensafely/oxycodone-subcutaneous-dmd/2a956f90",
-      "url": "https://www.opencodelists.org/codelist/opensafely/oxycodone-subcutaneous-dmd/2a956f90/",
-      "downloaded_at": "2024-01-03 15:08:39.838832Z",
-      "sha": "8e7af12bedace533778074b738b1fcf8646e8586"
-    },
-    "opensafely-morphine-subcutaneous-dmd.csv": {
-      "id": "opensafely/morphine-subcutaneous-dmd/1185fc5b",
-      "url": "https://www.opencodelists.org/codelist/opensafely/morphine-subcutaneous-dmd/1185fc5b/",
-      "downloaded_at": "2024-01-03 15:08:40.473604Z",
-      "sha": "f20893764b13102175247aca9b518589c08a1621"
-    },
-    "opensafely-diamorphine-subcutaneous.csv": {
-      "id": "opensafely/diamorphine-subcutaneous/31a51cf8",
-      "url": "https://www.opencodelists.org/codelist/opensafely/diamorphine-subcutaneous/31a51cf8/",
-      "downloaded_at": "2024-01-03 15:08:41.152023Z",
-      "sha": "11ccd07212827d624c7ed2788b1ec963172a953d"
     }
   }
 }
