@@ -15,6 +15,7 @@ import codelists
 
 from dataset_definition import make_dataset_opioids
 
+
  
 ##########
 
@@ -70,6 +71,7 @@ age_group = case(
 ######
 
 measures = Measures()
+measures.configure_disclosure_control(enabled=False)
 
 ## Opioid prescribing to people in care homes
 # Total denominator - people in care home

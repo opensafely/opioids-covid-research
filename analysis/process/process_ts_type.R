@@ -46,8 +46,7 @@ type <- read_csv(here::here("output", "measures", "measures_type.csv")) %>%
            measure == "rec_opioid" ~ "Rectal",
            measure == "oth_opioid" ~ "Other",
            measure == "inh_opioid" ~ "Inhaled"
-          ),
-         rate_opioid_any = (numerator / denominator * 1000)) %>%
+          )) %>%
   rename(opioid_any = numerator, pop_total = denominator) %>%
   dplyr::select(!c(interval_start, interval_end, ratio)) 
 
@@ -62,9 +61,8 @@ write.csv(type, file = here::here("output", "timeseries", "ts_type.csv"),
 # By admin route
 type_round <- read_csv(here::here("output", "timeseries", "ts_type.csv")) %>%
   mutate(opioid_any_round = rounding(opioid_any),
-         pop_total_round = rounding(pop_total),
-         rate_opioid_any_round = (opioid_any_round / pop_total_round * 1000)) %>%
-  dplyr::select(!c(opioid_any, pop_total, rate_opioid_any)) %>%
+         pop_total_round = rounding(pop_total)) %>%
+  dplyr::select(!c(opioid_any, pop_total)) %>%
   subset(!(measure %in% c("Buccal", "Inhaled", "Rectal") ))
 
 write.csv(type_round, here::here("output", "timeseries", "ts_type_rounded.csv"), row.names = FALSE)

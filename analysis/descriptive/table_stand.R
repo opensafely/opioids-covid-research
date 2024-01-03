@@ -149,8 +149,7 @@ bycancer <- combined %>%
   # Suppression and rounding 
   mutate(
     total_pop_round = rounding(total_population),
-    opioid_any_round = rounding(opioid_any),
-    opioid_per_1000 = opioid_any_round / total_pop_round * 1000) %>%
+    opioid_any_round = rounding(opioid_any)) %>%
   dplyr::select(!c(total_population, opioid_any))
 
 # Save
@@ -183,11 +182,7 @@ std <- function(data, ...){
     mutate(
       total_pop_round = rounding(total_population),
       opioid_any_round = rounding(opioid_any),
-      opioid_any_std_round = rounding(opioid_any_std),
-      opioid_per_1000 = opioid_any_round / total_pop_round * 1000,
-      
-      #standardised rate if same age/sex distribution as standard pop
-      opioid_per_1000_std = opioid_any_std_round / uk_pop * 1000 
+      opioid_any_std_round = rounding(opioid_any_std)
     ) %>%
     dplyr::select(!c(total_population, opioid_any, opioid_any_std))
   
@@ -236,7 +231,6 @@ admin <- rbind(
          ) %>%
   mutate(tot_round = rounding(tot),
          no_people_round = rounding(no_people),
-         prevalence_per_1000 = no_people_round / tot_round * 1000,
          group = "Full population") %>%
   dplyr::select(!c("tot", "no_people"))
 
@@ -259,7 +253,6 @@ admin.care <- rbind(
          ) %>%
   mutate(tot_round = rounding(tot),
          no_people_round = rounding(no_people),
-         prevalence_per_1000 = no_people_round / tot_round*1000,
          group = "Care home") %>%
   dplyr::select(!c("tot","no_people"))
 
