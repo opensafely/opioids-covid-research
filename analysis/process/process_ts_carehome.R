@@ -51,7 +51,8 @@ carehome <- read_csv(here::here("output", "measures", "measures_carehome.csv")) 
          pop_total = denominator_opioid_any,
          pop_naive = denominator_opioid_new) %>%
   dplyr::select(!c(denominator_hi_opioid_any, denominator_oral_opioid,
-                   denominator_trans_opioid, denominator_par_opioid)) 
+                   denominator_trans_opioid, denominator_par_opioid)) %>%
+  arrange(month)
 
 write.csv(carehome, file = here::here("output", "timeseries", "ts_carehome.csv"),
           row.names = FALSE)
@@ -66,7 +67,8 @@ carehome_sens <- read_csv(here::here("output", "measures", "measures_carehome.cs
          carehome = if_else(carehome == T, "Yes", "No", "No"),
          measure = substr(measure, 1, 10)) %>%
   rename(opioid_any = numerator, pop_total = denominator) %>%
-  dplyr::select(!c(interval_start, interval_end, ratio, measure)) 
+  dplyr::select(!c(interval_start, interval_end, ratio, measure)) %>%
+  arrange(month, age_group, carehome)
 
 write.csv(carehome_sens, file = here::here("output", "timeseries", "ts_carehome_sens.csv"),
           row.names = FALSE)
@@ -88,7 +90,8 @@ carehome_round <- read_csv(here::here("output", "timeseries", "ts_carehome.csv")
          pop_total_round = rounding(pop_total),
          pop_naive_round = rounding(pop_naive)) %>%
   dplyr::select(!c(opioid_any, opioid_new, hi_opioid_any, trans_opioid_any,
-                   par_opioid_any, oral_opioid_any, pop_naive, pop_total))
+                   par_opioid_any, oral_opioid_any, pop_naive, pop_total)) %>%
+  arrange(month)
 
 write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounded.csv"), row.names = FALSE)
 
@@ -97,6 +100,10 @@ write.csv(carehome_round, here::here("output", "timeseries", "ts_carehome_rounde
 carehome_sens_round <- read_csv(here::here("output", "timeseries", "ts_carehome_sens.csv")) %>%
   mutate(opioid_any_round = rounding(opioid_any),
          pop_total_round = rounding(pop_total)) %>%
-  dplyr::select(!c(opioid_any, pop_total))
+  dplyr::select(!c(opioid_any, pop_total)) %>%
+  arrange(month, age_group, carehome)
+
+carehome_sens_round <- carehome_sens_round[,c("month", "period", "age_group", "carehome", 
+                                  "opioid_any_round", "pop_total_round")]
 
 write.csv(carehome_sens_round, here::here("output", "timeseries", "ts_carehome_sens_rounded.csv"), row.names = FALSE)

@@ -63,7 +63,9 @@ demo_new <- read_csv(here::here("output", "measures", "measures_demo_new.csv")) 
          pop_naive = denominator_opioid_new)
 
 demo <- merge(demo_new, demo_prev, by.x = c("month", "cat", "var"),
-              by.y = c("month",  "cat", "var"))
+              by.y = c("month",  "cat", "var")) %>%
+  arrange(month, var, cat)
+
 
 write.csv(demo, file = here::here("output", "timeseries", "ts_demo.csv"),
           row.names = FALSE)
@@ -79,6 +81,10 @@ demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
          opioid_new_round = rounding(opioid_new),
          pop_total_round = rounding(pop_total),
          pop_naive_round = rounding(pop_naive)) %>%
-  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive))
+  dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive)) %>%
+  arrange(month, var, cat)
+
+demo_round <- demo_round[,c("month", "period", "cat", "var", "opioid_any_round", "opioid_new_round",
+                "pop_total_round", "pop_naive_round")]
 
 write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"), row.names = FALSE)
