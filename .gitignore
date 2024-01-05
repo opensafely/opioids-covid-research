@@ -9,3 +9,9 @@ venv/
 released_outputs/*
 .Rhistory
 .Rhistory
+<<<<<<< Updated upstream
+=======
+.Rhistory
+.Rhistory
+>>>>>>> Stashed changes
+.Rhistory
