@@ -53,7 +53,7 @@ def make_dataset_opioids(index_date, end_date):
     dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
 
 
-    # No. people with a new opioid prescription (2 year lookback) 
+    # No. people with a new opioid prescription (1 year lookback) 
     # Note: for any opioids only 
 
     # Date of last prescription before index date
