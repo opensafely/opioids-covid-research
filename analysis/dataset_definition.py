@@ -22,7 +22,7 @@ def make_dataset_opioids(index_date, end_date):
 
     ## Define relevant variables
 
-    # Cancer diagnosis in past 5 years (for sensivity analyses)
+    # Cancer diagnosis in past 5 years (for sensitivity analyses)
     dataset.cancer = clinical_events.where(
             clinical_events.snomedct_code.is_in(codelists.cancer_codes)
         ).where(
