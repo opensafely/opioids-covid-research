@@ -77,6 +77,12 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce/",
       "downloaded_at": "2024-01-03 15:08:39.184185Z",
       "sha": "8a6a1a599eaf9f595076c2aac6610f0e079dddce"
+    },
+    "opensafely-diamorphine-subcutaneous.csv": {
+      "id": "opensafely/diamorphine-subcutaneous/31a51cf8",
+      "url": "https://www.opencodelists.org/codelist/opensafely/diamorphine-subcutaneous/31a51cf8/",
+      "downloaded_at": "2024-01-18 11:14:52.328771Z",
+      "sha": "11ccd07212827d624c7ed2788b1ec963172a953d"
     }
   }
 }
