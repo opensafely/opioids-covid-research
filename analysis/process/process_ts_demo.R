@@ -84,7 +84,7 @@ demo_round <- read_csv(here::here("output", "timeseries", "ts_demo.csv")) %>%
   dplyr::select(!c(opioid_any, opioid_new, pop_total, pop_naive)) %>%
   arrange(month, var, cat)
 
-demo_round <- demo_round[,c("month", "period", "cat", "var", "opioid_any_round", "opioid_new_round",
+demo_round <- demo_round[,c("month", "period", "var", "cat", "opioid_any_round", "opioid_new_round",
                 "pop_total_round", "pop_naive_round")]
 
 write.csv(demo_round, here::here("output", "timeseries", "ts_demo_rounded.csv"), row.names = FALSE)
