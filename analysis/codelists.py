@@ -104,10 +104,9 @@ trans_opioid_codes = codelist_from_csv(
 )
 
 diamorph_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-diamorphine-subcutaneous.csv",
+  "codelists/user-anschaf-diamorphine-dmd.csv",
   column = "code",
 )
-
 
 ### Other opioid
 oth_opioid_codes = (

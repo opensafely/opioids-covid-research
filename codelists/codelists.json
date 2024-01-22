@@ -83,6 +83,12 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/diamorphine-subcutaneous/31a51cf8/",
       "downloaded_at": "2024-01-18 11:14:52.328771Z",
       "sha": "11ccd07212827d624c7ed2788b1ec963172a953d"
+    },
+    "user-anschaf-diamorphine-dmd.csv": {
+      "id": "user/anschaf/diamorphine-dmd/2020376b",
+      "url": "https://www.opencodelists.org/codelist/user/anschaf/diamorphine-dmd/2020376b/",
+      "downloaded_at": "2024-01-22 14:43:44.701006Z",
+      "sha": "2ed112e65314529111a435b66e911bd81a956517"
     }
   }
 }
