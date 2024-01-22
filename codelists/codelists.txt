@@ -12,3 +12,4 @@ opensafely/opioid-containing-medicines-rectal-excluding-drugs-for-substance-misu
 opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/23864d8f
 opensafely/non-high-dose-long-acting-opioids-openprescribing-dmd/39e300ce
 opensafely/diamorphine-subcutaneous/31a51cf8/
+user/anschaf/diamorphine-dmd/2020376b/
