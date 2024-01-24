@@ -80,8 +80,8 @@ actions:
     run: ehrql:v0 generate-measures analysis/measures_test.py 
       --output output/measures/measures_test.csv
       --
-      --start-date "2019-01-01"
-      --intervals 42
+      --start-date "2019-07-01"
+      --intervals 36
     outputs:
       moderately_sensitive:
         measure_csv: output/measures/measures_test.csv 
