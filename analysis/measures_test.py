@@ -86,6 +86,7 @@ measures.define_measure(
     numerator=number_diamorph_rx,
     denominator=denominator
 )
+
 measures.define_measure(
     name="par_opioid_any",
     numerator=par_opioid_any,

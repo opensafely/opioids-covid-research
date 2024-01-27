@@ -77,7 +77,7 @@ actions:
 
   # Measures - prevalent prescribing - checking overall counts
   measures_test:
-    run: ehrql:v0 generate-measures analysis/measures_test.py 
+    run: ehrql:v1 generate-measures analysis/measures_test.py 
       --output output/measures/measures_test.csv
       --
       --start-date "2019-07-01"
