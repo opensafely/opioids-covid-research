@@ -9,22 +9,14 @@
 
 
 library('tidyverse')
-library('lubridate')
-library('arrow')
 library('here')
-library('reshape2')
-library('dplyr')
 library('fs')
 library('ggplot2')
-library('TSA')
-library('tseries')
-library('forecast')
-library('astsa')
 library(MASS)
 library(sandwich)
 library(lmtest)
 library(PNWColors)
-library(ggpubr)
+
 library(patchwork)
 
 ## Create directories

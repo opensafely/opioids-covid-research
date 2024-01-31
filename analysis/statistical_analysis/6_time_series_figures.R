@@ -9,18 +9,10 @@
 
 
 library('tidyverse')
-library('lubridate')
-library('arrow')
 library('here')
-library('reshape2')
-library('dplyr')
 library('fs')
 library('ggplot2')
-library('RColorBrewer')
 library('PNWColors')
-library(viridis)
-library(ggpubr)
-library(cowplot)
 library(patchwork)
 
 
