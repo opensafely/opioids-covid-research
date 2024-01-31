@@ -8,18 +8,8 @@
 
 
 library('tidyverse')
-library('lubridate')
-library('arrow')
 library('here')
-library('reshape2')
-library('dplyr')
 library('fs')
-library('ggplot2')
-library('RColorBrewer')
-library('TSA')
-library('tseries')
-library('forecast')
-library('astsa')
 
 ## Create directories
 dir_create(here::here("output", "released_outputs", "final"), showWarnings = FALSE, recurse = TRUE)
