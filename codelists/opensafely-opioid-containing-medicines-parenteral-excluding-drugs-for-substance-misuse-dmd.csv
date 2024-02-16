@@ -14,6 +14,7 @@ code,term,dmd_id,dmd_type,bnf_code
 39145611000001106,Tramadol 100mg/2ml solution for injection ampoules,39145611000001106,AMP,040702040AAABAB
 14978511000001103,Tramadol 100mg/2ml solution for injection ampoules,14978511000001103,AMP,040702040AAABAB
 10072711000001101,Tramadol 100mg/2ml solution for injection ampoules,10072711000001101,AMP,040702040AAABAB
+41209311000001100,Tramadol 100mg/2ml solution for injection ampoules,41209311000001100,AMP,040702040AAABAB
 28798511000001104,Tramadol 100mg/2ml solution for injection ampoules,28798511000001104,AMP,040702040AAABAB
 793211000001103,Zydol 100mg/2ml solution for injection ampoules,793211000001103,AMP,040702040BBABAB
 473811000001101,Zamadol 100mg/2ml solution for injection ampoules,473811000001101,AMP,040702040BDAFAB
@@ -47,18 +48,20 @@ code,term,dmd_id,dmd_type,bnf_code
 36129811000001103,Oxycodone 10mg/1ml solution for injection ampoules,36129811000001103,VMP,0407020ADAAALAL
 19671011000001103,Oxycodone 10mg/1ml solution for injection ampoules,19671011000001103,AMP,0407020ADAAALAL
 37995711000001100,Oxycodone 10mg/1ml solution for injection ampoules,37995711000001100,AMP,0407020ADAAALAL
+41938511000001109,Oxycodone 10mg/1ml solution for injection ampoules,41938511000001109,AMP,0407020ADAAALAL
 37761311000001108,Oxycodone 10mg/1ml solution for injection ampoules,37761311000001108,AMP,0407020ADAAALAL
-35537411000001101,Oxycodone 10mg/1ml solution for injection ampoules,35537411000001101,AMP,0407020ADAAALAL
 36640411000001107,Oxycodone 10mg/1ml solution for injection ampoules,36640411000001107,AMP,0407020ADAAALAL
+35537411000001101,Oxycodone 10mg/1ml solution for injection ampoules,35537411000001101,AMP,0407020ADAAALAL
 39072711000001100,Oxycodone 10mg/1ml solution for injection ampoules,39072711000001100,AMP,0407020ADAAALAL
 17474211000001101,Oxycodone 10mg/1ml solution for injection ampoules,17474211000001101,AMP,0407020ADAAALAL
 35576611000001103,Oxycodone 10mg/1ml solution for injection ampoules,35576611000001103,AMP,0407020ADAAALAL
 36130611000001105,Oxycodone 20mg/2ml solution for injection ampoules,36130611000001105,VMP,0407020ADAAAMAM
 19671211000001108,Oxycodone 20mg/2ml solution for injection ampoules,19671211000001108,AMP,0407020ADAAAMAM
 37995911000001103,Oxycodone 20mg/2ml solution for injection ampoules,37995911000001103,AMP,0407020ADAAAMAM
+41938911000001102,Oxycodone 20mg/2ml solution for injection ampoules,41938911000001102,AMP,0407020ADAAAMAM
 37760911000001102,Oxycodone 20mg/2ml solution for injection ampoules,37760911000001102,AMP,0407020ADAAAMAM
-35537611000001103,Oxycodone 20mg/2ml solution for injection ampoules,35537611000001103,AMP,0407020ADAAAMAM
 36641311000001105,Oxycodone 20mg/2ml solution for injection ampoules,36641311000001105,AMP,0407020ADAAAMAM
+35537611000001103,Oxycodone 20mg/2ml solution for injection ampoules,35537611000001103,AMP,0407020ADAAAMAM
 39072911000001103,Oxycodone 20mg/2ml solution for injection ampoules,39072911000001103,AMP,0407020ADAAAMAM
 17474611000001104,Oxycodone 20mg/2ml solution for injection ampoules,17474611000001104,AMP,0407020ADAAAMAM
 35576911000001109,Oxycodone 20mg/2ml solution for injection ampoules,35576911000001109,AMP,0407020ADAAAMAM
@@ -67,6 +70,7 @@ code,term,dmd_id,dmd_type,bnf_code
 37996111000001107,Oxycodone 50mg/1ml solution for injection ampoules,37996111000001107,AMP,0407020ADAAANAN
 37761111000001106,Oxycodone 50mg/1ml solution for injection ampoules,37761111000001106,AMP,0407020ADAAANAN
 35537811000001104,Oxycodone 50mg/1ml solution for injection ampoules,35537811000001104,AMP,0407020ADAAANAN
+41577011000001108,Oxycodone 50mg/1ml solution for injection ampoules,41577011000001108,AMP,0407020ADAAANAN
 39073111000001107,Oxycodone 50mg/1ml solution for injection ampoules,39073111000001107,AMP,0407020ADAAANAN
 23607911000001102,Oxycodone 50mg/1ml solution for injection ampoules,23607911000001102,AMP,0407020ADAAANAN
 35584011000001106,Oxycodone 50mg/1ml solution for injection ampoules,35584011000001106,AMP,0407020ADAAANAN
@@ -97,7 +101,7 @@ code,term,dmd_id,dmd_type,bnf_code
 853711000001101,Diamorphine 5mg powder for solution for injection ampoules,853711000001101,AMP,0407020K0AAAAAA
 15404411000001109,Diamorphine 5mg powder for solution for injection ampoules,15404411000001109,AMP,0407020K0AAAAAA
 250111000001104,Diamorphine 5mg powder for solution for injection ampoules,250111000001104,AMP,0407020K0AAAAAA
-322524004,Diamorphine 10mg powder for solution for injection ampoules,322524004,VMP,0407020K0AAABAB
+42011311000001108,Diamorphine 10mg powder for solution for injection ampoules,42011311000001108,VMP,0407020K0AAABAB
 684411000001105,Diamorphine 10mg powder for solution for injection ampoules,684411000001105,AMP,0407020K0AAABAB
 15422411000001106,Diamorphine 10mg powder for solution for injection ampoules,15422411000001106,AMP,0407020K0AAABAB
 712711000001101,Diamorphine 10mg powder for solution for injection ampoules,712711000001101,AMP,0407020K0AAABAB
@@ -108,7 +112,7 @@ code,term,dmd_id,dmd_type,bnf_code
 25211000001109,Diamorphine 10mg powder for solution for injection ampoules,25211000001109,AMP,0407020K0AAABAB
 12389011000001108,Diamorphine 15mg powder for solution for injection ampoules,12389011000001108,VMP,0407020K0AAACAC
 12316211000001105,Diamorphine 15mg powder for solution for injection ampoules,12316211000001105,AMP,0407020K0AAACAC
-322525003,Diamorphine 30mg powder for solution for injection ampoules,322525003,VMP,0407020K0AAAEAE
+42011511000001102,Diamorphine 30mg powder for solution for injection ampoules,42011511000001102,VMP,0407020K0AAAEAE
 769411000001100,Diamorphine 30mg powder for solution for injection ampoules,769411000001100,AMP,0407020K0AAAEAE
 15422611000001109,Diamorphine 30mg powder for solution for injection ampoules,15422611000001109,AMP,0407020K0AAAEAE
 922811000001107,Diamorphine 30mg powder for solution for injection ampoules,922811000001107,AMP,0407020K0AAAEAE
@@ -118,7 +122,7 @@ code,term,dmd_id,dmd_type,bnf_code
 908611000001101,Diamorphine 30mg powder for solution for injection ampoules,908611000001101,AMP,0407020K0AAAEAE
 15405511000001109,Diamorphine 30mg powder for solution for injection ampoules,15405511000001109,AMP,0407020K0AAAEAE
 277811000001108,Diamorphine 30mg powder for solution for injection ampoules,277811000001108,AMP,0407020K0AAAEAE
-322526002,Diamorphine 100mg powder for solution for injection ampoules,322526002,VMP,0407020K0AAAFAF
+42011211000001100,Diamorphine 100mg powder for solution for injection ampoules,42011211000001100,VMP,0407020K0AAAFAF
 725011000001100,Diamorphine 100mg powder for solution for injection ampoules,725011000001100,AMP,0407020K0AAAFAF
 13886511000001103,Diamorphine 100mg powder for solution for injection ampoules,13886511000001103,AMP,0407020K0AAAFAF
 397811000001109,Diamorphine 100mg powder for solution for injection ampoules,397811000001109,AMP,0407020K0AAAFAF
@@ -126,7 +130,7 @@ code,term,dmd_id,dmd_type,bnf_code
 172311000001104,Diamorphine 100mg powder for solution for injection ampoules,172311000001104,AMP,0407020K0AAAFAF
 15405611000001108,Diamorphine 100mg powder for solution for injection ampoules,15405611000001108,AMP,0407020K0AAAFAF
 212411000001103,Diamorphine 100mg powder for solution for injection ampoules,212411000001103,AMP,0407020K0AAAFAF
-322527006,Diamorphine 500mg powder for solution for injection ampoules,322527006,VMP,0407020K0AAAGAG
+42011611000001103,Diamorphine 500mg powder for solution for injection ampoules,42011611000001103,VMP,0407020K0AAAGAG
 284911000001100,Diamorphine 500mg powder for solution for injection ampoules,284911000001100,AMP,0407020K0AAAGAG
 13887111000001105,Diamorphine 500mg powder for solution for injection ampoules,13887111000001105,AMP,0407020K0AAAGAG
 518611000001106,Diamorphine 500mg powder for solution for injection ampoules,518611000001106,AMP,0407020K0AAAGAG
@@ -165,6 +169,7 @@ code,term,dmd_id,dmd_type,bnf_code
 22605411000001109,Methadone 50mg/1ml solution for injection ampoules,22605411000001109,AMP,0407020M0AAACAC
 24119211000001104,Methadone 50mg/1ml solution for injection ampoules,24119211000001104,AMP,0407020M0AAACAC
 19739811000001100,Methadone 50mg/1ml solution for injection ampoules,19739811000001100,AMP,0407020M0AAACAC
+42412711000001105,Methadone 50mg/1ml solution for injection ampoules,42412711000001105,AMP,0407020M0AAACAC
 24570811000001107,Methadone 50mg/1ml solution for injection ampoules,24570811000001107,AMP,0407020M0AAACAC
 22158111000001104,Methadone 50mg/1ml solution for injection ampoules,22158111000001104,AMP,0407020M0AAACAC
 36032811000001103,Methadone 50mg/5ml solution for injection ampoules,36032811000001103,VMP,0407020M0AAANAN
@@ -229,6 +234,7 @@ code,term,dmd_id,dmd_type,bnf_code
 39146711000001105,Morphine sulfate 10mg/1ml solution for injection ampoules,39146711000001105,AMP,0407020Q0AAABAB
 4383611000001106,Morphine sulfate 10mg/1ml solution for injection ampoules,4383611000001106,AMP,0407020Q0AAABAB
 24403511000001100,Morphine sulfate 10mg/1ml solution for injection ampoules,24403511000001100,AMP,0407020Q0AAABAB
+40838611000001106,Morphine sulfate 10mg/1ml solution for injection ampoules,40838611000001106,AMP,0407020Q0AAABAB
 4383411000001108,Morphine sulfate 10mg/1ml solution for injection ampoules,4383411000001108,AMP,0407020Q0AAABAB
 4383011000001104,Morphine sulfate 10mg/1ml solution for injection ampoules,4383011000001104,AMP,0407020Q0AAABAB
 4383211000001109,Morphine sulfate 10mg/1ml solution for injection ampoules,4383211000001109,AMP,0407020Q0AAABAB
@@ -237,6 +243,7 @@ code,term,dmd_id,dmd_type,bnf_code
 4045011000001105,Morphine sulfate 15mg/1ml solution for injection ampoules,4045011000001105,AMP,0407020Q0AAACAC
 39146511000001100,Morphine sulfate 15mg/1ml solution for injection ampoules,39146511000001100,AMP,0407020Q0AAACAC
 4047511000001106,Morphine sulfate 15mg/1ml solution for injection ampoules,4047511000001106,AMP,0407020Q0AAACAC
+40839011000001109,Morphine sulfate 15mg/1ml solution for injection ampoules,40839011000001109,AMP,0407020Q0AAACAC
 4047011000001103,Morphine sulfate 15mg/1ml solution for injection ampoules,4047011000001103,AMP,0407020Q0AAACAC
 4046311000001103,Morphine sulfate 15mg/1ml solution for injection ampoules,4046311000001103,AMP,0407020Q0AAACAC
 4046711000001104,Morphine sulfate 15mg/1ml solution for injection ampoules,4046711000001104,AMP,0407020Q0AAACAC
@@ -245,6 +252,7 @@ code,term,dmd_id,dmd_type,bnf_code
 39146811000001102,Morphine sulfate 30mg/1ml solution for injection ampoules,39146811000001102,AMP,0407020Q0AAADAD
 4049611000001100,Morphine sulfate 30mg/1ml solution for injection ampoules,4049611000001100,AMP,0407020Q0AAADAD
 24403711000001105,Morphine sulfate 30mg/1ml solution for injection ampoules,24403711000001105,AMP,0407020Q0AAADAD
+40839211000001104,Morphine sulfate 30mg/1ml solution for injection ampoules,40839211000001104,AMP,0407020Q0AAADAD
 4049411000001103,Morphine sulfate 30mg/1ml solution for injection ampoules,4049411000001103,AMP,0407020Q0AAADAD
 4048911000001103,Morphine sulfate 30mg/1ml solution for injection ampoules,4048911000001103,AMP,0407020Q0AAADAD
 4049211000001102,Morphine sulfate 30mg/1ml solution for injection ampoules,4049211000001102,AMP,0407020Q0AAADAD
@@ -344,12 +352,14 @@ code,term,dmd_id,dmd_type,bnf_code
 16729711000001102,Alfentanil 1mg/2ml solution for injection ampoules,16729711000001102,AMP,1501043A0AAABAB
 39143911000001101,Alfentanil 1mg/2ml solution for injection ampoules,39143911000001101,AMP,1501043A0AAABAB
 13930311000001106,Alfentanil 1mg/2ml solution for injection ampoules,13930311000001106,AMP,1501043A0AAABAB
+40835211000001102,Alfentanil 1mg/2ml solution for injection ampoules,40835211000001102,AMP,1501043A0AAABAB
 13803811000001108,Alfentanil 1mg/2ml solution for injection ampoules,13803811000001108,AMP,1501043A0AAABAB
 14961811000001101,Alfentanil 1mg/2ml solution for injection ampoules,14961811000001101,AMP,1501043A0AAABAB
 35896611000001106,Alfentanil 5mg/10ml solution for injection ampoules,35896611000001106,VMP,1501043A0AAACAC
 18751711000001105,Alfentanil 5mg/10ml solution for injection ampoules,18751711000001105,AMP,1501043A0AAACAC
 39143711000001103,Alfentanil 5mg/10ml solution for injection ampoules,39143711000001103,AMP,1501043A0AAACAC
 13930511000001100,Alfentanil 5mg/10ml solution for injection ampoules,13930511000001100,AMP,1501043A0AAACAC
+40835411000001103,Alfentanil 5mg/10ml solution for injection ampoules,40835411000001103,AMP,1501043A0AAACAC
 13804011000001100,Alfentanil 5mg/10ml solution for injection ampoules,13804011000001100,AMP,1501043A0AAACAC
 14961011000001107,Alfentanil 5mg/10ml solution for injection ampoules,14961011000001107,AMP,1501043A0AAACAC
 35896711000001102,Alfentanil 5mg/1ml solution for injection ampoules,35896711000001102,VMP,1501043A0AAADAD
@@ -365,6 +375,10 @@ code,term,dmd_id,dmd_type,bnf_code
 322499003,VMP previous to 35913611000001107,322499003,VMP,0407020B0AAAAAA
 322506001,VMP previous to 36090011000001104,322506001,VMP,0407020C0AAAAAA
 322523005,VMP previous to 34819611000001105,322523005,VMP,0407020K0AAAAAA
+322524004,VMP previous to 42011311000001108,322524004,VMP,0407020K0AAABAB
+322525003,VMP previous to 42011511000001102,322525003,VMP,0407020K0AAAEAE
+322526002,VMP previous to 42011211000001100,322526002,VMP,0407020K0AAAFAF
+322527006,VMP previous to 42011611000001103,322527006,VMP,0407020K0AAAGAG
 322541002,VMP previous to 36069111000001106,322541002,VMP,0407020G0AAABAB
 322588003,VMP previous to 36121011000001105,322588003,VMP,0407020M0AAA3A3
 322589006,VMP previous to 36123211000001101,322589006,VMP,0407020M0AAATAT
@@ -397,7 +411,3 @@ code,term,dmd_id,dmd_type,bnf_code
 408078009,VMP previous to 36130611000001105,408078009,VMP,0407020ADAAAMAM
 408079001,VMP previous to 36129811000001103,408079001,VMP,0407020ADAAALAL
 430325001,VMP previous to 35896511000001107,430325001,VMP,1501043A0AAAFAF
-42011211000001100,VMP subsequent to 322526002,42011211000001100,VMP,0407020K0AAAFAF
-42011311000001108,VMP subsequent to 322524004,42011311000001108,VMP,0407020K0AAABAB
-42011511000001102,VMP subsequent to 322525003,42011511000001102,VMP,0407020K0AAAEAE
-42011611000001103,VMP subsequent to 322527006,42011611000001103,VMP,0407020K0AAAGAG
