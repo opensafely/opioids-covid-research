@@ -55,18 +55,6 @@ hi_opioid_codes = codelist_from_csv(
   column = "code",
 )
 
-### Non high dose, long-acting opioids 
-non_hi_opioid_codes = codelist_from_csv(
-  "codelists/opensafely-non-high-dose-long-acting-opioids-openprescribing-dmd.csv",
-  column = "code",
-)
-
-### Any long-acting opioid
-long_opioid_codes = (
-  hi_opioid_codes +
-  non_hi_opioid_codes
-)
-
 ### Buccal opioids
 buc_opioid_codes = codelist_from_csv(
   "codelists/opensafely-opioid-containing-medicines-buccal-nasal-and-oromucosal-excluding-drugs-for-substance-misuse-dmd.csv",
@@ -103,10 +91,6 @@ trans_opioid_codes = codelist_from_csv(
   column = "code",
 )
 
-diamorph_opioid_codes = codelist_from_csv(
-  "codelists/user-anschaf-diamorphine-dmd.csv",
-  column = "code",
-)
 
 ### Other opioid
 oth_opioid_codes = (
