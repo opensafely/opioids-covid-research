@@ -50,8 +50,6 @@ def make_dataset_opioids(index_date, end_date):
 
     # By strength/type
     dataset.hi_opioid_any = has_med_event(codelists.hi_opioid_codes)  # High dose / long-acting opioid
-    dataset.long_opioid_any = has_med_event(codelists.long_opioid_codes)  # Long-acting opioid
-
 
     # No. people with a new opioid prescription (1 year lookback) 
     # Note: for any opioids only 
