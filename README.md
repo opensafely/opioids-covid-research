@@ -2,6 +2,8 @@
 
 [View on OpenSAFELY](https://jobs.opensafely.org/datalab/opioid-prescribing-trends-and-changes-during-covid-19/opioids-covid-research/)
 
+[Link to preprint](https://www.medrxiv.org/content/10.1101/2024.02.23.24303238v1)
+
 Details of the purpose and any published outputs from this project can be found at the link above.
 
 The contents of this repository MUST NOT be considered an accurate or valid representation of the study or its purpose. 
