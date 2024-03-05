@@ -1,10 +1,10 @@
 # Changes in prescribing of opioids during COVID-19 
 
-[View on OpenSAFELY](https://jobs.opensafely.org/datalab/opioid-prescribing-trends-and-changes-during-covid-19/opioids-covid-research/)
+Preprint: [Changes in opioid prescribing during the COVID-19 pandemic in England: cohort study of 20 million patients in OpenSAFELY-TPP](https://www.medrxiv.org/content/10.1101/2024.02.23.24303238v1)
 
-[Link to preprint](https://www.medrxiv.org/content/10.1101/2024.02.23.24303238v1)
+Details of the purpose of this project can be found at the [OpenSAFELY workspace for this project](https://jobs.opensafely.org/opioid-prescribing-trends-and-changes-during-covid-19/opioids-covid-research/).
 
-Details of the purpose and any published outputs from this project can be found at the link above.
+The codelists used in this project are available in the [codelists folder](https://github.com/opensafely/opioids-covid-research/tree/main/codelists). 
 
 The contents of this repository MUST NOT be considered an accurate or valid representation of the study or its purpose. 
 This repository may reflect an incomplete or incorrect analysis with no further ongoing work.
