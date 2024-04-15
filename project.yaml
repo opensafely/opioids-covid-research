@@ -20,6 +20,21 @@ actions:
       highly_sensitive:
         cohort: output/data/dataset_table.csv.gz  
 
+  generate_dataset_missing:
+    run: ehrql:v1 generate-dataset analysis/define_dataset_missing.py 
+      --output output/data/dataset_missing.csv.gz
+    outputs:
+      highly_sensitive:
+        cohort: output/data/dataset_missing.csv.gz  
+
+  # Check missing sex values
+  sex_missing:
+    run: r:latest analysis/descriptive/sex_missing.R
+    needs: [generate_dataset_missing]
+    outputs:
+      moderately_sensitive:
+        table: output/tables/cohort_sex_missing.csv
+
   # Measures - prevalent and new prescribing - overall
   measures_overall:
     run: ehrql:v1 generate-measures analysis/measures_overall.py 
