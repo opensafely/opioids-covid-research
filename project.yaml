@@ -28,12 +28,12 @@ actions:
         cohort: output/data/dataset_missing.csv.gz  
 
   # Check missing sex values
-  sex_missing:
-    run: r:latest analysis/descriptive/sex_missing.R
+  missing:
+    run: r:latest analysis/descriptive/sex_age_missing.R
     needs: [generate_dataset_missing]
     outputs:
       moderately_sensitive:
-        table: output/tables/cohort_sex_missing.csv
+        table: output/tables/cohort_sex_age_missing.csv
 
   # Measures - prevalent and new prescribing - overall
   measures_overall:
