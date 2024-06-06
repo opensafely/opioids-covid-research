@@ -21,6 +21,7 @@ library(patchwork)
 
 ## Create directories
 dir_create(here::here("output", "released_outputs", "final" , "graphs"), showWarnings = FALSE, recurse = TRUE)
+dir_create(here::here("output", "released_outputs", "final"), showWarnings = FALSE, recurse = TRUE)
 
 
 ## Custom functions
@@ -116,17 +117,17 @@ AIC(mod2)
 lrtest(mod1, mod2)
 
 ## Check autocorrelation of residuals
-Box.test(mod2$residuals, type = 'Ljung-Box')
+Box.test(mod1$residuals, type = 'Ljung-Box')
 
 # Extract coefficients, calculated Newey-West adjusted 95%CIs
-coef_hi <- coef(mod2)
+coef_hi <- coef(mod1)
 
 write.csv(coef_hi,  
           file = here::here("output", "released_outputs", "final", "ts_coef_hi.csv"),
           row.names = TRUE)
 
 # Calculate predicted values (for graphs)
-pred_hi <- pred.val(mod2, df.data1, pop_total_round, "High dose prevalence", "Overall", rate_hi_opioid_round)
+pred_hi <- pred.val(mod1, df.data1, pop_total_round, "High dose prevalence", "Overall", rate_hi_opioid_round)
 
 
 
@@ -279,8 +280,7 @@ d <- ggplot(subset(pred_all, outcome == "Parenteral opioid prescribing"), aes(x 
 
 
 
-png(here::here("output", "released_outputs", "final", "figure1.png"), res = 300, 
-    units = "in", height = 4.25, width =6)
+pdf(here::here("output", "released_outputs", "final", "figure1.pdf"), height = 4.25, width =6)
 
 (a + b )/ (c + d)
 
