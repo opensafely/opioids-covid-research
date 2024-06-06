@@ -137,15 +137,3 @@ actions:
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv
-
-
-
-
-
-###
-  teaching:
-    run: ehrql:v1 generate-dataset analysis/dataset_teach.py 
-      --output output/data/dataset_teach.csv
-    outputs:
-      highly_sensitive:
-        cohort: output/data/dataset_teach.csv 
