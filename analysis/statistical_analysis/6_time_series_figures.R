@@ -24,7 +24,8 @@ predicted <- read_csv(here::here("output", "released_outputs", "final", "predict
                     col_types = cols(
                       var = col_character(),
                       cat = col_character(),
-                      month = col_date(format = "%Y-%m-%d")))
+                      month = col_date(format = "%Y-%m-%d"))) %>%
+  subset(!(var == "imd" & cat == "Unknown"))
 
 # Set levels
 predicted$cat <- factor(predicted$cat,
@@ -34,14 +35,16 @@ predicted$cat <- factor(predicted$cat,
                                   "female","male",
                                   
                                   "1 (most deprived)","2","3","4","5","6","7","8","9","10 (least deprived)",
-                                  "Unknown",
                                   
-                                  "North West","North East",
-                                  "Yorkshire and The Humber","West Midlands",
-                                  "East Midlands","South West",
-                                  "East","South East","London",
+                                  "East",
+                                  "East Midlands",
+                                  "London","North East",
+                                  "North West","South East","South West",
+                                  "West Midlands","Yorkshire and The Humber",
+                                  
+                                 
                                   "White","Black",
-                                  "South Asian","Mixed","Other"),
+                                  "South Asian","Mixed","Other","Unknown"),
                         
                         labels= c("90+ y", "80-89 y","70-79 y","60-69 y","50-59 y",
                                   "40-49 y","30-39 y","18-29 y",
@@ -49,13 +52,14 @@ predicted$cat <- factor(predicted$cat,
                                   "Female","Male",
                                   
                                   "1 most deprived","2","3","4","5","6","7","8","9","10 least deprived",
-                                  "Unknown",
                                   
-                                  "North West","North East",
-                                  "Yorkshire & The Humber","West Midlands",
-                                  "East Midlands","South West",
-                                  "East","South East","London",
-                                  "White","Black","Asian/Asian British","Mixed","Other"))
+                                  "East",
+                                  "East Midlands",
+                                  "London","North East",
+                                  "North West","South East","South West",
+                                  "West Midlands","Yorkshire and The Humber",
+                                  
+                                  "White","Black","Asian or British Asian","Mixed","Other","Unknown"))
 
 
 
@@ -64,17 +68,18 @@ predicted$cat <- factor(predicted$cat,
 ######################################
 
 fig <- function(grp, typ, pal, ylab){
-  graph <- ggplot(subset(predicted, var == grp & !(cat %in% c("Missing", "Unknown", NA)) 
+  graph <- ggplot(subset(predicted, var == grp & !(cat %in% c("Missing", NA)) 
                 & type == typ), aes(x =month)) +
-    #geom_point(aes(y = obs, col = cat, fill = cat), alpha = .3, size = .8) +
-    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = cat), 
-                alpha = .5, fill = "gray90")+
-    geom_line(aes(y = pred, col = cat), size = .5) +
+    geom_point(aes(y = obs, col = cat, fill = cat), alpha = .3, size = .8, shape = 16) +
+    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci,  fill = cat), 
+                alpha = .2)+
+    geom_line(aes(y = pred, col = cat), linewidth = .5) +
     geom_vline(aes(xintercept = as.Date("2020-03-01")), 
                linetype = "longdash", col = "black") +
     geom_vline(aes(xintercept = as.Date("2021-04-01")), 
                linetype = "longdash", col = "black") +
     scale_color_manual(values = pal) +
+    scale_fill_manual(values = pal) +
     scale_y_continuous(expand = expansion(mult = c(.2,.2))) +
     xlab(NULL) + ylab(ylab)+
     theme_bw() +
@@ -92,7 +97,7 @@ fig <- function(grp, typ, pal, ylab){
           legend.position = "bottom",
           legend.margin = margin(c(1,1,1,1)) 
     ) +
-    guides(colour = guide_legend(nrow = 2)) 
+    guides(colour = guide_legend(nrow = 3)) 
    return(graph)
 }
 
@@ -127,8 +132,8 @@ graph5 <- fig("eth6", "Prevalent",
 
 
 # Combined figure 
-png(here::here("output", "released_outputs", "final", "Figure3.png"), 
-    res = 300, units = "in", width = 6.8, height = 10)
+png(here::here("output", "released_outputs", "final", "suppfigure3.png"), 
+   width = 6.8, height = 10, res = 300, units = "in")
 
 graph1 + theme(plot.tag.position  = c(.06,1.03)) +
   graph2 +  theme(plot.tag.position  = c(0,1.03)) +
@@ -147,17 +152,17 @@ dev.off()
 ######################################
 
 fig.new <- function(grp, typ, pal, ylab){
-  graph <- ggplot(subset(predicted, var == grp & !(cat %in% c("Missing", "Unknown", NA)) 
+  graph <- ggplot(subset(predicted, var == grp & !(cat %in% c("Missing",  NA)) 
                          & type == typ), aes(x =month)) +
-   # geom_point(aes(y = obs, col = cat, fill = cat), alpha = .3, size = .8) +
-    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci, group = cat), 
-                alpha = .5, fill = "gray90")+
+    geom_point(aes(y = obs, col = cat, fill = cat), alpha = .3, size = .8, shape =16) +
+    geom_ribbon(aes(ymin = pred_lci, ymax = pred_uci,  fill = cat), alpha = .2)+
     geom_line(aes(y = pred, col = cat), size = .5) +
     geom_vline(aes(xintercept = as.Date("2020-03-01")), 
                linetype = "longdash", col = "black") +
     geom_vline(aes(xintercept = as.Date("2021-04-01")), 
                linetype = "longdash", col = "black") +
     scale_color_manual(values = pal) +
+    scale_fill_manual(values = pal) +
     scale_y_continuous(expand = expansion(mult = c(.1,.1))) +
     xlab(NULL) + ylab(ylab)+
     theme_bw() +
@@ -175,7 +180,7 @@ fig.new <- function(grp, typ, pal, ylab){
           legend.position = "bottom",
           legend.margin = margin(c(1,1,1,1)) 
     ) +
-    guides(colour = guide_legend(nrow = 2)) 
+    guides(colour = guide_legend(nrow = 3)) 
   return(graph)
 }
 
@@ -205,8 +210,8 @@ graph5 <- fig.new("eth6", "Incident",
                 "#3288BD", "#5E4FA2", "navy"), NULL)
 
 
-png(here::here("output", "released_outputs", "final", "Figure4.png"), 
-    res = 300, units = "in", width = 6.8, height = 10)
+png(here::here("output", "released_outputs", "final", "suppfigure4.png"), 
+     width = 6.8, height = 10, res = 300, units = "in")
 
 graph1 + theme(plot.tag.position  = c(.06,1.03)) +
   graph2 +  theme(plot.tag.position  = c(0,1.03)) +

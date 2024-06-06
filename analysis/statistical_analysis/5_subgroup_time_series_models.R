@@ -17,7 +17,11 @@ library('here')
 library('fs')
 library('ggplot2')
 library(PNWColors)
-
+library(janitor)
+library(MASS)
+library(lmtest)
+library(sandwich)
+library(ggpubr)
 
 ## Create directories
 dir_create(here::here("output", "released_outputs", "final"), showWarnings = FALSE, recurse = TRUE)
@@ -85,7 +89,7 @@ imd_coef$label <- factor(imd_coef$label,
                       levels=c("10 (least deprived)","9","8","7","6",
                                "5","4","3","2","1 (most deprived)"))
 
-imd_pred <- pred.val(imd) 
+imd_pred <- pred.val.cat(imd) 
 
 
 #### By sex ####
@@ -99,7 +103,7 @@ sex_coef2 <- nb(data = sex, ref = "male")
 
 sex_coef <- rbind(sex_coef1, sex_coef2) %>% mutate(var = "Sex")
 
-sex_pred <- pred.val(sex) 
+sex_pred <- pred.val.cat(sex) 
 
 
 #### By ethnicity ####
@@ -120,7 +124,7 @@ eth_coef <- rbind(eth_coef1, eth_coef2,
                   eth_coef5, eth_coef6) %>% 
             mutate(var = "Ethnicity")
 
-eth_pred <- pred.val(eth) 
+eth_pred <- pred.val.cat(eth) 
 
 
 #### By region ####
@@ -144,7 +148,7 @@ region_coef <- rbind(region_coef1, region_coef2, region_coef3,
                      region_coef7, region_coef8, region_coef9) %>%
                 mutate(var = "Region")
 
-region_pred <- pred.val(region) 
+region_pred <- pred.val.cat(region) 
 
 
 #### Combine all coefficients
@@ -185,15 +189,12 @@ write.csv(all.pred, here::here("output", "released_outputs", "final", "predicted
 
 #### Figures with percent changes ####
 
-png(here::here("output", "released_outputs", "final", "Figure5.png"), 
-    res = 300, units = "in", width = 5, height = 7)
-
-ggplot(data = subset(all.irr, type == "Prevalent"),
+fig3a <- ggplot(data = subset(all.irr, type == "Prevalent"),
        aes(x = (coef-1)*100, y= label, group = time, col = time)) +
   geom_vline(aes(xintercept = 0), linetype = "longdash") +
   geom_point(position=position_dodge(width =1)) + 
   geom_errorbarh(aes( xmin=(x2_5-1)*100, xmax=(x97_5-1)*100),height=.1) +
-  scale_x_continuous(lim = c(-25,20)) +
+  scale_x_continuous(lim = c(-25,40)) +
   xlab("Percentage change (95% CI)") + ylab(NULL) +
   scale_color_manual(values = pnw_palette("Bay", 2), guide = "none")+
   facet_grid(var ~time, scales = "free_y", space = "free",switch= "y")+
@@ -205,13 +206,7 @@ ggplot(data = subset(all.irr, type == "Prevalent"),
         panel.grid.major.y=element_blank(),
         panel.grid.minor.x = element_line(color = "gray90"))
 
-dev.off()
-
-
-png(here::here("output", "released_outputs", "final", "Figure6.png"), 
-    res = 300, units = "in", width = 5, height = 7)
-
-ggplot(data = subset(all.irr, type == "Incident"),
+fig3b <- ggplot(data = subset(all.irr, type == "Incident"),
        aes(x = (coef-1)*100, y= label, group = time, col = time)) +
   geom_vline(aes(xintercept = 0), linetype = "longdash") +
   geom_point(position=position_dodge(width =1)) + 
@@ -232,8 +227,11 @@ dev.off()
 
 
 
+pdf(here::here("output", "released_outputs", "final", "figure3.pdf"), width = 10, height = 7)
 
+ggarrange(fig3a, fig3b, labels = c("A","B"))
 
+dev.off()
 
 
 

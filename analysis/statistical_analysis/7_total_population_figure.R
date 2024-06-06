@@ -29,8 +29,7 @@ pop$variable <- factor(pop$variable, levels = c("pop_total_round", "pop_naive_ro
 
 
 # Plot
-png(here::here("output", "released_outputs", "final", "suppfigure1.png"), res = 300, 
-    units = "in", height = 2.5, width =5.2)
+pdf(here::here("output", "released_outputs", "final", "suppfigure1.pdf"), height = 2.5, width =5.2)
 
 ggplot(pop, aes(x =month)) + 
   geom_line(aes(y = value, col = variable), linewidth = .8) +

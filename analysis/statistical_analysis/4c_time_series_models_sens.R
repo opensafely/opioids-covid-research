@@ -18,6 +18,9 @@ library('ggplot2')
 library(MASS)
 library(lmtest)
 library(PNWColors)
+library(sandwich)
+library(ggpubr)
+library(patchwork)
 
 ## Create directories
 dir_create(here::here("output", "released_outputs", "final" , "graphs"), showWarnings = FALSE, recurse = TRUE)
@@ -115,7 +118,7 @@ AIC(mod2)
 lrtest(mod1, mod2)
 
 ## Check autocorrelation of residuals
-Box.test(mod2$residuals, type = 'Ljung-Box')
+Box.test(mod1$residuals, type = 'Ljung-Box')
 
 # Extract coefficients, calculated Newey-West adjusted 95%CIs
 coef_noca_hi <- coef(mod1)
@@ -220,9 +223,9 @@ c <- ggplot(subset(pred_noca_all, outcome == "New opioid prescribing"), aes(x =m
 
  
  
- png(here::here("output", "released_outputs", "final", "suppfigure2.png"), res = 300, 
-     units = "in", height = 6, width =3.2)
+png(here::here("output", "released_outputs", "final", "suppfigure2.png"), height = 4, width =3.2,
+    res = 300, units = "in")
  
- a / b / c
+ a /  c
  
  dev.off()

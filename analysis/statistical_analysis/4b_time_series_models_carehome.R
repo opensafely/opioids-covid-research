@@ -16,7 +16,7 @@ library('ggplot2')
 library(MASS)
 library(lmtest)
 library(PNWColors)
-
+library(sandwich)
 
 ## Create directories
 dir_create(here::here("output", "released_outputs", "final" , "graphs"), showWarnings = FALSE, recurse = TRUE)
@@ -283,8 +283,7 @@ d <- ggplot(subset(pred_carehome, outcome == "Parenteral opioid prescribing"), a
 
  
  
- png(here::here("output", "released_outputs", "final", "figure2.png"), res = 300, 
-     units = "in", height = 4.25, width =6)
+ pdf(here::here("output", "released_outputs", "final", "figure2.pdf"), height = 4.25, width =6)
  
  (a + b ) / (c + d)
  
