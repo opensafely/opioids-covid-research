@@ -1,7 +1,14 @@
-#######################################################
-# This script estimates negative binomial models
-#   for overall opioid prescribing (prevalent, new, high dose, parenteral)
-#######################################################
+####################################################################
+# This script:
+#   - estimates negative binomial / poisson models
+#   for overall opioid prescribing (prevalent, new, high dose, parenteral);
+#   - plots predicted and observed values
+# for full population
+#
+# Author: Andrea Schaffer
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
@@ -276,7 +283,6 @@ d <- ggplot(subset(pred_all, outcome == "Parenteral opioid prescribing"), aes(x 
         panel.grid.major.y =element_line(color = "gray90"),
         axis.title.y = element_text(size = 8), axis.title.x = element_blank(),
         axis.text.x = element_text(angle = 45, hjust = 1)) 
-
 
 
 

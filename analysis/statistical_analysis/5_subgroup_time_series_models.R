@@ -1,9 +1,11 @@
 #######################################################
-#
 # This script estimates negative binomial models
 #   for overall opioid prescribing and initiation
 #   to determine differences in changes by subgroup
 #
+# Author: Andrea Schaffer
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
 #######################################################
 
 

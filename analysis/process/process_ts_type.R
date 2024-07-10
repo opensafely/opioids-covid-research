@@ -1,10 +1,14 @@
 ######################################################
 # This script:
-# - imports measures data for prescribing by admin route
+# - imports measures data for prescribing by administration route
 # - cleans up data 
 # - applies rounding and redaction
 # - saves processed dataset(s)
-#######################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 
 # For running locally only #

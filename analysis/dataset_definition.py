@@ -3,7 +3,11 @@
 #   creates opioid prescribing variables,
 #   and whether someone had a history of cancer
 #   for use in downstream code
-###################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 
 from ehrql import Dataset, years

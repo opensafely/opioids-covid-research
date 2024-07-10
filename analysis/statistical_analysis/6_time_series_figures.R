@@ -1,7 +1,11 @@
 #######################################################
 # This script creates time series graphs by subgroups
 # with predicted values from models
-#######################################################
+#
+# Author: Andrea Schaffer
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")

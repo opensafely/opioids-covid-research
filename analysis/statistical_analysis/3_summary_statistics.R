@@ -1,8 +1,12 @@
-#######################################################
+#####################################################################
 # This script calculates summary statistics for all 
 #    relevant time series variables, 
 #    both overall and by time period (pre-COVID, lockdown, recovery)
-#######################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")

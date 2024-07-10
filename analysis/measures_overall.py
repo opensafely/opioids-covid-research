@@ -1,8 +1,12 @@
-###################################################
+#################################################################
 # This script creates monthly counts/rates of opioid
 # prescribing for any opioid prescribing, new opioid prescribing,
 # and high dose/long-acting prescribing
-###################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 from ehrql import months, INTERVAL, Measures
 from ehrql.tables.tpp import (

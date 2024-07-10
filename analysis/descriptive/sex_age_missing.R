@@ -1,9 +1,11 @@
-####################################################################################################
-# This script:
-# - Produces counts of patients prescribed opioids by demographic characteristics (Apr-Jun 2022)
-# - Both overall in full population, and people without a cancer diagnosis
-# - Both crude and age/sex standardised
-####################################################################################################
+#####################################################################
+# This script counts the number of people with: missing sex; missing/incorrect age; 
+#  age outside of range 
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 ## For running locally only
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")

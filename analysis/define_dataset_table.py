@@ -2,7 +2,12 @@
 # This script extracts relevant demographics and
 #   opioid prescribing data for people from Apr-Jun 2022
 #   for inclusion in Table 1
-#########################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
+
 
 from ehrql import case, when
 from ehrql.tables.tpp import (

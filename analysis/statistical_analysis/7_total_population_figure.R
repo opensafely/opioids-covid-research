@@ -1,6 +1,11 @@
-#######################################################
-# This script creates plot of overall population
-#######################################################
+#####################################################################
+# This script creates plot of overall population, and opioid naive population
+#
+# Author: Andrea Schaffer
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
+
 
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
