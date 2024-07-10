@@ -1,10 +1,11 @@
-######################################
-
-# Some covariates used in the study are created from codelists of clinical conditions or 
-# numerical values available on a patient's records.
-# This script fetches all of the codelists identified in codelists.txt from OpenCodelists.
-
-######################################
+####################################################################
+# This script fetches all of the codelists identified in 
+# codelists.txt from OpenCodelists.
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 
 # --- IMPORT STATEMENTS ---

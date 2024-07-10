@@ -1,9 +1,14 @@
 #######################################################
+# This script:
+#   - estimates negative binomial / poisson models
+#   for overall opioid prescribing (prevalent, new, high dose, parenteral);
+#   - plots predicted and observed value
+# for people in care homes
 #
-# This script estimates negative binomial models
-#   for people in care homes (prevalent, new, high dose, parenteral)
-#
-#######################################################
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 # For running locally only #
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")

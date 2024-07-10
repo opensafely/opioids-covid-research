@@ -1,9 +1,11 @@
-#########################################################
-# This script extracts relevant demographics and
-#   opioid prescribing data for people from Apr-Jun 2022
-#   for inclusion in Table 1
-#########################################################
-
+###################################################################
+# This script extracts age and sex for FULL cohort (no exclusions)
+#   for quantification of number of people with missing age/sex 
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
 
 from ehrql import Dataset
 

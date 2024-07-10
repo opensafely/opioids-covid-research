@@ -1,6 +1,10 @@
 ##########################################################
-# This script plots time series to check for 
-# errors or other issues
+# This script plots time series in secure environment to check for 
+# errors or other issues (not for final publication)
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
 ##########################################################
 
 ## For running locally only

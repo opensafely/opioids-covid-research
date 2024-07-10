@@ -1,11 +1,10 @@
-# # # # # # # # # # # # # # # # # # # # #
-# Purpose: Download and restructure mid pop 
-# estimates to be used to weight the
-# TPP population
+##############################################################
+# This script downloads and restructures mid-year 2020 pop 
+# estimates to be used for age/sex standardisation.
+# Mid-year pop downloaded from ONS.
 #
-# Notes: the 2020 mid year population estimates 
-# are used for standardisation
-# # # # # # # # # # # # # # # # # # # # #
+# (From Linda Nab)
+##############################################################
 
 
 library('tidyverse')
@@ -95,7 +94,6 @@ ons_pop_est_sex <- ons_pop_est %>%
 ons_pop_est_stand <- rbind(
   ons_pop_est_agesex, ons_pop_est_age,
   ons_pop_est_sex, ons_pop_est_tot)
-
 
 # save restructured estimates ----
 write.csv(ons_pop_est_stand, here("ONS-data", "ons_pop_stand.csv"), row.names = FALSE)

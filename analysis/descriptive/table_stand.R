@@ -3,7 +3,12 @@
 # - Produces counts of patients prescribed opioids by demographic characteristics (Apr-Jun 2022)
 # - Both overall in full population, and people without a cancer diagnosis
 # - Both crude and age/sex standardised
-####################################################################################################
+#
+# Author: Andrea Schaffer 
+#   Bennett Institute for Applied Data Science
+#   University of Oxford, 2024
+#####################################################################
+
 
 ## For running locally only
 # setwd("C:/Users/aschaffer/OneDrive - Nexus365/Documents/GitHub/opioids-covid-research")
@@ -30,6 +35,7 @@ ons_pop_stand <- read_csv(here::here("ONS-data", "ons_pop_stand.csv"))
 # Number check----
 print(dim(cohort))
 head(cohort)
+
 
 
 #################################################
