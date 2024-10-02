@@ -71,6 +71,12 @@
       "url": "https://www.opencodelists.org/codelist/opensafely/opioid-containing-medicines-transdermal-excluding-drugs-for-substance-misuse-dmd/02b4622b/",
       "downloaded_at": "2024-01-03 15:08:38.542463Z",
       "sha": "51704defad3ab4dcc8a9fc83d055ff61d29f2d99"
+    },
+    "user-anschaf-opioids-for-analgesia-dmd.csv": {
+      "id": "user/anschaf/opioids-for-analgesia-dmd/302b133b",
+      "url": "https://www.opencodelists.org/codelist/user/anschaf/opioids-for-analgesia-dmd/302b133b/",
+      "downloaded_at": "2024-10-02 14:38:59.195007Z",
+      "sha": "62c6a891f5d1f50b55ea3479c80fc58fc72834a3"
     }
   }
 }

@@ -1,0 +1,73 @@
+---
+name: Long-running generative tests
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  "26 0 * * *"
+
+jobs:
+  gentests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: opensafely-core/setup-action@v1
+        with:
+          install-just: true
+          python-version: "3.11"
+      - name: Set up dev environment
+        run: just devenv
+      # To work around memory leak issues in our database containers we run the
+      # tests in multiple smaller batches, recreating the containers between
+      # each batch
+      - name: Run `just test tests/generative/test_query_model.py::test_query_model` in batches
+        run: |
+          set -euo pipefail
+          start_time=$(date +%s)
+
+          export \
+            GENTEST_EXAMPLES=150 \
+            GENTEST_RANDOMIZE=t \
+            GENTEST_MAX_DEPTH=25
+
+          # We get a maximum of 6 hours runtime with Github Actions so breaking
+          # the loop after 4 hours feels like a reasonably balance of getting a
+          # decent amount of generative testing done while leaving plenty of
+          # headroom.
+          end_time=$((start_time + 4 * 3600))
+          i=1
+
+          while true; do
+            echo
+            echo "==> Running test batch $i with $GENTEST_EXAMPLES examples"
+            echo
+
+            # Do the actual testing
+            set +e
+            just test tests/generative/test_query_model.py::test_query_model
+            rc=$?
+            set -e
+
+            # 6 == dead database error, continue to remove db containers and start new batch
+            if [[ $rc -ne 0 && $rc -ne 6 ]]; then
+              exit $rc
+            fi
+
+            if [[ $(date +%s) -ge $end_time ]]; then
+              break
+            fi
+
+            just remove-database-containers
+            ((i++))
+          done
+
+      - name: "Notify Slack on Failure"
+        if: failure() && github.ref_name == 'main'
+        uses: zuplo/github-action-slack-notify-build@cf8e7e66a21d76a8125ea9648979c30920195552 # v2
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        with:
+          channel_id: C069YDR4NCA
+          status: "Generative Test Failure"
+          color: danger

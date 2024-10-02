@@ -1,0 +1,103 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "opensafely-ehrql"
+description = ""
+version = "2+local"
+readme = "README.md"
+authors = [{name = "OpenSAFELY", email = "tech@opensafely.org"}]
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)"]
+requires-python = ">=3.11"
+
+[project.scripts]
+ehrql = "ehrql.__main__:entrypoint"
+
+[project.urls]
+Home = "https://opensafely.org"
+Documentation = "https://docs.opensafely.org"
+Source = "https://github.com/opensafely-core/ehrql"
+
+[tool.coverage.run]
+branch = true
+
+[tool.coverage.report]
+fail_under = 100
+skip_covered = true
+exclude_also = [
+    # this indicates that the line should never be hit
+    "assert False",
+    # this condition is only true when a module is run as a script
+    'if __name__ == "__main__":',
+    # this indicates that a method should be defined in a subclass
+    "raise NotImplementedError",
+]
+omit = [
+    "ehrql/docs/__main__.py",
+    "tests/acceptance/external_studies/*",
+    "tests/lib/update_tpp_schema.py",
+]
+
+[tool.coverage.html]
+
+[tool.flit.module]
+name = "ehrql"
+
+[tool.pydocstyle]
+convention = "google"
+add_select = [
+  "D213",
+]
+# Base ignores for all docstrings, for module/package specific ones add them to
+# the CLI args in justfile
+add_ignore = [
+  "D100",
+  "D104",
+  "D107",
+  "D212",
+]
+
+[tool.pytest.ini_options]
+addopts = "--tb=native --strict-markers --dist=loadgroup"
+testpaths = ["tests"]
+filterwarnings = [
+    # ignnore dbapi() deprecation warnings for the third party TrinoDialect that we subclass
+    "ignore:.*dbapi.*TrinoDialect.*:sqlalchemy.exc.SADeprecationWarning",
+    # ignore warning about pydot being unmaintained; there's no obvious easy-to-install replacement
+    "ignore:.*nx.nx_pydot.to_pydot.*:DeprecationWarning",
+]
+
+[tool.ruff]
+line-length = 88
+exclude = [
+  ".direnv",
+  ".git",
+  ".github/",
+  ".ipynb_checkpoints",
+  ".pytest_cache",
+  ".venv/",
+  "__pycache__",
+  "coverage/",
+  "docker/",
+  "docs/",
+  "htmlcov/",
+  "tests/acceptance/external_studies/",
+  "tests/fixtures/bad_definition_files",
+  "venv/",
+]
+
+[tool.ruff.lint]
+extend-select = [
+  "A", # flake8-builtins
+  "I",  # isort
+  "INP",  # flake8-no-pep420
+  "UP",  # pyupgrade
+  "W",  # pycodestyle warning
+]
+extend-ignore = [
+  "E501", # line-too-long
+  "UP032", # replace `.format` with f-string
+]
+isort.lines-after-imports = 2
