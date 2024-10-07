@@ -60,7 +60,7 @@ age_band = case(
 
 # Denominator: For all objectives, the denominator is
 # adults (18-110 years)
-was_adult = (patients.age_on(index_date) >= 18) & (
+was_adult = (age >= 18) & (
     patients.age_on(index_date) <= 110
 )
 # alive and
