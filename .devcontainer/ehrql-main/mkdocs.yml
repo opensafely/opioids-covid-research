@@ -1,0 +1,111 @@
+# NOTE: This mkdocs.yml contains the minimum config required to run
+# ehrQL's docs locally.  These docs do not run in isolation in production.
+#
+# In production, the ehrql docs are pulled into and built with the main docs at
+# https://github.com/opensafely/documentation
+#
+# The contents of this mkdocs.yml are ignore in the production build.
+#
+site_name: OpenSAFELY ehrQL documentation
+repo_url: https://github.com/opensafely-core/ehrql
+docs_dir: docs
+
+# Dotfiles/dotdirectories and the top-level templates directory
+# are implicit entries for exclude_docs.
+# https://www.mkdocs.org/user-guide/configuration/#exclude_docs
+exclude_docs: |
+  /includes/
+
+not_in_nav: |
+  /reference/schemas/
+
+nav:
+  - ehrQL: index.md
+  - Tutorial:
+    - Tutorial: tutorial/index.md
+    - Setting up: tutorial/setting-up/index.md
+    - Working with tables: tutorial/working-with-tables/index.md
+    - Writing a dataset definition: tutorial/writing-a-dataset-definition/index.md
+    - Generating a dummy dataset: tutorial/generating-a-dummy-dataset/index.md
+    - Committing the dataset definition: tutorial/committing-the-dataset-definition/index.md
+    - Writing a more complex dataset definition: tutorial/writing-a-more-complex-dataset-definition/index.md
+    - Pushing the commits to GitHub: tutorial/pushing-to-github/index.md
+    - Tidying up: tutorial/tidying-up/index.md
+  - How-to guides:
+    - How-to guides: how-to/index.md
+    - Using ehrQL to answer specific questions: how-to/examples.md
+    - How to include and exclude patients from your study population: how-to/define-population.md
+    - Resolving ehrQL errors: how-to/errors.md
+    - How to use dummy data in an ehrQL dataset definition: how-to/dummy-data.md
+    - How to use dummy data in an ehrQL measures definition: how-to/dummy-measures-data.md
+    - How to assign multiple columns to a dataset programmatically: how-to/assign-multiple-columns.md
+    - How to work with codelists: how-to/codelists.md
+    - How to test your dataset definition: how-to/test-dataset-definition.md
+  - Reference:
+    - Reference: reference/index.md
+    - Language reference: reference/language.md
+    - Language features: reference/features.md
+    - Backends: reference/backends.md
+    - Table schemas: reference/schemas.md
+    - Command line interface: reference/cli.md
+    - Upgrading ehrQL from v0 to v1: reference/upgrading-ehrql-from-v0-to-v1.md
+  - Explanation:
+    - Explanation: explanation/index.md
+    - ehrQL backend tables: explanation/backend-tables.md
+    - ehrQL output formats: explanation/output-formats.md
+    - Using ehrQL in OpenSAFELY projects: explanation/using-ehrql-in-opensafely-projects.md
+    - Running ehrQL: explanation/running-ehrql.md
+    - Using the measures framework: explanation/measures.md
+    - Selecting populations for study: explanation/selecting-populations-for-study.md
+
+theme:
+  name: material
+  features:
+    - content.action.edit
+    - content.code.copy
+    - navigation.footer
+    - navigation.indexes
+
+extra_css:
+  - stylesheets/extra.css
+
+watch:
+  - docs
+
+# WARNING!
+# This markdown_extensions config (with the exception of the snippets base_path) is duplicated
+# from the mkdocs.yml in the parent repo (https://github.com/opensafely/documentation) in order
+# to build local docs with similar styling. If any changes/additions are needed, ensure they are
+# made in the parent repo also.
+markdown_extensions:
+  - pymdownx.details
+  - pymdownx.snippets:
+      check_paths: true
+      base_path: docs
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: "🔗"
+  - pymdownx.highlight:
+      extend_pygments_lang:
+        - name: ehrql
+          lang: python
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.keys
+  - admonition
+  - footnotes
+  - abbr
+  - md_in_html
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+# This hook adds some clarifying studying around snippets that will be incorporated
+# from the parent repo, and is relevant for local development only.
+hooks:
+  - hooks/parent_snippets.py

@@ -137,3 +137,10 @@ actions:
     outputs:
       moderately_sensitive:
         table: output/tables/table_*.csv
+
+  # Measures - prescribing opioids- by demographic categories
+  measure_opioid_prescription_martina:
+    run: ehrql:v1 generate-measures analysis/measure_opioid_prescription_martina.py --output output/measure_opioid_prescription_martina.csv.gz
+    outputs:
+      highly_sensitive:
+        measure_csv: output/measure_opioid_prescription_martina.csv.gz
